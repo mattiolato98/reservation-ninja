@@ -28,7 +28,7 @@ class RegistrationView(CreateView):
     def form_valid(self, form):
         response = super(RegistrationView, self).form_valid(form)
 
-        mail_subject = _('Wallet, email di conferma account')
+        mail_subject = _('Conferma la tua mail')
         relative_confirm_url = reverse(
             'user_management:verify-user-email',
             args=[
@@ -94,3 +94,11 @@ def ajax_check_username_exists(request):
     return JsonResponse({'exists': True}) \
         if get_user_model().objects.filter(username=request.GET.get('username')).exists() \
         else JsonResponse({'exists': False})
+
+
+def ajax_check_email(request):
+    email = request.GET.get('email')
+
+    if '@' in email and email.split('@')[1] == 'studenti.unimore.it':
+        return JsonResponse({'is_unimore_email': True})
+    return JsonResponse({'is_unimore_email': False})
