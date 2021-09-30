@@ -1,10 +1,70 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Title</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- FontAwesome CSS -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css"
+          integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU"
+          crossorigin="anonymous">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;300;400;500;600;700;900&display=swap"
+          rel="stylesheet">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet"
+          href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+          crossorigin="anonymous">
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.10/css/bootstrap-select.min.css"
+          integrity="sha256-jwJEU4p1YdtymLFwAjYfam5Pj5NOnylms63k7LYQ9Jk=" crossorigin="anonymous" />
+
+
+    <link rel="stylesheet"
+          href="{% static 'css/style.css' %}">
+
+    {% block extra_css %} {% endblock %}
+
+    <title>{% block title %}ReservationTool |{% endblock %}</title>
 </head>
+
 <body>
 
+{% include 'navbar.html' %}
+
+<div id="site-main-page" class="container-fluid mt-n1 mt-md-3">
+    {% block content %}
+    {% endblock %}
+</div>
+
+{#{% include 'footer.html' %}#}
+
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script
+        src="https://code.jquery.com/jquery-3.4.1.min.js"
+        integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+        crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+        crossorigin="anonymous"></script>
+
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.10/js/bootstrap-select.js"
+        integrity="sha256-GwAMtRKq8ocZyBdgm1wX+tzd2/nDbb2UGulIdqOItiU=" crossorigin="anonymous"></script>
+
+<!-- SweetAlert 2 JavaScript -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+
+<!-- Optional JavaScript -->
+<script src="{% static 'js/base.js' %}"></script>
+{% block extra_javascript %}{% endblock %}
 </body>
 </html>
