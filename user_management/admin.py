@@ -1,3 +1,4 @@
 from django.contrib import admin
+from user_management.models import PlatformUser
 
-# Register your models here.
+admin.site.register(PlatformUser)
