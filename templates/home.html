@@ -2,3 +2,9 @@
 {% block title %}
     {{ block.super }} Home
 {% endblock %}
+
+{% block content %}
+    <a href="{% url 'user_management:logout' %}">
+        Logout
+    </a>
+{% endblock %}
