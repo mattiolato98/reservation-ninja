@@ -1,8 +1,8 @@
 <script type="text/javascript">
-    /**
-     * Check if a username already exist.
-     */
     $('#id_username').on('change', function () {
+        /**
+         * Check if a username already exist.
+         */
         $.ajax({
             type: 'GET',
             url: "{% url 'user_management:ajax-check-username-exists' %}",
@@ -25,6 +25,37 @@
                 } else {
                     username_field.css('border-color', "#e8e8e8");
                     $('#username-exists-error').remove();
+                }
+            }
+        });
+    });
+
+    $('#id_email').on('change', function () {
+        /**
+         * Check email conformity.
+         */
+        $.ajax({
+            type: 'GET',
+            url: "{% url 'user_management:ajax-check-email' %}",
+            data: {
+                'email': $(this).val(),
+            },
+            dataType: 'json',
+            success: function(data) {
+                let email_field = $('#id_email');
+
+                if (!data.is_unimore_email) {
+                    email_field.css('border-color', "#dc3545");
+                    if (!$('#not-unimore-email').length) {
+                        email_field.after(
+                            '<span id="not-unimore-email" class="text-danger font-7 font-size-80">' +
+                            'Seems that you\'re not a Unimore student.' +
+                            '</span>'
+                        );
+                    }
+                } else {
+                    email_field.css('border-color', "#e8e8e8");
+                    $('#not-unimore-email').remove();
                 }
             }
         });
