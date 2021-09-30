@@ -38,6 +38,12 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+    # local
+    "user_management",
+
+    # 3d party
+    "crispy_forms",
 ]
 
 MIDDLEWARE = [
@@ -121,3 +127,17 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 STATIC_URL = '/static/'
+
+AUTHENTICATION_BACKENDS = ['user_management.auth.EmailOrUsernameModelBackend']
+
+AUTH_USER_MODEL = 'user_management.PlatformUser'
+
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
+
+STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
+
+LOGIN_URL = '/user/login'
+
+LOGIN_REDIRECT_URL = 'asset_management:asset-list'
+
+LOGOUT_REDIRECT_URL = '/user/login'
