@@ -4,3 +4,4 @@ geckodriver.log
 .idea/
 /reservation_tool_base_folder/secret_key.txt
 Pipfile
+*__pycache__
