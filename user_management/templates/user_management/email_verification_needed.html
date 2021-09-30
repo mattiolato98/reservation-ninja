@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ block.super }} Email confirmation{% endblock %}
+
+{% block content %}
+    <div class="p-4">
+        <h3 class="font-7 d-flex justify-content-center">Check your email inbox.</h3>
+        <h5 class="font-7 text-muted d-flex justify-content-center">
+            You should have received a link to confirm your email.
+            If you have already confirmed it, you can &nbsp;
+            <a class="site-blue-text font-7" href="{% url 'user_management:login' %}">login</a>.
+        </h5>
+    </div>
+{% endblock %}

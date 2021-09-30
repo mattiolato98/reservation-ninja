@@ -1,0 +1,13 @@
+{% extends 'registration/base_signing.html' %}
+
+{% block title %}{{ block.super }} Sign in{% endblock %}
+
+{% block signing_title %}Fill form with your information{% endblock %}
+{% block signing_submit_value %}Sign in{% endblock %}
+
+{% block undo_url %}{% url 'user_management:login' %}{% endblock %}
+{% block undo_text %}Back to login{% endblock %}
+
+{% block extra_javascript %}
+    {% include 'user_management/user_ajax.html' %}
+{% endblock %}
