@@ -1,8 +1,8 @@
 import time as t
 from datetime import time
 from selenium import webdriver
-from selenium.webdriver.common.keys import Keys
 from selenium.common.exceptions import NoSuchElementException
+
 
 def find_hours(root_element, start_hour, end_hour):
     links = root_element.find_elements_by_tag_name("a")
@@ -69,10 +69,10 @@ def reserve_room(driver, start_time, end_time, building, room):
         driver.get(building_url)
         t.sleep(1)
 
+        # button.click()
 
-    # button.click()
+        # driver.close()
 
-    # driver.close()
 
 if __name__ == "__main__":   
     lessons = [
