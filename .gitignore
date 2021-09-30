@@ -1,0 +1,6 @@
+.credentials
+.python-version
+geckodriver.log
+.idea/
+/reservation_tool_base_folder/secret_key.txt
+Pipfile
