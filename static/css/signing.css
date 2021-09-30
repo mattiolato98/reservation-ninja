@@ -1,0 +1,68 @@
+html,body {
+    font-weight: 500;
+    min-height: 100vh;
+}
+
+#site-main-page {
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+.navbar-header-background {
+    height: 0;
+}
+
+#background-column {
+    width: 100vw;
+    min-height: 100vh;
+    height: inherit;
+    background: white;
+    background-size: cover;
+}
+
+#signing-box {
+    max-width: 650px;
+    background-color: transparent;
+    color: #525252;
+}
+
+.form-control {
+    background-color: white;
+    color: #525252;
+    outline: none;
+    border: 1px solid #ced4da;
+    border-radius: 5px;
+}
+
+.form-control:focus {
+    border: 1px solid #525252;
+    color: #525252;
+    outline: none;
+    background-color: white;
+}
+
+.form-text {
+    color: #525252 !important;
+}
+
+.site-link {
+    color: #525252 !important;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.site-link:hover {
+    color: #525252;
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+textarea:-webkit-autofill,
+textarea:-webkit-autofill:hover,
+textarea:-webkit-autofill:focus,
+select:-webkit-autofill,
+select:-webkit-autofill:hover,
+select:-webkit-autofill:focus {
+    -webkit-text-fill-color: #525252;
+}
