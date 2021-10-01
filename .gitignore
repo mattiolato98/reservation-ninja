@@ -5,4 +5,3 @@ geckodriver.log
 /reservation_tool_base_folder/secret_key.txt
 Pipfile
 *__pycache__
-db.sqlite3
