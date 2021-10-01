@@ -5,6 +5,8 @@ from django.contrib.auth import get_user_model
 from selenium import webdriver
 from selenium.common.exceptions import NoSuchElementException
 
+RESERVATION_URL = 'https://www.unimore.it/covid19/trovaaula.html'
+
 
 def find_hours(root_element, start_hour, end_hour):
     links = root_element.find_elements_by_tag_name("a")
@@ -28,7 +30,7 @@ def find_hours(root_element, start_hour, end_hour):
     return ranges_to_reserve
 
 
-def reserve_room(driver, start_time, end_time, building, room):
+def reserve_room(driver, user, start_time, end_time, building, room):
     if driver.find_element_by_id("cookie-bar"):
         driver.find_element_by_xpath(
             "//*[@id='cookie-bar']//a[contains(text(), 'OK')]"
@@ -56,8 +58,8 @@ def reserve_room(driver, start_time, end_time, building, room):
         t.sleep(1)
 
         try:
-            driver.find_element_by_id("username").send_keys("")
-            driver.find_element_by_id("password").send_keys("")
+            driver.find_element_by_id("username").send_keys(user.unimore_username)
+            driver.find_element_by_id("password").send_keys(user.unimore_password)
 
             driver.find_element_by_name("_eventId_proceed").click()
             t.sleep(1)
@@ -84,9 +86,10 @@ def automatic_reservation():
                 f"Prenotando {lesson.classroom.building.name} {lesson.classroom.name} - "
                 f"{lesson.start_time}/{lesson.end_time}"
             )
-            driver.get("https://www.unimore.it/covid19/trovaaula.html")
+            driver.get(RESERVATION_URL)
             reserve_room(
                 driver,
+                user,
                 lesson.start_time,
                 lesson.end_time,
                 lesson.classroom.building.name,
