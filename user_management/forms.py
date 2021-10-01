@@ -18,8 +18,6 @@ class LoginForm(AuthenticationForm):
 class PlatformUserCreationForm(UserCreationForm):
     helper = FormHelper()
     email = forms.EmailField(required=True)
-    unimore_username = forms.CharField(required=True)
-    unimore_password = forms.CharField(required=True)
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -61,6 +59,8 @@ class PlatformUserCreationForm(UserCreationForm):
             'email',
             'password1',
             'password2',
+            'unimore_username',
+            'unimore_password',
         ]
         widgets = {
             'unimore_password': forms.PasswordInput(),
