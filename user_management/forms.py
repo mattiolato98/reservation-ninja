@@ -1,3 +1,4 @@
+from crispy_forms.layout import Layout, Row, Column
 from django.contrib.auth import get_user_model
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from crispy_forms.helper import FormHelper
@@ -31,6 +32,27 @@ class PlatformUserCreationForm(UserCreationForm):
         self.fields['password2'].widget.attrs.update({'placeholder': 'Confirm password'})
         self.fields['unimore_username'].widget.attrs.update({'placeholder': 'Unimore username'})
         self.fields['unimore_password'].widget.attrs.update({'placeholder': 'Unimore password'})
+
+        self.helper.layout = Layout(
+            Row(
+                Column('username', css_class='form-group mb-0'),
+                css_class='form-row'
+            ),
+            Row(
+                Column('email', css_class='form-group'),
+                css_class='form-row'
+            ),
+            Row(
+                Column('unimore_username', css_class='form-group'),
+                Column('unimore_password', css_class='form-group'),
+                css_class='form-row'
+            ),
+            Row(
+                Column('password1', css_class='form-group'),
+                Column('password2', css_class='form-group'),
+                css_class='form-row',
+            ),
+        )
 
     class Meta:
         model = get_user_model()
