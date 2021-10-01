@@ -1,5 +1,7 @@
 import time as t
 from datetime import time
+
+from django.contrib.auth import get_user_model
 from selenium import webdriver
 from selenium.common.exceptions import NoSuchElementException
 
@@ -74,22 +76,25 @@ def reserve_room(driver, start_time, end_time, building, room):
         # driver.close()
 
 
-if __name__ == "__main__":   
-    lessons = [
-        {
-            "start_time": time(9),
-            "end_time": time(12),
-            "building": "Fisica",
-            "room": "L1.2"
-        },
-    ]
+if __name__ == "__main__":
     driver = webdriver.Firefox()
 
-    for lesson in lessons:
-        reserve_room(
-            driver,
-            lesson["start_time"], 
-            lesson["end_time"],
-            lesson["building"], 
-            lesson["room"]
-        )
+    for user in get_user_model().objects.exclude(pk=1):
+        lessons = user.today_lessons()
+    # lessons = [
+    #     {
+    #         "start_time": time(9),
+    #         "end_time": time(12),
+    #         "building": "Fisica",
+    #         "room": "L1.2"
+    #     },
+    # ]
+
+        for lesson in lessons:
+            reserve_room(
+                driver,
+                lesson.start_time,
+                lesson.end_time,
+                lesson.classroom.building.name,
+                lesson.classroom.name
+            )
