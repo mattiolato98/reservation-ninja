@@ -13,10 +13,10 @@ def find_hours(root_element, start_hour, end_hour):
 
     ranges_to_reserve = list(filter(
         lambda x: (
-                range_start:=time(int(x[0].split(":")[0]), int(x[0].split(":")[1])),
-                range_end:=time(int(x[1].split(":")[0]), int(x[1].split(":")[1])),
-                (start_hour >= range_start and start_hour <= range_end) or
-                (end_hour <= range_end and end_hour >= range_start)
+            range_start := time(int(x[0].split(":")[0]), int(x[0].split(":")[1])),
+            range_end := time(int(x[1].split(":")[0]), int(x[1].split(":")[1])),
+            (range_start <= start_hour <= range_end) or
+            (range_end >= end_hour >= range_start)
             )[-1],
         available_hours
     ))
