@@ -1,10 +1,17 @@
+from os.path import dirname
+
+import django
+import os
+import sys
 import time as t
+
 from datetime import time
 
 from django.contrib.auth import get_user_model
 from selenium import webdriver
 from selenium.common.exceptions import NoSuchElementException
 
+PROJECT_PATH = os.path.join(dirname(__file__), "../")
 RESERVATION_URL = 'https://www.unimore.it/covid19/trovaaula.html'
 
 
@@ -24,8 +31,7 @@ def find_hours(root_element, start_hour, end_hour):
             )[-1],
         available_hours
     ))
-    print(ranges_to_reserve)
-    t.sleep(100)
+    t.sleep(1)
 
     return ranges_to_reserve
 
@@ -73,15 +79,13 @@ def reserve_room(driver, user, start_time, end_time, building, room):
 
         # button.click()
 
-        # driver.close()
-
 
 def automatic_reservation():
     driver = webdriver.Firefox()
 
     for user in get_user_model().objects.exclude(enable_automatic_reservation=False):
         print(f"UTENTE {user.username} -----------------------------------------------------------------------------")
-        for lesson in user.today_lessons():
+        for lesson in user.today_lessons:
             print(
                 f"Prenotando {lesson.classroom.building.name} {lesson.classroom.name} - "
                 f"{lesson.start_time}/{lesson.end_time}"
@@ -98,6 +102,14 @@ def automatic_reservation():
 
         driver.delete_all_cookies()
 
+    driver.close()
+
 
 if __name__ == "__main__":
+    print(PROJECT_PATH)
+    sys.path.append(os.path.join(os.path.dirname(__file__), PROJECT_PATH))
+    os.environ.setdefault("DJANGO_SETTINGS_MODULE", "reservation_tool_base_folder.settings")
+
+    django.setup()
+
     automatic_reservation()
