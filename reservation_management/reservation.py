@@ -106,7 +106,6 @@ def automatic_reservation():
 
 
 if __name__ == "__main__":
-    print(PROJECT_PATH)
     sys.path.append(os.path.join(os.path.dirname(__file__), PROJECT_PATH))
     os.environ.setdefault("DJANGO_SETTINGS_MODULE", "reservation_tool_base_folder.settings")
 
