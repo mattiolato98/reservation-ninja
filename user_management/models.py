@@ -2,8 +2,6 @@ from django.contrib.auth.models import AbstractUser
 from django.db import models
 from datetime import datetime
 
-from reservation_management.models import Lesson
-
 
 class PlatformUser(AbstractUser):
     AbstractUser._meta.get_field('email')._unique = True
@@ -19,4 +17,4 @@ class PlatformUser(AbstractUser):
 
     @property
     def today_lessons(self):
-        return Lesson.objects.filter(day=datetime.today().weekday())
+        return self.lessons.filter(day=datetime.today().weekday())
