@@ -24,3 +24,9 @@ class Timetable(models.Model):
 
     classroom = models.ForeignKey(Classroom, on_delete=models.CASCADE, related_name='timetables')
     user = models.ForeignKey(get_user_model(), on_delete=models.CASCADE, related_name='timetables')
+
+    def __str__(self):
+        return (
+            f'{self.user} in {self.classroom.name} - '
+            f'{self.start_time.strftime("%H:%M")}/{self.end_time.strftime("%H:%M")}'
+        )
