@@ -1,5 +1,8 @@
 from django.contrib.auth.models import AbstractUser
 from django.db import models
+from datetime import datetime
+
+from reservation_management.models import Lesson
 
 
 class PlatformUser(AbstractUser):
@@ -13,3 +16,7 @@ class PlatformUser(AbstractUser):
 
     def __str__(self):
         return self.username
+
+    @property
+    def today_lessons(self):
+        return Lesson.objects.filter(day=datetime.today().weekday())
