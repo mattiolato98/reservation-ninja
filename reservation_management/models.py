@@ -17,7 +17,7 @@ class Classroom(models.Model):
         return self.name
 
 
-class Timetable(models.Model):
+class Lesson(models.Model):
     day = models.PositiveSmallIntegerField()
     start_time = models.TimeField()
     end_time = models.TimeField()
