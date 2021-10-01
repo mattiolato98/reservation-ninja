@@ -9,7 +9,7 @@ class Building(models.Model):
 
 
 class Classroom(models.Model):
-    name = models.CharField(max_length=10)
+    name = models.CharField(max_length=50)
     building = models.ForeignKey(Building, on_delete=models.CASCADE, related_name='classrooms')
 
     def __str__(self):
