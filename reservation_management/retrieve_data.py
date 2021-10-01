@@ -5,7 +5,7 @@ from selenium.webdriver.common.keys import Keys
 from datetime import datetime
 import pandas as pd
 
-from reservation_management.models import Building, Classroom, Timetable
+from reservation_management.models import Building, Classroom, Lesson
 from user_management.models import PlatformUser
 
 
@@ -32,7 +32,7 @@ def get_lesson_metadata(lecture):
 
 def get_day_schedule(day_idx, user):
     keys_list = ["classroom", "start_time", "end_time", "building"]
-    lectures = Timetable.objects.get(day=day_idx, user=user)
+    lectures = Lesson.objects.get(day=day_idx, user=user)
     day_schedule = [dict(zip(keys_list, get_lesson_metadata(lecture)))
                     for lecture in lectures]
     return day_schedule
