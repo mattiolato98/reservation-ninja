@@ -79,7 +79,7 @@ def reserve_room(driver, user, start_time, end_time, building, room):
 def automatic_reservation():
     driver = webdriver.Firefox()
 
-    for user in get_user_model().objects.exclude(pk=1):
+    for user in get_user_model().objects.exclude(enable_automatic_reservation=False):
         print(f"UTENTE {user.username} -----------------------------------------------------------------------------")
         for lesson in user.today_lessons():
             print(
