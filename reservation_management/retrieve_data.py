@@ -8,7 +8,6 @@ import pandas as pd
 from reservation_management.models import Building, Classroom, Lesson
 from user_management.models import PlatformUser
 
-
 PASSWD_FILE = ".credentials"
 CLASS_SCHEDULE_FILE = 'class_schedule.csv'
 URL = "https://www.unimore.it/covid19/trovaaula.html"
@@ -18,7 +17,7 @@ def get_credentials(text_file):
     with open(text_file, 'r') as f:
         lines = (line.rstrip() for line in f.readlines())
         credentials = dict(zip(["username", "password"], lines))
-    
+
     return credentials
 
 
@@ -32,7 +31,7 @@ def get_lesson_metadata(lecture):
 
 def get_day_schedule(day_idx, user):
     keys_list = ["classroom", "start_time", "end_time", "building"]
-    lectures = Lesson.objects.get(day=day_idx, user=user)
+    lectures = Lesson.objects.filter(day=day_idx, user=user)
     day_schedule = [dict(zip(keys_list, get_lesson_metadata(lecture)))
                     for lecture in lectures]
     return day_schedule
