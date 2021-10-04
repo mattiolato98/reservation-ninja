@@ -28,5 +28,6 @@ class Lesson(models.Model):
     def __str__(self):
         return (
             f'{self.user} in {self.classroom.name} - '
-            f'{self.start_time.strftime("%H:%M")}/{self.end_time.strftime("%H:%M")}'
+            f'{self.start_time.strftime("%H:%M")}/{self.end_time.strftime("%H:%M")} '
+            f'on day {self.day}'
         )
