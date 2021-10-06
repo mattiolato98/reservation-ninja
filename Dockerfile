@@ -17,15 +17,18 @@ RUN apk update \
     && apk del build-deps
 
 # install dependencies
-COPY ./requirements.txt .
-RUN pip install -r requirements.txt
+COPY requirments.txt .
+RUN pip install -r requirments.txt
 
 # copy project
 COPY . .
+
+# collect static files
+RUN python manage.py collectstatic --noinput
 
 # add and run as non-root user
 RUN adduser -D mattiolato
 USER mattiolato
 
 # run gunicorn
-CMD gunicorn reservation_tool_base_folder.wsgi:application --bind 0.0.0.0:8000
+CMD gunicorn reservation_tool_base_folder.wsgi:application --bind 0.0.0.0:$PORT
