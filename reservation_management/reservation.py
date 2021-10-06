@@ -76,7 +76,7 @@ def reserve_room(driver, user, start_time, end_time, building, room):
         driver.get(building_url)
         # t.sleep(1)
 
-        # button.click()
+        button.click()
 
 # TODO: bisongerebbe darle un'ultima speranza con più utenti...
 # def automatic_reservation():
@@ -114,7 +114,7 @@ def reserve_lesson_map(lesson):
     options.headless = True
 
     driver = webdriver.Firefox(options=options)
-    
+
     # Selenium configuration:
     driver.implicitly_wait(TIME_INTERVAL)
 
