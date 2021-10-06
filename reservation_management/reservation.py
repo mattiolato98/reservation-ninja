@@ -11,6 +11,7 @@ from datetime import time
 import pytz
 from django.contrib.auth import get_user_model
 from selenium import webdriver
+from selenium.webdriver.firefox.options import Options
 from selenium.common.exceptions import NoSuchElementException
 
 
@@ -108,7 +109,12 @@ def reserve_room(driver, user, start_time, end_time, building, room):
 
 
 def reserve_lesson_map(lesson):
-    driver = webdriver.Firefox()
+    # Allows run Firefox on a system with no display
+    options = Options()
+    options.headless = True
+
+    driver = webdriver.Firefox(options=options)
+    
     # Selenium configuration:
     driver.implicitly_wait(TIME_INTERVAL)
 
