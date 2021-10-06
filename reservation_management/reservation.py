@@ -72,11 +72,12 @@ def reserve_room(driver, user, start_time, end_time, building, room):
             pass
 
         button = driver.find_element_by_xpath("//button[contains(text(), 'Inserisci')]")
-        print(f"{button.text} presenza {range_start_time}-{range_end_time}")
+        button.click()
+
+        print(f"Presenza inserita {range_start_time}-{range_end_time}")
+
         driver.get(building_url)
         # t.sleep(1)
-
-        button.click()
 
 # TODO: bisongerebbe darle un'ultima speranza con più utenti...
 # def automatic_reservation():
