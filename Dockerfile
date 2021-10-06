@@ -27,8 +27,8 @@ COPY . .
 RUN python manage.py collectstatic --noinput
 
 # add and run as non-root user
-RUN adduser -D mattiolato
-USER mattiolato
+RUN adduser -D ninja
+USER ninja
 
 # run gunicorn
 CMD gunicorn reservation_tool_base_folder.wsgi:application --bind 0.0.0.0:$PORT
