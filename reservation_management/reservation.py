@@ -8,6 +8,7 @@ from datetime import datetime
 
 from datetime import time
 
+import pytz
 from django.contrib.auth import get_user_model
 from selenium import webdriver
 from selenium.common.exceptions import NoSuchElementException
@@ -145,7 +146,8 @@ if __name__ == "__main__":
 
     from reservation_management.models import Lesson
 
-    lessons = Lesson.objects.filter(day=datetime.today().weekday())
+    lessons = Lesson.objects.filter(day=datetime.now(pytz.timezone('Europe/Rome')).weekday())
+
     # start = measure_time()
     # TODO: understand if this assignment is required...
     dummy_var = list(map(reserve_lesson_map, lessons))
