@@ -1,4 +1,5 @@
 from django.contrib.auth import get_user_model, login
+from django.contrib.auth.hashers import make_password
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.tokens import PasswordResetTokenGenerator
 from django.contrib.auth.views import LoginView
@@ -30,7 +31,11 @@ class RegistrationView(CreateView):
         if form.cleaned_data['email'].split('@')[1] != 'studenti.unimore.it':
             return redirect('user_management:registration')
 
-        response = super(RegistrationView, self).form_valid(form)
+        self.object = form.save(commit=False)
+        self.object.unimore_password = make_password(form.cleaned_data['unimore_password'])
+        self.object.save()
+
+        return super(RegistrationView, self).form_valid(form)
 
         # mail_subject = _('Conferma la tua mail')
         # relative_confirm_url = reverse(
@@ -53,8 +58,6 @@ class RegistrationView(CreateView):
         # self.object.token_sent = True
         # self.object.is_active = False
         # self.object.save()
-
-        return response
 
 
 def user_login_by_token(request, user_id_b64=None, user_token=None):
