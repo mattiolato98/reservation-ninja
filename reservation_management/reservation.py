@@ -66,7 +66,6 @@ def reserve_room(driver, user, start_time, end_time, building, room):
             driver.find_element_by_id("password").send_keys(user.unimore_password)
 
             driver.find_element_by_name("_eventId_proceed").click()
-            # t.sleep(1)
         except NoSuchElementException:
             pass
 
@@ -76,7 +75,6 @@ def reserve_room(driver, user, start_time, end_time, building, room):
         print(f"Presenza inserita {range_start_time}-{range_end_time}")
 
         driver.get(building_url)
-        # t.sleep(1)
 
 
 # TODO: bisongerebbe darle un'ultima speranza con più utenti...
@@ -153,7 +151,10 @@ if __name__ == "__main__":
 
     from reservation_management.models import Lesson
 
-    lessons = Lesson.objects.filter(day=datetime.now(pytz.timezone('Europe/Rome')).weekday())
+    lessons = Lesson.objects.filter(
+        day=datetime.now(pytz.timezone('Europe/Rome')).weekday(),
+        user__enable_automatic_reservation=True
+    )
 
     # start = measure_time()
     # TODO: understand if this assignment is required...
