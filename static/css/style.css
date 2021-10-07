@@ -113,7 +113,7 @@ h5 {
 }
 
 .logo-font {
-    font-family: 'Comfortaa', cursive;
+    font-family: 'Share Tech Mono', monospace;
 }
 
 nav .logo-font {
@@ -181,21 +181,21 @@ select:-webkit-autofill:focus {
 }
 
 .site-btn {
-    background-color: #0075A2;
-    border-color: #0075A2;
+    background-color: #0A8754;
+    border-color: #0A8754;
     color: white !important;
 }
 
 .site-btn:hover {
     box-shadow: 0 .5rem 1rem rgba(0,0,0,.15)!important;
-    background-color: #0081b3;
-    border-color: #0081b3;
+    background-color: #098f58;
+    border-color: #098f58;
     color: white;
 }
 
 .site-btn:active {
-    background-color: #084570 !important;
-    border-color: #084570 !important;
+    background-color: #08a263 !important;
+    border-color: #08a263 !important;
     color: white;
 }
 
