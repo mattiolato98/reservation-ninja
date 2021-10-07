@@ -11,12 +11,12 @@
 
 {% block title %}{{ block.super }} Email successfully verified{% endblock %}
 
-{% block header %}
+{% block content %}
     <div id="welcome-page-background" class="d-flex justify-content-center align-items-center column-flex">
         <div class="row">
             <div class="col site-col p-4">
-                <h3 class="font-7 logo-font big-text mb-3 text-white">Welcome</h3>
-                <h5 class="font-5 text-white">
+                <h3 class="font-7 logo-font big-text mb-3">Welcome</h3>
+                <h5 class="font-5 logo-font">
                     Your email has been successfully verified.
                     <a class="site-blue-text font-7 site-light-blue-text-mobile"
                        href="{% url 'home' %}">
