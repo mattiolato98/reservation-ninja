@@ -1,5 +1,4 @@
 from django.contrib.auth import get_user_model, login
-from django.contrib.auth.hashers import make_password
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.tokens import PasswordResetTokenGenerator
 from django.contrib.auth.views import LoginView
@@ -24,8 +23,7 @@ class LoginUserView(LoginView):
 class RegistrationView(CreateView):
     form_class = PlatformUserCreationForm
     template_name = 'registration/registration.html'
-    # success_url = reverse_lazy('user_management:email-verification-needed')
-    success_url = reverse_lazy('user_management:login')
+    success_url = reverse_lazy('user_management:email-verification-needed')
 
     def form_valid(self, form):
         if form.cleaned_data['email'].split('@')[1] != 'studenti.unimore.it':
@@ -33,29 +31,30 @@ class RegistrationView(CreateView):
 
         response = super(RegistrationView, self).form_valid(form)
 
-        # mail_subject = _('Conferma la tua mail')
-        # relative_confirm_url = reverse(
-        #     'user_management:verify-user-email',
-        #     args=[
-        #         urlsafe_base64_encode(force_bytes(self.object.pk)),
-        #         account_activation_token.make_token(self.object)
-        #     ]
-        # )
-        #
-        # self.object.email_user(
-        #     subject=mail_subject,
-        #     message=_(f'''Ciao {self.object.username}, '''
-        #               + '''ti diamo il benvenuto in Wallet.\n'''
-        #               + '''\nClicca il seguente link per confermare la tua email:'''
-        #               + f'''\n{self.request.build_absolute_uri(relative_confirm_url)}\n'''
-        #               + '''\nA presto, \nil Team di Wallet.''')
-        # )
-        #
-        # self.object.token_sent = True
-        # self.object.is_active = False
-        # self.object.save()
+        mail_subject = _('Reservation Ninja - Confirm your email')
+        relative_confirm_url = reverse(
+            'user_management:verify-user-email',
+            args=[
+                urlsafe_base64_encode(force_bytes(self.object.pk)),
+                account_activation_token.make_token(self.object)
+            ]
+        )
+
+        self.object.email_user(
+            subject=mail_subject,
+            message=_(f'''Ciao {self.object.username}, '''
+                      + '''ti diamo il benvenuto in Reservation Ninja.\n'''
+                      + '''\nClicca il seguente link per confermare la tua email:'''
+                      + f'''\n{self.request.build_absolute_uri(relative_confirm_url)}\n'''
+                      + '''\nA presto, \nil Team di Reservation Ninja.''')
+        )
+
+        self.object.token_sent = True
+        self.object.is_active = False
+        self.object.save()
 
         return response
+
 
 def user_login_by_token(request, user_id_b64=None, user_token=None):
     """
