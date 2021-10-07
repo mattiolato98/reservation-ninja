@@ -1,9 +1,9 @@
 {% extends 'registration/base_signing.html' %}
 
-{% block title %}{{ block.super }} Sign in{% endblock %}
+{% block title %}{{ block.super }} Sign up{% endblock %}
 
 {% block signing_title %}Fill the form with your information{% endblock %}
-{% block signing_submit_value %}Sign in{% endblock %}
+{% block signing_submit_value %}Sign up{% endblock %}
 
 {% block undo_url %}{% url 'user_management:login' %}{% endblock %}
 {% block undo_text %}Back to login{% endblock %}

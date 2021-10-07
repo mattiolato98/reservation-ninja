@@ -13,7 +13,10 @@ from django.contrib.auth import get_user_model
 from selenium import webdriver
 from selenium.webdriver.firefox.options import Options
 from selenium.common.exceptions import NoSuchElementException
+<<<<<<< HEAD
 
+=======
+>>>>>>> dev
 
 PROJECT_PATH = os.path.join(dirname(__file__), "../")
 RESERVATION_URL = 'https://www.unimore.it/covid19/trovaaula.html'
@@ -67,12 +70,12 @@ def reserve_room(driver, user, start_time, end_time, building, room):
             driver.find_element_by_id("password").send_keys(user.unimore_password)
 
             driver.find_element_by_name("_eventId_proceed").click()
-            # t.sleep(1)
         except NoSuchElementException:
             pass
 
         button = driver.find_element_by_xpath("//button[contains(text(), 'Inserisci')]")
         button.click()
+<<<<<<< HEAD
 
         print(f"Presenza inserita {range_start_time}-{range_end_time}")
 
@@ -107,8 +110,54 @@ def reserve_room(driver, user, start_time, end_time, building, room):
 #         driver.delete_all_cookies()
 #
 #     driver.close()
+=======
 
+        print(f"Presenza inserita {range_start_time}-{range_end_time}")
+>>>>>>> dev
 
+        driver.get(building_url)
+
+<<<<<<< HEAD
+def reserve_lesson_map(lesson):
+    # Allows run Firefox on a system with no display
+    options = Options()
+    options.headless = True
+=======
+
+# TODO: bisongerebbe darle un'ultima speranza con più utenti...
+# def automatic_reservation():
+#     driver = webdriver.Firefox()
+#     # Selenium configuration:
+#     driver.implicitly_wait(TIME_INTERVAL)
+#     # driver.maximize_window()
+#
+#     # for user in get_user_model().objects.exclude(enable_automatic_reservation=False):
+#     for user in get_user_model().objects.filter(username="mattiolato"):
+#         print(f"UTENTE {user.username} -----------------------------------------------------------------------------")
+#         for lesson in user.today_lessons:
+#             print(
+#                 f"Prenotando {lesson.classroom.building.name} {lesson.classroom.name} - "
+#                 f"{lesson.start_time}/{lesson.end_time}"
+#             )
+#             driver.get(RESERVATION_URL)
+#             reserve_room(
+#                 driver,
+#                 user,
+#                 lesson.start_time,
+#                 lesson.end_time,
+#                 lesson.classroom.building.name,
+#                 lesson.classroom.name
+#             )
+#
+#         driver.delete_all_cookies()
+#
+#     driver.close()
+>>>>>>> dev
+
+    driver = webdriver.Firefox(options=options)
+
+<<<<<<< HEAD
+=======
 def reserve_lesson_map(lesson):
     # Allows run Firefox on a system with no display
     options = Options()
@@ -116,6 +165,7 @@ def reserve_lesson_map(lesson):
 
     driver = webdriver.Firefox(options=options)
 
+>>>>>>> dev
     # Selenium configuration:
     driver.implicitly_wait(TIME_INTERVAL)
 
@@ -123,10 +173,17 @@ def reserve_lesson_map(lesson):
     """
     l'ideale è creare ad esempio 3 tab e ciclare iterativamente su di essi con l'operatore modulo, in questo modo
     dovremmo ottimizzare al massimo il driver e l'occupazione di memoria e cpu.
+<<<<<<< HEAD
     
     ogni map calcola che tab utilizzare (mediante un contatore globale + operatore modulo(3)) e fa quello che deve 
     su quel tab.
     
+=======
+
+    ogni map calcola che tab utilizzare (mediante un contatore globale + operatore modulo(3)) e fa quello che deve 
+    su quel tab.
+
+>>>>>>> dev
     Il driver a quel punto viene creato direttamente dal main così può essere chiuso da lì.
     """
     # driver.execute_script(f"window.open('{RESERVATION_URL}', '_blank');")
@@ -153,7 +210,14 @@ if __name__ == "__main__":
 
     from reservation_management.models import Lesson
 
+<<<<<<< HEAD
     lessons = Lesson.objects.filter(day=datetime.now(pytz.timezone('Europe/Rome')).weekday())
+=======
+    lessons = Lesson.objects.filter(
+        day=datetime.now(pytz.timezone('Europe/Rome')).weekday(),
+        user__enable_automatic_reservation=True
+    )
+>>>>>>> dev
 
     # start = measure_time()
     # TODO: understand if this assignment is required...

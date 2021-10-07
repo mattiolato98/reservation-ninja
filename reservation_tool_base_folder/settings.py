@@ -10,6 +10,9 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.1/ref/settings/
 """
 import os
+import dj_database_url
+
+from .email_settings import *
 from pathlib import Path
 
 import dj_database_url

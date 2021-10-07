@@ -3,7 +3,9 @@
 geckodriver.log
 .idea/
 /reservation_tool_base_folder/secret_key.txt
+/reservation_tool_base_folder/email_settings.py
 Pipfile
 *.pyc
 db.sqlite3
 *__pycache__
+db.sqlite3
