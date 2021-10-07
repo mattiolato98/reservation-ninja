@@ -27,10 +27,10 @@ class RegistrationView(CreateView):
     success_url = reverse_lazy('user_management:login')
 
     def form_valid(self, form):
-        response = super(RegistrationView, self).form_valid(form)
-
         if form.cleaned_data['email'].split('@')[1] != 'studenti.unimore.it':
             return redirect('user_management:registration')
+
+        response = super(RegistrationView, self).form_valid(form)
 
         # mail_subject = _('Conferma la tua mail')
         # relative_confirm_url = reverse(
