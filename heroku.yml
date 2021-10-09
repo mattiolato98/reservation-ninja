@@ -1,0 +1,5 @@
+build:
+  docker:
+    web: Dockerfile
+run:
+  clock: python reservation_management/scheduler_test.py
