@@ -9,7 +9,6 @@ from datetime import datetime
 from datetime import time
 
 import pytz
-from django.contrib.auth import get_user_model
 from selenium import webdriver
 from selenium.webdriver.firefox.options import Options
 from selenium.common.exceptions import NoSuchElementException
