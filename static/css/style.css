@@ -1,7 +1,6 @@
 body {
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Montserrat', sans-serif;
     font-weight: 400;
-    background-color: #f2f2f2;
     color: #464c52;
 }
 
@@ -163,10 +162,6 @@ select:-webkit-autofill:focus {
     -webkit-text-fill-color: #525252;
 }
 
-.site-box {
-    border-radius: 15px;
-}
-
 .btn {
     font-weight: 500;
     border-radius: 20px;
@@ -311,22 +306,6 @@ select:-webkit-autofill:focus {
     border: none;
 }
 
-.list-group-item {
-    border-radius: 15px !important;
-    -webkit-transition: background-color 0.5s;
-    -moz-transition: background-color 0.5s;
-    -o-transition: background-color 0.5s;
-    transition: background-color 0.5s;
-}
-
-.list-group-item:hover {
-    border-radius: 15px;
-    -webkit-transition: background-color 0.3s;
-    -moz-transition: background-color 0.3s;
-    -o-transition: background-color 0.3s;
-    transition: background-color 0.3s;
-}
-
 .badge {
     font-size: 1rem;
 }
@@ -441,4 +420,9 @@ select:-webkit-autofill:focus {
     border-radius: 15px;
     border-color: transparent;
     box-shadow:  0 .5rem 1rem rgba(0,0,0,.15) !important;
+}
+
+hr {
+    border-style: solid;
+    width: 100%;
 }

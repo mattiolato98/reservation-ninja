@@ -1,4 +1,4 @@
-from crispy_forms.layout import Layout, Row, Column
+from crispy_forms.layout import Layout, Row, Column, HTML
 from django.contrib.auth import get_user_model
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from crispy_forms.helper import FormHelper
@@ -24,8 +24,10 @@ class PlatformUserCreationForm(UserCreationForm):
 
         self.fields['password1'].help_text = None
 
+        self.fields['email'].label = "Unimore Email"
+
         self.fields['username'].widget.attrs.update({'placeholder': 'Username'})
-        self.fields['email'].widget.attrs.update({'placeholder': 'Email'})
+        self.fields['email'].widget.attrs.update({'placeholder': 'Your Unimore Email'})
         self.fields['password1'].widget.attrs.update({'placeholder': 'Password'})
         self.fields['password2'].widget.attrs.update({'placeholder': 'Confirm password'})
         self.fields['unimore_username'].widget.attrs.update({'placeholder': 'Unimore username'})
@@ -37,8 +39,15 @@ class PlatformUserCreationForm(UserCreationForm):
                 css_class='form-row'
             ),
             Row(
-                Column('email', css_class='form-group'),
-                css_class='form-row'
+                Column('password1', css_class='form-group'),
+                Column('password2', css_class='form-group'),
+                css_class='form-row',
+            ),
+            Row(HTML("<hr>")),
+            Row(
+                HTML("""
+                    <h3 class='mt-3 logo-font'>Unimore Credentials</h3>
+                """),
             ),
             Row(
                 Column('unimore_username', css_class='form-group'),
@@ -46,22 +55,24 @@ class PlatformUserCreationForm(UserCreationForm):
                 css_class='form-row'
             ),
             Row(
-                Column('password1', css_class='form-group'),
-                Column('password2', css_class='form-group'),
-                css_class='form-row',
+                Column('email', css_class='form-group'),
+                css_class='form-row'
             ),
         )
 
     class Meta:
         model = get_user_model()
-        fields = [
+        fields = (
             'username',
             'email',
             'password1',
             'password2',
             'unimore_username',
             'unimore_password',
-        ]
+        )
+        labels = {
+            'email': 'Unimore Email',
+        }
         widgets = {
             'unimore_password': forms.PasswordInput(),
         }
