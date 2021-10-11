@@ -1,0 +1,92 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-10-12 00:22+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: user_management/templates/registration/login.html:6
+#: user_management/templates/user_management/email_verified.html:19
+msgid "Welcome"
+msgstr "Benvenuto"
+
+#: user_management/templates/registration/login.html:10
+msgid "Don't have an account yet? Sign up"
+msgstr "Non hai ancora un account? Registrati"
+
+#: user_management/templates/registration/registration.html:4
+#: user_management/templates/registration/registration.html:7
+msgid "Sign up"
+msgstr "Registrati"
+
+#: user_management/templates/registration/registration.html:6
+msgid "Fill the form with your information"
+msgstr "Inserisci le tue informazioni"
+
+#: user_management/templates/registration/registration.html:10
+msgid "Back to login"
+msgstr "Torna al login"
+
+#: user_management/templates/user_management/email_verification_needed.html:4
+msgid "Email confirmation"
+msgstr "Conferma della email"
+
+#: user_management/templates/user_management/email_verification_needed.html:8
+msgid "Check your email inbox."
+msgstr "Controlla la tua casella di posta."
+
+#: user_management/templates/user_management/email_verification_needed.html:10
+msgid ""
+"\n"
+"            You should have received a link to confirm your email.\n"
+"            If you have already confirmed it, you can &nbsp;\n"
+"            "
+msgstr ""
+"\n"
+"            Dovresti aver ricevuto un link per confermare la tua email.\n"
+"            Se lo hai già fatto, puoi procedere al &nbsp;\n"
+"            "
+
+#: user_management/templates/user_management/email_verified.html:13
+msgid "Email successfully verified"
+msgstr "Email verificata con successo"
+
+#: user_management/templates/user_management/email_verified.html:21
+msgid "Your email has been successfully verified."
+msgstr "La tua email è stata verificata con successo"
+
+#: user_management/templates/user_management/email_verified.html:24
+msgid "Join"
+msgstr "Entra"
+
+#: user_management/views.py:34
+msgid "Reservation Ninja - Confirm your email"
+msgstr "Reservation Ninja - Conferma la tua email"
+
+#: user_management/views.py:45
+#, fuzzy, python-brace-format
+msgid ""
+"Hi {self.object.username}, welcome to Reservation Ninja.\n"
+"\n"
+"Click this link to confirm your email:"
+msgstr ""
+"Ciao {self.object.username}, ti diamo il benvenuto in Reservation Ninja.\n"
+"\n"
+"Clicca il seguente link per confermare la tua email:"
+
+#: user_management/views.py:83
+#, python-brace-format
+msgid "Error. Attempt to validate email for the user {user} with token {token}"
+msgstr "Errore. Tentativo di validazione dell'email per l'utente {user} con il token {token}"
