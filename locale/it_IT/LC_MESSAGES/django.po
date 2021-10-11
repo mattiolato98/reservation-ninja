@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-10-12 00:22+0200\n"
+"POT-Creation-Date: 2021-10-11 22:34+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -16,6 +16,36 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+
+#: user_management/forms.py:31
+msgid "Your Unimore Email"
+msgstr "La tua email Unimore"
+
+#: user_management/forms.py:33
+msgid "Confirm password"
+msgstr "Conferma password"
+
+#: user_management/forms.py:34 user_management/forms.py:75
+msgid "Unimore username"
+msgstr "Username Unimore"
+
+#: user_management/forms.py:35 user_management/forms.py:76
+msgid "Unimore password"
+msgstr "Password Unimore"
+
+#: user_management/forms.py:49
+msgid ""
+"\n"
+"                    <h3 class='mt-3 logo-font'>Unimore Credentials</h3>\n"
+"                "
+msgstr ""
+"\n"
+"                    <h3 class='mt-3 logo-font'>Credenziali Unimore</h3>\n"
+"                "
+
+#: user_management/forms.py:77
+msgid "Unimore Email"
+msgstr "Email Unimore"
 
 #: user_management/templates/registration/login.html:6
 #: user_management/templates/user_management/email_verified.html:19
@@ -89,4 +119,6 @@ msgstr ""
 #: user_management/views.py:83
 #, python-brace-format
 msgid "Error. Attempt to validate email for the user {user} with token {token}"
-msgstr "Errore. Tentativo di validazione dell'email per l'utente {user} con il token {token}"
+msgstr ""
+"Errore. Tentativo di validazione dell'email per l'utente {user} con il token "
+"{token}"
