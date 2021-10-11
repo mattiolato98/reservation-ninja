@@ -1,12 +1,13 @@
 {% extends 'registration/base_signing.html' %}
+{% load i18n %}
 
-{% block title %}{{ block.super }} Sign up{% endblock %}
+{% block title %}{{ block.super }} {% translate "Sign up" %}{% endblock %}
 
-{% block signing_title %}Fill the form with your information{% endblock %}
-{% block signing_submit_value %}Sign up{% endblock %}
+{% block signing_title %}{% translate "Fill the form with your information" %}{% endblock %}
+{% block signing_submit_value %}{% translate "Sign up" %}{% endblock %}
 
 {% block undo_url %}{% url 'user_management:login' %}{% endblock %}
-{% block undo_text %}Back to login{% endblock %}
+{% block undo_text %}{% translate "Back to login" %}{% endblock %}
 
 {% block extra_javascript %}
     {% include 'user_management/user_ajax.html' %}

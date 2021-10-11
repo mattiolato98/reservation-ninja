@@ -1,9 +1,10 @@
 {% extends 'registration/base_signing.html' %}
+{% load i18n %}
 
 {% block title %}{{ block.super }} Login{% endblock %}
 
-{% block signing_title %}Welcome{% endblock %}
+{% block signing_title %}{% translate "Welcome" %}{% endblock %}
 {% block signing_submit_value %}Login{% endblock %}
 
 {% block undo_url %}{% url 'user_management:registration' %}{% endblock %}
-{% block undo_text %}Don't have an account yet? Sign up{% endblock %}
+{% block undo_text %}{% translate "Don't have an account yet? Sign up" %}{% endblock %}
