@@ -14,6 +14,8 @@ import dj_database_url
 
 from .email_settings import *
 from pathlib import Path
+
+import dj_database_url
 from django.core.management.utils import get_random_secret_key
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
