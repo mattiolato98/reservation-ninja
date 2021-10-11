@@ -14,6 +14,7 @@ import dj_database_url
 
 from .email_settings import *
 from pathlib import Path
+
 from django.core.management.utils import get_random_secret_key
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -155,6 +156,7 @@ LOGOUT_REDIRECT_URL = '/user/login'
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 # security settings
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 SECURE_SSL_REDIRECT = int(os.environ.get('SECURE_SSL_REDIRECT', default=1))
 SESSION_COOKIE_SECURE = int(os.environ.get('SESSION_COOKIE_SECURE', default=1))
 CSRF_COOKIE_SECURE = int(os.environ.get('CSRF_COOKIE_SECURE', default=1))
