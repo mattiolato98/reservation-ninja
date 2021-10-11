@@ -1,13 +1,16 @@
 {% extends 'base.html' %}
+{% load i18n %}
 
-{% block title %}{{ block.super }} Email confirmation{% endblock %}
+{% block title %}{{ block.super }} {% translate "Email confirmation" %}{% endblock %}
 
 {% block content %}
     <div class="p-4">
-        <h3 class="font-7 d-flex justify-content-center logo-font">Check your email inbox.</h3>
+        <h3 class="font-7 d-flex justify-content-center logo-font">{% translate "Check your email inbox." %}</h3>
         <h5 class="font-7 text-muted d-flex justify-content-center logo-font">
+            {% blocktranslate %}
             You should have received a link to confirm your email.
             If you have already confirmed it, you can &nbsp;
+            {% endblocktranslate %}
             <a class="site-blue-text font-7" href="{% url 'user_management:login' %}">login</a>.
         </h5>
     </div>

@@ -2,6 +2,7 @@ from crispy_forms.layout import Layout, Row, Column, HTML
 from django.contrib.auth import get_user_model
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from crispy_forms.helper import FormHelper
+from django.utils.translation import gettext_lazy as _
 from django import forms
 
 
@@ -27,11 +28,11 @@ class PlatformUserCreationForm(UserCreationForm):
         self.fields['email'].label = "Unimore Email"
 
         self.fields['username'].widget.attrs.update({'placeholder': 'Username'})
-        self.fields['email'].widget.attrs.update({'placeholder': 'Your Unimore Email'})
+        self.fields['email'].widget.attrs.update({'placeholder': _('Your Unimore Email')})
         self.fields['password1'].widget.attrs.update({'placeholder': 'Password'})
-        self.fields['password2'].widget.attrs.update({'placeholder': 'Confirm password'})
-        self.fields['unimore_username'].widget.attrs.update({'placeholder': 'Unimore username'})
-        self.fields['unimore_password'].widget.attrs.update({'placeholder': 'Unimore password'})
+        self.fields['password2'].widget.attrs.update({'placeholder': _('Confirm password')})
+        self.fields['unimore_username'].widget.attrs.update({'placeholder': _('Unimore username')})
+        self.fields['unimore_password'].widget.attrs.update({'placeholder': _('Unimore password')})
 
         self.helper.layout = Layout(
             Row(
@@ -45,9 +46,9 @@ class PlatformUserCreationForm(UserCreationForm):
             ),
             Row(HTML("<hr>")),
             Row(
-                HTML("""
+                HTML(_("""
                     <h3 class='mt-3 logo-font'>Unimore Credentials</h3>
-                """),
+                """)),
             ),
             Row(
                 Column('unimore_username', css_class='form-group'),
@@ -71,7 +72,9 @@ class PlatformUserCreationForm(UserCreationForm):
             'unimore_password',
         )
         labels = {
-            'email': 'Unimore Email',
+            'unimore_username': _('Unimore username'),
+            'unimore_password': _('Unimore password'),
+            'email': _('Unimore Email'),
         }
         widgets = {
             'unimore_password': forms.PasswordInput(),

@@ -42,11 +42,11 @@ class RegistrationView(CreateView):
 
         self.object.email_user(
             subject=mail_subject,
-            message=_(f'''Ciao {self.object.username}, '''
-                      + '''ti diamo il benvenuto in Reservation Ninja.\n'''
-                      + '''\nClicca il seguente link per confermare la tua email:'''
+            message=_(f'''Hi {self.object.username}, '''
+                      + '''welcome to Reservation Ninja.\n'''
+                      + '''\nClick this link to confirm your email:'''
                       + f'''\n{self.request.build_absolute_uri(relative_confirm_url)}\n'''
-                      + '''\nA presto, \nil Team di Reservation Ninja.''')
+                      + '''\nSee you soon, \nReservation Ninja.''')
         )
 
         self.object.token_sent = True
@@ -80,7 +80,7 @@ def verify_user_email(request, user_id_b64=None, user_token=None):
     Check for the token and redirect to email verification succeeded page.
     """
     if not user_login_by_token(request, user_id_b64, user_token):
-        message = _('Errore. Tentativo di validazione email per l\'utente {user} con token {token}')
+            message = _('Error. Attempt to validate email for the user {user} with token {token}')
 
     return redirect('user_management:email-verified')
 
