@@ -13,13 +13,6 @@ ENV SESSION_COOKIE_SECURE 1
 ENV CSRF_COOKIE_SECURE 1
 ENV TZ Europe/Rome
 
-# set python virtual environment
-ENV VIRTUAL_ENV=/opt/reservation-ninja
-RUN pip install --upgrade pip
-    && pip install virtualenv \
-    && virtualenv $VIRTUAL_ENV
-ENV PATH="$VIRTUAL_ENV/bin:$PATH"
-
 # install psycopg2
 RUN apk update \
     && apk add --virtual build-deps gcc python3-dev musl-dev \
@@ -64,5 +57,4 @@ RUN adduser -D ninja
 USER ninja
 
 # run gunicorn
-# CMD gunicorn reservation_tool_base_folder.wsgi:application --bind 0.0.0.0:$PORT
-CMD gunicorn reservation_tool_base_folder.wsgi:application --bind 0.0.0.0:8000
+CMD gunicorn reservation_tool_base_folder.wsgi:application --bind 0.0.0.0:$PORT
