@@ -111,6 +111,18 @@ h5 {
     text-decoration: underline !important;
 }
 
+.path-link {
+    padding: 0.25rem 0.5rem;
+    color: currentColor;
+    border-radius: 5px;
+}
+
+.path-link:hover {
+    color: currentColor;
+    text-decoration: none;
+    background-color: rgba(0,0,0,.075);
+}
+
 .logo-font {
     font-family: 'Share Tech Mono', monospace;
 }
