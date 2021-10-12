@@ -107,7 +107,7 @@ def reserve_room(driver, user, start_time, end_time, building, room):
 
 
 def reserve_lesson_map(lesson):
-    # Allows run Firefox on a system with no display
+    # Allows to run Firefox on a system with no display
     options = Options()
     options.headless = True
 
