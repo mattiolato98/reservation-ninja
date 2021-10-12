@@ -26,46 +26,48 @@
 {% endblock %}
 
 {% block content %}
-    <a href="{% url 'user_management:logout' %}">
-        Logout
-    </a>
+    <div class="row justify-content-end px-4">
+        <a href="{% url 'user_management:logout' %}" class="path-link font-6">
+            <i class="fas fa-sign-out-alt"></i> Logout
+        </a>
+    </div>
     <div class="d-flex justify-content-center">
         <h1 class="logo-font">Your reservations</h1>
     </div>
 
     <div class="list-group">
         <a href="#" class="list-group-item list-group-item-action d-flex gap-3 py-3" aria-current="true">
-                <img src="https://github.com/twbs.png" alt="twbs" width="32" height="32"
-                     class="rounded-circle flex-shrink-0 mr-2">
-                <div class="d-flex gap-2 w-100 justify-content-between">
-                    <div>
-                        <h6 class="mb-0">List group item heading</h6>
-                        <p class="mb-0 opacity-75">Some placeholder content in a paragraph.</p>
-                    </div>
-                    <small class="opacity-50 text-nowrap">now</small>
+            <img src="https://github.com/twbs.png" alt="twbs" width="32" height="32"
+                 class="rounded-circle flex-shrink-0 mr-2">
+            <div class="d-flex gap-2 w-100 justify-content-between">
+                <div>
+                    <h6 class="mb-0">List group item heading</h6>
+                    <p class="mb-0 opacity-75">Some placeholder content in a paragraph.</p>
                 </div>
+                <small class="opacity-50 text-nowrap">now</small>
+            </div>
         </a>
         <a href="#" class="list-group-item list-group-item-action d-flex gap-3 py-3" aria-current="true">
-                <img src="https://github.com/twbs.png" alt="twbs" width="32" height="32"
-                     class="rounded-circle flex-shrink-0 mr-2">
-                <div class="d-flex gap-2 w-100 justify-content-between">
-                    <div>
-                        <h6 class="mb-0">List group item heading</h6>
-                        <p class="mb-0 opacity-75">Some placeholder content in a paragraph.</p>
-                    </div>
-                    <small class="opacity-50 text-nowrap">now</small>
+            <img src="https://github.com/twbs.png" alt="twbs" width="32" height="32"
+                 class="rounded-circle flex-shrink-0 mr-2">
+            <div class="d-flex gap-2 w-100 justify-content-between">
+                <div>
+                    <h6 class="mb-0">List group item heading</h6>
+                    <p class="mb-0 opacity-75">Some placeholder content in a paragraph.</p>
                 </div>
+                <small class="opacity-50 text-nowrap">now</small>
+            </div>
         </a>
         <a href="#" class="list-group-item list-group-item-action d-flex gap-3 py-3" aria-current="true">
-                <img src="https://github.com/twbs.png" alt="twbs" width="32" height="32"
-                     class="rounded-circle flex-shrink-0 mr-2">
-                <div class="d-flex gap-2 w-100 justify-content-between">
-                    <div>
-                        <h6 class="mb-0">List group item heading</h6>
-                        <p class="mb-0 opacity-75">Some placeholder content in a paragraph.</p>
-                    </div>
-                    <small class="opacity-50 text-nowrap">now</small>
+            <img src="https://github.com/twbs.png" alt="twbs" width="32" height="32"
+                 class="rounded-circle flex-shrink-0 mr-2">
+            <div class="d-flex gap-2 w-100 justify-content-between">
+                <div>
+                    <h6 class="mb-0">List group item heading</h6>
+                    <p class="mb-0 opacity-75">Some placeholder content in a paragraph.</p>
                 </div>
+                <small class="opacity-50 text-nowrap">now</small>
+            </div>
         </a>
     </div>
     {#    <script src="../assets/dist/js/bootstrap.bundle.min.js"></script>#}
