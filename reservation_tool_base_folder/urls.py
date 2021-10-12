@@ -21,5 +21,6 @@ from reservation_tool_base_folder.views import HomepageView
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', HomepageView.as_view(), name='home'),
-    path('user/', include('user_management.urls'))
+    path('user/', include('user_management.urls')),
+    path('reservation/', include('reservation_management.urls')),
 ]
