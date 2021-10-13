@@ -40,6 +40,11 @@
 <body>
 
 <div id="site-main-page" class="container-fluid mt-3">
+    <div class="row justify-content-end px-4">
+        <a href="{% url 'user_management:logout' %}" class="path-link font-6">
+            <i class="fas fa-sign-out-alt"></i> Logout
+        </a>
+    </div>
     {% block content %}
     {% endblock %}
 </div>
