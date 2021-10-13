@@ -10,7 +10,7 @@ class PlatformUser(AbstractUser):
     is_manager = models.BooleanField(default=False)
 
     unimore_username = models.CharField(max_length=100)
-    unimore_password = models.CharField(max_length=100)
+    unimore_password = models.CharField(max_length=500)
 
     enable_automatic_reservation = models.BooleanField(default=False)
 
