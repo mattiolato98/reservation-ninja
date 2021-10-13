@@ -49,8 +49,7 @@ RUN cp /usr/share/zoneinfo/$TZ /etc/localtime \
     && apk del tzdata
 
 # collect static files and migrate
-RUN python manage.py collectstatic --noinput \
-    && python manage.py migrate
+RUN python manage.py collectstatic --noinput
 
 # add and run as non-root user
 RUN adduser -D ninja
