@@ -22,6 +22,6 @@ class PlatformUser(AbstractUser):
         return self.lessons.filter(day=datetime.today().weekday())
 
     @property
-    def clear_unimore_password(self):
+    def plain_unimore_password(self):
         decryptor = Fernet(settings.CRYPTOGRAPHY_KEY.encode())
         return decryptor.decrypt(self.unimore_password.encode()).decode()
