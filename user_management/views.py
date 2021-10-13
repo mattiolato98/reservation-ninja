@@ -1,3 +1,5 @@
+from cryptography.fernet import Fernet
+from django.conf import settings
 from django.contrib.auth import get_user_model, login
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.tokens import PasswordResetTokenGenerator
@@ -29,7 +31,10 @@ class RegistrationView(CreateView):
         if form.cleaned_data['email'].split('@')[1] != 'studenti.unimore.it':
             return redirect('user_management:registration')
 
-        response = super(RegistrationView, self).form_valid(form)
+        self.object = form.save(commit=False)
+
+        encryptor = Fernet(settings.CRYPTOGRAPHY_KEY.encode())
+        self.object.unimore_password = encryptor.encrypt(self.object.unimore_password.encode()).decode()
 
         mail_subject = _('Reservation Ninja - Confirm your email')
         relative_confirm_url = reverse(
@@ -53,7 +58,7 @@ class RegistrationView(CreateView):
         self.object.is_active = False
         self.object.save()
 
-        return response
+        return super(RegistrationView, self).form_valid(form)
 
 
 def user_login_by_token(request, user_id_b64=None, user_token=None):
@@ -89,7 +94,7 @@ class EmailVerificationNeededView(TemplateView):
     template_name = 'user_management/email_verification_needed.html'
 
 
-class EmailVerifiedView(LoginRequiredMixin, TemplateView):
+class EmailVerifiedView(TemplateView):
     template_name = 'user_management/email_verified.html'
 
 
