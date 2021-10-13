@@ -111,6 +111,18 @@ h5 {
     text-decoration: underline !important;
 }
 
+.path-link {
+    padding: 0.25rem 0.5rem;
+    color: currentColor;
+    border-radius: 5px;
+}
+
+.path-link:hover {
+    color: currentColor;
+    text-decoration: none;
+    background-color: rgba(0,0,0,.075);
+}
+
 .logo-font {
     font-family: 'Share Tech Mono', monospace;
 }
@@ -120,22 +132,24 @@ nav .logo-font {
 }
 
 .form-control {
+    background-color: white;
     color: #525252;
     outline: none;
-    background-color: transparent;
-    border-top-style: hidden;
-    border-right-style: hidden;
-    border-left-style: hidden;
-    border-bottom: 4px solid #525252;
+    border: 1px solid #ced4da;
+    border-radius: 5px;
 }
 
 .form-control:focus {
+    border: 1px solid #525252;
     color: #525252;
-    border-bottom-color: #525252;
     outline: none;
-    box-shadow: none;
-    background-color: transparent;
+    background-color: white;
 }
+
+.form-text {
+    color: #525252 !important;
+}
+
 
 .search-input {
     outline: none;

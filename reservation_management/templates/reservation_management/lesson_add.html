@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% load i18n %}
+
+{% block title %}{% translate "Add a lesson" %}{% endblock %}
+
+{% block content %}
+    <div class="row h-100 w-100 ml-0">
+        <div id="background-column" class="col d-flex align-items-center justify-content-center p-0">
+            <div id="lesson-box" class="p-4 d-flex align-items-center justify-content-center">
+                <div id="lesson-form">
+                    <form method="POST">
+                        <h2 class="mb-5 font-7 logo-font">{% translate "Add a lesson" %}</h2>
+                        <div>
+                            {% crispy form %}
+                            <div class="d-flex mt-5 flex-column align-items-center">
+                                <input id="submit-lesson-button" class="btn site-btn mb-2 w-75 font-5" type="submit"
+                                       value="{% translate "Insert" %}">
+                                <a class="site-link font-5" href="{% url "home" %}">
+                                    {% translate "Back to home" %}
+                                </a>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
