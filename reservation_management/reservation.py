@@ -20,10 +20,20 @@ TIME_INTERVAL = 5
 
 def find_hours(root_element, start_hour, end_hour):
     links = root_element.find_elements_by_tag_name("a")
-    available_hours = [
-        tuple(link.text.split(" ")[2].split("-"))
-        for link in links
-    ]
+
+    def time_to_int(time_value):
+        try:
+            return int(time_value)
+        except (ValueError, TypeError):
+            return None
+
+    available_hours = filter(
+        lambda x: x[0] is not None and x[1] is not None,
+        [
+            tuple(map(time_to_int, link.text.split(" ")[2].split("-")))
+            for link in links
+        ]
+    )
 
     ranges_to_reserve = list(filter(
         lambda x: (
@@ -62,14 +72,14 @@ def reserve_room(driver, user, start_time, end_time, building, room):
 
         try:
             driver.find_element_by_id("username").send_keys(user.unimore_username)
-            driver.find_element_by_id("password").send_keys(user.unimore_password)
+            driver.find_element_by_id("password").send_keys(user.plain_unimore_password)
 
             driver.find_element_by_name("_eventId_proceed").click()
         except NoSuchElementException:
             pass
 
         button = driver.find_element_by_xpath("//button[contains(text(), 'Inserisci')]")
-        button.click()
+        # button.click()
 
         print(f"Presenza inserita {range_start_time}-{range_end_time}")
 
