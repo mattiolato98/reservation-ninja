@@ -15,10 +15,9 @@ ENV TZ Europe/Rome
 
 # install psycopg2
 RUN apk update \
-    && apk add --virtual build-deps gcc python3-dev musl-dev \
+    && apk add --virtual build-deps gcc python3-dev libc-dev musl-dev libffi-dev openssl-dev \
     && apk add postgresql-dev \
     && pip install psycopg2 \
-    && apk del build-deps \
     && apk add --no-cache tzdata
 
 # get all the prereqs
@@ -38,7 +37,8 @@ RUN wget https://github.com/mozilla/geckodriver/releases/download/v0.26.0/geckod
 
 # install dependencies
 COPY requirments.txt .
-RUN pip install -r requirments.txt
+RUN pip install --upgrade pip \
+    && pip install -r requirments.txt
 
 # copy project
 COPY . .
