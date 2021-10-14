@@ -47,13 +47,20 @@ class PlatformUserCreationForm(UserCreationForm):
             Row(HTML("<hr>")),
             Row(
                 HTML(_("""
-                    <h3 class='mt-3 logo-font'>Unimore Credentials</h3>
+                    <h3 class='mt-3 mb-0 logo-font'>Unimore Credentials</h3>
                 """)),
+            ),
+            Row(
+                HTML(_("""
+                    <span class='form-text small mt-0'>
+                    Your password will be encrypted and securely stored.
+                    </span>      
+                """))
             ),
             Row(
                 Column('unimore_username', css_class='form-group'),
                 Column('unimore_password', css_class='form-group'),
-                css_class='form-row'
+                css_class='form-row mt-3'
             ),
             Row(
                 Column('email', css_class='form-group'),

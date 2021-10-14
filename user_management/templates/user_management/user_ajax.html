@@ -1,3 +1,5 @@
+{% load i18n %}
+
 <script type="text/javascript">
     $('#id_username').on('change', function () {
         /**
@@ -18,7 +20,7 @@
                     if (!$('#username-exists-error').length) {
                         username_field.after(
                             '<span id="username-exists-error" class="text-danger font-7 font-size-80">' +
-                            'Someone stole this username. Damn!.' +
+                            '{% translate "Someone stole this username. Damn!." %}' +
                             '</span>'
                         );
                     }
@@ -51,7 +53,7 @@
                     if (!$('#not-unimore-email').length) {
                         email_field.after(
                             '<span id="not-unimore-email" class="text-danger font-7 font-size-80">' +
-                            'Seems that you\'re not a Unimore student.' +
+                            '{% translate "Seems that you are not a Unimore student." %}' +
                             '</span>'
                         );
                     }
