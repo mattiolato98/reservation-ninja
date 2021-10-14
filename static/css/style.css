@@ -353,7 +353,7 @@ select:-webkit-autofill:focus {
 }
 
 
-.rounded-picture-extra-big {
+.rounded-ftra-big {
     border-radius: 50%;
     height: 250px;
     width: auto;
@@ -406,6 +406,10 @@ select:-webkit-autofill:focus {
 .picture-small-fixed {
     height: 40px;
     width: 40px;
+}
+
+.picture-xxs {
+    height: 20px;
 }
 
 .clickable-element {
