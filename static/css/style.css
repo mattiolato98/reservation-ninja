@@ -450,7 +450,11 @@ hr {
 }
 
 #footer {
-  background-color: #1c1c1c;
-  flex-basis: 80px;
-  width: 100%;
+    background-color: #1c1c1c;
+    flex-basis: 80px;
+    width: 100%;
+}
+
+#footer span {
+    color: #a1a1a1;
 }
