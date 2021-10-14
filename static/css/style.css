@@ -487,3 +487,7 @@ hr {
 #footer span {
     color: #a1a1a1;
 }
+
+#lesson-form {
+    min-width: 25vw;
+}
