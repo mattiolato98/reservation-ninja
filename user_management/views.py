@@ -13,6 +13,7 @@ from django.views.generic import CreateView, TemplateView
 from django.utils.translation import gettext_lazy as _
 
 from user_management.forms import LoginForm, PlatformUserCreationForm
+from user_management.models import PlatformUser
 
 account_activation_token = PasswordResetTokenGenerator()
 
@@ -36,6 +37,8 @@ class RegistrationView(CreateView):
         encryptor = Fernet(settings.CRYPTOGRAPHY_KEY.encode())
         self.object.unimore_password = encryptor.encrypt(self.object.unimore_password.encode()).decode()
 
+        response = super(RegistrationView, self).form_valid(form)
+
         mail_subject = _('Reservation Ninja - Confirm your email')
         relative_confirm_url = reverse(
             'user_management:verify-user-email',
@@ -58,7 +61,7 @@ class RegistrationView(CreateView):
         self.object.is_active = False
         self.object.save()
 
-        return super(RegistrationView, self).form_valid(form)
+        return response
 
 
 def user_login_by_token(request, user_id_b64=None, user_token=None):
@@ -85,7 +88,13 @@ def verify_user_email(request, user_id_b64=None, user_token=None):
     Check for the token and redirect to email verification succeeded page.
     """
     if not user_login_by_token(request, user_id_b64, user_token):
-            message = _('Error. Attempt to validate email for the user {user} with token {token}')
+        message = _(f'Error. Attempt to validate email for the user {user_id_b64} with token {user_token}')
+        subject = _('Authentication error')
+        # in this case manager and admin are the same entity
+        manager = PlatformUser.objects.get(is_manager=True)
+        manager.email_user(subject=subject, message=message)
+        # TODO: maybe provide an error message?
+        return redirect('user_management:registration')
 
     return redirect('user_management:email-verified')
 
