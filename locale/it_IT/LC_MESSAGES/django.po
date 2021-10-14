@@ -48,12 +48,7 @@ msgstr "Username Unimore"
 msgid "Unimore password"
 msgstr "Password Unimore"
 
-#: user_management/forms.py:49
-#, fuzzy
-#| msgid ""
-#| "\n"
-#| "                    <h3 class='mt-3 logo-font'>Unimore Credentials</h3>\n"
-#| "                "
+#: user_management/forms.py:49          "
 msgid ""
 "\n"
 "                    <h3 class='mt-3 mb-0 logo-font'>Unimore Credentials</"
