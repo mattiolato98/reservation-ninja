@@ -47,7 +47,7 @@ class PlatformUserCreationForm(UserCreationForm):
             Row(HTML("<hr>")),
             Row(
                 HTML(_("""
-                    <h3 class='mt-3 mb-0 logo-font'>Unimore Credentials</h3>
+                    <h3 class='mt-3 mb-0 logo-font site-color'>Unimore Credentials</h3>
                 """)),
             ),
             Row(
