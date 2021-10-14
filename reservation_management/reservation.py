@@ -79,7 +79,7 @@ def reserve_room(driver, user, start_time, end_time, building, room):
             pass
 
         button = driver.find_element_by_xpath("//button[contains(text(), 'Inserisci')]")
-        # button.click()
+        button.click()
 
         print(f"Presenza inserita {range_start_time}-{range_end_time}")
 
