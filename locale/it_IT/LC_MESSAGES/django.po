@@ -27,10 +27,8 @@ msgid "Insert"
 msgstr "Inserisci"
 
 #: reservation_management/templates/reservation_management/lesson_add.html:21
-#, fuzzy
-#| msgid "Back to login"
 msgid "Back to home"
-msgstr "Torna al login"
+msgstr "Torna alla home"
 
 #: user_management/forms.py:31
 msgid "Your Unimore Email"
