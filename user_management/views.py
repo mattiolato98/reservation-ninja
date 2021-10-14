@@ -35,6 +35,7 @@ class RegistrationView(CreateView):
         self.object = form.save(commit=False)
 
         encryptor = Fernet(settings.CRYPTOGRAPHY_KEY.encode())
+        self.object.unimore_username = encryptor.encrypt(self.object.unimore_username.encode()).decode()
         self.object.unimore_password = encryptor.encrypt(self.object.unimore_password.encode()).decode()
 
         response = super(RegistrationView, self).form_valid(form)

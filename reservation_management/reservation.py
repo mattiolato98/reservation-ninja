@@ -71,7 +71,7 @@ def reserve_room(driver, user, start_time, end_time, building, room):
         driver.execute_script("arguments[0].click();", element)
 
         try:
-            driver.find_element_by_id("username").send_keys(user.unimore_username)
+            driver.find_element_by_id("username").send_keys(user.plain_unimore_username)
             driver.find_element_by_id("password").send_keys(user.plain_unimore_password)
 
             driver.find_element_by_name("_eventId_proceed").click()
