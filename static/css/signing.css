@@ -36,10 +36,6 @@ html,body {
     color: #525252;
 }
 
-input {
-    font-family: 'ZCOOL KuaiLe', cursive;
-}
-
 input:-webkit-autofill,
 input:-webkit-autofill:hover,
 input:-webkit-autofill:focus,
