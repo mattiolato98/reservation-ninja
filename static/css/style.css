@@ -444,6 +444,35 @@ select:-webkit-autofill:focus {
     box-shadow:  0 .5rem 1rem rgba(0,0,0,.15) !important;
 }
 
+.dropdown-item.active {
+    background-color: #548687 !important;
+    font-weight: 600;
+    color: white !important;
+}
+
+.dropdown-item {
+    color: #464c52 !important;
+}
+
+.dropdown-item:hover {
+    background-color: #edf0f2;
+    color: #464c52;
+}
+
+.dropdown-item:active {
+    outline: none !important;
+}
+
+
+.dropdown-menu input {
+    border: 1px solid #ced4da;
+    font-weight: 400;
+}
+
+.dropdown-menu input:focus {
+    border: 3px solid #525252;
+}
+
 hr {
     border-style: solid;
     width: 100%;
