@@ -4,6 +4,10 @@ body {
     color: #525252;
 }
 
+#site-main-page {
+    min-height: 100vh;
+}
+
 h2 {
     font-weight: 700;
 }
@@ -125,6 +129,9 @@ h5 {
 
 .logo-font {
     font-family: 'ZCOOL KuaiLe', cursive;
+}
+
+.site-color {
     color: #FF5964;
 }
 
@@ -440,4 +447,10 @@ select:-webkit-autofill:focus {
 hr {
     border-style: solid;
     width: 100%;
+}
+
+#footer {
+  background-color: #1c1c1c;
+  flex-basis: 80px;
+  width: 100%;
 }
