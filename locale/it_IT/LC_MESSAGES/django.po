@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-10-11 22:34+0000\n"
+"POT-Creation-Date: 2021-10-14 08:15+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -16,6 +16,21 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+
+#: reservation_management/templates/reservation_management/lesson_add.html:6
+#: reservation_management/templates/reservation_management/lesson_add.html:14
+msgid "Add a lesson"
+msgstr "Aggiungi una lezione"
+
+#: reservation_management/templates/reservation_management/lesson_add.html:19
+msgid "Insert"
+msgstr "Inserisci"
+
+#: reservation_management/templates/reservation_management/lesson_add.html:21
+#, fuzzy
+#| msgid "Back to login"
+msgid "Back to home"
+msgstr "Torna al login"
 
 #: user_management/forms.py:31
 msgid "Your Unimore Email"
@@ -25,25 +40,45 @@ msgstr "La tua email Unimore"
 msgid "Confirm password"
 msgstr "Conferma password"
 
-#: user_management/forms.py:34 user_management/forms.py:75
+#: user_management/forms.py:34 user_management/forms.py:82
 msgid "Unimore username"
 msgstr "Username Unimore"
 
-#: user_management/forms.py:35 user_management/forms.py:76
+#: user_management/forms.py:35 user_management/forms.py:83
 msgid "Unimore password"
 msgstr "Password Unimore"
 
 #: user_management/forms.py:49
+#, fuzzy
+#| msgid ""
+#| "\n"
+#| "                    <h3 class='mt-3 logo-font'>Unimore Credentials</h3>\n"
+#| "                "
 msgid ""
 "\n"
-"                    <h3 class='mt-3 logo-font'>Unimore Credentials</h3>\n"
+"                    <h3 class='mt-3 mb-0 logo-font'>Unimore Credentials</"
+"h3>\n"
 "                "
 msgstr ""
 "\n"
 "                    <h3 class='mt-3 logo-font'>Credenziali Unimore</h3>\n"
 "                "
 
-#: user_management/forms.py:77
+#: user_management/forms.py:54
+msgid ""
+"\n"
+"                    <span class='form-text small mt-0'>\n"
+"                    Your password will be encrypted and securely stored.\n"
+"                    </span>      \n"
+"                "
+msgstr ""
+"\n"
+"                    <span class='form-text small mt-0'>\n"
+"                    La tua password è cryptata e memorizzata in sicurezza.\n"
+"                    </span>      \n"
+"                "
+
+#: user_management/forms.py:84
 msgid "Unimore Email"
 msgstr "Email Unimore"
 
@@ -101,11 +136,19 @@ msgstr "La tua email è stata verificata con successo"
 msgid "Join"
 msgstr "Entra"
 
-#: user_management/views.py:34
+#: user_management/templates/user_management/user_ajax.html:23
+msgid "Someone stole this username. Damn!."
+msgstr "Qualcuno ha rubato questo username. Accidenti!"
+
+#: user_management/templates/user_management/user_ajax.html:56
+msgid "Seems that you are not a Unimore student."
+msgstr "Sembra che tu non sia uno studente Unimore."
+
+#: user_management/views.py:39
 msgid "Reservation Ninja - Confirm your email"
 msgstr "Reservation Ninja - Conferma la tua email"
 
-#: user_management/views.py:45
+#: user_management/views.py:50
 #, fuzzy, python-brace-format
 msgid ""
 "Hi {self.object.username}, welcome to Reservation Ninja.\n"
@@ -116,7 +159,7 @@ msgstr ""
 "\n"
 "Clicca il seguente link per confermare la tua email:"
 
-#: user_management/views.py:83
+#: user_management/views.py:88
 #, python-brace-format
 msgid "Error. Attempt to validate email for the user {user} with token {token}"
 msgstr ""
