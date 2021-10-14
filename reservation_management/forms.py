@@ -60,5 +60,7 @@ class LessonForm(forms.ModelForm):
         )
         widgets = {
             'classroom': forms.Select(attrs={'class': 'selectpicker', 'data-live-search': 'true'}),
+            'start_time': forms.TimeInput(attrs={'type': 'time'}),
+            'end_time': forms.TimeInput(attrs={'type': 'time'}),
         }
 
