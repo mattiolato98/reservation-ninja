@@ -53,7 +53,7 @@ class PlatformUserCreationForm(UserCreationForm):
             Row(
                 Column('unimore_username', css_class='form-group'),
                 Column('unimore_password', css_class='form-group'),
-                css_class='form-row'
+                css_class='form-row mt-3'
             ),
             Row(
                 Column('email', css_class='form-group'),
