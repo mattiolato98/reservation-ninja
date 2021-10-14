@@ -34,13 +34,13 @@
           integrity="sha256-jwJEU4p1YdtymLFwAjYfam5Pj5NOnylms63k7LYQ9Jk=" crossorigin="anonymous"/>
 
 
-    <link rel="stylesheet"
-          href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'css/media-queries.css' %}">
+
+    {% block extra_css %} {% endblock %}
 
     <!-- favicon -->
     <link rel="shortcut icon" type="image/png" href="{% static 'img/ninja.png' %}">
-
-    {% block extra_css %} {% endblock %}
 
     <title>{% block title %}ReservationNinja |{% endblock %}</title>
 </head>
