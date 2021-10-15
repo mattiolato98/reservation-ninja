@@ -1,5 +1,6 @@
 from django.contrib.auth import get_user_model
 from django.db import models
+from django.utils.translation import gettext_lazy as _
 
 
 class Building(models.Model):
@@ -18,7 +19,19 @@ class Classroom(models.Model):
 
 
 class Lesson(models.Model):
-    day = models.PositiveSmallIntegerField()
+    MONDAY = 0
+    TUESDAY = 1
+    WEDNESDAY = 2
+    THURSDAY = 3
+    FRIDAY = 4
+    WEEKDAYS = [
+        (MONDAY, _("Monday")),
+        (TUESDAY, _("Tuesday")),
+        (WEDNESDAY, _("Wednesday")),
+        (THURSDAY, _("Thursday")),
+        (FRIDAY, _("Friday")),
+    ]
+    day = models.PositiveSmallIntegerField(choices=WEEKDAYS, default=MONDAY)
     start_time = models.TimeField()
     end_time = models.TimeField()
 
