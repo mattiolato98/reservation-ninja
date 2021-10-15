@@ -5,4 +5,5 @@ app_name = 'reservation_management'
 
 urlpatterns = [
     path('lesson/add', views.LessonAddView.as_view(), name='lesson-add'),
+    path('lesson/list', views.LessonListView.as_view(), name='lesson-list'),
 ]

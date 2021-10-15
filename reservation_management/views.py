@@ -1,7 +1,7 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import HttpResponseRedirect
 from django.urls import reverse_lazy
-from django.views.generic import CreateView
+from django.views.generic import CreateView, ListView
 
 from reservation_management.forms import LessonForm
 from reservation_management.models import Lesson
@@ -27,3 +27,11 @@ class LessonAddView(LoginRequiredMixin, CreateView):
     def form_valid(self, form):
         form.instance.user = self.request.user
         return super(LessonAddView, self).form_valid(form)
+
+
+class LessonListView(ListView, LoginRequiredMixin):
+    """
+    View to display the Lessons created by a user.
+    """
+    model = Lesson
+    template_name = "reservation_management/lesson_list.html"
