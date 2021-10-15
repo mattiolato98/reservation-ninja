@@ -21,29 +21,26 @@ TIME_INTERVAL = 5
 def find_hours(root_element, start_hour, end_hour):
     links = root_element.find_elements_by_tag_name("a")
 
-    def time_to_int(time_value):
-        try:
-            return int(time_value)
-        except (ValueError, TypeError):
-            return None
-
-    available_hours = filter(
-        lambda x: x[0] is not None and x[1] is not None,
-        [
-            tuple(map(time_to_int, link.text.split(" ")[2].split("-")))
-            for link in links
-        ]
+    available_hours = (
+        tuple(link.text.split(" ")[2].split("-"))
+        for link in links
     )
 
+    def check_range(x):
+        try:
+            range_start = time(int(x[0].split(":")[0]), int(x[0].split(":")[1]))
+            range_end = time(int(x[1].split(":")[0]), int(x[1].split(":")[1]))
+        except (TypeError, ValueError):
+            return False
+
+        return (range_start <= start_hour < range_end) or (range_end >= end_hour > range_start)
+
     ranges_to_reserve = list(filter(
-        lambda x: (
-            range_start := time(int(x[0].split(":")[0]), int(x[0].split(":")[1])),
-            range_end := time(int(x[1].split(":")[0]), int(x[1].split(":")[1])),
-            (range_start <= start_hour < range_end) or
-            (range_end >= end_hour > range_start)
-        )[-1],
+        check_range,
         available_hours
     ))
+
+    print(ranges_to_reserve)
 
     return ranges_to_reserve
 
@@ -79,7 +76,7 @@ def reserve_room(driver, user, start_time, end_time, building, room):
             pass
 
         button = driver.find_element_by_xpath("//button[contains(text(), 'Inserisci')]")
-        button.click()
+        # button.click()
 
         print(f"Presenza inserita {range_start_time}-{range_end_time}")
 
