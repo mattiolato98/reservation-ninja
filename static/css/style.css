@@ -186,7 +186,7 @@ select:-webkit-autofill:focus {
 
 .btn {
     font-weight: 500;
-    border-radius: 20px;
+    border-radius: 10px;
 }
 
 .btn.dropdown-toggle {
