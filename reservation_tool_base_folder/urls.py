@@ -16,11 +16,12 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 
-from reservation_tool_base_folder.views import HomepageView
+from reservation_tool_base_folder.views import HomepageView, HelpView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', HomepageView.as_view(), name='home'),
+    path('help', HelpView.as_view(), name='help'),
     path('user/', include('user_management.urls')),
     path('reservation/', include('reservation_management.urls')),
 ]

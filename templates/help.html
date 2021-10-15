@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% load i18n %}
+
+{% block content %}
+    <div class="site-box">
+        <div class="row justify-content-center">
+            <div class="col-lg-3 col-12">
+                <h2 class="logo-font site-color">
+                    {% translate "Help" %}
+                </h2>
+            </div>
+        </div>
+        <div class="row justify-content-center mt-3">
+            <div class="col-lg-3 col-12">
+                <p>
+                    {% blocktranslate %}
+                        If you have some doubt or you want to report an issue,
+                        write to this email:
+                        <span class="font-6 site-color">reservationtoolninja@gmail.com</span>.
+                    {% endblocktranslate %}
+                </p>
+                <p>
+                    {% blocktranslate %}
+                        Our cookie policy:
+                    {% endblocktranslate %}
+                </p>
+            </div>
+        </div>
+        <div class="row justify-content-center mt-3">
+            <div class="col-lg-3 col-12">
+                <a href="{% url 'home' %}" class="font-6 site-blue-text">
+                    <i class="fas fa-chevron-left ml-2"></i>
+                    {% translate "Back home" %}
+                </a>
+            </div>
+        </div>
+    </div>
+{% endblock %}
