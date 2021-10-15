@@ -52,8 +52,8 @@ class PlatformUserCreationForm(UserCreationForm):
             ),
             Row(
                 HTML(_("""
-                    <span class='form-text small mt-0'>
-                    Your password will be encrypted and securely stored.
+                    <span class='form-text small mt-0 mb-2'>
+                    Your credentials will be encrypted and securely stored and you can delete them at any time.
                     </span>      
                 """))
             ),

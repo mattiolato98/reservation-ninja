@@ -51,7 +51,7 @@
     {% if user.is_authenticated %}
         <div class="row justify-content-end px-4">
             <a href="{% url 'user_management:logout' %}" class="path-link font-6">
-                <i class="fas fa-sign-out-alt"></i> Logout
+                Logout <i class="fas fa-sign-out-alt ml-2"></i>
             </a>
         </div>
     {% endif %}

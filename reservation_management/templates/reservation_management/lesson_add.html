@@ -6,24 +6,22 @@
 {% block title %}{% translate "Add a lesson" %}{% endblock %}
 
 {% block content %}
-    <div class="row h-100 w-100 ml-0">
-        <div id="background-column" class="col d-flex align-items-center justify-content-center p-0">
-            <div id="lesson-box" class="p-4 d-flex align-items-center justify-content-center">
-                <div id="lesson-form">
-                    <form method="POST">
-                        <h2 class="mb-5 font-7 logo-font site-color">{% translate "Add a lesson" %}</h2>
-                        <div>
-                            {% crispy form %}
-                            <div class="d-flex mt-5 flex-column align-items-center">
-                                <input id="submit-lesson-button" class="btn site-btn mb-2 w-75 font-5" type="submit"
-                                       value="{% translate "Insert" %}">
-                                <a class="site-link font-5" href="{% url "home" %}">
-                                    {% translate "Back to home" %}
-                                </a>
-                            </div>
+    <div class="site-box">
+        <div class="row h-100 w-100 ml-0 justify-content-center">
+            <div id="lesson-column" class="col-lg-3 col-12 d-flex align-items-center justify-content-center p-0">
+                <form method="POST" class="w-100">
+                    <h2 class="mb-5 font-7 logo-font site-color">{% translate "Add a lesson" %}</h2>
+                    <div>
+                        {% crispy form %}
+                        <div class="d-flex mt-5 flex-column align-items-center">
+                            <input id="submit-lesson-button" class="btn site-btn mb-2 w-75 font-5" type="submit"
+                                   value="{% translate "Insert" %}">
+                            <a class="site-link font-5" href="{% url "home" %}">
+                                {% translate "Back to home" %}
+                            </a>
                         </div>
-                    </form>
-                </div>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
