@@ -46,7 +46,8 @@
             <div class="col-lg-3 col-12">
                 <div class="list-group my-3">
                     {% for lesson in lesson_list %}
-                        <a href="#" class="list-group-item list-group-item-action d-flex gap-3 py-3"
+                        <a href="{% url 'reservation_management:lesson-detail' lesson.pk %}"
+                           class="list-group-item list-group-item-action d-flex gap-3 py-3"
                            aria-current="true">
                             <img src="{% static 'img/calendar.png' %}" alt="cal" width="32" height="32"
                                  class="flex-shrink-0 mr-3">
