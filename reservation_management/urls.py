@@ -8,4 +8,5 @@ urlpatterns = [
     path('lesson/add', views.LessonAddView.as_view(), name='lesson-add'),
     path('lesson/list', views.LessonListView.as_view(), name='lesson-list'),
     path('lesson/<int:pk>/detail', views.LessonDetailView.as_view(), name='lesson-detail'),
+    path('lesson/<int:pk>/update', views.LessonUpdateView.as_view(), name='lesson-update'),
 ]

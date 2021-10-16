@@ -1,7 +1,7 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import HttpResponseRedirect
 from django.urls import reverse_lazy
-from django.views.generic import CreateView, ListView, DetailView
+from django.views.generic import CreateView, ListView, DetailView, UpdateView
 
 from reservation_management.forms import LessonForm
 from reservation_management.models import Lesson, Reservation
@@ -43,6 +43,18 @@ class LessonDetailView(LoginRequiredMixin, DetailView):
     """
     model = Lesson
     template_name = "reservation_management/lesson_detail.html"
+
+
+class LessonUpdateView(LoginRequiredMixin, UpdateView):
+    """
+    View to update a Lesson.
+    """
+    model = Lesson
+    form_class = LessonForm
+    template_name = "reservation_management/lesson_update.html"
+
+    def get_success_url(self):
+        return reverse_lazy("reservation_management:lesson-detail", kwargs={'pk': self.kwargs['pk']})
 
 
 class ReservationListView(LoginRequiredMixin, ListView):
