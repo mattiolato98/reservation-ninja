@@ -49,7 +49,7 @@
                         <a href="#" class="list-group-item list-group-item-action d-flex gap-3 py-3"
                            aria-current="true">
                             <img src="{% static 'img/calendar.png' %}" alt="cal" width="32" height="32"
-                                 class="flex-shrink-0 mr-2">
+                                 class="flex-shrink-0 mr-3">
                             <div class="d-flex gap-2 w-100 justify-content-between">
                                 <div>
                                     <h6 class="mb-0">{{ lesson.classroom }} {{ lesson.start_time }}
@@ -60,15 +60,32 @@
                                 <small class="opacity-50 text-nowrap">{{ lesson.day|get_day_from_int }}</small>
                             </div>
                         </a>
+                    {% empty %}
+                        <a href="{{ reservation.link }}"
+                           class="list-group-item list-group-item-action d-flex gap-3 py-3"
+                           aria-current="true">
+                            <img src="{% static 'img/empty.png' %}" alt="res" width="32" height="32"
+                                 class="flex-shrink-0 mr-2">
+                            <div class="d-flex gap-2 w-100 justify-content-between">
+                                <div>
+                                    <h6 class="mb-0">{% translate "No lesson here, insert your lessons!" %}</h6>
+                                    <p class="mb-0 opacity-75">
+                                        {% translate "Click the " %}
+                                        <strong>{% translate "button" %}</strong> {% translate "and add them!" %}
+                                    </p>
+                                </div>
+                                <small class="opacity-50 text-nowrap"></small>
+                            </div>
+                        </a>
                     {% endfor %}
                 </div>
             </div>
         </div>
         <div class="row justify-content-center">
             <div class="col-lg-3 col-12 d-flex justify-content-between align-items-center">
-                <a href="{% url 'home' %}" class="font-6 site-blue-text">
+                <a href="{% url 'reservation_management:reservation-list' %}" class="font-6 site-blue-text">
                     <i class="fas fa-chevron-left mr-2"></i>
-                    {% translate "Home" %}
+                    {% translate "Your reservations" %}
                 </a>
             </div>
         </div>
