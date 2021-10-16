@@ -11,7 +11,7 @@ class LessonAddView(LoginRequiredMixin, CreateView):
     model = Lesson
     form_class = LessonForm
     template_name = "reservation_management/lesson_add.html"
-    success_url = reverse_lazy("home")
+    success_url = reverse_lazy("reservation_management:lesson-list")
 
     def post(self, request, *args, **kwargs):
         """
