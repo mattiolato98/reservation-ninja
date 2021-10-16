@@ -18,7 +18,8 @@
     <div class="site-box">
         <div class="row justify-content-center mt-5">
             <div class="col-lg-5 col-12">
-                <h2 class="site-color logo-font">{% translate "Welcome to Reservation Ninja" %}</h2>
+                <span class="h2 site-color logo-font">{% translate "Welcome to Reservation Ninja " %}</span>
+                <span class="h5 logo-font">Beta</span>
                 <div class="row mt-4">
                     <div class="col-auto">
                         <img src="{% static 'img/ninja.png' %}" class="picture-small-fixed" alt="Ninja icon"/>
@@ -33,9 +34,7 @@
                     </div>
                 </div>
                 <p class="font-6">
-                    {% blocktranslate %}
-                        How does it work?
-                    {% endblocktranslate %}
+                    {% translate "How does it work?" %}
                 </p>
                 <ul>
                     {% blocktranslate %}
@@ -43,7 +42,21 @@
                         <li>Let the tool work, every morning you'll find the link to the daily reservations</li>
                     {% endblocktranslate %}
                 </ul>
-                <p class="logo-font mt-3 h5">{% translate "Exploit the power of the ninja" %}</p>
+                <p class="font-6 site-color mt-4">
+                    {% translate "Beta notes" %}
+                </p>
+                <p>
+                    {% blocktranslate %}
+                    This is the Beta version of the app, so you could experiment issues or bug.
+                    For any problem with the reservations or the use of the app, please
+                    {% endblocktranslate %}
+                    <a href="{% url 'help' %}" class="site-link site-blue-text">{% translate "contact us" %}</a>
+                    {% blocktranslate %}
+                    so we can fix them as short as possible. <br>
+                    Thanks for the support.
+                    {% endblocktranslate %}
+                </p>
+                <p class="logo-font mt-4 h5">{% translate "Exploit the power of the ninja" %}</p>
                 <p class="small">
                     <a href="{% url 'help' %}" class="site-link text-muted">
                         {% translate "Need help?" %}
