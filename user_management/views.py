@@ -1,6 +1,7 @@
 from cryptography.fernet import Fernet
 from django.conf import settings
 from django.contrib.auth import get_user_model, login
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.tokens import PasswordResetTokenGenerator
 from django.contrib.auth.views import LoginView
@@ -9,6 +10,8 @@ from django.shortcuts import redirect
 from django.urls import reverse_lazy, reverse
 from django.utils.encoding import force_bytes, force_text
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
+from django.views.decorators.csrf import csrf_protect
+from django.views.decorators.http import require_GET
 from django.views.generic import CreateView, TemplateView, DeleteView
 from django.utils.translation import gettext_lazy as _
 
@@ -112,9 +115,13 @@ class SettingsView(LoginRequiredMixin, TemplateView):
     template_name = "user_management/settings.html"
 
 
-class UserDeleteView(LoginRequiredMixin, TemplateView):
+class UserDeleteView(LoginRequiredMixin, DeleteView):
     template_name = "user_management/user_delete.html"
+    success_url = reverse_lazy("home")
     model = get_user_model()
+
+    def get_object(self, queryset=None):
+        return self.request.user
 
 
 def ajax_check_username_exists(request):
@@ -129,3 +136,12 @@ def ajax_check_email(request):
     if '@' in email and email.split('@')[1] == 'studenti.unimore.it':
         return JsonResponse({'is_unimore_email': True})
     return JsonResponse({'is_unimore_email': False})
+
+
+@login_required
+@require_GET
+@csrf_protect
+def ajax_check_username_is_correct(request):
+    if request.GET.get('username') == request.user.username:
+        return JsonResponse({'is_correct': True})
+    return JsonResponse({'is_correct': False})
