@@ -22,7 +22,20 @@
         </div>
         <div class="row justify-content-center">
             <div class="col-lg-3 col-12">
-                <a href="#" class="btn site-btn">Delete</a>
+                <form method="POST" class="d-flex flex-column"> {% csrf_token %}
+                    <label>
+                        <span class="small">
+                            {% translate "For confirmation, enter your username" %}
+                        </span>
+                        <span class="small text-muted font-6">{{ user.username }}</span>
+                        <input id="username-check" type="text" class="form-control">
+                    </label>
+                    <input id="delete-user-submit"
+                           class="btn site-btn"
+                           type="submit"
+                           value="{% translate 'Delete' %}"
+                           disabled="disabled">
+                </form>
             </div>
         </div>
         <div class="row justify-content-center mt-4">
@@ -34,4 +47,8 @@
             </div>
         </div>
     </div>
+{% endblock %}
+
+{% block extra_javascript %}
+    {% include 'user_management/user_ajax.html' %}
 {% endblock %}
