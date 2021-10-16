@@ -29,7 +29,7 @@ class LessonAddView(LoginRequiredMixin, CreateView):
         return super(LessonAddView, self).form_valid(form)
 
 
-class LessonListView(ListView, LoginRequiredMixin):
+class LessonListView(LoginRequiredMixin, ListView):
     """
     View to display the Lessons created by a user.
     """
@@ -37,6 +37,6 @@ class LessonListView(ListView, LoginRequiredMixin):
     template_name = "reservation_management/lesson_list.html"
 
 
-class ReservationListView(ListView, LoginRequiredMixin):
+class ReservationListView(LoginRequiredMixin, ListView):
     model = Reservation
     template_name = "reservation_management/reservation_list.html"
