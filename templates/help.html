@@ -28,10 +28,17 @@
         </div>
         <div class="row justify-content-center mt-3">
             <div class="col-lg-3 col-12">
-                <a href="{% url 'home' %}" class="font-6 site-blue-text">
-                    <i class="fas fa-chevron-left ml-2"></i>
-                    {% translate "Back home" %}
-                </a>
+                {% if user.is_authenticated %}
+                    <a href="{% url 'reservation_management:reservation-list' %}" class="font-6 site-blue-text">
+                        <i class="fas fa-chevron-left ml-2"></i>
+                        {% translate "Back home" %}
+                    </a>
+                {% else %}
+                    <a href="{% url 'home' %}" class="font-6 site-blue-text">
+                        <i class="fas fa-chevron-left ml-2"></i>
+                        {% translate "Back home" %}
+                    </a>
+                {% endif %}
             </div>
         </div>
     </div>
