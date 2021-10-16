@@ -19,7 +19,7 @@
                     {% endblocktranslate %}
                 </span>
                 <hr>
-                <a href="#" class="site-link text-danger font-6">{% translate "Delete your account" %}</a>
+                <a href="{% url 'user_management:delete' %}" class="site-link text-danger font-6">{% translate "Delete your account" %}</a>
                 <span class="text-muted font-5">
                     {% blocktranslate %}
                         Delete your account and all your information
