@@ -5,7 +5,6 @@ import os
 import sys
 # from time import time as measure_time
 from datetime import datetime
-
 from datetime import time
 
 import pytz
@@ -45,31 +44,31 @@ def find_hours(root_element, start_hour, end_hour):
     return ranges_to_reserve
 
 
-def reserve_room(driver, user, start_time, end_time, building, room):
+def reserve_room(driver, lesson):
     element = driver.find_element_by_xpath(
-        f"//li[contains(text(), '{building}')]"
+        f"//li[contains(text(), '{lesson.classroom.building.name}')]"
         "//a[contains(text(), 'Elenco Aule con link per registrazione presenza')]"
     )
     driver.execute_script("arguments[0].click();", element)
 
     room_element = driver.find_element_by_xpath(
-        f"//td[contains(text(), '{room}')]/ancestor::tr"
+        f"//td[contains(text(), '{lesson.classroom}')]/ancestor::tr"
     )
 
-    ranges = find_hours(room_element, start_time, end_time)
+    ranges = find_hours(room_element, lesson.start_time, lesson.end_time)
 
     building_url = driver.current_url
     # TODO: sembra che questo ciclo faccia un'iterazione in più!
     for range_start_time, range_end_time in ranges:
         element = driver.find_element_by_xpath(
-            f"//td[contains(text(), '{room}')]"
+            f"//td[contains(text(), '{lesson.classroom}')]"
             f"/ancestor::tr//a[contains(text(), 'Turno Aula {range_start_time}-{range_end_time}')]"
         )
         driver.execute_script("arguments[0].click();", element)
 
         try:
-            driver.find_element_by_id("username").send_keys(user.plain_unimore_username)
-            driver.find_element_by_id("password").send_keys(user.plain_unimore_password)
+            driver.find_element_by_id("username").send_keys(lesson.user.plain_unimore_username)
+            driver.find_element_by_id("password").send_keys(lesson.user.plain_unimore_password)
 
             driver.find_element_by_name("_eventId_proceed").click()
         except NoSuchElementException:
@@ -77,40 +76,10 @@ def reserve_room(driver, user, start_time, end_time, building, room):
 
         button = driver.find_element_by_xpath("//button[contains(text(), 'Inserisci')]")
         # button.click()
-
+        Reservation.objects.create(link=driver.current_url, lesson=lesson)
         print(f"Presenza inserita {range_start_time}-{range_end_time}")
 
         driver.get(building_url)
-
-
-# TODO: bisongerebbe darle un'ultima speranza con più utenti...
-# def automatic_reservation():
-#     driver = webdriver.Firefox()
-#     # Selenium configuration:
-#     driver.implicitly_wait(TIME_INTERVAL)
-#     # driver.maximize_window()
-#
-#     # for user in get_user_model().objects.exclude(enable_automatic_reservation=False):
-#     for user in get_user_model().objects.filter(username="mattiolato"):
-#         print(f"UTENTE {user.username} -----------------------------------------------------------------------------")
-#         for lesson in user.today_lessons:
-#             print(
-#                 f"Prenotando {lesson.classroom.building.name} {lesson.classroom.name} - "
-#                 f"{lesson.start_time}/{lesson.end_time}"
-#             )
-#             driver.get(RESERVATION_URL)
-#             reserve_room(
-#                 driver,
-#                 user,
-#                 lesson.start_time,
-#                 lesson.end_time,
-#                 lesson.classroom.building.name,
-#                 lesson.classroom.name
-#             )
-#
-#         driver.delete_all_cookies()
-#
-#     driver.close()
 
 
 def reserve_lesson_map(lesson):
@@ -135,14 +104,7 @@ def reserve_lesson_map(lesson):
     """
     # driver.execute_script(f"window.open('{RESERVATION_URL}', '_blank');")
     driver.get(RESERVATION_URL)
-    reserve_room(
-        driver,
-        lesson.user,
-        lesson.start_time,
-        lesson.end_time,
-        lesson.classroom.building.name,
-        lesson.classroom.name
-    )
+    reserve_room(driver, lesson)
     driver.delete_all_cookies()
     driver.close()
 
@@ -150,12 +112,9 @@ def reserve_lesson_map(lesson):
 if __name__ == "__main__":
     sys.path.append(os.path.join(os.path.dirname(__file__), PROJECT_PATH))
     os.environ.setdefault("DJANGO_SETTINGS_MODULE", "reservation_tool_base_folder.settings")
-
     django.setup()
 
-    # automatic_reservation()
-
-    from reservation_management.models import Lesson
+    from reservation_management.models import Lesson, Reservation
 
     lessons = Lesson.objects.filter(
         day=datetime.now(pytz.timezone('Europe/Rome')).weekday(),
