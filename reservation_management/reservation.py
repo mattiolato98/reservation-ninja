@@ -116,6 +116,9 @@ if __name__ == "__main__":
 
     from reservation_management.models import Lesson, Reservation
 
+    # Delete old reservations
+    Reservation.objects.all().delete()
+
     lessons = Lesson.objects.filter(
         day=datetime.now(pytz.timezone('Europe/Rome')).weekday(),
         user__enable_automatic_reservation=True
