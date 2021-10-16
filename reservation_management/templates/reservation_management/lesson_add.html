@@ -1,47 +1,13 @@
-{% extends 'base.html' %}
-{% load static %}
-{% load crispy_forms_tags %}
+{% extends 'reservation_management/lesson_form.html' %}
 {% load i18n %}
 
 {% block title %}{% translate "Add a lesson" %}{% endblock %}
 
-{% block extra_css %}
-    <style>
-        {#.input-wrapper {#}
-        {#    display: inline-block;#}
-        {#    position: relative#}
-        {
-        #}#}
-        {##}
-        {#.input-wrapper:after {#}
-        {#    font-family: 'FontAwesome';#}
-        {#    content: '\f00c';#}
-        {#    position: absolute;#}
-        {#right: 6px;#}
-        {
-        #}#}
-    </style>
-{% endblock %}
+{% block form_title %}{% translate "Add a lesson" %}{% endblock %}
 
-{% block content %}
-    <div class="site-box">
-        <div class="row h-100 w-100 ml-0 justify-content-center">
-            <div id="lesson-column" class="col-lg-3 col-12 d-flex align-items-center justify-content-center p-0">
-                <form method="POST" class="w-100">
-                    <h2 class="mb-5 font-7 logo-font site-color">{% translate "Add a lesson" %}</h2>
-                    <div>
-                        {% crispy form %}
-                        <div class="row justify-content-start">
-                            <div class="col d-flex justify-content-between align-items-center mt-3">
-                                <a href="{% url 'reservation_management:lesson-list' %}" class="font-6 site-blue-text">
-                                    <i class="fas fa-chevron-left mr-2"></i>
-                                    {% translate "Your lessons" %}
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
+{% block back_url %}
+    <a href="{% url 'reservation_management:lesson-list' %}" class="font-6 site-blue-text">
+        <i class="fas fa-chevron-left mr-2"></i>
+        {% translate "Your lessons" %}
+    </a>
 {% endblock %}
