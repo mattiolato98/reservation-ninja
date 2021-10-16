@@ -44,3 +44,8 @@ class Lesson(models.Model):
             f'{self.start_time.strftime("%H:%M")}/{self.end_time.strftime("%H:%M")} '
             f'on day {self.day}'
         )
+
+
+class Reservation(models.Model):
+    link = models.URLField()
+    lesson = models.ForeignKey(Lesson, on_delete=models.CASCADE, related_name='reservations')
