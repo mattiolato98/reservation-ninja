@@ -4,7 +4,7 @@ from django.urls import reverse_lazy
 from django.views.generic import CreateView, ListView
 
 from reservation_management.forms import LessonForm
-from reservation_management.models import Lesson
+from reservation_management.models import Lesson, Reservation
 
 
 class LessonAddView(LoginRequiredMixin, CreateView):
@@ -35,3 +35,8 @@ class LessonListView(ListView, LoginRequiredMixin):
     """
     model = Lesson
     template_name = "reservation_management/lesson_list.html"
+
+
+class ReservationListView(ListView, LoginRequiredMixin):
+    model = Reservation
+    template_name = "reservation_management/reservation_list.html"
