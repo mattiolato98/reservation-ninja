@@ -108,6 +108,10 @@ class EmailVerifiedView(TemplateView):
     template_name = 'user_management/email_verified.html'
 
 
+class SettingsView(LoginRequiredMixin, TemplateView):
+    template_name = "user_management/settings.html"
+
+
 def ajax_check_username_exists(request):
     return JsonResponse({'exists': True}) \
         if get_user_model().objects.filter(username=request.GET.get('username')).exists() \
