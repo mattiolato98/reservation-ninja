@@ -36,6 +36,9 @@ class LessonListView(LoginRequiredMixin, ListView):
     model = Lesson
     template_name = "reservation_management/lesson_list.html"
 
+    def get_queryset(self):
+        return Lesson.objects.filter(user=self.request.user)
+
 
 class LessonDetailView(LoginRequiredMixin, DetailView):
     """
