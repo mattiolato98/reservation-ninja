@@ -1,7 +1,7 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import HttpResponseRedirect
 from django.urls import reverse_lazy
-from django.views.generic import CreateView, ListView
+from django.views.generic import CreateView, ListView, DetailView
 
 from reservation_management.forms import LessonForm
 from reservation_management.models import Lesson, Reservation
@@ -35,6 +35,14 @@ class LessonListView(LoginRequiredMixin, ListView):
     """
     model = Lesson
     template_name = "reservation_management/lesson_list.html"
+
+
+class LessonDetailView(LoginRequiredMixin, DetailView):
+    """
+    View to show detail of a Lesson.
+    """
+    model = Lesson
+    template_name = "reservation_management/lesson_detail.html"
 
 
 class ReservationListView(LoginRequiredMixin, ListView):
