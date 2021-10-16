@@ -63,3 +63,6 @@ class LessonUpdateView(LoginRequiredMixin, UpdateView):
 class ReservationListView(LoginRequiredMixin, ListView):
     model = Reservation
     template_name = "reservation_management/reservation_list.html"
+
+    def get_queryset(self):
+        return Reservation.objects.filter(lesson__user=self.request.user)
