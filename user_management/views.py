@@ -9,7 +9,7 @@ from django.shortcuts import redirect
 from django.urls import reverse_lazy, reverse
 from django.utils.encoding import force_bytes, force_text
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
-from django.views.generic import CreateView, TemplateView
+from django.views.generic import CreateView, TemplateView, DeleteView
 from django.utils.translation import gettext_lazy as _
 
 from user_management.forms import LoginForm, PlatformUserCreationForm
@@ -110,6 +110,11 @@ class EmailVerifiedView(TemplateView):
 
 class SettingsView(LoginRequiredMixin, TemplateView):
     template_name = "user_management/settings.html"
+
+
+class UserDeleteView(LoginRequiredMixin, TemplateView):
+    template_name = "user_management/user_delete.html"
+    model = get_user_model()
 
 
 def ajax_check_username_exists(request):
