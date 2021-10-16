@@ -66,4 +66,24 @@
             }
         });
     });
+
+    $('#username-check').on('input', function () {
+        /**
+         * Check username is correct.
+         */
+        $.ajax({
+            type: 'GET',
+            url: "{% url 'user_management:ajax-check-username-is-correct' %}",
+            data: {
+                'username': $(this).val(),
+            },
+            dataType: 'json',
+            success: function(data) {
+                if (!data.is_correct)
+                    $('#delete-user-submit').attr('disabled', true);
+                else
+                    $('#delete-user-submit').attr('disabled', false);
+            }
+        });
+    });
 </script>
