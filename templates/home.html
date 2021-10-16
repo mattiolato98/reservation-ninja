@@ -8,78 +8,59 @@
 
 {% block extra_css %}
     <style>
-        .bd-placeholder-img {
-            font-size: 1.125rem;
-            text-anchor: middle;
-            -webkit-user-select: none;
-            -moz-user-select: none;
-            user-select: none;
-        }
-
-        @media (min-width: 768px) {
-            .bd-placeholder-img-lg {
-                font-size: 3.5rem;
-            }
+        .site-box {
+            min-height: 100vh;
         }
     </style>
-
-    <link rel="stylesheet" href="{% static 'css/list-groups.css' %}">
 {% endblock %}
 
 {% block content %}
     <div class="site-box">
-        <div class="row justify-content-center">
-            <div class="col-lg-3 col-12">
-                <h2 class="logo-font site-color">Your reservations</h2>
-            </div>
-        </div>
-        <div class="row justify-content-center">
-            <div class="col-lg-3 col-12">
-                <div class="list-group my-3">
-                    <a href="#" class="list-group-item list-group-item-action d-flex gap-3 py-3" aria-current="true">
-                        <img src="https://github.com/twbs.png" alt="twbs" width="32" height="32"
-                             class="rounded-circle flex-shrink-0 mr-2">
-                        <div class="d-flex gap-2 w-100 justify-content-between">
-                            <div>
-                                <h6 class="mb-0">List group item heading</h6>
-                                <p class="mb-0 opacity-75">Some placeholder content in a paragraph.</p>
-                            </div>
-                            <small class="opacity-50 text-nowrap">now</small>
-                        </div>
-                    </a>
-                    <a href="#" class="list-group-item list-group-item-action d-flex gap-3 py-3" aria-current="true">
-                        <img src="https://github.com/twbs.png" alt="twbs" width="32" height="32"
-                             class="rounded-circle flex-shrink-0 mr-2">
-                        <div class="d-flex gap-2 w-100 justify-content-between">
-                            <div>
-                                <h6 class="mb-0">List group item heading</h6>
-                                <p class="mb-0 opacity-75">Some placeholder content in a paragraph.</p>
-                            </div>
-                            <small class="opacity-50 text-nowrap">now</small>
-                        </div>
-                    </a>
-                    <a href="#" class="list-group-item list-group-item-action d-flex gap-3 py-3" aria-current="true">
-                        <img src="https://github.com/twbs.png" alt="twbs" width="32" height="32"
-                             class="rounded-circle flex-shrink-0 mr-2">
-                        <div class="d-flex gap-2 w-100 justify-content-between">
-                            <div>
-                                <h6 class="mb-0">List group item heading</h6>
-                                <p class="mb-0 opacity-75">Some placeholder content in a paragraph.</p>
-                            </div>
-                            <small class="opacity-50 text-nowrap">now</small>
-                        </div>
-                    </a>
+        <div class="row justify-content-center mt-5">
+            <div class="col-lg-5 col-12">
+                <h2 class="site-color logo-font">{% translate "Welcome to Reservation Ninja" %}</h2>
+                <div class="row mt-4">
+                    <div class="col-auto">
+                        <img src="{% static 'img/ninja.png' %}" class="picture-small-fixed" alt="Ninja icon"/>
+                    </div>
+                    <div class="col">
+                        <p class="text-muted font-5">
+                            {% blocktranslate %}
+                                Hi and welcome to Reservation Ninja, the tool which allows you to reserve
+                                classrooms automatically.
+                            {% endblocktranslate %}
+                        </p>
+                    </div>
                 </div>
+                <p class="font-6">
+                    {% blocktranslate %}
+                        How does it work?
+                    {% endblocktranslate %}
+                </p>
+                <ul>
+                    {% blocktranslate %}
+                        <li>Create your weekly schedule, by entering your lessons timetable</li>
+                        <li>Let the tool work, every morning you'll find the link to the daily reservations</li>
+                    {% endblocktranslate %}
+                </ul>
+                <p class="logo-font mt-3 h5">{% translate "Exploit the power of the ninja" %}</p>
+                <p class="small">
+                    <a href="{% url 'help' %}" class="site-link text-muted">
+                        {% translate "Need help?" %}
+                    </a>
+                </p>
             </div>
         </div>
-        <div class="row justify-content-center">
-            <div class="col-lg-3 col-12 d-flex justify-content-end">
-                <a href="{% url 'reservation_management:lesson-list' %}" class="font-6 site-blue-text">
-                    {% translate "Your lessons" %}
-                    <i class="fas fa-chevron-right ml-2"></i>
+        <div class="row justify-content-center align-items-center mt-5">
+            <div class="col-lg-3 col-12 d-flex flex-column justify-content-center">
+                <a href="{% url 'user_management:registration' %}" class="btn site-btn mb-2">
+                    {% translate "Sign up" %}
+                </a>
+                <a href="{% url 'user_management:login' %}"
+                   class="site-link font-6 mt-2 text-center">
+                    {% translate "Login" %}
                 </a>
             </div>
         </div>
     </div>
-    {#    <script src="../assets/dist/js/bootstrap.bundle.min.js"></script>#}
 {% endblock %}
