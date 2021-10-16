@@ -49,3 +49,9 @@ class Lesson(models.Model):
 class Reservation(models.Model):
     link = models.URLField()
     lesson = models.ForeignKey(Lesson, on_delete=models.CASCADE, related_name='reservations')
+
+    def __str__(self):
+        return (
+            f'{self.lesson.classroom.name} of {self.lesson.user.username} '
+            f'from {self.lesson.start_time} to {self.lesson.end_time}'
+        )
