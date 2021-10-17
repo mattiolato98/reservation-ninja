@@ -130,7 +130,7 @@ if __name__ == "__main__":
     end = measure_time()
 
     Log.objects.create(
-        execution_time=(start - end),
+        execution_time=(end - start),
         users=len(set(lesson.user for lesson in lessons)),
         lessons=len(lessons),
     )
