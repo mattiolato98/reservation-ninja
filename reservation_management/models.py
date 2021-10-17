@@ -65,3 +65,21 @@ class Reservation(models.Model):
             f'{self.lesson.classroom.name} of {self.lesson.user.username} '
             f'from {self.lesson.start_time} to {self.lesson.end_time}'
         )
+
+
+class Logs(models.Model):
+    execution_time = models.FloatField()
+    users = models.IntegerField()
+    lessons = models.IntegerField()
+    date = models.DateField(auto_now_add=True)
+
+    def __str__(self):
+        return self.date
+
+    @property
+    def average_user_execution_time(self):
+        return self.execution_time / self.users
+
+    @property
+    def average_lesson_execution_time(self):
+        return self.execution_time / self.lessons
