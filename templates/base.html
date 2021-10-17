@@ -63,8 +63,6 @@
 </div>
 {% include 'footer.html' %}
 
-{#{% include 'footer.html' %}#}
-
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
 <script
         src="https://code.jquery.com/jquery-3.4.1.min.js"
@@ -82,6 +80,7 @@
         integrity="sha256-GwAMtRKq8ocZyBdgm1wX+tzd2/nDbb2UGulIdqOItiU=" crossorigin="anonymous"></script>
 
 <!-- Optional JavaScript -->
+<script src="{% static 'js/site_javascript.js' %}"></script>
 {% block extra_javascript %}{% endblock %}
 </body>
 </html>
