@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-10-17 12:25+0000\n"
+"POT-Creation-Date: 2021-10-17 12:30+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -20,6 +20,22 @@ msgstr ""
 #: reservation_management/forms.py:34
 msgid "Insert"
 msgstr "Inserisci"
+
+#: reservation_management/forms.py:50
+msgid "Day"
+msgstr "Giorno"
+
+#: reservation_management/forms.py:51
+msgid "Start time"
+msgstr "Ora inizio"
+
+#: reservation_management/forms.py:52
+msgid "End time"
+msgstr "Ora fine"
+
+#: reservation_management/forms.py:53
+msgid "Classroom"
+msgstr "Aula"
 
 #: reservation_management/models.py:28
 #: reservation_management/templatetags/app_filters.py:8
@@ -64,11 +80,11 @@ msgstr "Lezione"
 
 #: reservation_management/templates/reservation_management/lesson_detail.html:32
 msgid "Start at "
-msgstr "Inizia alle"
+msgstr "Inizia alle "
 
 #: reservation_management/templates/reservation_management/lesson_detail.html:33
 msgid "End at "
-msgstr "Finisce alle"
+msgstr "Finisce alle "
 
 #: reservation_management/templates/reservation_management/lesson_list.html:7
 msgid "My lessons"
@@ -105,17 +121,11 @@ msgstr "Aggiorna i dati della lezione"
 
 #: reservation_management/templates/reservation_management/lesson_update.html:11
 msgid "Back to lesson"
-msgstr "Torna al login"
+msgstr "Torna alla lezione"
 
 #: reservation_management/templates/reservation_management/reservation_list.html:7
 msgid "Reservation list"
 msgstr "Lista prenotazioni"
-
-#: reservation_management/templates/reservation_management/reservation_list.html:51
-#, fuzzy
-#| msgid "Lesson"
-msgid "Presso"
-msgstr "Lezione"
 
 #: reservation_management/templates/reservation_management/reservation_list.html:64
 msgid "No reservation made, insert your lessons!"
