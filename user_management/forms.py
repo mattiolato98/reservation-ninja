@@ -27,7 +27,7 @@ class PlatformUserCreationForm(UserCreationForm):
 
         self.fields['password1'].help_text = None
 
-        self.fields['email'].label = "Unimore Email"
+        self.fields['email'].label = _("Unimore Email")
 
         self.fields['username'].widget.attrs.update({'placeholder': 'Username'})
         self.fields['email'].widget.attrs.update({'placeholder': _('Your Unimore Email')})
@@ -40,10 +40,10 @@ class PlatformUserCreationForm(UserCreationForm):
         cookie_policy_url = reverse_lazy('user_management:cookie-policy')
 
         self.fields['privacy_and_cookie_policy_acceptance'].label = mark_safe(_(
-            f"I agree with the <a href='{privacy_policy_url}' target='_blank' class='site-link'>privacy policy</a> "
-            f"and the use of essential cookies, according with our <a href='{cookie_policy_url}' "
-            f"target='_blank' class='site-link'> cookie policy</a>, in order to allow the proper operation of the app"
-        ))
+            "I agree with the <a href='{}' target='_blank' class='site-link'>privacy policy</a> "
+            "and the use of essential cookies, according with our <a href='{}' "
+            "target='_blank' class='site-link'>cookie policy</a>, in order to allow the proper operation of the app"
+        ).format(privacy_policy_url, cookie_policy_url))
 
         self.helper.layout = Layout(
             Row(
