@@ -75,7 +75,7 @@ def reserve_room(driver, lesson):
             pass
 
         button = driver.find_element_by_xpath("//button[contains(text(), 'Inserisci')]")
-        # button.click()
+        button.click()
         Reservation.objects.create(link=driver.current_url, lesson=lesson)
         print(f"Presenza inserita {range_start_time}-{range_end_time}")
 
