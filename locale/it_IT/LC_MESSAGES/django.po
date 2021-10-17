@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-10-17 12:56+0000\n"
+"POT-Creation-Date: 2021-10-17 20:10+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -64,7 +64,9 @@ msgstr "Venerdì"
 
 #: reservation_management/models.py:52
 msgid "Lesson start time should be before end time"
-msgstr "L'orario di inizio di una lezione dovrebbe essere inferiore all'orario di fine."
+msgstr ""
+"L'orario di inizio di una lezione dovrebbe essere inferiore all'orario di "
+"fine."
 
 #: reservation_management/templates/reservation_management/lesson_add.html:4
 #: reservation_management/templates/reservation_management/lesson_add.html:6
@@ -171,11 +173,11 @@ msgstr ""
 #: templates/help.html:23
 msgid ""
 "\n"
-"                        Check out our policies\n"
+"                        Check out our privacy policies\n"
 "                    "
 msgstr ""
 "\n"
-"                        Dai un'occhiata alle nostre politiche\n"
+"                        Dai un'occhiata alle nostre politiche sul trattamento dei dati\n"
 "                    "
 
 #: templates/help.html:32
@@ -191,11 +193,11 @@ msgstr "Informativa sulla privacy"
 msgid "Back home"
 msgstr "Torna alla home"
 
-#: templates/home.html:21
+#: templates/home.html:24
 msgid "Welcome to Reservation Ninja "
 msgstr "Benvenuto in Reservation Ninja"
 
-#: templates/home.html:29
+#: templates/home.html:32
 msgid ""
 "\n"
 "                                Hi and welcome to Reservation Ninja, the "
@@ -209,11 +211,11 @@ msgstr ""
 "                                le aule automaticamente.\n"
 "                            "
 
-#: templates/home.html:37
+#: templates/home.html:40
 msgid "How does it work?"
 msgstr "Come funziona?"
 
-#: templates/home.html:40
+#: templates/home.html:43
 msgid ""
 "\n"
 "                        <li>Create your weekly schedule, by entering your "
@@ -229,11 +231,11 @@ msgstr ""
 "link alle prenotazioni del giorno</li>\n"
 "                    "
 
-#: templates/home.html:46
+#: templates/home.html:49
 msgid "Beta notes"
 msgstr "Note versione Beta"
 
-#: templates/home.html:49
+#: templates/home.html:52
 msgid ""
 "\n"
 "                    This is the Beta version of the app, so you could "
@@ -249,11 +251,11 @@ msgstr ""
 "all'utilizzo dell'app perfavore\n"
 "                    "
 
-#: templates/home.html:53
+#: templates/home.html:56
 msgid "contact us"
 msgstr "contattaci"
 
-#: templates/home.html:54
+#: templates/home.html:57
 msgid ""
 "\n"
 "                    so we can fix it as soon as possible. <br>\n"
@@ -265,21 +267,21 @@ msgstr ""
 "                    Grazie per il supporto.\n"
 "                    "
 
-#: templates/home.html:59
+#: templates/home.html:62
 msgid "Exploit the power of the ninja"
 msgstr "Sfrutta il potere del ninja"
 
-#: templates/home.html:62
+#: templates/home.html:65
 msgid "Need help?"
 msgstr "Hai bisogno di aiuto?"
 
-#: templates/home.html:70
+#: templates/home.html:73
 #: user_management/templates/registration/registration.html:4
 #: user_management/templates/registration/registration.html:7
 msgid "Sign up"
 msgstr "Registrati"
 
-#: templates/home.html:74
+#: templates/home.html:77
 msgid "Login"
 msgstr "Login"
 
@@ -459,11 +461,11 @@ msgstr "Elimina"
 msgid "Back to settings"
 msgstr "Torna alle impostazioni"
 
-#: user_management/views.py:47
+#: user_management/views.py:49
 msgid "Reservation Ninja - Confirm your email"
 msgstr "Reservation Ninja - Conferma la tua email"
 
-#: user_management/views.py:58
+#: user_management/views.py:60
 #, fuzzy, python-brace-format
 msgid ""
 "Hi {self.object.username}, welcome to Reservation Ninja.\n"
@@ -474,7 +476,7 @@ msgstr ""
 "\n"
 "Clicca il seguente link per confermare la tua email:"
 
-#: user_management/views.py:96
+#: user_management/views.py:98
 #, fuzzy, python-brace-format
 #| msgid ""
 #| "Error. Attempt to validate email for the user {user} with token {token}"
@@ -485,6 +487,6 @@ msgstr ""
 "Errore. Tentativo di validazione dell'email per l'utente {user} con il token "
 "{token}"
 
-#: user_management/views.py:97
+#: user_management/views.py:99
 msgid "Authentication error"
 msgstr "Errore di autenticazione"
