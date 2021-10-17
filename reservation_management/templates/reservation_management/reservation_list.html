@@ -31,7 +31,7 @@
     <div class="site-box">
         <div class="row justify-content-center">
             <div class="col-lg-3 col-12">
-                <h2 class="logo-font site-color">Your reservations</h2>
+                <h2 class="logo-font site-color">{% translate "Your reservations" %}</h2>
             </div>
         </div>
         <div class="row justify-content-center mt-5">
@@ -48,7 +48,7 @@
                                     <h6 class="mb-0">{{ reservation.lesson.classroom }} {{ reservation.lesson.start_time }}
                                         - {{ lesson.end_time }}</h6>
                                     <p class="mb-0 opacity-75">
-                                        {% translate "Presso" %}: {{ reservation.lesson.classroom.building }}</p>
+                                        {{ reservation.lesson.classroom.building }}</p>
                                 </div>
                                 <small class="opacity-50 text-nowrap">{{ reservation.lesson.day|get_day_from_int }}</small>
                             </div>
@@ -63,8 +63,9 @@
                                 <div>
                                     <h6 class="mb-0">{% translate "No reservation made, insert your lessons!" %}</h6>
                                     <p class="mb-0 opacity-75">
-                                        {% translate "Go to " %}
-                                        <strong>{% translate "Your lessons" %}</strong> {% translate "and add them!" %}
+                                        {% blocktranslate %}
+                                            Go to <strong>Your lessons</strong> and add them!
+                                        {% endblocktranslate %}
                                     </p>
                                 </div>
                                 <small class="opacity-50 text-nowrap"></small>
