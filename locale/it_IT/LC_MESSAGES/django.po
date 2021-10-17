@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-10-17 20:10+0000\n"
+"POT-Creation-Date: 2021-10-17 20:15+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -177,7 +177,8 @@ msgid ""
 "                    "
 msgstr ""
 "\n"
-"                        Dai un'occhiata alle nostre politiche sul trattamento dei dati\n"
+"                        Dai un'occhiata alle nostre politiche sul "
+"trattamento dei dati\n"
 "                    "
 
 #: templates/help.html:32
@@ -433,6 +434,7 @@ msgid "Someone stole this username. Damn!."
 msgstr "Qualcuno ha rubato questo username. Accidenti!"
 
 #: user_management/templates/user_management/user_ajax.html:54
+#: user_management/views.py:39
 msgid "Seems that you are not a Unimore student."
 msgstr "Sembra che tu non sia uno studente Unimore."
 
@@ -461,11 +463,15 @@ msgstr "Elimina"
 msgid "Back to settings"
 msgstr "Torna alle impostazioni"
 
-#: user_management/views.py:49
+#: user_management/views.py:41
+msgid "You must accept the privacy policies."
+msgstr "Devi accettare le politiche sul trattamento dei dati."
+
+#: user_management/views.py:51
 msgid "Reservation Ninja - Confirm your email"
 msgstr "Reservation Ninja - Conferma la tua email"
 
-#: user_management/views.py:60
+#: user_management/views.py:62
 #, fuzzy, python-brace-format
 msgid ""
 "Hi {self.object.username}, welcome to Reservation Ninja.\n"
@@ -476,7 +482,7 @@ msgstr ""
 "\n"
 "Clicca il seguente link per confermare la tua email:"
 
-#: user_management/views.py:98
+#: user_management/views.py:100
 #, fuzzy, python-brace-format
 #| msgid ""
 #| "Error. Attempt to validate email for the user {user} with token {token}"
@@ -487,6 +493,6 @@ msgstr ""
 "Errore. Tentativo di validazione dell'email per l'utente {user} con il token "
 "{token}"
 
-#: user_management/views.py:99
+#: user_management/views.py:101
 msgid "Authentication error"
 msgstr "Errore di autenticazione"
