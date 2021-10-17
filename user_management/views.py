@@ -107,6 +107,10 @@ class PrivacyPolicyView(TemplateView):
     template_name = "user_management/privacy_policy.html"
 
 
+class CookiePolicyView(TemplateView):
+    template_name = "user_management/cookie-policy.html"
+
+
 class EmailVerificationNeededView(TemplateView):
     template_name = 'user_management/email_verification_needed.html'
 
