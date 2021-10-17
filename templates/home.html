@@ -11,6 +11,9 @@
         .site-box {
             min-height: 100vh;
         }
+        .site-btn {
+            width: 75%;
+        }
     </style>
 {% endblock %}
 
@@ -65,7 +68,7 @@
             </div>
         </div>
         <div class="row justify-content-center align-items-center mt-5">
-            <div class="col-lg-3 col-12 d-flex flex-column justify-content-center">
+            <div class="col-lg-3 col-12 d-flex flex-column align-items-center">
                 <a href="{% url 'user_management:registration' %}" class="btn site-btn mb-0">
                     {% translate "Sign up" %}
                 </a>
