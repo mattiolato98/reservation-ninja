@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-10-17 12:13+0000\n"
+"POT-Creation-Date: 2021-10-17 12:17+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -260,6 +260,10 @@ msgstr "Registrati"
 msgid "Login"
 msgstr "Login"
 
+#: user_management/forms.py:30 user_management/forms.py:100
+msgid "Unimore Email"
+msgstr "Email Unimore"
+
 #: user_management/forms.py:33
 msgid "Your Unimore Email"
 msgstr "La tua email Unimore"
@@ -276,14 +280,17 @@ msgstr "Username Unimore"
 msgid "Unimore password"
 msgstr "Password Unimore"
 
-#: user_management/forms.py:43
+#: user_management/forms.py:42
 #, python-brace-format
 msgid ""
-"I agree with the <a href='{privacy_policy_url}' target='_blank' class='site-"
-"link'>privacy policy</a> "
+"I agree with the <a href='{privacy_policy_url}' target='_blank' class='site-link'>privacy policy</a> "
+"and the use of essential cookies, according with our <a href='{cookie_policy_url}' "
+"target='_blank' class='site-link'> cookie policy</a>, in order to allow the proper operation of the app"
 msgstr ""
 "Acconsento all'<a href='{privacy_policy_url}' target='_blank' class='site-"
-"link'>informativa sulla privacy</a> "
+"link'>informativa sulla privacy</a> e all'utilizzo dei cookie essenziali, in accordo cone la nostra "
+"<a href='{cookie_policy_url}' target='_blank' class='site-link'>informativa sui cookie</a>, per consentire il corretto"
+"funzionamento dell'app"
 
 #: user_management/forms.py:60
 msgid ""
@@ -293,7 +300,8 @@ msgid ""
 "                "
 msgstr ""
 "\n"
-"                    <h3 class='mt-3 mb-0 logo-font site-color'>Credenziali Unimore</h3>\n"
+"                    <h3 class='mt-3 mb-0 logo-font site-color'>Credenziali "
+"Unimore</h3>\n"
 "                "
 
 #: user_management/forms.py:65
@@ -307,14 +315,10 @@ msgid ""
 msgstr ""
 "\n"
 "                    <span class='form-text small mt-0 mb-2'>\n"
-"                    Le tue credenziali sono cryptate e memorizzate in sicurezza "
-"e puoi eliminarle in qualsiasi momento.\n"
+"                    Le tue credenziali sono cryptate e memorizzate in "
+"sicurezza e puoi eliminarle in qualsiasi momento.\n"
 "                    </span>      \n"
 "                "
-
-#: user_management/forms.py:100
-msgid "Unimore Email"
-msgstr "Email Unimore"
 
 #: user_management/templates/registration/login.html:6
 #: user_management/templates/user_management/email_verified.html:19
