@@ -53,7 +53,7 @@ class Lesson(models.Model):
         return super(Lesson, self).clean()
 
     class Meta:
-        ordering = ['day']
+        ordering = ['day', 'start_time']
 
 
 class Reservation(models.Model):
