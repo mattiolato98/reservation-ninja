@@ -103,6 +103,10 @@ def verify_user_email(request, user_id_b64=None, user_token=None):
     return redirect('user_management:email-verified')
 
 
+class PrivacyPolicyView(TemplateView):
+    template_name = "user_management/privacy_policy.html"
+
+
 class EmailVerificationNeededView(TemplateView):
     template_name = 'user_management/email_verification_needed.html'
 

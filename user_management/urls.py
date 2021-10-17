@@ -16,4 +16,5 @@ urlpatterns = [
     path('ajax-check-username-is-correct', views.ajax_check_username_is_correct, name='ajax-check-username-is-correct'),
     path('settings', views.SettingsView.as_view(), name='settings'),
     path('delete', views.UserDeleteView.as_view(), name='delete'),
+    path('privacy', views.PrivacyPolicyView.as_view(), name='privacy-policy'),
 ]
