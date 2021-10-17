@@ -10,7 +10,6 @@ from django.shortcuts import redirect
 from django.urls import reverse_lazy, reverse
 from django.utils.encoding import force_bytes, force_text
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
-from django.utils.safestring import mark_safe
 from django.views.decorators.csrf import csrf_protect
 from django.views.decorators.http import require_GET
 from django.views.generic import CreateView, TemplateView, DeleteView
@@ -31,20 +30,6 @@ class RegistrationView(CreateView):
     form_class = PlatformUserCreationForm
     template_name = 'registration/registration.html'
     success_url = reverse_lazy('user_management:email-verification-needed')
-
-    def get_context_data(self, **kwargs):
-        context = super(RegistrationView, self).get_context_data(**kwargs)
-
-        privacy_policy_url = reverse_lazy('user_management:privacy-policy')
-        cookie_policy_url = reverse_lazy('user_management:cookie-policy')
-
-        context['form'].fields['privacy_and_cookie_policy_acceptance'].label = mark_safe(_(
-            f"I agree with the <a href='{privacy_policy_url}' target='_blank' class='site-link'>privacy policy</a> "
-            f"and the use of essential cookies, according with our <a href='{cookie_policy_url}' "
-            f"target='_blank' class='site-link'> cookie policy</a>, in order to allow the proper operation of the app"
-        ))
-
-        return context
 
     def form_valid(self, form):
         if form.cleaned_data['email'].split('@')[1] != 'studenti.unimore.it' or \

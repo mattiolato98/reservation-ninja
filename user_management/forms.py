@@ -2,6 +2,8 @@ from crispy_forms.layout import Layout, Row, Column, HTML
 from django.contrib.auth import get_user_model
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from crispy_forms.helper import FormHelper
+from django.urls import reverse_lazy
+from django.utils.safestring import mark_safe
 from django.utils.translation import gettext_lazy as _
 from django import forms
 
@@ -33,6 +35,15 @@ class PlatformUserCreationForm(UserCreationForm):
         self.fields['password2'].widget.attrs.update({'placeholder': _('Confirm password')})
         self.fields['unimore_username'].widget.attrs.update({'placeholder': _('Unimore username')})
         self.fields['unimore_password'].widget.attrs.update({'placeholder': _('Unimore password')})
+
+        privacy_policy_url = reverse_lazy('user_management:privacy-policy')
+        cookie_policy_url = reverse_lazy('user_management:cookie-policy')
+
+        self.fields['privacy_and_cookie_policy_acceptance'].label = mark_safe(_(
+            f"I agree with the <a href='{privacy_policy_url}' target='_blank' class='site-link'>privacy policy</a> "
+            f"and the use of essential cookies, according with our <a href='{cookie_policy_url}' "
+            f"target='_blank' class='site-link'> cookie policy</a>, in order to allow the proper operation of the app"
+        ))
 
         self.helper.layout = Layout(
             Row(
