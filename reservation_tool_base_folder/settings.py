@@ -24,14 +24,13 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
-# SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = get_random_secret_key()
 
 with open("crypto.txt") as f:
     CRYPTOGRAPHY_KEY = f.read().strip()
 
-# SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = int(os.environ.get('DEBUG', default=0))
+ADMIN_ENABLED = int(os.environ.get('ADMIN_ENABLED', default=0))
 
 ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'reservation-ninja.herokuapp.com', 'app.reservation.ninja']
 
@@ -39,7 +38,6 @@ ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'reservation-ninja.herokuapp.com', 'a
 # Application definition
 
 INSTALLED_APPS = [
-    'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
@@ -53,6 +51,9 @@ INSTALLED_APPS = [
     # 3d party
     "crispy_forms",
 ]
+
+if ADMIN_ENABLED:
+    INSTALLED_APPS.append('django.contrib.admin')
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
