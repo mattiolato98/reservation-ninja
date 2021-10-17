@@ -1,6 +1,8 @@
 from cryptography.fernet import Fernet
 from django.conf import settings
 from django.contrib.auth.models import AbstractUser
+from django.core.exceptions import ValidationError
+from django.utils.translation import gettext_lazy as _
 from django.db import models
 from datetime import datetime
 
@@ -18,6 +20,14 @@ class PlatformUser(AbstractUser):
 
     def __str__(self):
         return self.username
+
+    def clean(self):
+        if self.email.split('@')[1] != 'studenti.unimore.it':
+            raise ValidationError(_("Seems that you are not a Unimore student."))
+        if not self.privacy_and_cookie_policy_acceptance:
+            raise ValidationError(_("You must accept the privacy policies."))
+
+        return super(PlatformUser, self).clean()
 
     @property
     def today_lessons(self):
