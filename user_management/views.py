@@ -8,13 +8,15 @@ from django.contrib.auth.views import LoginView
 from django.http import JsonResponse
 from django.shortcuts import redirect
 from django.urls import reverse_lazy, reverse
+from django.utils.decorators import method_decorator
 from django.utils.encoding import force_bytes, force_text
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from django.views.decorators.csrf import csrf_protect
 from django.views.decorators.http import require_GET
-from django.views.generic import CreateView, TemplateView, DeleteView
+from django.views.generic import CreateView, TemplateView, DeleteView, ListView
 from django.utils.translation import gettext_lazy as _
 
+from user_management.decorators import manager_required
 from user_management.forms import LoginForm, PlatformUserCreationForm
 from user_management.models import PlatformUser
 
@@ -131,6 +133,15 @@ class UserDeleteView(LoginRequiredMixin, DeleteView):
 
     def get_object(self, queryset=None):
         return self.request.user
+
+
+@method_decorator(manager_required, name='dispatch')
+class UserListView(ListView):
+    model = get_user_model()
+    template_name = "user_management/user_list.html"
+
+    def get_queryset(self):
+        return get_user_model().objects.all().order_by('-date_joined')
 
 
 def ajax_check_username_exists(request):
