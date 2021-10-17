@@ -47,7 +47,8 @@ class RegistrationView(CreateView):
         return context
 
     def form_valid(self, form):
-        if form.cleaned_data['email'].split('@')[1] != 'studenti.unimore.it':
+        if form.cleaned_data['email'].split('@')[1] != 'studenti.unimore.it' or \
+                not form.cleaned_data['privacy_and_cookie_policy_acceptance']:
             return redirect('user_management:registration')
 
         self.object = form.save(commit=False)
