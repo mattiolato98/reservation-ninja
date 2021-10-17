@@ -132,7 +132,7 @@ h5 {
 }
 
 .site-color {
-    color: #FF5964;
+    color: #FF5964 !important;
 }
 
 nav .logo-font {
