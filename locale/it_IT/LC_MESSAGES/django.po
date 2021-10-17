@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-10-17 12:40+0000\n"
+"POT-Creation-Date: 2021-10-17 12:56+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -37,30 +37,34 @@ msgstr "Ora fine"
 msgid "Classroom"
 msgstr "Aula"
 
-#: reservation_management/models.py:28
+#: reservation_management/models.py:30
 #: reservation_management/templatetags/app_filters.py:8
 msgid "Monday"
 msgstr "Lunedì"
 
-#: reservation_management/models.py:29
+#: reservation_management/models.py:31
 #: reservation_management/templatetags/app_filters.py:9
 msgid "Tuesday"
 msgstr "Martedì"
 
-#: reservation_management/models.py:30
+#: reservation_management/models.py:32
 #: reservation_management/templatetags/app_filters.py:10
 msgid "Wednesday"
 msgstr "Mercoledì"
 
-#: reservation_management/models.py:31
+#: reservation_management/models.py:33
 #: reservation_management/templatetags/app_filters.py:11
 msgid "Thursday"
 msgstr "Giovedì"
 
-#: reservation_management/models.py:32
+#: reservation_management/models.py:34
 #: reservation_management/templatetags/app_filters.py:12
 msgid "Friday"
 msgstr "Venerdì"
+
+#: reservation_management/models.py:52
+msgid "Lesson start time should be before end time"
+msgstr "L'orario di inizio di una lezione dovrebbe essere inferiore all'orario di fine."
 
 #: reservation_management/templates/reservation_management/lesson_add.html:4
 #: reservation_management/templates/reservation_management/lesson_add.html:6
