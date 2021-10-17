@@ -67,7 +67,7 @@ class Reservation(models.Model):
         )
 
 
-class Logs(models.Model):
+class Log(models.Model):
     execution_time = models.FloatField()
     users = models.IntegerField()
     lessons = models.IntegerField()

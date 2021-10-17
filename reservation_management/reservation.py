@@ -114,7 +114,7 @@ if __name__ == "__main__":
     os.environ.setdefault("DJANGO_SETTINGS_MODULE", "reservation_tool_base_folder.settings")
     django.setup()
 
-    from reservation_management.models import Lesson, Reservation, Logs
+    from reservation_management.models import Lesson, Reservation, Log
 
     # Delete old reservations
     Reservation.objects.all().delete()
@@ -129,7 +129,7 @@ if __name__ == "__main__":
     dummy_var = list(map(reserve_lesson_map, lessons))
     end = measure_time()
 
-    Logs.objects.create({
+    Log.objects.create({
         'execution_time': start - end,
         'users': len(set(lesson.user for lesson in lessons)),
         'lessons': len(lessons),
