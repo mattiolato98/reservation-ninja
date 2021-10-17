@@ -36,8 +36,11 @@
                     {% for user in object_list %}
                         <div class="list-group-item py-3 d-flex flex-column">
                             <span class="font-6">{{ user.username }}</span>
+                            <span>Email: {{ user.email }}</span>
                             <span>Joined: {{ user.date_joined }}</span>
                             <span>Last login: {{ user.last_login }}</span>
+                            <span>Active: {{ user.is_active }}</span>
+                            <span>Token sent: {{ user.token_sent }}</span>
                         </div>
                     {% endfor %}
                 </div>
