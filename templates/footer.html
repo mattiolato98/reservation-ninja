@@ -1,0 +1,19 @@
+{% load static %}
+{% load i18n %}
+
+<div id="footer" class="mt-5 d-flex justify-content-between align-items-center">
+    <div class="d-flex justify-content-start align-items-center p-4">
+        <img src="{% static "img/ninja.png" %}"
+             class="picture-xxs mr-2"
+             alt="Ninja icon"
+        >
+        <span class="logo-font">Reservation Ninja</span>
+    </div>
+    <div class="d-flex justify-content-end align-items-center p-4">
+        <a href="{% url 'help' %}" class="site-link font-6">
+            <span>
+                {% translate "Help" %}
+            </span>
+        </a>
+    </div>
+</div>

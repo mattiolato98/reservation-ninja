@@ -11,4 +11,14 @@
 
 {% block extra_javascript %}
     {% include 'user_management/user_ajax.html' %}
+    <script type="text/javascript">
+        $(function () {
+            let policies_acceptance = $("#id_privacy_and_cookie_policy_acceptance")
+            $("#submit-signing-button").prop("disabled", !policies_acceptance.is(":checked"));
+
+            policies_acceptance.on('change', function () {
+                $("#submit-signing-button").prop("disabled", !$(this).is(":checked"));
+            });
+        });
+    </script>
 {% endblock %}

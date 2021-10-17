@@ -4,6 +4,10 @@ body {
     color: #525252;
 }
 
+#site-main-page {
+    min-height: 100vh;
+}
+
 h2 {
     font-weight: 700;
 }
@@ -125,7 +129,10 @@ h5 {
 
 .logo-font {
     font-family: 'ZCOOL KuaiLe', cursive;
-    color: #FF5964;
+}
+
+.site-color {
+    color: #FF5964 !important;
 }
 
 nav .logo-font {
@@ -136,12 +143,12 @@ nav .logo-font {
     background-color: white;
     color: #525252;
     outline: none;
-    border: 1px solid #ced4da;
+    border: 1px solid #e0e0e0;
     border-radius: 5px;
 }
 
 .form-control:focus {
-    border: 1px solid #525252;
+    border: 1px solid #e0e0e0;
     color: #525252;
     outline: none;
     background-color: white;
@@ -179,7 +186,7 @@ select:-webkit-autofill:focus {
 
 .btn {
     font-weight: 500;
-    border-radius: 20px;
+    border-radius: 10px;
 }
 
 .btn.dropdown-toggle {
@@ -346,7 +353,7 @@ select:-webkit-autofill:focus {
 }
 
 
-.rounded-picture-extra-big {
+.rounded-ftra-big {
     border-radius: 50%;
     height: 250px;
     width: auto;
@@ -401,6 +408,10 @@ select:-webkit-autofill:focus {
     width: 40px;
 }
 
+.picture-xxs {
+    height: 20px;
+}
+
 .clickable-element {
     cursor: pointer;
 }
@@ -437,7 +448,46 @@ select:-webkit-autofill:focus {
     box-shadow:  0 .5rem 1rem rgba(0,0,0,.15) !important;
 }
 
+.dropdown-item.active {
+    background-color: #548687 !important;
+    font-weight: 600;
+    color: white !important;
+}
+
+.dropdown-item {
+    color: #464c52 !important;
+}
+
+.dropdown-item:hover {
+    background-color: #edf0f2;
+    color: #464c52;
+}
+
+.dropdown-item:active {
+    outline: none !important;
+}
+
+
+.dropdown-menu input {
+    border: 1px solid #ced4da;
+    font-weight: 400;
+}
+
+.dropdown-menu input:focus {
+    border: 3px solid #525252;
+}
+
 hr {
     border-style: solid;
     width: 100%;
+}
+
+#footer {
+    background-color: #333333;
+    flex-basis: 80px;
+    width: 100%;
+}
+
+#footer span {
+    color: #a1a1a1;
 }

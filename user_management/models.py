@@ -9,10 +9,12 @@ class PlatformUser(AbstractUser):
     AbstractUser._meta.get_field('email')._unique = True
     is_manager = models.BooleanField(default=False)
 
-    unimore_username = models.CharField(max_length=100)
+    unimore_username = models.CharField(max_length=500)
     unimore_password = models.CharField(max_length=500)
 
-    enable_automatic_reservation = models.BooleanField(default=False)
+    enable_automatic_reservation = models.BooleanField(default=True)
+
+    privacy_and_cookie_policy_acceptance = models.BooleanField(default=False)
 
     def __str__(self):
         return self.username
@@ -20,6 +22,11 @@ class PlatformUser(AbstractUser):
     @property
     def today_lessons(self):
         return self.lessons.filter(day=datetime.today().weekday())
+
+    @property
+    def plain_unimore_username(self):
+        decryptor = Fernet(settings.CRYPTOGRAPHY_KEY.encode())
+        return decryptor.decrypt(self.unimore_username.encode()).decode()
 
     @property
     def plain_unimore_password(self):

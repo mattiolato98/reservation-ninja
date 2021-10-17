@@ -1,3 +1,5 @@
+{% load i18n %}
+
 <script type="text/javascript">
     $('#id_username').on('change', function () {
         /**
@@ -18,15 +20,13 @@
                     if (!$('#username-exists-error').length) {
                         username_field.after(
                             '<span id="username-exists-error" class="text-danger font-7 font-size-80">' +
-                            'Someone stole this username. Damn!.' +
+                            '{% translate "Someone stole this username. Damn!." %}' +
                             '</span>'
                         );
                     }
-                    $('#submit-signing-button').attr('disabled', true);
                 } else {
                     username_field.css('border-color', "#e8e8e8");
                     $('#username-exists-error').remove();
-                    $('#submit-signing-button').attr('disabled', false);
                 }
             }
         });
@@ -51,16 +51,34 @@
                     if (!$('#not-unimore-email').length) {
                         email_field.after(
                             '<span id="not-unimore-email" class="text-danger font-7 font-size-80">' +
-                            'Seems that you\'re not a Unimore student.' +
+                            '{% translate "Seems that you are not a Unimore student." %}' +
                             '</span>'
                         );
                     }
-                    $('#submit-signing-button').attr('disabled', true);
                 } else {
                     email_field.css('border-color', "#e8e8e8");
                     $('#not-unimore-email').remove();
-                    $('#submit-signing-button').attr('disabled', false);
                 }
+            }
+        });
+    });
+
+    $('#username-check').on('input', function () {
+        /**
+         * Check username is correct.
+         */
+        $.ajax({
+            type: 'GET',
+            url: "{% url 'user_management:ajax-check-username-is-correct' %}",
+            data: {
+                'username': $(this).val(),
+            },
+            dataType: 'json',
+            success: function(data) {
+                if (!data.is_correct)
+                    $('#delete-user-submit').attr('disabled', true);
+                else
+                    $('#delete-user-submit').attr('disabled', false);
             }
         });
     });

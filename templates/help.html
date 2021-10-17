@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+{% load i18n %}
+
+{% block content %}
+    <div class="site-box mt-5">
+        <div class="row justify-content-center">
+            <div class="col-lg-3 col-12">
+                <h2 class="logo-font site-color">
+                    {% translate "Help" %}
+                </h2>
+            </div>
+        </div>
+        <div class="row justify-content-center mt-3">
+            <div class="col-lg-3 col-12">
+                <p>
+                    {% blocktranslate %}
+                        If you have some doubt or you want to report an issue,
+                        write to this email:
+                        <span class="font-6 site-color">reservationtoolninja@gmail.com</span>.
+                    {% endblocktranslate %}
+                </p>
+                <p class="font-6">
+                    {% blocktranslate %}
+                        Check out our policies
+                    {% endblocktranslate %}
+                </p>
+                <ul>
+                    <li>
+                        <a href="{% url 'user_management:cookie-policy' %}"
+                           target="_blank"
+                           class="font-6 site-link site-color">
+                            {% translate "Cookie policy" %}
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{% url 'user_management:privacy-policy' %}"
+                           target="_blank"
+                           class="font-6 site-link site-color">
+                            {% translate "Privacy policy" %}
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="row justify-content-center mt-3">
+            <div class="col-lg-3 col-12">
+                {% if user.is_authenticated %}
+                    <a href="{% url 'reservation_management:reservation-list' %}" class="font-6 site-blue-text">
+                        <i class="fas fa-chevron-left ml-2"></i>
+                        {% translate "Back home" %}
+                    </a>
+                {% else %}
+                    <a href="{% url 'home' %}" class="font-6 site-blue-text">
+                        <i class="fas fa-chevron-left ml-2"></i>
+                        {% translate "Back home" %}
+                    </a>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+{% endblock %}

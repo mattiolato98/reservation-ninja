@@ -13,14 +13,20 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+from django.conf import settings
 from django.contrib import admin
 from django.urls import path, include
 
-from reservation_tool_base_folder.views import HomepageView
+from reservation_tool_base_folder.views import HomepageView, HelpView
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
     path('', HomepageView.as_view(), name='home'),
+    path('help', HelpView.as_view(), name='help'),
     path('user/', include('user_management.urls')),
     path('reservation/', include('reservation_management.urls')),
 ]
+
+if settings.ADMIN_ENABLED:
+    urlpatterns.append(
+        path('admin/', admin.site.urls)
+    )

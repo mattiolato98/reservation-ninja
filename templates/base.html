@@ -35,12 +35,15 @@
           integrity="sha256-jwJEU4p1YdtymLFwAjYfam5Pj5NOnylms63k7LYQ9Jk=" crossorigin="anonymous"/>
 
 
-    <link rel="stylesheet"
-          href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'css/media-queries.css' %}">
 
     {% block extra_css %} {% endblock %}
 
-    <title>{% block title %}ReservationTool |{% endblock %}</title>
+    <!-- favicon -->
+    <link rel="shortcut icon" type="image/png" href="{% static 'img/ninja.png' %}">
+
+    <title>{% block title %}ReservationNinja |{% endblock %}</title>
 </head>
 
 <body>
@@ -48,16 +51,18 @@
 <div id="site-main-page" class="container-fluid mt-3">
     {% if user.is_authenticated %}
         <div class="row justify-content-end px-4">
+            <a href="{% url 'user_management:settings' %}" class="path-link mr-2">
+                <i class="fas fa-cog"></i>
+            </a>
             <a href="{% url 'user_management:logout' %}" class="path-link font-6">
-                <i class="fas fa-sign-out-alt"></i> Logout
+                Logout <i class="fas fa-sign-out-alt ml-2"></i>
             </a>
         </div>
     {% endif %}
     {% block content %}
     {% endblock %}
 </div>
-
-{#{% include 'footer.html' %}#}
+{% include 'footer.html' %}
 
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
 <script
@@ -76,6 +81,7 @@
         integrity="sha256-GwAMtRKq8ocZyBdgm1wX+tzd2/nDbb2UGulIdqOItiU=" crossorigin="anonymous"></script>
 
 <!-- Optional JavaScript -->
+<script src="{% static 'js/site_javascript.js' %}"></script>
 {% block extra_javascript %}{% endblock %}
 </body>
 </html>

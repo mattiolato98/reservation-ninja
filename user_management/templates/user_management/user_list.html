@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block extra_css %}
+    <style>
+        .bd-placeholder-img {
+            font-size: 1.125rem;
+            text-anchor: middle;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            user-select: none;
+        }
+
+        @media (min-width: 768px) {
+            .bd-placeholder-img-lg {
+                font-size: 3.5rem;
+            }
+        }
+    </style>
+
+    <link rel="stylesheet" href="{% static 'css/list-groups.css' %}">
+{% endblock %}
+
+{% block title %}Users{% endblock %}
+
+{% block content %}
+    <div class="site-box">
+        <div class="row justify-content-center mt-5">
+            <div class="col-lg-3 col-12">
+                <span class="h2 site-color logo-font">Users</span>
+            </div>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-lg-3 col-12">
+                <div class="list-group">
+                    {% for user in object_list %}
+                        <div class="list-group-item py-3 d-flex flex-column">
+                            <span class="font-6">{{ user.username }}</span>
+                            <span>Email: {{ user.email }}</span>
+                            <span>Joined: {{ user.date_joined }}</span>
+                            <span>Last login: {{ user.last_login }}</span>
+                            <span>Active: {{ user.is_active }}</span>
+                            <span>Token sent: {{ user.token_sent }}</span>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

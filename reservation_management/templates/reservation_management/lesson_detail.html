@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% load app_filters %}
+
+{% block title %}{{ block.super }} {% translate "Lesson" %}{% endblock %}
+
+{% block content %}
+    <div class="site-box">
+        <div class="row justify-content-center">
+            <div class="col-lg-3 col-12">
+                <div class="row">
+                    <div class="col d-flex flex-column">
+                        <span class="text-muted font-5">{{ lesson.day|get_day_from_int }}</span>
+                        <span class="h2 site-color logo-font">{{ lesson.classroom.name }}</span>
+                        <span class="font-6">{{ lesson.classroom.building.name }}</span>
+                    </div>
+                    <div class="col-auto">
+                        <a href="{% url 'reservation_management:lesson-update' lesson.pk %}"
+                           class="site-link no-decoration">
+                            <i class="fas fa-pen mt-2 mr-3"></i>
+                        </a>
+                        <a href="#" class="site-link no-decoration">
+                            <i class="fas fa-trash text-danger"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row justify-content-center mt-5">
+            <div class="col-lg-3 col-12">
+                <ul>
+                    <li>{% translate "Start at " %}{{ lesson.start_time }}</li>
+                    <li>{% translate "End at " %}{{ lesson.end_time }}</li>
+                </ul>
+                <p>
+
+                </p>
+            </div>
+        </div>
+        <div class="row justify-content-center mt-4">
+            <div class="col-lg-3 col-12 d-flex justify-content-between align-items-center">
+                <a href="{% url 'reservation_management:lesson-list' %}" class="font-6 site-blue-text">
+                    <i class="fas fa-chevron-left mr-2"></i>
+                    {% translate "Your lessons" %}
+                </a>
+            </div>
+        </div>
+    </div>
+{% endblock %}

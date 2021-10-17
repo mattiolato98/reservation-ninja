@@ -1,0 +1,8 @@
+@media (max-width: 991px) {
+    .btn {
+        width: 90% !important;
+    }
+    .site-box {
+        margin-top: 35px;
+    }
+}
