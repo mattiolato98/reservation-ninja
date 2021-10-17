@@ -74,7 +74,7 @@ class Log(models.Model):
     date = models.DateField(auto_now_add=True)
 
     def __str__(self):
-        return self.date
+        return f"{self.date}"
 
     @property
     def average_user_execution_time(self):
