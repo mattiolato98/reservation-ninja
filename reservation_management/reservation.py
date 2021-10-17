@@ -129,8 +129,8 @@ if __name__ == "__main__":
     dummy_var = list(map(reserve_lesson_map, lessons))
     end = measure_time()
 
-    Log.objects.create({
-        'execution_time': start - end,
-        'users': len(set(lesson.user for lesson in lessons)),
-        'lessons': len(lessons),
-    })
+    Log.objects.create(
+        execution_time=(start - end),
+        users=len(set(lesson.user for lesson in lessons)),
+        lessons=len(lessons),
+    )
