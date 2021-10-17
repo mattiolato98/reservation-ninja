@@ -5,7 +5,6 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.tokens import PasswordResetTokenGenerator
 from django.contrib.auth.views import LoginView
-from django.core.exceptions import ValidationError
 from django.http import JsonResponse
 from django.shortcuts import redirect
 from django.urls import reverse_lazy, reverse
@@ -35,11 +34,6 @@ class RegistrationView(CreateView):
     success_url = reverse_lazy('user_management:email-verification-needed')
 
     def form_valid(self, form):
-        if form.cleaned_data['email'].split('@')[1] != 'studenti.unimore.it':
-            raise ValidationError(_("Seems that you are not a Unimore student."))
-        if not form.cleaned_data['privacy_and_cookie_policy_acceptance']:
-            raise ValidationError(_("You must accept the privacy policies."))
-
         self.object = form.save(commit=False)
 
         encryptor = Fernet(settings.CRYPTOGRAPHY_KEY.encode())
