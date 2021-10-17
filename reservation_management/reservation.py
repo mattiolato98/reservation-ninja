@@ -3,7 +3,7 @@ from os.path import dirname
 import django
 import os
 import sys
-# from time import time as measure_time
+from time import time as measure_time
 from datetime import datetime
 from datetime import time
 
@@ -114,7 +114,7 @@ if __name__ == "__main__":
     os.environ.setdefault("DJANGO_SETTINGS_MODULE", "reservation_tool_base_folder.settings")
     django.setup()
 
-    from reservation_management.models import Lesson, Reservation
+    from reservation_management.models import Lesson, Reservation, Logs
 
     # Delete old reservations
     Reservation.objects.all().delete()
@@ -124,8 +124,13 @@ if __name__ == "__main__":
         user__enable_automatic_reservation=True
     )
 
-    # start = measure_time()
+    start = measure_time()
     # TODO: understand if this assignment is required...
     dummy_var = list(map(reserve_lesson_map, lessons))
-    # end = measure_time()
-    # print(f'{end - start}')
+    end = measure_time()
+
+    Logs.objects.create({
+        'execution_time': start - end,
+        'users': len(set(lesson.user for lesson in lessons)),
+        'lessons': len(lessons),
+    })
