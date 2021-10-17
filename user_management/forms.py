@@ -66,6 +66,10 @@ class PlatformUserCreationForm(UserCreationForm):
                 Column('email', css_class='form-group'),
                 css_class='form-row'
             ),
+            Row(
+                Column('privacy_and_cookie_policy_acceptance', css_class='form-group'),
+                css_class='form-row'
+            ),
         )
 
     class Meta:
@@ -77,6 +81,7 @@ class PlatformUserCreationForm(UserCreationForm):
             'password2',
             'unimore_username',
             'unimore_password',
+            'privacy_and_cookie_policy_acceptance',
         )
         labels = {
             'unimore_username': _('Unimore username'),

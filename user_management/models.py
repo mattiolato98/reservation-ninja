@@ -14,6 +14,8 @@ class PlatformUser(AbstractUser):
 
     enable_automatic_reservation = models.BooleanField(default=True)
 
+    privacy_and_cookie_policy_acceptance = models.BooleanField(default=False)
+
     def __str__(self):
         return self.username
 
