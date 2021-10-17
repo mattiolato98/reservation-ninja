@@ -1,5 +1,7 @@
 from django.contrib.auth import get_user_model
+from django.core.exceptions import ValidationError
 from django.db import models
+from django.db.models import Q, F
 from django.utils.translation import gettext_lazy as _
 
 
@@ -44,6 +46,11 @@ class Lesson(models.Model):
             f'{self.start_time.strftime("%H:%M")}/{self.end_time.strftime("%H:%M")} '
             f'on day {self.day}'
         )
+
+    def clean(self):
+        if self.start_time >= self.end_time:
+            raise ValidationError(_('Lesson start time should be before end time'))
+        return super(Lesson, self).clean()
 
     class Meta:
         ordering = ['day']
