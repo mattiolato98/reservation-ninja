@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-10-17 12:34+0000\n"
+"POT-Creation-Date: 2021-10-17 12:37+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -426,21 +426,13 @@ msgstr "Sembra che tu non sia uno studente Unimore."
 msgid "Delete account"
 msgstr "Elimina account"
 
-#: user_management/templates/user_management/user_delete.html:16
-msgid ""
-"\n"
-"                        <span class=\"text-muted font-5\">Are you sure you "
-"want to delete your account?</span><br>\n"
-"                        <span>All your data will be destroyed and you won't "
-"be able to retrieve it.</span>\n"
-"                    "
-msgstr ""
-"\n"
-"                        <span class=\"text-muted font-5\">Sei sicuro di "
-"volere eliminare il tuo account?</span><br>\n"
-"                        <span>Tutti i tuoi dati verranno distrutti e non "
-"sarai più in grado di recuperarli.</span>\n"
-"                    "
+#: user_management/templates/user_management/user_delete.html:17
+msgid "Are you sure you want to delete your account?"
+msgstr "Sei sicuro di voler eliminare il tuo account?"
+
+#: user_management/templates/user_management/user_delete.html:19
+msgid "All your data will be destroyed and you won't be able to retrieve it."
+msgstr "Tutti i tuoi dati verranno distrutti e non sarai più in grado di recuperarli."
 
 #: user_management/templates/user_management/user_delete.html:28
 msgid "For confirmation, enter your username"
