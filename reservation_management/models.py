@@ -6,14 +6,14 @@ from django.utils.translation import gettext_lazy as _
 
 
 class Building(models.Model):
-    name = models.CharField(max_length=50)
+    name = models.CharField(max_length=100)
 
     def __str__(self):
         return self.name
 
 
 class Classroom(models.Model):
-    name = models.CharField(max_length=50)
+    name = models.CharField(max_length=100)
     building = models.ForeignKey(Building, on_delete=models.CASCADE, related_name='classrooms')
 
     def __str__(self):
