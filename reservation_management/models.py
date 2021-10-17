@@ -45,6 +45,9 @@ class Lesson(models.Model):
             f'on day {self.day}'
         )
 
+    class Meta:
+        ordering = ['day']
+
 
 class Reservation(models.Model):
     link = models.URLField()
