@@ -4,14 +4,14 @@
 {% block content %}
     <div class="site-box mt-5">
         <div class="row justify-content-center">
-            <div class="col-lg-3 col-12">
+            <div class="col-xl-3 col-lg-5 col-md-9 col-12">
                 <h2 class="logo-font site-color">
                     {% translate "Help" %}
                 </h2>
             </div>
         </div>
         <div class="row justify-content-center mt-5">
-            <div class="col-lg-3 col-12">
+            <div class="col-xl-3 col-lg-5 col-md-9 col-12">
                 <p>
                     {% blocktranslate %}
                         If you have some doubt or you want to report an issue,
@@ -43,7 +43,7 @@
             </div>
         </div>
         <div class="row justify-content-center mt-3">
-            <div class="col-lg-3 col-12">
+            <div class="col-xl-3 col-lg-5 col-md-9 col-12">
                 {% if user.is_authenticated %}
                     <a href="{% url 'reservation_management:reservation-list' %}" class="font-6 site-blue-text">
                         <i class="fas fa-chevron-left ml-2"></i>
