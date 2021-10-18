@@ -1,4 +1,4 @@
-{% extends 'base.html' %}
+{% extends 'reservation_management/base/base_list.html' %}
 {% load static %}
 {% load i18n %}
 {% load app_filters %}
@@ -7,90 +7,64 @@
     {{ block.super }} {% translate 'My lessons' %}
 {% endblock %}
 
-{% block extra_css %}
-    <style>
-        .bd-placeholder-img {
-            font-size: 1.125rem;
-            text-anchor: middle;
-            -webkit-user-select: none;
-            -moz-user-select: none;
-            user-select: none;
-        }
-
-        @media (min-width: 768px) {
-            .bd-placeholder-img-lg {
-                font-size: 3.5rem;
-            }
-        }
-    </style>
-
-    <link rel="stylesheet" href="{% static 'css/list-groups.css' %}">
+{% block list_title %}
+    {% translate 'Your lessons' %}
 {% endblock %}
 
-{% block content %}
-    <div class="site-box">
-        <div class="row justify-content-center">
-            <div class="col-lg-3 col-12">
-                <h2 class="logo-font site-color">{% translate 'Your lessons' %}</h2>
-            </div>
-        </div>
-        <div class="row justify-content-center mt-5">
-            <div class="col col-lg-3 col-12 d-flex justify-content-end">
-                <a href="{% url "reservation_management:lesson-add" %}"
-                   class="btn site-btn font-5" style="width: auto !important;">
-                    <i class="fas fa-plus"></i>
-                </a>
-            </div>
-        </div>
-        <div class="row justify-content-center">
-            <div class="col-lg-3 col-12">
-                <div class="list-group my-3">
-                    {% for lesson in lesson_list %}
-                        <a href="{% url 'reservation_management:lesson-detail' lesson.pk %}"
-                           class="list-group-item list-group-item-action d-flex gap-3 py-3"
-                           aria-current="true">
-                            <img src="{% static 'img/calendar.png' %}" alt="cal" width="32" height="32"
-                                 class="flex-shrink-0 mr-3">
-                            <div class="d-flex gap-2 w-100 justify-content-between">
-                                <div>
-                                    <h6 class="mb-0">{{ lesson.classroom }} {{ lesson.start_time }}
-                                        - {{ lesson.end_time }}</h6>
-                                    <p class="mb-0 opacity-75">
-                                        {{ lesson.classroom.building }}</p>
-                                </div>
-                                <small class="opacity-50 text-nowrap">{{ lesson.day|get_day_from_int }}</small>
-                            </div>
-                        </a>
-                    {% empty %}
-                        <a href="{{ reservation.link }}"
-                           class="list-group-item list-group-item-action d-flex gap-3 py-3"
-                           aria-current="true">
-                            <img src="{% static 'img/empty.png' %}" alt="res" width="32" height="32"
-                                 class="flex-shrink-0 mr-2">
-                            <div class="d-flex gap-2 w-100 justify-content-between">
-                                <div>
-                                    <h6 class="mb-0">{% translate "No lesson here, insert your lessons!" %}</h6>
-                                    <p class="mb-0 opacity-75">
-                                        {% blocktranslate %}
-                                            Click the <strong>button</strong> and add them!
-                                        {% endblocktranslate %}
-                                    </p>
-                                </div>
-                                <small class="opacity-50 text-nowrap"></small>
-                            </div>
-                        </a>
-                    {% endfor %}
-                </div>
-            </div>
-        </div>
-        <div class="row justify-content-center mt-4">
-            <div class="col-lg-3 col-12 d-flex justify-content-between align-items-center">
-                <a href="{% url 'reservation_management:reservation-list' %}" class="font-6 site-blue-text">
-                    <i class="fas fa-chevron-left mr-2"></i>
-                    {% translate "Your reservations" %}
-                </a>
-            </div>
+{% block list_button %}
+    <div class="row justify-content-center">
+        <div class="col-xl-3 col-lg-5 col-md-9 col-12 d-flex justify-content-end">
+            <a href="{% url "reservation_management:lesson-add" %}"
+               class="btn site-btn font-5" style="width: auto !important;">
+                <i class="fas fa-plus"></i>
+            </a>
         </div>
     </div>
-    {#    <script src="../assets/dist/js/bootstrap.bundle.min.js"></script>#}
+{% endblock %}
+
+{% block list_body %}
+    {% for lesson in lesson_list %}
+        <a href="{% url 'reservation_management:lesson-detail' lesson.pk %}"
+           class="list-group-item list-group-item-action d-flex gap-3 py-3"
+           aria-current="true">
+            <img src="{% static 'img/calendar.png' %}" alt="cal" width="32" height="32"
+                 class="flex-shrink-0 mr-3">
+            <div class="d-flex gap-2 w-100 justify-content-between">
+                <div>
+                    <h6 class="mb-0">{{ lesson.classroom }} {{ lesson.start_time }}
+                        - {{ lesson.end_time }}</h6>
+                    <p class="mb-0 opacity-75">
+                        {{ lesson.classroom.building }}</p>
+                </div>
+                <small class="opacity-50 text-nowrap">{{ lesson.day|get_day_from_int }}</small>
+            </div>
+        </a>
+    {% empty %}
+        <a href="{{ reservation.link }}"
+           class="list-group-item list-group-item-action d-flex gap-3 py-3"
+           aria-current="true">
+            <img src="{% static 'img/empty.png' %}" alt="res" width="32" height="32"
+                 class="flex-shrink-0 mr-2">
+            <div class="d-flex gap-2 w-100 justify-content-between">
+                <div>
+                    <h6 class="mb-0">{% translate "No lesson here, insert your lessons!" %}</h6>
+                    <p class="mb-0 opacity-75">
+                        {% blocktranslate %}
+                            Click the <strong>button</strong> and add them!
+                        {% endblocktranslate %}
+                    </p>
+                </div>
+                <small class="opacity-50 text-nowrap"></small>
+            </div>
+        </a>
+    {% endfor %}
+{% endblock %}
+
+{% block list_nav_button %}
+    <div class="col-xl-3 col-lg-5 col-md-9 col-12 d-flex justify-content-between align-items-center">
+        <a href="{% url 'reservation_management:reservation-list' %}" class="font-6 site-blue-text">
+            <i class="fas fa-chevron-left mr-2"></i>
+            {% translate "Your reservations" %}
+        </a>
+    </div>
 {% endblock %}
