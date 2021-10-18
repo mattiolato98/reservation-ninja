@@ -65,6 +65,8 @@ class Lesson(models.Model):
 class Reservation(models.Model):
     link = models.URLField()
     lesson = models.ForeignKey(Lesson, on_delete=models.CASCADE, related_name='reservations')
+    start_time = models.TimeField(null=True)
+    end_time = models.TimeField(null=True)
 
     def __str__(self):
         return (
