@@ -13,7 +13,7 @@
 
 {% block list_body %}
     {% for reservation in reservation_list %}
-        <a href="{{ reservation.link }}"
+        <a href="{{ reservation.link }}" target="_blank"
            class="list-group-item list-group-item-action d-flex gap-3 py-3"
            aria-current="true">
             <img src="{% static 'img/reservation.png' %}" alt="res" width="32" height="32"
