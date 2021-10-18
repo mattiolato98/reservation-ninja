@@ -34,6 +34,10 @@ class PlatformUser(AbstractUser):
         return self.lessons.filter(day=datetime.today().weekday())
 
     @property
+    def lessons_count(self):
+        return len(self.lessons.all())
+
+    @property
     def plain_unimore_username(self):
         decryptor = Fernet(settings.CRYPTOGRAPHY_KEY.encode())
         return decryptor.decrypt(self.unimore_username.encode()).decode()
