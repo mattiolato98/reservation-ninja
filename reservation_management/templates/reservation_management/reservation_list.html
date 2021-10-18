@@ -60,7 +60,7 @@
 
 {% block manager_tools %}
     {% if user.is_manager %}
-        <div class="row justify-content-center mt-5">
+        <div class="row justify-content-center mt-5 px-3">
             <div class="col-xl-3 col-lg-5 col-md-9 col-12 d-flex flex-column border p-4">
                 <span class="h4 font-6 logo-font">Administration</span>
                 <a href="{% url 'user_management:list' %}" class="site-link site-color font-6">
