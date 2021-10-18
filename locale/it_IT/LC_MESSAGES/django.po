@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-10-17 20:15+0000\n"
+"POT-Creation-Date: 2021-10-18 15:21+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -37,32 +37,32 @@ msgstr "Ora fine"
 msgid "Classroom"
 msgstr "Aula"
 
-#: reservation_management/models.py:30
+#: reservation_management/models.py:36
 #: reservation_management/templatetags/app_filters.py:8
 msgid "Monday"
 msgstr "Lunedì"
 
-#: reservation_management/models.py:31
+#: reservation_management/models.py:37
 #: reservation_management/templatetags/app_filters.py:9
 msgid "Tuesday"
 msgstr "Martedì"
 
-#: reservation_management/models.py:32
+#: reservation_management/models.py:38
 #: reservation_management/templatetags/app_filters.py:10
 msgid "Wednesday"
 msgstr "Mercoledì"
 
-#: reservation_management/models.py:33
+#: reservation_management/models.py:39
 #: reservation_management/templatetags/app_filters.py:11
 msgid "Thursday"
 msgstr "Giovedì"
 
-#: reservation_management/models.py:34
+#: reservation_management/models.py:40
 #: reservation_management/templatetags/app_filters.py:12
 msgid "Friday"
 msgstr "Venerdì"
 
-#: reservation_management/models.py:52
+#: reservation_management/models.py:58
 msgid "Lesson start time should be before end time"
 msgstr ""
 "L'orario di inizio di una lezione dovrebbe essere inferiore all'orario di "
@@ -75,8 +75,8 @@ msgstr "Aggiungi una lezione"
 
 #: reservation_management/templates/reservation_management/lesson_add.html:11
 #: reservation_management/templates/reservation_management/lesson_detail.html:44
-#: reservation_management/templates/reservation_management/lesson_list.html:34
-#: reservation_management/templates/reservation_management/reservation_list.html:82
+#: reservation_management/templates/reservation_management/lesson_list.html:11
+#: reservation_management/templates/reservation_management/reservation_list.html:55
 msgid "Your lessons"
 msgstr "Le tue lezioni"
 
@@ -93,27 +93,27 @@ msgid "End at "
 msgstr "Finisce alle "
 
 #: reservation_management/templates/reservation_management/lesson_list.html:7
+#: reservation_management/templates/reservation_management/reservation_list.html:7
 msgid "My lessons"
 msgstr "Le mie lezioni"
 
-#: reservation_management/templates/reservation_management/lesson_list.html:72
+#: reservation_management/templates/reservation_management/lesson_list.html:50
 msgid "No lesson here, insert your lessons!"
 msgstr "Ancora nessuna lezione, aggiungine una!"
 
-#: reservation_management/templates/reservation_management/lesson_list.html:74
+#: reservation_management/templates/reservation_management/lesson_list.html:52
 msgid ""
 "\n"
-"                                            Click the <strong>button</"
-"strong> and add them!\n"
-"                                        "
+"                            Click the <strong>button</strong> and add them!\n"
+"                        "
 msgstr ""
 "\n"
 "                                            Clicca il <strong>pulsante</"
 "strong> e aggiungile!\n"
 "                                        "
 
-#: reservation_management/templates/reservation_management/lesson_list.html:90
-#: reservation_management/templates/reservation_management/reservation_list.html:34
+#: reservation_management/templates/reservation_management/lesson_list.html:67
+#: reservation_management/templates/reservation_management/reservation_list.html:11
 msgid "Your reservations"
 msgstr "Le tue prenotazioni"
 
@@ -129,20 +129,16 @@ msgstr "Aggiorna i dati della lezione"
 msgid "Back to lesson"
 msgstr "Torna alla lezione"
 
-#: reservation_management/templates/reservation_management/reservation_list.html:7
-msgid "Reservation list"
-msgstr "Lista prenotazioni"
-
-#: reservation_management/templates/reservation_management/reservation_list.html:64
+#: reservation_management/templates/reservation_management/reservation_list.html:39
 msgid "No reservation made, insert your lessons!"
 msgstr "Nessuna prenotazione effettuata, inserisci le tue lezioni!"
 
-#: reservation_management/templates/reservation_management/reservation_list.html:66
+#: reservation_management/templates/reservation_management/reservation_list.html:41
 msgid ""
 "\n"
-"                                            Go to <strong>Your lessons</"
-"strong> and add them!\n"
-"                                        "
+"                            Go to <strong>Your lessons</strong> and add "
+"them!\n"
+"                        "
 msgstr ""
 "\n"
 "                                            Vai a <strong>le tue lezioni</"
@@ -346,6 +342,15 @@ msgstr ""
 "                    </span>      \n"
 "                "
 
+#: user_management/models.py:26
+#: user_management/templates/user_management/user_ajax.html:54
+msgid "Seems that you are not a Unimore student."
+msgstr "Sembra che tu non sia uno studente Unimore."
+
+#: user_management/models.py:28
+msgid "You must accept the privacy policies."
+msgstr "Devi accettare le politiche sul trattamento dei dati."
+
 #: user_management/templates/registration/login.html:6
 #: user_management/templates/user_management/email_verified.html:19
 msgid "Welcome"
@@ -433,11 +438,6 @@ msgstr ""
 msgid "Someone stole this username. Damn!."
 msgstr "Qualcuno ha rubato questo username. Accidenti!"
 
-#: user_management/templates/user_management/user_ajax.html:54
-#: user_management/views.py:39
-msgid "Seems that you are not a Unimore student."
-msgstr "Sembra che tu non sia uno studente Unimore."
-
 #: user_management/templates/user_management/user_delete.html:4
 msgid "Delete account"
 msgstr "Elimina account"
@@ -463,15 +463,11 @@ msgstr "Elimina"
 msgid "Back to settings"
 msgstr "Torna alle impostazioni"
 
-#: user_management/views.py:41
-msgid "You must accept the privacy policies."
-msgstr "Devi accettare le politiche sul trattamento dei dati."
-
-#: user_management/views.py:51
+#: user_management/views.py:45
 msgid "Reservation Ninja - Confirm your email"
 msgstr "Reservation Ninja - Conferma la tua email"
 
-#: user_management/views.py:62
+#: user_management/views.py:56
 #, fuzzy, python-brace-format
 msgid ""
 "Hi {self.object.username}, welcome to Reservation Ninja.\n"
@@ -482,7 +478,7 @@ msgstr ""
 "\n"
 "Clicca il seguente link per confermare la tua email:"
 
-#: user_management/views.py:100
+#: user_management/views.py:94
 #, fuzzy, python-brace-format
 #| msgid ""
 #| "Error. Attempt to validate email for the user {user} with token {token}"
@@ -493,6 +489,7 @@ msgstr ""
 "Errore. Tentativo di validazione dell'email per l'utente {user} con il token "
 "{token}"
 
-#: user_management/views.py:101
+#: user_management/views.py:95
 msgid "Authentication error"
 msgstr "Errore di autenticazione"
+
