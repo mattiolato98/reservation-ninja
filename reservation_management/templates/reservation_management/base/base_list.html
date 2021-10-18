@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load i18n %}
+{% load app_filters %}
+
+{% block extra_css %}
+    <style>
+        .bd-placeholder-img {
+            font-size: 1.125rem;
+            text-anchor: middle;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            user-select: none;
+        }
+
+        @media (min-width: 768px) {
+            .bd-placeholder-img-lg {
+                font-size: 3.5rem;
+            }
+        }
+    </style>
+
+    <link rel="stylesheet" href="{% static 'css/list-groups.css' %}">
+{% endblock %}
+
+{% block content %}
+    <div class="site-box">
+        <div class="row justify-content-center mb-5">
+            <div class="col-xl-3 col-lg-5 col-md-9 col-12">
+                <h2 class="logo-font site-color">{% block list_title %}{% endblock %}</h2>
+            </div>
+        </div>
+        {% block list_button %}
+        {% endblock %}
+        <div class="row justify-content-center">
+            <div class="col-xl-3 col-lg-5 col-md-9 col-12">
+                <div class="list-group my-3">
+                    {% block list_body %}
+                    {% endblock %}
+                </div>
+            </div>
+        </div>
+        <div class="row justify-content-center mt-4">
+            {% block list_nav_button %}
+            {% endblock %}
+        </div>
+        {% block manager_tools %}
+        {% endblock %}
+    </div>
+    {#    <script src="../assets/dist/js/bootstrap.bundle.min.js"></script>#}
+{% endblock %}

@@ -1,10 +1,12 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import HttpResponseRedirect
 from django.urls import reverse_lazy
+from django.utils.decorators import method_decorator
 from django.views.generic import CreateView, ListView, DetailView, UpdateView
 
 from reservation_management.forms import LessonForm
-from reservation_management.models import Lesson, Reservation
+from reservation_management.models import Lesson, Reservation, Log
+from user_management.decorators import manager_required
 
 
 class LessonAddView(LoginRequiredMixin, CreateView):
@@ -66,3 +68,12 @@ class ReservationListView(LoginRequiredMixin, ListView):
 
     def get_queryset(self):
         return Reservation.objects.filter(lesson__user=self.request.user)
+
+
+@method_decorator(manager_required, name='dispatch')
+class LogListView(ListView):
+    model = Log
+    template_name = "reservation_management/log_list.html"
+
+    def get_queryset(self):
+        return Log.objects.all().order_by('-date')

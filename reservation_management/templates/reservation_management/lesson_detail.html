@@ -7,7 +7,7 @@
 {% block content %}
     <div class="site-box">
         <div class="row justify-content-center">
-            <div class="col-lg-3 col-12">
+            <div class="col-xl-3 col-lg-5 col-md-9 col-12">
                 <div class="row">
                     <div class="col d-flex flex-column">
                         <span class="text-muted font-5">{{ lesson.day|get_day_from_int }}</span>
@@ -27,7 +27,7 @@
             </div>
         </div>
         <div class="row justify-content-center mt-5">
-            <div class="col-lg-3 col-12">
+            <div class="col-xl-3 col-lg-5 col-md-9 col-12">
                 <ul>
                     <li>{% translate "Start at " %}{{ lesson.start_time }}</li>
                     <li>{% translate "End at " %}{{ lesson.end_time }}</li>
@@ -38,7 +38,7 @@
             </div>
         </div>
         <div class="row justify-content-center mt-4">
-            <div class="col-lg-3 col-12 d-flex justify-content-between align-items-center">
+            <div class="col-xl-3 col-lg-5 col-md-9 col-12 d-flex justify-content-between align-items-center">
                 <a href="{% url 'reservation_management:lesson-list' %}" class="font-6 site-blue-text">
                     <i class="fas fa-chevron-left mr-2"></i>
                     {% translate "Your lessons" %}

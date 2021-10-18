@@ -1,3 +1,4 @@
+from itertools import repeat
 from os.path import dirname
 
 import django
@@ -44,6 +45,19 @@ def find_hours(root_element, start_hour, end_hour):
     return ranges_to_reserve
 
 
+def check_reservation_exist(start_time, end_time, lesson):
+    reservations = Reservation.objects.filter(
+            lesson__user=lesson.user,
+            lesson__classroom=lesson.classroom,
+            start_time=start_time,
+            end_time=end_time
+    )
+    if len(reservations) > 0:
+        return reservations[0].link
+
+    return False
+
+
 def reserve_room(driver, lesson):
     element = driver.find_element_by_xpath(
         f"//li[contains(text(), '{lesson.classroom.building.name}')]"
@@ -58,40 +72,48 @@ def reserve_room(driver, lesson):
     ranges = find_hours(room_element, lesson.start_time, lesson.end_time)
 
     building_url = driver.current_url
-    # TODO: sembra che questo ciclo faccia un'iterazione in più!
     for range_start_time, range_end_time in ranges:
-        element = driver.find_element_by_xpath(
-            f"//td[contains(text(), '{lesson.classroom}')]"
-            f"/ancestor::tr//a[contains(text(), 'Turno Aula {range_start_time}-{range_end_time}')]"
-        )
-        driver.execute_script("arguments[0].click();", element)
+        if link := check_reservation_exist(range_start_time, range_end_time, lesson):
+            Reservation.objects.create(
+                link=link,
+                lesson=lesson,
+                start_time=range_start_time,
+                end_time=range_end_time,
+            )
+            print(f"Presenza duplicata inserita {range_start_time}-{range_end_time}")
+        else:
+            element = driver.find_element_by_xpath(
+                f"//td[contains(text(), '{lesson.classroom}')]"
+                f"/ancestor::tr//a[contains(text(), 'Turno Aula {range_start_time}-{range_end_time}')]"
+            )
+            driver.execute_script("arguments[0].click();", element)
 
-        try:
-            driver.find_element_by_id("username").send_keys(lesson.user.plain_unimore_username)
-            driver.find_element_by_id("password").send_keys(lesson.user.plain_unimore_password)
+            try:
+                driver.find_element_by_id("username").send_keys(lesson.user.plain_unimore_username)
+                driver.find_element_by_id("password").send_keys(lesson.user.plain_unimore_password)
 
-            driver.find_element_by_name("_eventId_proceed").click()
-        except NoSuchElementException:
-            pass
+                driver.find_element_by_name("_eventId_proceed").click()
+            except NoSuchElementException:
+                pass
 
-        button = driver.find_element_by_xpath("//button[contains(text(), 'Inserisci')]")
-        button.click()
-        Reservation.objects.create(link=driver.current_url, lesson=lesson)
-        print(f"Presenza inserita {range_start_time}-{range_end_time}")
+            try:
+                button = driver.find_element_by_xpath("//button[contains(text(), 'Inserisci')]")
+                # button.click()
+                Reservation.objects.create(
+                    link=driver.current_url,
+                    lesson=lesson,
+                    start_time=range_start_time,
+                    end_time=range_end_time,
+                )
+                print(f"Presenza inserita {range_start_time}-{range_end_time}")
+            except NoSuchElementException:
+                print(f"WRONG CREDENTIALS for user {lesson.user.username}")
+                break
 
-        driver.get(building_url)
+            driver.get(building_url)
 
 
-def reserve_lesson_map(lesson):
-    # Allows to run Firefox on a system with no display
-    options = Options()
-    options.headless = True
-
-    driver = webdriver.Firefox(options=options)
-
-    # Selenium configuration:
-    driver.implicitly_wait(TIME_INTERVAL)
-
+def reserve_lesson_map(lesson, driver):
     print(f'Reserving: {lesson}')
     """
     l'ideale è creare ad esempio 3 tab e ciclare iterativamente su di essi con l'operatore modulo, in questo modo
@@ -106,7 +128,6 @@ def reserve_lesson_map(lesson):
     driver.get(RESERVATION_URL)
     reserve_room(driver, lesson)
     driver.delete_all_cookies()
-    driver.close()
 
 
 if __name__ == "__main__":
@@ -124,9 +145,19 @@ if __name__ == "__main__":
         user__enable_automatic_reservation=True
     )
 
+    # Allows to run Firefox on a system with no display
+    options = Options()
+    options.headless = True
+
+    driver = webdriver.Firefox()
+
+    # Selenium configuration:
+    driver.implicitly_wait(TIME_INTERVAL)
+
     start = measure_time()
     # TODO: understand if this assignment is required...
-    dummy_var = list(map(reserve_lesson_map, lessons))
+    dummy_var = list(map(reserve_lesson_map, lessons, repeat(driver)))
+    driver.close()
     end = measure_time()
 
     Log.objects.create(
