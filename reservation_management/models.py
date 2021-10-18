@@ -78,8 +78,9 @@ class Log(models.Model):
 
     @property
     def average_user_execution_time(self):
-        return self.execution_time / self.users
+        return self.execution_time / self.users if self.users > 0 else 0
+
 
     @property
     def average_lesson_execution_time(self):
-        return self.execution_time / self.lessons
+        return self.execution_time / self.lessons if self.lessons > 0 else 0
