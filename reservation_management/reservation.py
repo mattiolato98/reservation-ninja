@@ -98,7 +98,7 @@ def reserve_room(driver, lesson):
 
             try:
                 button = driver.find_element_by_xpath("//button[contains(text(), 'Inserisci')]")
-                # button.click()
+                button.click()
                 Reservation.objects.create(
                     link=driver.current_url,
                     lesson=lesson,
@@ -149,7 +149,7 @@ if __name__ == "__main__":
     options = Options()
     options.headless = True
 
-    driver = webdriver.Firefox()
+    driver = webdriver.Firefox(options=options)
 
     # Selenium configuration:
     driver.implicitly_wait(TIME_INTERVAL)
