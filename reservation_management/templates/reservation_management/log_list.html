@@ -1,50 +1,13 @@
-{% extends 'base.html' %}
-{% load static %}
+{% extends 'base_admin.html' %}
 
 {% block title %}Logs{% endblock %}
+{% block page_title %}Logs{% endblock %}
 
-{% block extra_css %}
-    <style>
-        .bd-placeholder-img {
-            font-size: 1.125rem;
-            text-anchor: middle;
-            -webkit-user-select: none;
-            -moz-user-select: none;
-            user-select: none;
-        }
-
-        @media (min-width: 768px) {
-            .bd-placeholder-img-lg {
-                font-size: 3.5rem;
-            }
-        }
-    </style>
-
-    <link rel="stylesheet" href="{% static 'css/list-groups.css' %}">
-{% endblock %}
-
-{% block content %}
-    <div class="site-box">
-        <div class="row justify-content-center mt-5">
-            <div class="col-lg-3 col-12">
-                <span class="h2 site-color logo-font">Logs</span>
-            </div>
-        </div>
-        <div class="row justify-content-center">
-            <div class="col-lg-3 col-12">
-                <div class="list-group">
-                    {% for log in object_list %}
-                        <div class="list-group-item py-3 d-flex flex-column">
-                            <span class="font-6">{{ log.date }}</span>
-                            <span>Execution time: {{ log.execution_time }}</span>
-                            <span>Lessons: {{ log.lessons }}</span>
-                            <span>Users: {{ log.users }}</span>
-                            <span>Average exec per user: {{ log.average_user_execution_time }}</span>
-                            <span>Average exec per lesson: {{ log.average_lesson_execution_time }}</span>
-                        </div>
-                    {% endfor %}
-                </div>
-            </div>
-        </div>
-    </div>
+{% block items %}
+    <span class="font-6">{{ item.date }}</span>
+    <span>Execution time: {{ item.execution_time }}</span>
+    <span>Lessons: {{ item.lessons }}</span>
+    <span>Users: {{ item.users }}</span>
+    <span>Average exec per user: {{ item.average_user_execution_time }}</span>
+    <span>Average exec per lesson: {{ item.average_lesson_execution_time }}</span>
 {% endblock %}
