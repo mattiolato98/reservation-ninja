@@ -11,6 +11,9 @@ class Building(models.Model):
     def __str__(self):
         return self.name
 
+    class Meta:
+        ordering = ['name']
+
 
 class Classroom(models.Model):
     name = models.CharField(max_length=100)
@@ -18,6 +21,9 @@ class Classroom(models.Model):
 
     def __str__(self):
         return self.name
+
+    class Meta:
+        ordering = ['building__name', 'name']
 
 
 class Lesson(models.Model):
