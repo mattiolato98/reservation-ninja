@@ -1,3 +1,5 @@
+import json
+import pickle
 from itertools import repeat
 from os.path import dirname
 
@@ -87,18 +89,28 @@ def reserve_room(driver, lesson):
                 f"/ancestor::tr//a[contains(text(), 'Turno Aula {range_start_time}-{range_end_time}')]"
             )
             driver.execute_script("arguments[0].click();", element)
-
             try:
                 driver.find_element_by_id("username").send_keys(lesson.user.plain_unimore_username)
                 driver.find_element_by_id("password").send_keys(lesson.user.plain_unimore_password)
-
                 driver.find_element_by_name("_eventId_proceed").click()
+                c = list(filter(lambda x: x['name'] == 'shib_idp_session', driver.get_cookies()))
+
+                with open("cookies.json", "w") as f:
+                    json.dump(c, f)
+
+                import time
+                time.sleep(1000)
+
             except NoSuchElementException:
+                print("HELLLL YEAAAAAAAAHHHHH")
                 pass
+
+            import time
+            time.sleep(1000)
 
             try:
                 button = driver.find_element_by_xpath("//button[contains(text(), 'Inserisci')]")
-                button.click()
+                # button.click()
                 Reservation.objects.create(
                     link=driver.current_url,
                     lesson=lesson,
@@ -125,6 +137,9 @@ def reserve_lesson_map(lesson, driver):
     Il driver a quel punto viene creato direttamente dal main così può essere chiuso da lì.
     """
     # driver.execute_script(f"window.open('{RESERVATION_URL}', '_blank');")
+    driver.get("https://idp.unimore.it")
+    with open("cookies.json", "r") as f:
+        driver.add_cookie(json.load(f)[0])
     driver.get(RESERVATION_URL)
     reserve_room(driver, lesson)
     driver.delete_all_cookies()
@@ -149,7 +164,7 @@ if __name__ == "__main__":
     options = Options()
     options.headless = True
 
-    driver = webdriver.Firefox(options=options)
+    driver = webdriver.Firefox()
 
     # Selenium configuration:
     driver.implicitly_wait(TIME_INTERVAL)
@@ -159,6 +174,8 @@ if __name__ == "__main__":
     dummy_var = list(map(reserve_lesson_map, lessons, repeat(driver)))
     driver.close()
     end = measure_time()
+
+    print(f"EXEC {end - start}")
 
     Log.objects.create(
         execution_time=(end - start),
