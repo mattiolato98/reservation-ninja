@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-10-20 17:40+0000\n"
+"POT-Creation-Date: 2021-10-20 17:42+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -379,10 +379,8 @@ msgid "You must accept the privacy policies."
 msgstr "Devi accettare le politiche sul trattamento dei dati."
 
 #: user_management/forms.py:136
-#, fuzzy
-#| msgid "Update lesson"
 msgid "Update"
-msgstr "Aggiorna la lezione"
+msgstr "Aggiorna"
 
 #: user_management/templates/registration/login.html:6
 #: user_management/templates/user_management/email_verified.html:19
