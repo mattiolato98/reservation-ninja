@@ -74,6 +74,9 @@ class Reservation(models.Model):
             f'from {self.lesson.start_time} to {self.lesson.end_time}'
         )
 
+    class Meta:
+        ordering = ['start_time', 'end_time']
+
 
 class Log(models.Model):
     execution_time = models.FloatField()
