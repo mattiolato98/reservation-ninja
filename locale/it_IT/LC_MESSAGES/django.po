@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-10-18 15:21+0000\n"
+"POT-Creation-Date: 2021-10-20 09:38+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -274,7 +274,7 @@ msgstr "Hai bisogno di aiuto?"
 
 #: templates/home.html:73
 #: user_management/templates/registration/registration.html:4
-#: user_management/templates/registration/registration.html:7
+#: user_management/templates/registration/registration.html:8
 msgid "Sign up"
 msgstr "Registrati"
 
@@ -364,7 +364,12 @@ msgstr "Non hai ancora un account? Registrati"
 msgid "Fill the form with your information"
 msgstr "Inserisci le tue informazioni"
 
-#: user_management/templates/registration/registration.html:10
+#: user_management/templates/registration/registration.html:7
+msgid "Reservations will start the day after registration"
+msgstr ""
+"Le prenotazioni partiranno dal giorno successivo a quello della registrazione"
+
+#: user_management/templates/registration/registration.html:11
 msgid "Back to login"
 msgstr "Torna al login"
 
@@ -492,4 +497,3 @@ msgstr ""
 #: user_management/views.py:95
 msgid "Authentication error"
 msgstr "Errore di autenticazione"
-
