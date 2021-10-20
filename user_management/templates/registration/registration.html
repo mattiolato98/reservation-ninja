@@ -4,6 +4,7 @@
 {% block title %}{{ block.super }} {% translate "Sign up" %}{% endblock %}
 
 {% block signing_title %}{% translate "Fill the form with your information" %}{% endblock %}
+{% block signing_subtitle %}{% translate "Reservations will start from midnight on the day of registration" %}{% endblock %}
 {% block signing_submit_value %}{% translate "Sign up" %}{% endblock %}
 
 {% block undo_url %}{% url 'user_management:login' %}{% endblock %}
