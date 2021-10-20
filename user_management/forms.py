@@ -1,7 +1,8 @@
-from crispy_forms.layout import Layout, Row, Column, HTML
+from crispy_forms.layout import Layout, Row, Column, HTML, Submit
 from django.contrib.auth import get_user_model
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from crispy_forms.helper import FormHelper
+from django.core.exceptions import ValidationError
 from django.urls import reverse_lazy
 from django.utils.safestring import mark_safe
 from django.utils.translation import gettext_lazy as _
@@ -103,6 +104,14 @@ class PlatformUserCreationForm(UserCreationForm):
             'unimore_password': forms.PasswordInput(),
         }
 
+    def clean(self):
+        if self.cleaned_data['email'].split('@')[1] != 'studenti.unimore.it':
+            raise ValidationError(_("Seems that you are not a Unimore student."))
+        if not self.cleaned_data['privacy_and_cookie_policy_acceptance']:
+            raise ValidationError(_("You must accept the privacy policies."))
+
+        return super(PlatformUserCreationForm, self).clean()
+
 
 class UserUpdateUnimoreCredentialsForm(forms.ModelForm):
     helper = FormHelper()
@@ -116,11 +125,18 @@ class UserUpdateUnimoreCredentialsForm(forms.ModelForm):
         self.helper.layout = Layout(
             Row(
                 Column('unimore_username', css_class='form-group'),
-                css_class='form-row mt-3'
+                css_class='form-row'
             ),
             Row(
                 Column('unimore_password', css_class='form-group'),
-                css_class='form-row mt-3'
+                css_class='form-row'
+            ),
+            Row(
+                Column(
+                    Submit('submit', _('Update'), css_class="btn site-btn w-100 font-5"),
+                    css_class='form-group d-flex justify-content-center align-items-end'
+                ),
+                css_class='form-row'
             )
         )
 
