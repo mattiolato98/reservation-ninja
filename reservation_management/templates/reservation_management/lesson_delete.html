@@ -25,7 +25,7 @@
 {% endblock %}
 
 {% block back_url %}
-    <a href="{% url 'reservation_management:lesson-list' %}" class="font-6 site-blue-text">
+    <a href="{% url 'reservation_management:lesson-detail' lesson.pk %}" class="font-6 site-blue-text">
         <i class="fas fa-chevron-left mr-2"></i>
         {% translate "Back to lesson" %}
     </a>
