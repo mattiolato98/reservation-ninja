@@ -31,7 +31,6 @@ def check_data(user):
         driver.find_element_by_id("password").send_keys(user.plain_unimore_password)
 
         driver.find_element_by_name("_eventId_proceed").click()
-        print(f"{user.username} OK")
     except NoSuchElementException:
         print(f"--- ERROR DURING AUTHENTICATION OF {user.username}---")
         driver.delete_all_cookies()
@@ -40,6 +39,7 @@ def check_data(user):
 
     try:
         driver.find_element_by_xpath("//a[contains(text(), 'Esci')]").click()
+        print(f"{user.username} OK")
     except NoSuchElementException:
         print(f"{user.username} wrong credentials")
         driver.delete_all_cookies()
