@@ -13,7 +13,7 @@ from django.utils.encoding import force_bytes, force_text
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from django.views.decorators.csrf import csrf_protect
 from django.views.decorators.http import require_GET
-from django.views.generic import CreateView, TemplateView, DeleteView, ListView, UpdateView
+from django.views.generic import CreateView, TemplateView, DeleteView, ListView, UpdateView, FormView
 from django.utils.translation import gettext_lazy as _
 
 from user_management.decorators import manager_required
@@ -67,11 +67,31 @@ class RegistrationView(CreateView):
         return response
 
 
-class UserUpdateUnimoreCredentialsView(LoginRequiredMixin, UpdateView):
+class UserUpdateUnimoreCredentialsView(LoginRequiredMixin, FormView):
     model = get_user_model()
     form_class = UserUpdateUnimoreCredentialsForm
     template_name = "user_management/user_update_unimore_credentials.html"
     success_url = reverse_lazy('user_management:settings')
+
+    def get_context_data(self, **kwargs):
+        context = super(UserUpdateUnimoreCredentialsView, self).get_context_data(**kwargs)
+        context['form'].fields['unimore_username'].widget.attrs.update({'value': self.request.user.plain_unimore_username})
+        context['form'].fields['unimore_password'].widget.attrs.update({'value': ''})
+        return context
+
+    def form_valid(self, form):
+        self.object = self.request.user
+
+        username = form.cleaned_data['unimore_username']
+        password = form.cleaned_data['unimore_password']
+
+        encryptor = Fernet(settings.CRYPTOGRAPHY_KEY.encode())
+        self.object.unimore_username = encryptor.encrypt(username.encode()).decode()
+        self.object.unimore_password = encryptor.encrypt(password.encode()).decode()
+
+        self.object.save()
+
+        return super(UserUpdateUnimoreCredentialsView, self).form_valid(form)
 
     def get_object(self, queryset=None):
         return self.request.user

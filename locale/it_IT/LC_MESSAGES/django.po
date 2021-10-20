@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-10-20 16:07+0000\n"
+"POT-Creation-Date: 2021-10-20 17:42+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -94,7 +94,9 @@ msgstr "Vuoi davvero eliminare questa lezione?"
 
 #: reservation_management/templates/reservation_management/lesson_delete.html:15
 msgid "This data will be destroyed and you won't be able to retrieve it."
-msgstr "I dati di questa lezione verranno eliminati e non sarai più in grado di recuperarli."
+msgstr ""
+"I dati di questa lezione verranno eliminati e non sarai più in grado di "
+"recuperarli."
 
 #: reservation_management/templates/reservation_management/lesson_delete.html:23
 #: user_management/templates/user_management/user_delete.html:36
@@ -208,7 +210,7 @@ msgid "Privacy policy"
 msgstr "Informativa sulla privacy"
 
 #: templates/help.html:50 templates/help.html:55
-#: user_management/templates/user_management/settings.html:34
+#: user_management/templates/user_management/settings.html:37
 msgid "Back home"
 msgstr "Torna alla home"
 
@@ -305,27 +307,29 @@ msgstr "Registrati"
 msgid "Login"
 msgstr "Login"
 
-#: user_management/forms.py:30 user_management/forms.py:100
+#: user_management/forms.py:31 user_management/forms.py:101
 msgid "Unimore Email"
 msgstr "Email Unimore"
 
-#: user_management/forms.py:33
+#: user_management/forms.py:34
 msgid "Your Unimore Email"
 msgstr "La tua email Unimore"
 
-#: user_management/forms.py:35
+#: user_management/forms.py:36
 msgid "Confirm password"
 msgstr "Conferma password"
 
-#: user_management/forms.py:36 user_management/forms.py:98
+#: user_management/forms.py:37 user_management/forms.py:99
+#: user_management/forms.py:122 user_management/forms.py:147
 msgid "Unimore username"
 msgstr "Username Unimore"
 
-#: user_management/forms.py:37 user_management/forms.py:99
+#: user_management/forms.py:38 user_management/forms.py:100
+#: user_management/forms.py:123 user_management/forms.py:148
 msgid "Unimore password"
 msgstr "Password Unimore"
 
-#: user_management/forms.py:43
+#: user_management/forms.py:44
 msgid ""
 "I agree with the <a href='{}' target='_blank' class='site-link'>privacy "
 "policy</a> and the use of essential cookies, according with our <a href='{}' "
@@ -337,7 +341,7 @@ msgstr ""
 "nostra <a href='{}' target='_blank' class='site-link'>informativa sui "
 "cookie</a>, per consentire il corretto funzionamento dell'app"
 
-#: user_management/forms.py:60
+#: user_management/forms.py:61
 msgid ""
 "\n"
 "                    <h3 class='mt-3 mb-0 logo-font site-color'>Unimore "
@@ -349,7 +353,7 @@ msgstr ""
 "Unimore</h3>\n"
 "                "
 
-#: user_management/forms.py:65
+#: user_management/forms.py:66
 msgid ""
 "\n"
 "                    <span class='form-text small mt-0 mb-2'>\n"
@@ -365,14 +369,18 @@ msgstr ""
 "                    </span>      \n"
 "                "
 
-#: user_management/models.py:26
+#: user_management/forms.py:109
 #: user_management/templates/user_management/user_ajax.html:54
 msgid "Seems that you are not a Unimore student."
 msgstr "Sembra che tu non sia uno studente Unimore."
 
-#: user_management/models.py:28
+#: user_management/forms.py:111
 msgid "You must accept the privacy policies."
 msgstr "Devi accettare le politiche sul trattamento dei dati."
+
+#: user_management/forms.py:136
+msgid "Update"
+msgstr "Aggiorna"
 
 #: user_management/templates/registration/login.html:6
 #: user_management/templates/user_management/email_verified.html:19
@@ -433,11 +441,12 @@ msgstr "Entra"
 msgid "Settings"
 msgstr "Impostazioni"
 
-#: user_management/templates/user_management/settings.html:15
+#: user_management/templates/user_management/settings.html:17
+#: user_management/templates/user_management/user_update_unimore_credentials.html:5
 msgid "Update Unimore credentials"
 msgstr "Aggiorna le credenziali Unimore"
 
-#: user_management/templates/user_management/settings.html:17
+#: user_management/templates/user_management/settings.html:20
 msgid ""
 "\n"
 "                        Update your Unimore credentials\n"
@@ -447,12 +456,12 @@ msgstr ""
 "                        Aggiorna le tue credenziali Unimore\n"
 "                    "
 
-#: user_management/templates/user_management/settings.html:22
+#: user_management/templates/user_management/settings.html:25
 #: user_management/templates/user_management/user_delete.html:10
 msgid "Delete your account"
 msgstr "Elimina il tuo account"
 
-#: user_management/templates/user_management/settings.html:24
+#: user_management/templates/user_management/settings.html:27
 msgid ""
 "\n"
 "                        Delete your account and all your information\n"
@@ -484,8 +493,13 @@ msgid "For confirmation, enter your username"
 msgstr "Inserisci il tuo username per confermare"
 
 #: user_management/templates/user_management/user_delete.html:45
+#: user_management/templates/user_management/user_update_unimore_credentials.html:25
 msgid "Back to settings"
 msgstr "Torna alle impostazioni"
+
+#: user_management/templates/user_management/user_update_unimore_credentials.html:11
+msgid "Update your Unimore credentials"
+msgstr "Aggiorna le credenziali Unimore"
 
 #: user_management/views.py:45
 msgid "Reservation Ninja - Confirm your email"
@@ -502,7 +516,7 @@ msgstr ""
 "\n"
 "Clicca il seguente link per confermare la tua email:"
 
-#: user_management/views.py:94
+#: user_management/views.py:124
 #, fuzzy, python-brace-format
 #| msgid ""
 #| "Error. Attempt to validate email for the user {user} with token {token}"
@@ -513,6 +527,6 @@ msgstr ""
 "Errore. Tentativo di validazione dell'email per l'utente {user} con il token "
 "{token}"
 
-#: user_management/views.py:95
+#: user_management/views.py:125
 msgid "Authentication error"
 msgstr "Errore di autenticazione"
