@@ -74,12 +74,12 @@ def reserve_room(driver, lesson):
     building_url = driver.current_url
     for range_start_time, range_end_time in ranges:
         if link := check_reservation_exist(range_start_time, range_end_time, lesson):
-            Reservation.objects.create(
-                link=link,
-                lesson=lesson,
-                start_time=range_start_time,
-                end_time=range_end_time,
-            )
+            # Reservation.objects.create(
+            #     link=link,
+            #     lesson=lesson,
+            #     start_time=range_start_time,
+            #     end_time=range_end_time,
+            # )
             print(f"Presenza duplicata inserita {range_start_time}-{range_end_time}")
         else:
             element = driver.find_element_by_xpath(
@@ -93,6 +93,7 @@ def reserve_room(driver, lesson):
                 driver.find_element_by_id("password").send_keys(lesson.user.plain_unimore_password)
 
                 driver.find_element_by_name("_eventId_proceed").click()
+                print("CREDENZIALI INSERITE CORRETTAMENTE")
             except NoSuchElementException:
                 print("CREDENZIALI ESISTENTI")
                 pass
@@ -100,12 +101,12 @@ def reserve_room(driver, lesson):
             try:
                 button = driver.find_element_by_xpath("//button[contains(text(), 'Inserisci')]")
                 # button.click()
-                Reservation.objects.create(
-                    link=driver.current_url,
-                    lesson=lesson,
-                    start_time=range_start_time,
-                    end_time=range_end_time,
-                )
+                # Reservation.objects.create(
+                #     link=driver.current_url,
+                #     lesson=lesson,
+                #     start_time=range_start_time,
+                #     end_time=range_end_time,
+                # )
                 print(f"Presenza inserita {range_start_time}-{range_end_time}")
             except NoSuchElementException:
                 print(f"WRONG CREDENTIALS for user {lesson.user.username}")
@@ -130,13 +131,13 @@ def reserve_lesson_map(lesson):
     options.headless = True
 
     driver = webdriver.Firefox(options=options)
-
+    print("------------------------------------ Launching driver ------------------------------------")
     # Selenium configuration:
     driver.implicitly_wait(TIME_INTERVAL)
 
     driver.get(RESERVATION_URL)
     reserve_room(driver, lesson)
-    driver.close()
+    driver.quit()
 
 
 if __name__ == "__main__":
@@ -147,7 +148,7 @@ if __name__ == "__main__":
     from reservation_management.models import Lesson, Reservation, Log
 
     # Delete old reservations
-    Reservation.objects.all().delete()
+    # Reservation.objects.all().delete()
 
     lessons = Lesson.objects.filter(
         day=datetime.now(pytz.timezone('Europe/Rome')).weekday(),
@@ -157,13 +158,12 @@ if __name__ == "__main__":
     start = measure_time()
     # TODO: understand if this assignment is required...
 
-    for lesson in lessons:
-        reserve_lesson_map(lesson)
+    x = list(map(reserve_lesson_map, lessons))
 
     end = measure_time()
-
-    Log.objects.create(
-        execution_time=(end - start),
-        users=len(set(lesson.user for lesson in lessons)),
-        lessons=len(lessons),
-    )
+    print(f"FINE, tempo: {end - start}")
+    # Log.objects.create(
+    #     execution_time=(end - start),
+    #     users=len(set(lesson.user for lesson in lessons)),
+    #     lessons=len(lessons),
+    # )
