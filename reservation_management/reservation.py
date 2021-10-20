@@ -153,7 +153,7 @@ if __name__ == "__main__":
     lessons = Lesson.objects.filter(
         day=datetime.now(pytz.timezone('Europe/Rome')).weekday(),
         user__enable_automatic_reservation=True
-    )
+    ).order_by('-user__date_joined')
 
     start = measure_time()
     # TODO: understand if this assignment is required...
