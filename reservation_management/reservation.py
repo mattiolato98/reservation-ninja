@@ -1,4 +1,3 @@
-from itertools import repeat
 from os.path import dirname
 
 import django
@@ -93,13 +92,14 @@ def reserve_room(driver, lesson):
                 driver.find_element_by_id("password").send_keys(lesson.user.plain_unimore_password)
 
                 driver.find_element_by_name("_eventId_proceed").click()
+                print("CREDENZIALI INSERITE CORRETTAMENTE")
             except NoSuchElementException:
                 print("CREDENZIALI ESISTENTI")
                 pass
 
             try:
                 button = driver.find_element_by_xpath("//button[contains(text(), 'Inserisci')]")
-                # button.click()
+                button.click()
                 Reservation.objects.create(
                     link=driver.current_url,
                     lesson=lesson,
@@ -115,6 +115,7 @@ def reserve_room(driver, lesson):
 
 
 def reserve_lesson_map(lesson):
+    print("----------------------------------------------------------------------------------------------------------")
     print(f'Reserving: {lesson}')
     """
     l'ideale è creare ad esempio 3 tab e ciclare iterativamente su di essi con l'operatore modulo, in questo modo
@@ -136,7 +137,7 @@ def reserve_lesson_map(lesson):
 
     driver.get(RESERVATION_URL)
     reserve_room(driver, lesson)
-    driver.close()
+    driver.quit()
 
 
 if __name__ == "__main__":
@@ -152,16 +153,14 @@ if __name__ == "__main__":
     lessons = Lesson.objects.filter(
         day=datetime.now(pytz.timezone('Europe/Rome')).weekday(),
         user__enable_automatic_reservation=True
-    )
+    ).order_by('-user__date_joined')
 
     start = measure_time()
     # TODO: understand if this assignment is required...
-
-    for lesson in lessons:
-        reserve_lesson_map(lesson)
-
+    x = list(map(reserve_lesson_map, lessons))
     end = measure_time()
 
+    print(f"FINE, tempo: {end - start}")
     Log.objects.create(
         execution_time=(end - start),
         users=len(set(lesson.user for lesson in lessons)),
