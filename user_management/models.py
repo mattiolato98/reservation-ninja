@@ -1,3 +1,5 @@
+import pytz
+
 from cryptography.fernet import Fernet
 from django.conf import settings
 from django.contrib.auth.models import AbstractUser
@@ -21,7 +23,7 @@ class PlatformUser(AbstractUser):
 
     @property
     def today_lessons(self):
-        return self.lessons.filter(day=datetime.today().weekday())
+        return self.lessons.filter(day=datetime.now(pytz.timezone('Europe/Rome')).weekday())
 
     @property
     def lessons_count(self):
