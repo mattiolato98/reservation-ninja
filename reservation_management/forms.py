@@ -60,3 +60,18 @@ class LessonForm(forms.ModelForm):
             'end_time': forms.TimeInput(attrs={'type': 'time'}, format='%H:%M'),
         }
 
+
+class LessonDeleteForm(forms.Form):
+    helper = FormHelper()
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
+        self.helper.layout = Layout(
+            Row(
+                Submit('submit', _('Delete'), css_class="btn site-btn mb-3 w-75 font-5"),
+            ),
+        )
+
+    class Meta:
+        model = Lesson
