@@ -4,7 +4,7 @@ from django.urls import reverse_lazy
 from django.utils.decorators import method_decorator
 from django.views.generic import CreateView, ListView, DetailView, UpdateView, DeleteView
 
-from reservation_management.forms import LessonForm, LessonDeleteForm
+from reservation_management.forms import LessonForm
 from reservation_management.models import Lesson, Reservation, Log
 from user_management.decorators import manager_required
 
@@ -84,6 +84,5 @@ class LessonDeleteView(LoginRequiredMixin, DeleteView):
     View to delete an existing dish.
     """
     model = Lesson
-    form_class = LessonDeleteForm
     template_name = 'reservation_management/lesson_delete.html'
     success_url = reverse_lazy('reservation_management:lesson-list')
