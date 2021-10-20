@@ -1,0 +1,13 @@
+{% extends 'reservation_management/base/lesson_form.html' %}
+{% load i18n %}
+
+{% block title %}{% translate "Delete a lesson" %}{% endblock %}
+
+{% block form_title %}{% translate "Delete a lesson" %}{% endblock %}
+
+{% block back_url %}
+    <a href="{% url 'reservation_management:lesson-list' %}" class="font-6 site-blue-text">
+        <i class="fas fa-chevron-left mr-2"></i>
+        {% translate "Cancel" %}
+    </a>
+{% endblock %}
