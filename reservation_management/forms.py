@@ -73,5 +73,3 @@ class LessonDeleteForm(forms.Form):
             ),
         )
 
-    class Meta:
-        model = Lesson
