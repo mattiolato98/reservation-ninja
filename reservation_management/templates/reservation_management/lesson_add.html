@@ -1,9 +1,14 @@
 {% extends 'reservation_management/base/lesson_form.html' %}
 {% load i18n %}
+{% load crispy_forms_tags %}
 
-{% block title %}{% translate "Add a lesson" %}{% endblock %}
+{% block title %}{{ block.super }} {% translate "Add a lesson" %}{% endblock %}
 
 {% block form_title %}{% translate "Add a lesson" %}{% endblock %}
+
+{% block form_body %}
+    {% crispy form %}
+{% endblock %}
 
 {% block back_url %}
     <a href="{% url 'reservation_management:lesson-list' %}" class="font-6 site-blue-text">
