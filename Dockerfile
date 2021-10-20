@@ -31,6 +31,9 @@ RUN wget -q -O /etc/apk/keys/sgerrand.rsa.pub https://alpine-pkgs.sgerrand.com/s
 # install Firefox
 RUN apk add firefox-esr
 
+# install vim editor
+RUN apk add vim
+
 # install GeckoDriver
 RUN wget https://github.com/mozilla/geckodriver/releases/download/v0.26.0/geckodriver-v0.26.0-linux64.tar.gz \
     && tar -zxf geckodriver-v0.26.0-linux64.tar.gz -C /usr/bin \
