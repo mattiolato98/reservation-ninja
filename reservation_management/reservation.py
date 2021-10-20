@@ -94,11 +94,12 @@ def reserve_room(driver, lesson):
 
                 driver.find_element_by_name("_eventId_proceed").click()
             except NoSuchElementException:
+                print("CREDENZIALI ESISTENTI")
                 pass
 
             try:
                 button = driver.find_element_by_xpath("//button[contains(text(), 'Inserisci')]")
-                button.click()
+                # button.click()
                 Reservation.objects.create(
                     link=driver.current_url,
                     lesson=lesson,
@@ -113,7 +114,7 @@ def reserve_room(driver, lesson):
             driver.get(building_url)
 
 
-def reserve_lesson_map(lesson, driver):
+def reserve_lesson_map(lesson):
     print(f'Reserving: {lesson}')
     """
     l'ideale è creare ad esempio 3 tab e ciclare iterativamente su di essi con l'operatore modulo, in questo modo
@@ -124,10 +125,18 @@ def reserve_lesson_map(lesson, driver):
 
     Il driver a quel punto viene creato direttamente dal main così può essere chiuso da lì.
     """
-    # driver.execute_script(f"window.open('{RESERVATION_URL}', '_blank');")
+    # Allows to run Firefox on a system with no display
+    options = Options()
+    options.headless = True
+
+    driver = webdriver.Firefox(options=options)
+
+    # Selenium configuration:
+    driver.implicitly_wait(TIME_INTERVAL)
+
     driver.get(RESERVATION_URL)
     reserve_room(driver, lesson)
-    driver.delete_all_cookies()
+    driver.close()
 
 
 if __name__ == "__main__":
@@ -145,19 +154,12 @@ if __name__ == "__main__":
         user__enable_automatic_reservation=True
     )
 
-    # Allows to run Firefox on a system with no display
-    options = Options()
-    options.headless = True
-
-    driver = webdriver.Firefox(options=options)
-
-    # Selenium configuration:
-    driver.implicitly_wait(TIME_INTERVAL)
-
     start = measure_time()
     # TODO: understand if this assignment is required...
-    dummy_var = list(map(reserve_lesson_map, lessons, repeat(driver)))
-    driver.close()
+
+    for lesson in lessons:
+        reserve_lesson_map(lesson)
+
     end = measure_time()
 
     Log.objects.create(
