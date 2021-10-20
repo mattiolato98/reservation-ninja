@@ -15,11 +15,13 @@ TIME_INTERVAL = 5
 
 
 def check_data(user):
+    print("----------------------------------------------------------------------------------------------------------")
+
     # Allows to run Firefox on a system with no display
     options = Options()
     options.headless = True
 
-    driver = webdriver.Firefox()
+    driver = webdriver.Firefox(options=options)
     driver.implicitly_wait(TIME_INTERVAL)
 
     driver.get(LOGIN_URL)
@@ -29,8 +31,9 @@ def check_data(user):
         driver.find_element_by_id("password").send_keys(user.plain_unimore_password)
 
         driver.find_element_by_name("_eventId_proceed").click()
+        print(f"{user.username} OK")
     except NoSuchElementException:
-        print("--- ERROR DURING AUTHENTICATION ---")
+        print(f"--- ERROR DURING AUTHENTICATION OF {user.username}---")
         driver.delete_all_cookies()
         driver.quit()
         return user
@@ -38,7 +41,7 @@ def check_data(user):
     try:
         driver.find_element_by_xpath("//a[contains(text(), 'Esci')]").click()
     except NoSuchElementException:
-        print("--- WRONG CREDENTIALS ---")
+        print(f"{user.username} wrong credentials")
         driver.delete_all_cookies()
         driver.quit()
         return user
