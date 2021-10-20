@@ -19,9 +19,9 @@ urlpatterns = [
     path('delete', views.UserDeleteView.as_view(), name='delete'),
     path('privacy-policy', views.PrivacyPolicyView.as_view(), name='privacy-policy'),
     path('cookie-policy', views.CookiePolicyView.as_view(), name='cookie-policy'),
-    # path(
-    #     'update-unimore-credentials',
-    #     views.UserUpdateUnimoreCredentialsView.as_view(),
-    #     name='update-unimore-credentials'
-    # ),
+    path(
+        'update-unimore-credentials',
+        views.UserUpdateUnimoreCredentialsView.as_view(),
+        name='update-unimore-credentials'
+    ),
 ]
