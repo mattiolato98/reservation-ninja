@@ -102,3 +102,35 @@ class PlatformUserCreationForm(UserCreationForm):
         widgets = {
             'unimore_password': forms.PasswordInput(),
         }
+
+
+class UserUpdateUnimoreCredentialsForm(forms.ModelForm):
+    helper = FormHelper()
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
+        self.fields['unimore_username'].widget.attrs.update({'placeholder': _('Unimore username')})
+        self.fields['unimore_password'].widget.attrs.update({'placeholder': _('Unimore password')})
+
+        self.helper.layout = Layout(
+            Row(
+                Column('unimore_username', css_class='form-group'),
+                css_class='form-row mt-3'
+            ),
+            Row(
+                Column('unimore_password', css_class='form-group'),
+                css_class='form-row mt-3'
+            )
+        )
+
+    class Meta:
+        model = get_user_model()
+        fields = ('unimore_username', 'unimore_password')
+        labels = {
+            'unimore_username': _('Unimore username'),
+            'unimore_password': _('Unimore password'),
+        }
+        widgets = {
+            'unimore_password': forms.PasswordInput(),
+        }
