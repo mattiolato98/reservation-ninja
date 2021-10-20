@@ -13,11 +13,11 @@ from django.utils.encoding import force_bytes, force_text
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from django.views.decorators.csrf import csrf_protect
 from django.views.decorators.http import require_GET
-from django.views.generic import CreateView, TemplateView, DeleteView, ListView
+from django.views.generic import CreateView, TemplateView, DeleteView, ListView, UpdateView
 from django.utils.translation import gettext_lazy as _
 
 from user_management.decorators import manager_required
-from user_management.forms import LoginForm, PlatformUserCreationForm
+from user_management.forms import LoginForm, PlatformUserCreationForm, UserUpdateUnimoreCredentialsForm
 from user_management.models import PlatformUser
 
 account_activation_token = PasswordResetTokenGenerator()
@@ -65,6 +65,16 @@ class RegistrationView(CreateView):
         self.object.save()
 
         return response
+
+
+class UserUpdateUnimoreCredentialsView(LoginRequiredMixin, UpdateView):
+    model = get_user_model()
+    form_class = UserUpdateUnimoreCredentialsForm
+    template_name = "user_management/user_update_unimore_credentials.html"
+    success_url = reverse_lazy('user_management:settings')
+
+    def get_object(self, queryset=None):
+        return self.request.user
 
 
 def user_login_by_token(request, user_id_b64=None, user_token=None):
