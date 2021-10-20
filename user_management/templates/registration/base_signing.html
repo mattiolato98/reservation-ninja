@@ -12,7 +12,10 @@
             <div id="signing-box" class="p-4 d-flex align-items-center justify-content-center">
                 <div id="signing-form">
                     <form method="POST">
-                        <h2 class="mb-5 font-7 logo-font site-color">{% block signing_title %}{% endblock %}</h2>
+                        <div class="mb-5">
+                            <h2 class="font-7 logo-font site-color mb-0">{% block signing_title %}{% endblock %}</h2>
+                            <span class="small">{% block signing_subtitle %}{% endblock %}</span>
+                        </div>
                         <div>
                             {% crispy form %}
                             <div class="d-flex mt-5 flex-column align-items-center">
