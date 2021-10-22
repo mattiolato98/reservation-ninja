@@ -421,7 +421,7 @@ msgid ""
 msgstr ""
 "\n"
 "            Dovresti aver ricevuto un link per confermare la tua email.\n"
-"            Se lo hai già fatto, puoi procedere al &nbsp;\n"
+"            Se lo hai gia' fatto, puoi procedere al &nbsp;\n"
 "            "
 
 #: user_management/templates/user_management/email_verified.html:13
