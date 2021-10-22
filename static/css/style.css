@@ -203,6 +203,12 @@ select:-webkit-autofill:focus {
     color: white !important;
 }
 
+.green-btn {
+    background-color: #69DC9E;
+    border-color: #69DC9E;
+    color: white !important;
+}
+
 .site-btn:hover {
     box-shadow: 0 .5rem 1rem rgba(0,0,0,.15)!important;
     background-color: #e64c56;
