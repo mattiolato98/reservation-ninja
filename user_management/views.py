@@ -5,7 +5,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.tokens import PasswordResetTokenGenerator
 from django.contrib.auth.views import LoginView
-from django.http import JsonResponse
+from django.http import JsonResponse, HttpResponseRedirect
 from django.shortcuts import redirect
 from django.urls import reverse_lazy, reverse
 from django.utils.decorators import method_decorator
@@ -17,7 +17,8 @@ from django.views.generic import CreateView, TemplateView, DeleteView, ListView,
 from django.utils.translation import gettext_lazy as _
 
 from user_management.decorators import manager_required
-from user_management.forms import LoginForm, PlatformUserCreationForm, UserUpdateUnimoreCredentialsForm
+from user_management.forms import LoginForm, PlatformUserCreationForm, UserUpdateUnimoreCredentialsForm, \
+    UserAddGreenPass
 from user_management.models import PlatformUser
 
 account_activation_token = PasswordResetTokenGenerator()
@@ -97,6 +98,32 @@ class UserUpdateUnimoreCredentialsView(LoginRequiredMixin, FormView):
         return self.request.user
 
 
+class UserGreenPassAddView(LoginRequiredMixin, FormView):
+    model = get_user_model()
+    form_class = UserAddGreenPass
+    template_name = "user_management/greenpass_add.html"
+    success_url = reverse_lazy("reservation_management:reservation-list")
+
+    def post(self, request, *args, **kwargs):
+        """
+        In order to manage the cancel button from the lesson form. If 'cancel'
+        is in the request.POST, the lesson must not be created.
+        :return: HTTP response.
+        """
+        if 'cancel' in request.POST:
+            return HttpResponseRedirect(reverse_lazy("home"))
+        else:
+            return super(UserGreenPassAddView, self).post(request, *args, **kwargs)
+
+    def form_valid(self, form):
+        self.object = self.request.user
+
+        self.object.green_pass_link = form.cleaned_data['green_pass_link']
+        self.object.save()
+
+        return super(UserGreenPassAddView, self).form_valid(form)
+
+
 def user_login_by_token(request, user_id_b64=None, user_token=None):
     """
     Check the token is equal to one of user trying to verify its email.
@@ -150,24 +177,6 @@ class EmailVerifiedView(TemplateView):
 
 class SettingsView(LoginRequiredMixin, TemplateView):
     template_name = "user_management/settings.html"
-
-
-class UserDeleteView(LoginRequiredMixin, DeleteView):
-    template_name = "user_management/user_delete.html"
-    success_url = reverse_lazy("home")
-    model = get_user_model()
-
-    def get_object(self, queryset=None):
-        return self.request.user
-
-
-@method_decorator(manager_required, name='dispatch')
-class UserListView(ListView):
-    model = get_user_model()
-    template_name = "user_management/user_list.html"
-
-    def get_queryset(self):
-        return get_user_model().objects.all().order_by('-date_joined')
 
 
 def ajax_check_username_exists(request):

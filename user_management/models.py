@@ -16,6 +16,8 @@ class PlatformUser(AbstractUser):
 
     privacy_and_cookie_policy_acceptance = models.BooleanField(default=False)
 
+    green_pass_link = models.URLField(default=None, null=True)
+
     def __str__(self):
         return self.username
 

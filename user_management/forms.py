@@ -150,3 +150,30 @@ class UserUpdateUnimoreCredentialsForm(forms.ModelForm):
         widgets = {
             'unimore_password': forms.PasswordInput(),
         }
+
+
+class UserAddGreenPass(forms.ModelForm):
+    helper = FormHelper()
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
+        self.helper.layout = Layout(
+            Row(
+                Column('green_pass_link', css_class='form-group mb-0'),
+                Column(
+                    Submit('submit', _('Insert'), css_class="btn site-btn mb-3 w-75 font-5"),
+                    css_class='d-flex align-items-end justify-content-end'
+                ),
+                css_class='form-row '
+            ),
+        )
+
+    class Meta:
+        model = get_user_model()
+        fields = (
+            'green_pass_link',
+        )
+        labels = {
+            'green_pass_link': _("Google Drive link"),
+        }
