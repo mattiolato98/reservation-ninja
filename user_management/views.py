@@ -98,6 +98,24 @@ class UserUpdateUnimoreCredentialsView(LoginRequiredMixin, FormView):
         return self.request.user
 
 
+class UserDeleteView(LoginRequiredMixin, DeleteView):
+    template_name = "user_management/user_delete.html"
+    success_url = reverse_lazy("home")
+    model = get_user_model()
+
+    def get_object(self, queryset=None):
+        return self.request.user
+
+
+@method_decorator(manager_required, name='dispatch')
+class UserListView(ListView):
+    model = get_user_model()
+    template_name = "user_management/user_list.html"
+
+    def get_queryset(self):
+        return get_user_model().objects.all().order_by('-date_joined')
+
+
 class UserGreenPassAddView(LoginRequiredMixin, FormView):
     model = get_user_model()
     form_class = UserAddGreenPass
