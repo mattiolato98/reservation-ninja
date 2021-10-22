@@ -13,6 +13,7 @@ import os
 import dj_database_url
 
 from .email_settings import *
+from .pwa_settings import *
 from pathlib import Path
 
 from django.core.management.utils import get_random_secret_key
@@ -50,6 +51,7 @@ INSTALLED_APPS = [
 
     # 3d party
     "crispy_forms",
+    "pwa",
 ]
 
 if ADMIN_ENABLED:
