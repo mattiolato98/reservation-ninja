@@ -430,7 +430,7 @@ msgstr "Email verificata con successo"
 
 #: user_management/templates/user_management/email_verified.html:21
 msgid "Your email has been successfully verified."
-msgstr "La tua email è stata verificata con successo"
+msgstr "La tua email e' stata verificata con successo"
 
 #: user_management/templates/user_management/email_verified.html:24
 msgid "Join"
