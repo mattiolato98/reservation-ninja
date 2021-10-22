@@ -16,6 +16,7 @@ from django.views.decorators.http import require_GET
 from django.views.generic import CreateView, TemplateView, DeleteView, ListView, UpdateView, FormView
 from django.utils.translation import gettext_lazy as _
 
+from reservation_tool_base_folder.decorators import not_authenticated_only
 from user_management.decorators import manager_required
 from user_management.forms import LoginForm, PlatformUserCreationForm, UserUpdateUnimoreCredentialsForm, \
     UserAddGreenPass
@@ -24,11 +25,13 @@ from user_management.models import PlatformUser
 account_activation_token = PasswordResetTokenGenerator()
 
 
+@method_decorator(not_authenticated_only, name='dispatch')
 class LoginUserView(LoginView):
     form_class = LoginForm
     template_name = 'registration/login.html'
 
 
+@method_decorator(not_authenticated_only, name='dispatch')
 class RegistrationView(CreateView):
     form_class = PlatformUserCreationForm
     template_name = 'registration/registration.html'
