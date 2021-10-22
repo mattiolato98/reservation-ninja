@@ -203,12 +203,6 @@ select:-webkit-autofill:focus {
     color: white !important;
 }
 
-.green-btn {
-    background-color: #69DC9E;
-    border-color: #69DC9E;
-    color: white !important;
-}
-
 .site-btn:hover {
     box-shadow: 0 .5rem 1rem rgba(0,0,0,.15)!important;
     background-color: #e64c56;
@@ -219,6 +213,25 @@ select:-webkit-autofill:focus {
 .site-btn:active {
     background-color: #f7606a !important;
     border-color: #f7606a !important;
+    color: white;
+}
+
+.green-btn {
+    background-color: #69DC9E;
+    border-color: #69DC9E;
+    color: white !important;
+}
+
+.green-btn:hover {
+    box-shadow: 0 .5rem 1rem rgba(0,0,0,.15)!important;
+    background-color: #5cc58c;
+    border-color: #5cc58c;
+    color: white;
+}
+
+.green-btn:active {
+    background-color: #7ceaae !important;
+    border-color: #7ceaae !important;
     color: white;
 }
 
