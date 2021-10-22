@@ -135,6 +135,14 @@ h5 {
     color: #FF5964 !important;
 }
 
+.green-color {
+    color: #69DC9E !important;
+}
+
+.spinner-border {
+    color: #69DC9E;
+}
+
 nav .logo-font {
     font-size: 40px;
 }
