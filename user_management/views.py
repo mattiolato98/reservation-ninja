@@ -12,11 +12,12 @@ from django.utils.decorators import method_decorator
 from django.utils.encoding import force_bytes, force_text
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from django.views.decorators.csrf import csrf_protect
-from django.views.decorators.http import require_GET
+from django.views.decorators.http import require_GET, require_POST
 from django.views.generic import CreateView, TemplateView, DeleteView, ListView, UpdateView, FormView
 from django.utils.translation import gettext_lazy as _
 
 from reservation_tool_base_folder.decorators import not_authenticated_only
+from user_management.check_unimore_credentials import check_unimore_credentials
 from user_management.decorators import manager_required
 from user_management.forms import LoginForm, PlatformUserCreationForm, UserUpdateUnimoreCredentialsForm, \
     UserAddGreenPass
@@ -221,3 +222,14 @@ def ajax_check_username_is_correct(request):
     if request.GET.get('username') == request.user.username:
         return JsonResponse({'is_correct': True})
     return JsonResponse({'is_correct': False})
+
+
+@login_required
+@require_POST
+@csrf_protect
+def ajax_check_unimore_credentials(request):
+    if not check_unimore_credentials(
+            request.POST.get('username'), request.POST.get('password')
+    ):
+        return JsonResponse({'is_valid': False})
+    return JsonResponse({'is_valid': True})
