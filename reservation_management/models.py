@@ -1,7 +1,6 @@
 from django.contrib.auth import get_user_model
 from django.core.exceptions import ValidationError
 from django.db import models
-from django.db.models import Q, F
 from django.utils.translation import gettext_lazy as _
 
 
@@ -90,7 +89,6 @@ class Log(models.Model):
     @property
     def average_user_execution_time(self):
         return self.execution_time / self.users if self.users > 0 else 0
-
 
     @property
     def average_lesson_execution_time(self):
