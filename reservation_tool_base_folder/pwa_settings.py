@@ -1,6 +1,6 @@
 PWA_APP_NAME = 'Reservation Ninja'
 PWA_APP_DESCRIPTION = "Reservation Ninja"
-PWA_APP_THEME_COLOR = '#ff5964'
+PWA_APP_THEME_COLOR = '#36736f'
 PWA_APP_BACKGROUND_COLOR = '#ffffff'
 PWA_APP_DISPLAY = 'standalone'
 PWA_APP_SCOPE = '/'
