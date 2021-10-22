@@ -133,7 +133,7 @@ class UserUpdateUnimoreCredentialsForm(forms.ModelForm):
             ),
             Row(
                 Column(
-                    Submit('submit', _('Update'), css_class="btn site-btn w-100 font-5"),
+                    Submit('submit', _('Update'), css_class="btn site-btn w-100 font-5 d-none", disabled="disabled"),
                     css_class='form-group d-flex justify-content-center align-items-end'
                 ),
                 css_class='form-row'
