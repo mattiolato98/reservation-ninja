@@ -11,6 +11,7 @@ class PlatformUser(AbstractUser):
 
     unimore_username = models.CharField(max_length=500)
     unimore_password = models.CharField(max_length=500)
+    wrong_unimore_credentials = models.BooleanField(default=False)
 
     enable_automatic_reservation = models.BooleanField(default=True)
 
