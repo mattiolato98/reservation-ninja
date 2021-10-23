@@ -20,7 +20,7 @@ from reservation_tool_base_folder.decorators import not_authenticated_only
 from user_management.check_unimore_credentials import check_unimore_credentials
 from user_management.decorators import manager_required
 from user_management.forms import LoginForm, PlatformUserCreationForm, UserUpdateUnimoreCredentialsForm, \
-    UserAddGreenPass
+    UserAddGreenPass, UserGeneralSettings
 from user_management.models import PlatformUser
 
 account_activation_token = PasswordResetTokenGenerator()
@@ -70,6 +70,16 @@ class RegistrationView(CreateView):
         self.object.save()
 
         return response
+
+
+class UserGeneralSettingsView(LoginRequiredMixin, UpdateView):
+    model = get_user_model()
+    form_class = UserGeneralSettings
+    template_name = 'user_management/user_general_settings.html'
+    success_url = reverse_lazy('user_management:settings')
+
+    def get_object(self, queryset=None):
+        return self.request.user
 
 
 class UserUpdateUnimoreCredentialsView(LoginRequiredMixin, FormView):

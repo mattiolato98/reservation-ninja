@@ -26,5 +26,6 @@ urlpatterns = [
         name='update-unimore-credentials'
     ),
     path('greenpass-add', views.UserGreenPassAddView.as_view(), name='green-pass-add'),
+    path('general-settings', views.UserGeneralSettingsView.as_view(), name='general-settings'),
 
 ]
