@@ -26,10 +26,11 @@
             success: function(data) {
                 $('#user-feedback-box').html(
                     '<i class="fas fa-check text-success mr-3"></i>' +
-                    '<span class="text-success font-6">{% translate "Thanks for the feedback!" %}</span>'
+                    '<span class="text-success font-6">{% translate "Thanks for the feedback!" %}</span><br>' +
+                    '<span class="font-6 font-italic">Arigatō</span>'
                 );
                 window.setTimeout(function() {
-                    $('#user-feedback-box').remove();
+                    $('#user-feedback-box').parent().remove();
                 }, 3000);
             }
         });
