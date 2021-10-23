@@ -93,3 +93,9 @@ class Log(models.Model):
     @property
     def average_lesson_execution_time(self):
         return self.execution_time / self.lessons if self.lessons > 0 else 0
+
+
+class Feedback(models.Model):
+    user = models.ForeignKey(get_user_model(), on_delete=models.SET_NULL, related_name='feedbacks')
+    ok = models.BooleanField()
+    date = models.DateField(auto_now_add=True)
