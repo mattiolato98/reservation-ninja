@@ -185,6 +185,9 @@ class UserGeneralSettings(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
+        self.fields['enable_automatic_reservation'].help_text = \
+            _('Disable automatic reservations if you don\'t need them. You\'ll be able to enable them again later.')
+
         self.helper.layout = Layout(
             Row(
                 Column('enable_automatic_reservation', css_class='form-group mb-0 font-6'),
@@ -192,7 +195,7 @@ class UserGeneralSettings(forms.ModelForm):
             ),
             Row(
                 Column(
-                    Submit('submit', _('Save changes'), css_class="btn site-btn mb-3 w-75 font-5"),
+                    Submit('submit', _('Save changes'), css_class="btn site-btn mb-3 w-100 font-5"),
                 ),
                 css_class='form-row mt-5'
             )
