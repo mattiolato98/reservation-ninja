@@ -101,10 +101,11 @@
             },
             dataType: 'json',
             beforeSend: function() {
-                button.hide();
-                resultDiv.html(
-                    '<div class="spinner-border mr-3" role="status"></div>' +
-                    '<span class="green-color font-7">{% translate "Checking ..." %}</span>'
+                resultDiv.html('');
+                button.attr("disabled", true);
+                button.html(
+                    '<div class="spinner-grow spinner-grow-sm mr-3" role="status"></div>' +
+                    '<span>{% translate "Checking ..." %}</span>'
                 );
             },
             success: function(data) {
@@ -117,9 +118,11 @@
                             '</span>' +
                         '</div>'
                     );
-                    button.show();
-                    window.setTimeout(function() {$('#error-msg').remove(); }, 3000);
+                    button.html('{% translate "Update" %}')
+                    button.attr("disabled", false);
+                    window.setTimeout(function() {$('#error-msg').remove(); }, 2500);
                 } else {
+                    button.hide();
                     resultDiv.html(
                         '<i class="fas fa-check text-success"></i>&nbsp;' +
                         '<span class="text-success font-7">{% translate "Verified" %}</span>'
