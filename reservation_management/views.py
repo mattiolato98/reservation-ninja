@@ -66,6 +66,16 @@ class LessonUpdateView(UpdateView):
         return reverse_lazy("reservation_management:lesson-detail", kwargs={'pk': self.kwargs['pk']})
 
 
+@method_decorator((login_required, lesson_owner_only), name='dispatch')
+class LessonDeleteView(DeleteView):
+    """
+    View to delete an existing dish.
+    """
+    model = Lesson
+    template_name = 'reservation_management/lesson_delete.html'
+    success_url = reverse_lazy('reservation_management:lesson-list')
+
+
 class ReservationListView(LoginRequiredMixin, ListView):
     model = Reservation
     template_name = "reservation_management/reservation_list.html"
@@ -81,13 +91,3 @@ class LogListView(ListView):
 
     def get_queryset(self):
         return Log.objects.all().order_by('-date')
-
-
-@method_decorator((login_required, lesson_owner_only), name='dispatch')
-class LessonDeleteView(DeleteView):
-    """
-    View to delete an existing dish.
-    """
-    model = Lesson
-    template_name = 'reservation_management/lesson_delete.html'
-    success_url = reverse_lazy('reservation_management:lesson-list')

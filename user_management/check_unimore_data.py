@@ -56,7 +56,8 @@ if __name__ == "__main__":
     django.setup()
 
     users = get_user_model().objects.filter(
-        enable_automatic_reservation=True
+        enable_automatic_reservation=True,
+        credentials_ok=True,
     )
 
     wrong_users = list(set(map(check_data, users)))

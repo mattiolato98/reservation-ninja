@@ -78,8 +78,11 @@ h5 {
     color: #0075A2 !important;
 }
 
+.site-green-text {
+    color: #69DC9E !important;
+}
+
 .site-yellow-text {
-    font-weight: 700;
     color: #F1A208 !important;
 }
 
@@ -213,6 +216,25 @@ select:-webkit-autofill:focus {
 .site-btn:active {
     background-color: #f7606a !important;
     border-color: #f7606a !important;
+    color: white;
+}
+
+.green-btn {
+    background-color: #69DC9E;
+    border-color: #69DC9E;
+    color: white !important;
+}
+
+.green-btn:hover {
+    box-shadow: 0 .5rem 1rem rgba(0,0,0,.15)!important;
+    background-color: #5cc58c;
+    border-color: #5cc58c;
+    color: white;
+}
+
+.green-btn:active {
+    background-color: #7ceaae !important;
+    border-color: #7ceaae !important;
     color: white;
 }
 

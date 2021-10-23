@@ -11,6 +11,29 @@
     {% translate "Your reservations" %}
 {% endblock %}
 
+{% block list_button %}
+    {% if user.green_pass_link is not None %}
+        <div class="row justify-content-center">
+            <div class="col-xl-3 col-lg-5 col-md-9 col-12 d-flex justify-content-end">
+                <a href="{{ user.green_pass_link }}" target="_blank" class="btn green-btn font-5">
+                    <i class="fas fa-passport mr-2"></i>
+                    {% translate "Green Pass" %}
+                </a>
+            </div>
+        </div>
+    {% else %}
+        <div class="row justify-content-center">
+            <div class="col-xl-3 col-lg-5 col-md-9 col-12 d-flex justify-content-end">
+                <a href="{% url 'user_management:green-pass-add' %}" class="btn green-btn font-5">
+                    <i class="fas fa-passport mr-2"></i>
+                    {% translate "Add your Green Pass" %}
+                </a>
+            </div>
+        </div>
+    {% endif %}
+
+{% endblock %}
+
 {% block list_body %}
     {% for reservation in reservation_list %}
         <a href="{{ reservation.link }}" target="_blank"

@@ -33,7 +33,7 @@ with open("crypto.txt") as f:
 DEBUG = int(os.environ.get('DEBUG', default=0))
 ADMIN_ENABLED = int(os.environ.get('ADMIN_ENABLED', default=0))
 
-ALLOWED_HOSTS = ['testing-ninja.herokuapp.com']
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'testing-ninja.herokuapp.com']
 
 
 # Application definition
@@ -131,7 +131,7 @@ AUTH_PASSWORD_VALIDATORS = [
 LANGUAGE_CODE = 'en-us'
 LOCALE_PATHS = (os.path.join(BASE_DIR, 'locale'), )
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Europe/Rome'
 
 USE_I18N = True
 

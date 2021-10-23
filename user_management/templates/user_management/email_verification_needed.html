@@ -4,14 +4,20 @@
 {% block title %}{{ block.super }} {% translate "Email confirmation" %}{% endblock %}
 
 {% block content %}
-    <div class="p-4">
-        <h3 class="font-7 d-flex justify-content-center logo-font site-color">{% translate "Check your email inbox." %}</h3>
-        <h5 class="font-7 text-muted d-flex justify-content-center logo-font">
-            {% blocktranslate %}
-            You should have received a link to confirm your email.
-            If you have already confirmed it, you can &nbsp;
-            {% endblocktranslate %}
-            <a class="site-blue-text font-7" href="{% url 'user_management:login' %}">login</a>.
-        </h5>
+    <div class="row justify-content-center p-4">
+        <div class="col-md-9 col-12">
+            <h3 class="font-7 logo-font text-center site-color">{% translate "Check your email inbox." %}</h3>
+            <h5 class="font-7 text-muted text-center logo-font">
+                {% blocktranslate %}
+                    You should have received a link to confirm your email.
+                    If you have already confirmed it, you can login.
+                {% endblocktranslate %}
+            </h5>
+        </div>
+    </div>
+    <div class="row justify-content-center mt-5">
+        <div class="col-xl-3 col-lg-5 col-md-9 col-12 d-flex justify-content-center ">
+            <a class="btn site-btn font-7 w-50" href="{% url 'user_management:login' %}">Login</a>
+        </div>
     </div>
 {% endblock %}

@@ -15,6 +15,7 @@ urlpatterns = [
     path('email/verified', views.EmailVerifiedView.as_view(), name='email-verified'),
     path('verify/<str:user_id_b64>/<str:user_token>', views.verify_user_email, name='verify-user-email'),
     path('ajax-check-username-is-correct', views.ajax_check_username_is_correct, name='ajax-check-username-is-correct'),
+    path('ajax-check-unimore-credentials', views.ajax_check_unimore_credentials, name='ajax-check-unimore-credentials'),
     path('settings', views.SettingsView.as_view(), name='settings'),
     path('delete', views.UserDeleteView.as_view(), name='delete'),
     path('privacy-policy', views.PrivacyPolicyView.as_view(), name='privacy-policy'),
@@ -24,4 +25,6 @@ urlpatterns = [
         views.UserUpdateUnimoreCredentialsView.as_view(),
         name='update-unimore-credentials'
     ),
+    path('greenpass-add', views.UserGreenPassAddView.as_view(), name='green-pass-add'),
+
 ]

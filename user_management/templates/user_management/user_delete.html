@@ -12,12 +12,18 @@
         </div>
         <div class="row justify-content-center mt-5">
             <div class="col-xl-3 col-lg-5 col-md-9 col-12">
-                <p>
-                    <span class="font-6">
-                        {% translate "Are you sure you want to delete your account?" %}
-                    </span><br>
-                    <span>{% translate "All your data will be destroyed and you won't be able to retrieve it." %}</span>
-                </p>
+                <div class="alert alert-danger" role="alert">
+                    <h5 class="alert-heading">{% translate "Warning" %} <i class="fas fa-exclamation-triangle"></i></h5>
+                    <p>
+                        <span class="font-6">
+                            {% translate "Are you sure you want to delete your account?" %}
+                        </span>
+                    </p>
+                    <hr>
+                    <p class="mb-0">
+                        {% translate "All your data will be destroyed and you won't be able to retrieve it." %}
+                    </p>
+                </div>
             </div>
         </div>
         <div class="row justify-content-center">
@@ -25,7 +31,7 @@
                 <form method="POST" class="d-flex flex-column"> {% csrf_token %}
                     <label>
                         <span class="small">
-                            {% translate "For confirmation, enter your username" %}
+                            {% translate "For confirmation, enter your username:" %}
                         </span>
                         <span class="small text-muted font-6">{{ user.username }}</span>
                         <input id="username-check" type="text" class="form-control">
