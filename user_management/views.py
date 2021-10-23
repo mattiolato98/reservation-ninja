@@ -94,6 +94,8 @@ class UserUpdateUnimoreCredentialsView(LoginRequiredMixin, FormView):
         self.object.unimore_username = encryptor.encrypt(username.encode()).decode()
         self.object.unimore_password = encryptor.encrypt(password.encode()).decode()
 
+        self.object.credentials_ok = True  # Credentials has been verified with Ajax before submit
+
         self.object.save()
 
         return super(UserUpdateUnimoreCredentialsView, self).form_valid(form)
