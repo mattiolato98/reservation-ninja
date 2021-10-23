@@ -11,4 +11,7 @@
     <span>Active: {{ item.is_active }}</span>
     <span>Lessons: {{ item.lessons_count }}</span>
     <span>Today lessons: {{ item.today_lessons.count }}</span>
+    {% if not item.credentials_ok %}
+        <span class="site-color font-6 mt-3"> Wrong credentials</span>
+    {% endif %}
 {% endblock %}
