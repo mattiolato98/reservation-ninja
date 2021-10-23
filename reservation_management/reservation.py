@@ -161,9 +161,14 @@ if __name__ == "__main__":
     x = list(map(reserve_lesson_map, lessons))
     end = measure_time()
 
+    users = list(set(lesson.user for lesson in lessons))
+    for user in users:
+        user.feedback = False
+        user.save()
+
     print(f"FINE, tempo: {end - start}")
     Log.objects.create(
         execution_time=(end - start),
-        users=len(set(lesson.user for lesson in lessons)),
+        users=len(users),
         lessons=len(lessons),
     )
