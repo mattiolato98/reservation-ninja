@@ -30,6 +30,30 @@
                 <h2 class="logo-font site-color">{% block list_title %}{% endblock %}</h2>
             </div>
         </div>
+        {% if not user.credentials_ok %}
+            <div class="row justify-content-center my-3">
+                <div class="col-xl-3 col-lg-5 col-md-9 col-12">
+                    <div class="alert alert-danger" role="alert">
+                        <h5 class="alert-heading">
+                            {% translate "Warning" %} <i class="fas fa-exclamation-triangle"></i>
+                        </h5>
+                        <p>
+                        <span class="font-6">
+                            {% translate "Your Unimore credentials are wrong" %}
+                        </span>
+                        </p>
+                        <hr>
+                        <p class="mb-0">
+                            {% translate "Please update them or we can't reserve your classrooms." %}
+                            <a href="{% url 'user_management:update-unimore-credentials' %}"
+                               class="site-link site-blue-text font-6">
+                                {% translate "Update" %}
+                            </a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        {% endif %}
         {% block list_button %}
         {% endblock %}
         <div class="row justify-content-center">
