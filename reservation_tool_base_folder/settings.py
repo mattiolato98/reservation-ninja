@@ -34,7 +34,8 @@ DEBUG = int(os.environ.get('DEBUG', default=0))
 ADMIN_ENABLED = int(os.environ.get('ADMIN_ENABLED', default=0))
 
 ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'reservation-ninja.herokuapp.com']
-
+CORS_ORIGIN_ALLOW_ALL = False
+CORS_ORIGIN_WHITELIST = ['testing-ninja.herokuapp.com']
 
 # Application definition
 
@@ -52,6 +53,7 @@ INSTALLED_APPS = [
     # 3d party
     "crispy_forms",
     "pwa",
+    "corsheaders",
 ]
 
 if ADMIN_ENABLED:
@@ -67,6 +69,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
 ]
 
 ROOT_URLCONF = 'reservation_tool_base_folder.urls'
