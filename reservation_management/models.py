@@ -99,3 +99,6 @@ class Feedback(models.Model):
     user = models.ForeignKey(get_user_model(), on_delete=models.SET_NULL, related_name='feedbacks', null=True)
     ok = models.BooleanField()
     date = models.DateField(auto_now_add=True)
+
+    def __str__(self):
+        return f'{self.user.username} {self.ok}'
