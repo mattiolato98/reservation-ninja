@@ -42,11 +42,15 @@
                             {% translate "Your Unimore credentials are wrong" %}
                         </span>
                         </p>
+                        <p>
+                            <span class="font-6">猿も木から落ちる - Saru mo ki kara ochiru</span><br>
+                            <span class="font-italic">{% translate "Even monkeys fall from trees" %}</span>
+                        </p>
                         <hr>
                         <p class="mb-0">
                             {% translate "Please update them or we can't reserve your classrooms." %}
                             <a href="{% url 'user_management:update-unimore-credentials' %}"
-                               class="site-link site-blue-text font-6">
+                               class="site-link font-6">
                                 {% translate "Update" %}
                             </a>
                         </p>
