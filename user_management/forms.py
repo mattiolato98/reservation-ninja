@@ -177,3 +177,32 @@ class UserAddGreenPass(forms.ModelForm):
         labels = {
             'green_pass_link': _("Google Drive link"),
         }
+
+
+class UserGeneralSettings(forms.ModelForm):
+    helper = FormHelper()
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
+        self.helper.layout = Layout(
+            Row(
+                Column('enable_automatic_reservation', css_class='form-group mb-0 font-6'),
+                css_class='form-row'
+            ),
+            Row(
+                Column(
+                    Submit('submit', _('Save changes'), css_class="btn site-btn mb-3 w-75 font-5"),
+                ),
+                css_class='form-row mt-5'
+            )
+        )
+
+    class Meta:
+        model = get_user_model()
+        fields = (
+            'enable_automatic_reservation',
+        )
+        labels = {
+            'enable_automatic_reservation': _('Enable automatic reservations'),
+        }
