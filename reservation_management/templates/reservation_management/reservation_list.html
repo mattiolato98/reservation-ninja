@@ -125,11 +125,11 @@
     <script type="text/javascript">
         $(function () {
             $("#feedback-response-yes").on('click', function () {
-                send_feedback(true, $(this));
+                send_feedback(1, $(this));
             });
 
             $("#feedback-response-no").on('click', function () {
-                send_feedback(false, $(this));
+                send_feedback(0, $(this));
             });
 
             {% if user.whats_new %}
