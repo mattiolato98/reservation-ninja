@@ -35,4 +35,18 @@
             }
         });
     }
+
+     $("#whats-new-confirm-button").on('click', function () {
+        /**
+         * Save user Feedback.
+         */
+        $.ajax({
+            type: 'POST',
+            url: "{% url 'reservation_management:whats-new-confirm' %}",
+            headers:{
+                "X-CSRFToken": '{{ csrf_token }}'
+            },
+            dataType: 'json',
+        });
+    });
 </script>
