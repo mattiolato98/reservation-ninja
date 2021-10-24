@@ -95,6 +95,15 @@ class LogListView(ListView):
         return Log.objects.all().order_by('-date')
 
 
+@method_decorator(manager_required, name='dispatch')
+class FeedbackListView(ListView):
+    model = Feedback
+    template_name = "reservation_management/feedback_list.html"
+
+    def get_queryset(self):
+        return Feedback.objects.all().order_by('-date')
+
+
 @login_required
 @require_POST
 @csrf_protect
