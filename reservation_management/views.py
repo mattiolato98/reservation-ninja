@@ -121,7 +121,7 @@ def ajax_send_feedback(request):
 
     Feedback.objects.create(
         user=user,
-        ok=bool(request.POST.get('response_ok')),
+        ok=int(request.POST.get('response_ok')) == 1,
     )
 
     user.feedback = True
