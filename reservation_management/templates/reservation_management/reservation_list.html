@@ -132,7 +132,9 @@
                 send_feedback(false, $(this));
             });
 
-            $('#whats-new-modal').modal('show');
+            {% if user.whats_new %}
+                $('#whats-new-modal').modal('show');
+            {% endif %}
         });
     </script>
     {% include 'reservation_management/reservation_ajax.html' %}
