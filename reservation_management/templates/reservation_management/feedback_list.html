@@ -1,0 +1,10 @@
+{% extends 'base_admin.html' %}
+
+{% block title %}Feedbacks{% endblock %}
+{% block page_title %}Feedback{% endblock %}
+
+{% block items %}
+    <span class="font-6">{{ item.date }}</span>
+    <span>{{ item.ok }}</span>
+    <span>{{ item.user.username }}</span>
+{% endblock %}
