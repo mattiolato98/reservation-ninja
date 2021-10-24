@@ -11,7 +11,17 @@
     <span>Active: {{ item.is_active }}</span>
     <span>Lessons: {{ item.lessons_count }}</span>
     <span>Today lessons: {{ item.today_lessons.count }}</span>
+    {% if item.whats_new %}
+        <span class="text-danger font-6">Unseen What's new</span>
+    {% else %}
+        <span class="text-success font-6">Seen What's new</span>
+    {% endif %}
+    {% if item.green_pass_link %}
+        <span class="text-success font-6">Green pass added</span>
+    {% else %}
+        <span class="text-danger font-6">Green pass not added</span>
+    {% endif %}
     {% if not item.credentials_ok %}
-        <span class="site-color font-6 mt-3"> Wrong credentials</span>
+        <span class="text-danger font-6 mt-3"> Wrong credentials</span>
     {% endif %}
 {% endblock %}
