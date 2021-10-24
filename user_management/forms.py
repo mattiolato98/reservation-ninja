@@ -207,5 +207,5 @@ class UserGeneralSettings(forms.ModelForm):
             'enable_automatic_reservation',
         )
         labels = {
-            'enable_automatic_reservation': _('Enable automatic reservations'),
+            'enable_automatic_reservation': _('Automatic reservations'),
         }
