@@ -1,3 +1,5 @@
+from collections import defaultdict
+
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import HttpResponseRedirect, JsonResponse
@@ -101,7 +103,14 @@ class FeedbackListView(ListView):
     template_name = "reservation_management/feedback_list.html"
 
     def get_queryset(self):
-        return Feedback.objects.all().order_by('-date')
+        feedbacks = Feedback.objects.all().order_by('-date', 'user')
+        feedbacks_grouped_by_date = defaultdict(list)
+
+        for feedback in feedbacks:
+            feedbacks_grouped_by_date[feedback.date].append(feedback)
+
+        # Dict cast is needed, because template see defaultdict as empty
+        return dict(feedbacks_grouped_by_date)
 
 
 @login_required
