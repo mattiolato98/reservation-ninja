@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-10-24 17:27+0200\n"
+"POT-Creation-Date: 2021-10-24 19:06+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -190,12 +190,12 @@ msgstr "Grazie per il feedback!"
 
 #: reservation_management/templates/reservation_management/reservation_list.html:20
 msgid "Green Pass"
-msgstr "TODO"
+msgstr "Certificato Verde"
 
 #: reservation_management/templates/reservation_management/reservation_list.html:29
 #: user_management/templates/user_management/greenpass_add.html:7
 msgid "Add your Green Pass"
-msgstr "TODO"
+msgstr "Aggiungi il to Certificato Verde"
 
 #: reservation_management/templates/reservation_management/reservation_list.html:62
 msgid "No reservation made, insert your lessons!"
@@ -269,10 +269,6 @@ msgstr "Informativa sulla privacy"
 #: user_management/templates/user_management/settings.html:43
 msgid "Back home"
 msgstr "Torna alla home"
-
-#: templates/home.html:24
-msgid "Welcome to Reservation Ninja "
-msgstr "Benvenuto in Reservation Ninja"
 
 #: templates/home.html:32
 msgid ""
@@ -385,15 +381,17 @@ msgstr "Disabilita prenotazioni automatiche"
 msgid ""
 "Don't need classroom reservations for tomorrow's lessons? Disable "
 "reservations from settings"
-msgstr "Non hai bisogno delle prenotazioni per domani? Disabilitale dalle impostazioni"
+msgstr ""
+"Non hai bisogno delle prenotazioni per domani? Disabilitale dalle "
+"impostazioni"
 
 #: templates/whats_new_modal.html:29
 msgid "Add your green pass"
-msgstr "TODO"
+msgstr "Aggiungi il tuo Certificato Verde"
 
 #: templates/whats_new_modal.html:31
 msgid "You can add the Google Drive link to your green pass"
-msgstr "TODO"
+msgstr "Puoi aggiungere il link Google Drive al tuo Certificato Verde"
 
 #: templates/whats_new_modal.html:38
 msgid "Reservations feedback"
@@ -402,7 +400,9 @@ msgstr "Feedback sulle prenotazioni"
 #: templates/whats_new_modal.html:40
 msgid ""
 "You can let a daily feedback about reservations and help us improve the tool"
-msgstr "Puoi lasciare un feedback giornaliero sulle tue prenotazioni e aiutarci a migliorare lo strumento"
+msgstr ""
+"Puoi lasciare un feedback giornaliero sulle tue prenotazioni e aiutarci a "
+"migliorare lo strumento"
 
 #: templates/whats_new_modal.html:47
 msgid "Great, thanks!"
@@ -481,13 +481,15 @@ msgstr "Devi accettare le politiche sul trattamento dei dati."
 
 #: user_management/forms.py:178
 msgid "Google Drive link"
-msgstr "TODO"
+msgstr "Link a Google Drive"
 
 #: user_management/forms.py:189
 msgid ""
 "Disable automatic reservations if you don't need them. You'll be able to "
 "enable them again later."
-msgstr "Disabilita le prenotazioni automatiche se non ne hai bisogno. Potrai sempre abilitarle di nuovo successivamente."
+msgstr ""
+"Disabilita le prenotazioni automatiche se non ne hai bisogno. Potrai sempre "
+"abilitarle di nuovo successivamente."
 
 #: user_management/forms.py:198
 msgid "Save changes"
@@ -500,7 +502,7 @@ msgstr "Prenotazioni automatiche"
 #: user_management/templates/registration/login.html:6
 #: user_management/templates/user_management/email_verified.html:19
 msgid "Welcome"
-msgstr "Benvenuto"
+msgstr "Accedi"
 
 #: user_management/templates/registration/login.html:10
 msgid "Don't have an account yet? Sign up"
@@ -553,11 +555,11 @@ msgstr "Entra"
 
 #: user_management/templates/user_management/greenpass_add.html:5
 msgid "Add Green Pass"
-msgstr "TODO"
+msgstr "Aggiungi il Certificato Verde"
 
 #: user_management/templates/user_management/greenpass_add.html:14
 msgid "Make sure your drive link is accessible only by you."
-msgstr "TODO"
+msgstr "Assicurati che il link a drive sia accessibile solamente da te."
 
 #: user_management/templates/user_management/greenpass_add.html:19
 msgid ""
@@ -568,7 +570,14 @@ msgid ""
 "<strong>only</strong>\n"
 "                authorized user to access the file.\n"
 "            "
-msgstr "TODO"
+msgstr ""
+"\n"
+"                Le <strong>impostazioni di condivisione</strong> del tuo "
+"file su Google Drive devono essere\n"
+"                <strong>\"Con limitazioni\"</strong> e tu dovresti essere "
+"l'<strong>unico</strong>\n"
+"                utente autorizzato ad accedere il file.\n"
+"            "
 
 #: user_management/templates/user_management/settings.html:4
 #: user_management/templates/user_management/settings.html:10
@@ -680,3 +689,6 @@ msgstr ""
 #: user_management/views.py:186
 msgid "Authentication error"
 msgstr "Errore di autenticazione"
+
+#~ msgid "Welcome to Reservation Ninja "
+#~ msgstr "Benvenuto in Reservation Ninja"
