@@ -5,4 +5,7 @@
     .site-box {
         margin-top: 35px;
     }
+    .modal {
+        width: 100%;
+    }
 }
