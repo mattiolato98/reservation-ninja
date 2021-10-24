@@ -1,7 +1,6 @@
 from django.contrib.auth import get_user_model
 from django.core.exceptions import ValidationError
 from django.db import models
-from django.db.models import Q, F
 from django.utils.translation import gettext_lazy as _
 
 
@@ -91,7 +90,15 @@ class Log(models.Model):
     def average_user_execution_time(self):
         return self.execution_time / self.users if self.users > 0 else 0
 
-
     @property
     def average_lesson_execution_time(self):
         return self.execution_time / self.lessons if self.lessons > 0 else 0
+
+
+class Feedback(models.Model):
+    user = models.ForeignKey(get_user_model(), on_delete=models.SET_NULL, related_name='feedbacks', null=True)
+    ok = models.BooleanField()
+    date = models.DateField(auto_now_add=True)
+
+    def __str__(self):
+        return f'{self.user.username} {self.ok}'

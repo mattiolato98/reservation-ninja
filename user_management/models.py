@@ -13,10 +13,15 @@ class PlatformUser(AbstractUser):
 
     unimore_username = models.CharField(max_length=500)
     unimore_password = models.CharField(max_length=500)
+    credentials_ok = models.BooleanField(default=True)
 
     enable_automatic_reservation = models.BooleanField(default=True)
+    feedback = models.BooleanField(default=True)
+    whats_new = models.BooleanField(default=True)
 
     privacy_and_cookie_policy_acceptance = models.BooleanField(default=False)
+
+    green_pass_link = models.URLField(blank=True, null=True)
 
     def __str__(self):
         return self.username

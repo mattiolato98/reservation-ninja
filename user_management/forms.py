@@ -133,7 +133,7 @@ class UserUpdateUnimoreCredentialsForm(forms.ModelForm):
             ),
             Row(
                 Column(
-                    Submit('submit', _('Update'), css_class="btn site-btn w-100 font-5"),
+                    Submit('submit', _('Update'), css_class="btn site-btn w-100 font-5 d-none", disabled="disabled"),
                     css_class='form-group d-flex justify-content-center align-items-end'
                 ),
                 css_class='form-row'
@@ -149,4 +149,63 @@ class UserUpdateUnimoreCredentialsForm(forms.ModelForm):
         }
         widgets = {
             'unimore_password': forms.PasswordInput(),
+        }
+
+
+class UserAddGreenPass(forms.ModelForm):
+    helper = FormHelper()
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
+        self.helper.layout = Layout(
+            Row(
+                Column('green_pass_link', css_class='form-group mb-0'),
+                Column(
+                    Submit('submit', _('Insert'), css_class="btn site-btn mb-3 w-75 font-5"),
+                    css_class='d-flex align-items-end justify-content-end'
+                ),
+                css_class='form-row '
+            ),
+        )
+
+    class Meta:
+        model = get_user_model()
+        fields = (
+            'green_pass_link',
+        )
+        labels = {
+            'green_pass_link': _("Google Drive link"),
+        }
+
+
+class UserGeneralSettings(forms.ModelForm):
+    helper = FormHelper()
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
+        self.fields['enable_automatic_reservation'].help_text = \
+            _('Disable automatic reservations if you don\'t need them. You\'ll be able to enable them again later.')
+
+        self.helper.layout = Layout(
+            Row(
+                Column('enable_automatic_reservation', css_class='form-group mb-0 font-6'),
+                css_class='form-row'
+            ),
+            Row(
+                Column(
+                    Submit('submit', _('Save changes'), css_class="btn site-btn mb-3 w-100 font-5"),
+                ),
+                css_class='form-row mt-5'
+            )
+        )
+
+    class Meta:
+        model = get_user_model()
+        fields = (
+            'enable_automatic_reservation',
+        )
+        labels = {
+            'enable_automatic_reservation': _('Enable automatic reservations'),
         }

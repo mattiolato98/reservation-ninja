@@ -5,29 +5,34 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.tokens import PasswordResetTokenGenerator
 from django.contrib.auth.views import LoginView
-from django.http import JsonResponse
+from django.http import JsonResponse, HttpResponseRedirect
 from django.shortcuts import redirect
 from django.urls import reverse_lazy, reverse
 from django.utils.decorators import method_decorator
 from django.utils.encoding import force_bytes, force_text
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from django.views.decorators.csrf import csrf_protect
-from django.views.decorators.http import require_GET
+from django.views.decorators.http import require_GET, require_POST
 from django.views.generic import CreateView, TemplateView, DeleteView, ListView, UpdateView, FormView
 from django.utils.translation import gettext_lazy as _
 
+from reservation_tool_base_folder.decorators import not_authenticated_only
+from user_management.check_unimore_credentials import check_unimore_credentials
 from user_management.decorators import manager_required
-from user_management.forms import LoginForm, PlatformUserCreationForm, UserUpdateUnimoreCredentialsForm
+from user_management.forms import LoginForm, PlatformUserCreationForm, UserUpdateUnimoreCredentialsForm, \
+    UserAddGreenPass, UserGeneralSettings
 from user_management.models import PlatformUser
 
 account_activation_token = PasswordResetTokenGenerator()
 
 
+@method_decorator(not_authenticated_only, name='dispatch')
 class LoginUserView(LoginView):
     form_class = LoginForm
     template_name = 'registration/login.html'
 
 
+@method_decorator(not_authenticated_only, name='dispatch')
 class RegistrationView(CreateView):
     form_class = PlatformUserCreationForm
     template_name = 'registration/registration.html'
@@ -67,6 +72,16 @@ class RegistrationView(CreateView):
         return response
 
 
+class UserGeneralSettingsView(LoginRequiredMixin, UpdateView):
+    model = get_user_model()
+    form_class = UserGeneralSettings
+    template_name = 'user_management/user_general_settings.html'
+    success_url = reverse_lazy('user_management:settings')
+
+    def get_object(self, queryset=None):
+        return self.request.user
+
+
 class UserUpdateUnimoreCredentialsView(LoginRequiredMixin, FormView):
     model = get_user_model()
     form_class = UserUpdateUnimoreCredentialsForm
@@ -89,12 +104,58 @@ class UserUpdateUnimoreCredentialsView(LoginRequiredMixin, FormView):
         self.object.unimore_username = encryptor.encrypt(username.encode()).decode()
         self.object.unimore_password = encryptor.encrypt(password.encode()).decode()
 
+        self.object.credentials_ok = True  # Credentials has been verified with Ajax before submit
+
         self.object.save()
 
         return super(UserUpdateUnimoreCredentialsView, self).form_valid(form)
 
     def get_object(self, queryset=None):
         return self.request.user
+
+
+class UserDeleteView(LoginRequiredMixin, DeleteView):
+    template_name = "user_management/user_delete.html"
+    success_url = reverse_lazy("home")
+    model = get_user_model()
+
+    def get_object(self, queryset=None):
+        return self.request.user
+
+
+@method_decorator(manager_required, name='dispatch')
+class UserListView(ListView):
+    model = get_user_model()
+    template_name = "user_management/user_list.html"
+
+    def get_queryset(self):
+        return get_user_model().objects.all().order_by('-date_joined')
+
+
+class UserGreenPassAddView(LoginRequiredMixin, FormView):
+    model = get_user_model()
+    form_class = UserAddGreenPass
+    template_name = "user_management/greenpass_add.html"
+    success_url = reverse_lazy("reservation_management:reservation-list")
+
+    def post(self, request, *args, **kwargs):
+        """
+        In order to manage the cancel button from the lesson form. If 'cancel'
+        is in the request.POST, the lesson must not be created.
+        :return: HTTP response.
+        """
+        if 'cancel' in request.POST:
+            return HttpResponseRedirect(reverse_lazy("home"))
+        else:
+            return super(UserGreenPassAddView, self).post(request, *args, **kwargs)
+
+    def form_valid(self, form):
+        self.object = self.request.user
+
+        self.object.green_pass_link = form.cleaned_data['green_pass_link']
+        self.object.save()
+
+        return super(UserGreenPassAddView, self).form_valid(form)
 
 
 def user_login_by_token(request, user_id_b64=None, user_token=None):
@@ -152,24 +213,6 @@ class SettingsView(LoginRequiredMixin, TemplateView):
     template_name = "user_management/settings.html"
 
 
-class UserDeleteView(LoginRequiredMixin, DeleteView):
-    template_name = "user_management/user_delete.html"
-    success_url = reverse_lazy("home")
-    model = get_user_model()
-
-    def get_object(self, queryset=None):
-        return self.request.user
-
-
-@method_decorator(manager_required, name='dispatch')
-class UserListView(ListView):
-    model = get_user_model()
-    template_name = "user_management/user_list.html"
-
-    def get_queryset(self):
-        return get_user_model().objects.all().order_by('-date_joined')
-
-
 def ajax_check_username_exists(request):
     return JsonResponse({'exists': True}) \
         if get_user_model().objects.filter(username=request.GET.get('username')).exists() \
@@ -191,3 +234,14 @@ def ajax_check_username_is_correct(request):
     if request.GET.get('username') == request.user.username:
         return JsonResponse({'is_correct': True})
     return JsonResponse({'is_correct': False})
+
+
+@login_required
+@require_POST
+@csrf_protect
+def ajax_check_unimore_credentials(request):
+    if not check_unimore_credentials(
+            request.POST.get('username'), request.POST.get('password')
+    ):
+        return JsonResponse({'is_valid': False})
+    return JsonResponse({'is_valid': True})
