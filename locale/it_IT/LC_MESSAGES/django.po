@@ -195,7 +195,7 @@ msgstr "Certificato Verde"
 #: reservation_management/templates/reservation_management/reservation_list.html:29
 #: user_management/templates/user_management/greenpass_add.html:7
 msgid "Add your Green Pass"
-msgstr "Aggiungi il to Certificato Verde"
+msgstr "Aggiungi il tuo Certificato Verde"
 
 #: reservation_management/templates/reservation_management/reservation_list.html:62
 msgid "No reservation made, insert your lessons!"
@@ -558,8 +558,8 @@ msgid "Add Green Pass"
 msgstr "Aggiungi il Certificato Verde"
 
 #: user_management/templates/user_management/greenpass_add.html:14
-msgid "Make sure your drive link is accessible only by you."
-msgstr "Assicurati che il link a drive sia accessibile solamente da te."
+msgid "Make sure your G-Drive link is accessible only by you."
+msgstr "Assicurati che il link a G-Drive sia accessibile solamente a te."
 
 #: user_management/templates/user_management/greenpass_add.html:19
 msgid ""
@@ -576,7 +576,7 @@ msgstr ""
 "file su Google Drive devono essere\n"
 "                <strong>\"Con limitazioni\"</strong> e tu dovresti essere "
 "l'<strong>unico</strong>\n"
-"                utente autorizzato ad accedere il file.\n"
+"                utente autorizzato ad accedere al file.\n"
 "            "
 
 #: user_management/templates/user_management/settings.html:4
