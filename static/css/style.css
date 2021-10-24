@@ -83,7 +83,7 @@ h5 {
 }
 
 .site-yellow-text {
-    color: #F1A208 !important;
+    color: #FF9F1C !important;
 }
 
 .flat-link {
@@ -512,4 +512,9 @@ hr {
 
 #footer span {
     color: #a1a1a1;
+}
+
+.modal-content {
+    border-color: transparent !important;
+    border-radius: 10px;
 }
