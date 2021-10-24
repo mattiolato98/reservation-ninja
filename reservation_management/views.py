@@ -128,3 +128,14 @@ def ajax_send_feedback(request):
     user.save()
 
     return JsonResponse({'ok': True})
+
+
+@login_required
+@require_POST
+@csrf_protect
+def ajax_whats_new_confirm(request):
+    user = request.user
+    user.whats_new = False
+    user.save()
+
+    return JsonResponse({'ok', True})
