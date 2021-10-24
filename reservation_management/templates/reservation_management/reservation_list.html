@@ -73,6 +73,7 @@
 {% endblock %}
 
 {% block extra_content %}
+    {% include 'whats_new_modal.html' %}
     {% if not user.feedback %}
         <div class="row justify-content-center align-items-center mt-3 mb-5">
             <div id="user-feedback-box" class="col-xl-3 col-lg-5 col-md-9 col-12 d-flex column-flex align-items-center justify-content-center">
@@ -129,7 +130,9 @@
 
             $("#feedback-response-no").on('click', function () {
                 send_feedback(false, $(this));
-             });
+            });
+
+            $('#whats-new-modal').modal('show');
         });
     </script>
     {% include 'reservation_management/reservation_ajax.html' %}
