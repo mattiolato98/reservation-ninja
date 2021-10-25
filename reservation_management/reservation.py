@@ -147,6 +147,10 @@ if __name__ == "__main__":
 
     from reservation_management.models import Lesson, Reservation, Log
 
+    # In the case the scheduler execute this script more than one time:
+    if Log.objects.filter(date=datetime.now(pytz.timezone('Europe/Rome')).date()).exists():
+        sys.exit(0)
+
     # Delete old reservations
     Reservation.objects.all().delete()
 
