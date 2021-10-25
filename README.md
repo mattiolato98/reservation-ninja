@@ -5,7 +5,20 @@
 
 This is the source code of [Reservation-Ninja](https://reservation-ninja.herokuapp.com/).
 
-## Configuration
+## Why
+
+This project comes from the idea of simplify the process of classrooms reservation in the University of Modena and Reggio Emilia (UNIMORE)
+
+## How to use it
+  - Sign up to the platform available at *https://reservation-ninja.herokuapp.com/*
+  - Create your weekly schedule, by entering your lessons timetable
+  - Let the tool work, every morning you'll find the link to the daily reservations
+
+## Development configuration
+
+If you wish to contribute to the development of **Reservation Ninja**, read this section about how to configure your local environment.
+
+If you have any question regarding **Reservation Ninja**, you are welcome to write an issue.
 
 ### Files
 
