@@ -29,6 +29,7 @@ key = Fernet.generate_key()
 You can then simply copy and paste it in the file.
 
 ### Environment variables
+You should setup some environment variables:
   - `PYTHONUNBUFFERED = 1`
   - `DEBUG = 1`
   - `ADMIN_ENABLED = 1`
