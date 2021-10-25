@@ -41,4 +41,4 @@ You should setup some environment variables:
 
 <img src="static/img/ninja.png" alt="Ninja icon" width="100" /> 
 
-| Exploit the power of the ninja
+> Exploit the power of the ninja
