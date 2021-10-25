@@ -42,7 +42,3 @@ You should setup some environment variables:
   - `SECURE_SSL_REDIRECT = 0`
   - `SESSION_COOKIE_SECURE = 0`
   - `CSRF_COOKIE_SECURE = 0`
-
----
-
-> Exploit the power of the ninja
