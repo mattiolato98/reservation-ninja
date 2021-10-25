@@ -1,7 +1,4 @@
-<p align="center">
-  <img src="static/img/ninja.png" alt="Ninja icon" width="100" /> 
-</p>
-<h1 align="center">reservation-ninja</h1>
+# reservation-ninja
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
@@ -42,3 +39,11 @@ You should setup some environment variables:
   - `SECURE_SSL_REDIRECT = 0`
   - `SESSION_COOKIE_SECURE = 0`
   - `CSRF_COOKIE_SECURE = 0`
+
+<br>
+
+---
+
+<br>
+
+<img src="static/img/ninja.png" alt="Ninja icon" width="100" /> 
