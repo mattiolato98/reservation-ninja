@@ -93,13 +93,13 @@ def reserve_room(driver, lesson):
                 driver.find_element_by_id("username").send_keys(lesson.user.plain_unimore_username)
                 driver.find_element_by_id("password").send_keys(lesson.user.plain_unimore_password)
                 driver.find_element_by_name("_eventId_proceed").click()
-                c = list(filter(lambda x: x['name'] == 'shib_idp_session', driver.get_cookies()))
-
-                with open("cookies.json", "w") as f:
-                    json.dump(c, f)
-
-                import time
-                time.sleep(1000)
+                # c = list(filter(lambda x: x['name'] == 'shib_idp_session', driver.get_cookies()))
+                #
+                # with open("cookies.json", "w") as f:
+                #     json.dump(c, f)
+                #
+                # import time
+                # time.sleep(1000)
 
             except NoSuchElementException:
                 print("HELLLL YEAAAAAAAAHHHHH")
@@ -146,6 +146,7 @@ def reserve_lesson_map(lesson, driver):
 
 
 if __name__ == "__main__":
+    # SESSION COOKIE CREATED ON MONDAY OCTOBER 25 AT 11:33 AM
     sys.path.append(os.path.join(os.path.dirname(__file__), PROJECT_PATH))
     os.environ.setdefault("DJANGO_SETTINGS_MODULE", "reservation_tool_base_folder.settings")
     django.setup()
