@@ -114,7 +114,7 @@ def reserve_room(driver, lesson):
             driver.get(building_url)
 
 
-def reserve_lesson_map(lesson):
+def reserve_lessons(lesson):
     print("----------------------------------------------------------------------------------------------------------")
     print(f'Reserving: {lesson}')
     """
@@ -158,7 +158,7 @@ if __name__ == "__main__":
 
     start = measure_time()
     # TODO: understand if this assignment is required...
-    x = list(map(reserve_lesson_map, lessons))
+    x = list(map(reserve_lessons, lessons))
     end = measure_time()
 
     users = list(set(lesson.user for lesson in lessons))
