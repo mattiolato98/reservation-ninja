@@ -3,6 +3,9 @@
 </p>
 <h1 align="center">reservation-ninja</h1>
 
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+
+
 This is the source code of [Reservation-Ninja](https://reservation-ninja.herokuapp.com/).
 
 ## Configuration
