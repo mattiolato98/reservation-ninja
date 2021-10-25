@@ -15,7 +15,6 @@ import dj_database_url
 from .email_settings import *
 from pathlib import Path
 
-import dj_database_url
 from django.core.management.utils import get_random_secret_key
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -25,19 +24,20 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
-# SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = get_random_secret_key()
 
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = int(os.environ.get('DEBUG', default=0))
+with open("crypto.txt") as f:
+    CRYPTOGRAPHY_KEY = f.read().strip()
 
-ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'reservation-ninja.herokuapp.com', 'app.reservation.ninja']
+DEBUG = int(os.environ.get('DEBUG', default=0))
+ADMIN_ENABLED = int(os.environ.get('ADMIN_ENABLED', default=0))
+
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'reservation-ninja.herokuapp.com']
 
 
 # Application definition
 
 INSTALLED_APPS = [
-    'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
@@ -52,10 +52,14 @@ INSTALLED_APPS = [
     "crispy_forms",
 ]
 
+if ADMIN_ENABLED:
+    INSTALLED_APPS.append('django.contrib.admin')
+
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',  # new
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.middleware.locale.LocaleMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -123,8 +127,9 @@ AUTH_PASSWORD_VALIDATORS = [
 # https://docs.djangoproject.com/en/3.1/topics/i18n/
 
 LANGUAGE_CODE = 'en-us'
+LOCALE_PATHS = (os.path.join(BASE_DIR, 'locale'), )
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Europe/Rome'
 
 USE_I18N = True
 
@@ -150,8 +155,14 @@ STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
 
 LOGIN_URL = '/user/login'
 
-LOGIN_REDIRECT_URL = 'home'
+LOGIN_REDIRECT_URL = '/reservation'
 
 LOGOUT_REDIRECT_URL = '/user/login'
 
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
+# security settings
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+SECURE_SSL_REDIRECT = int(os.environ.get('SECURE_SSL_REDIRECT', default=1))
+SESSION_COOKIE_SECURE = int(os.environ.get('SESSION_COOKIE_SECURE', default=1))
+CSRF_COOKIE_SECURE = int(os.environ.get('CSRF_COOKIE_SECURE', default=1))

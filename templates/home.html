@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
+{% load i18n %}
 
 {% block title %}
     {{ block.super }} Home
@@ -7,66 +8,75 @@
 
 {% block extra_css %}
     <style>
-        .bd-placeholder-img {
-            font-size: 1.125rem;
-            text-anchor: middle;
-            -webkit-user-select: none;
-            -moz-user-select: none;
-            user-select: none;
+        .site-box {
+            min-height: 100vh;
         }
-
-        @media (min-width: 768px) {
-            .bd-placeholder-img-lg {
-                font-size: 3.5rem;
-            }
+        .site-btn {
+            width: 75%;
         }
     </style>
-
-    <link rel="stylesheet" href="{% static 'css/list-groups.css' %}">
 {% endblock %}
 
 {% block content %}
-    <a href="{% url 'user_management:logout' %}">
-        Logout
-    </a>
-    <div class="d-flex justify-content-center">
-        <h1 class="logo-font">Your reservations</h1>
+    <div class="site-box">
+        <div class="row justify-content-center mt-5">
+            <div class="col-lg-5 col-12">
+                <span class="h2 site-color logo-font">Reservation Ninja</span>
+                <span class="h5 logo-font">Beta</span>
+                <div class="row mt-4">
+                    <div class="col-auto">
+                        <img src="{% static 'img/ninja.png' %}" class="picture-small-fixed" alt="Ninja icon"/>
+                    </div>
+                    <div class="col">
+                        <p class="text-muted font-5">
+                            {% blocktranslate %}
+                                Hi and welcome to Reservation Ninja, the tool which allows you to reserve
+                                classrooms automatically.
+                            {% endblocktranslate %}
+                        </p>
+                    </div>
+                </div>
+                <p class="font-6">
+                    {% translate "How does it work?" %}
+                </p>
+                <ul>
+                    {% blocktranslate %}
+                        <li>Create your weekly schedule, by entering your lessons timetable</li>
+                        <li>Let the tool work, every morning you'll find the link to the daily reservations</li>
+                    {% endblocktranslate %}
+                </ul>
+                <p class="font-6 site-color mt-4">
+                    {% translate "Beta notes" %}
+                </p>
+                <p>
+                    {% blocktranslate %}
+                    This is the Beta version of the app, so you could experiment issues or bug.
+                    For any problem with the reservations or the use of the app, please
+                    {% endblocktranslate %}
+                    <a href="{% url 'help' %}" class="site-link site-blue-text">{% translate "contact us" %}</a>
+                    {% blocktranslate %}
+                    so we can fix it as soon as possible. <br>
+                    Thanks for the support.
+                    {% endblocktranslate %}
+                </p>
+                <p class="logo-font mt-4 h5">{% translate "Exploit the power of the ninja" %}</p>
+                <p class="small">
+                    <a href="{% url 'help' %}" class="site-link text-muted">
+                        {% translate "Need help?" %}
+                    </a>
+                </p>
+            </div>
+        </div>
+        <div class="row justify-content-center align-items-center mt-5">
+            <div class="col-xl-3 col-lg-5 col-md-9 col-12 d-flex flex-column align-items-center">
+                <a href="{% url 'user_management:registration' %}" class="btn site-btn mb-0">
+                    {% translate "Sign up" %}
+                </a>
+                <a href="{% url 'user_management:login' %}"
+                   class="site-link font-6 mt-2 text-center">
+                    {% translate "Login" %}
+                </a>
+            </div>
+        </div>
     </div>
-
-    <div class="list-group">
-        <a href="#" class="list-group-item list-group-item-action d-flex gap-3 py-3" aria-current="true">
-                <img src="https://github.com/twbs.png" alt="twbs" width="32" height="32"
-                     class="rounded-circle flex-shrink-0 mr-2">
-                <div class="d-flex gap-2 w-100 justify-content-between">
-                    <div>
-                        <h6 class="mb-0">List group item heading</h6>
-                        <p class="mb-0 opacity-75">Some placeholder content in a paragraph.</p>
-                    </div>
-                    <small class="opacity-50 text-nowrap">now</small>
-                </div>
-        </a>
-        <a href="#" class="list-group-item list-group-item-action d-flex gap-3 py-3" aria-current="true">
-                <img src="https://github.com/twbs.png" alt="twbs" width="32" height="32"
-                     class="rounded-circle flex-shrink-0 mr-2">
-                <div class="d-flex gap-2 w-100 justify-content-between">
-                    <div>
-                        <h6 class="mb-0">List group item heading</h6>
-                        <p class="mb-0 opacity-75">Some placeholder content in a paragraph.</p>
-                    </div>
-                    <small class="opacity-50 text-nowrap">now</small>
-                </div>
-        </a>
-        <a href="#" class="list-group-item list-group-item-action d-flex gap-3 py-3" aria-current="true">
-                <img src="https://github.com/twbs.png" alt="twbs" width="32" height="32"
-                     class="rounded-circle flex-shrink-0 mr-2">
-                <div class="d-flex gap-2 w-100 justify-content-between">
-                    <div>
-                        <h6 class="mb-0">List group item heading</h6>
-                        <p class="mb-0 opacity-75">Some placeholder content in a paragraph.</p>
-                    </div>
-                    <small class="opacity-50 text-nowrap">now</small>
-                </div>
-        </a>
-    </div>
-    {#    <script src="../assets/dist/js/bootstrap.bundle.min.js"></script>#}
 {% endblock %}

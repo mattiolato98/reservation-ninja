@@ -26,25 +26,6 @@ html,body {
     color: #525252;
 }
 
-.form-control {
-    background-color: white;
-    color: #525252;
-    outline: none;
-    border: 1px solid #ced4da;
-    border-radius: 5px;
-}
-
-.form-control:focus {
-    border: 1px solid #525252;
-    color: #525252;
-    outline: none;
-    background-color: white;
-}
-
-.form-text {
-    color: #525252 !important;
-}
-
 .site-link {
     color: #525252 !important;
     font-weight: 600;

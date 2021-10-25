@@ -1,0 +1,34 @@
+{% extends 'base_form.html' %}
+{% load i18n %}
+
+{% block title %}{{ block.super }} {% translate "Delete lesson" %}{% endblock %}
+
+{% block form_title %}{% translate "Delete the lesson" %}{% endblock %}
+
+{% block form_alert %}
+    <div class="alert alert-danger" role="alert">
+        <h5 class="alert-heading">{% translate "Warning" %} <i class="fas fa-exclamation-triangle"></i></h5>
+        <p>
+            <span class="font-6">
+                {% translate "Are you sure you want to delete this lesson?" %}
+            </span>
+        </p>
+        <hr>
+        <p class="mb-0">
+            {% translate "This data will be destroyed and you won't be able to retrieve it." %}
+        </p>
+    </div>
+{% endblock %}
+
+{% block form_body %}
+    <form method="post">{% csrf_token %}
+        <input class="btn site-btn mb-3 w-100 font-5" type="submit" value="{% translate "Delete" %}">
+    </form>
+{% endblock %}
+
+{% block back_url %}
+    <a href="{% url 'reservation_management:lesson-detail' lesson.pk %}" class="font-6 site-blue-text">
+        <i class="fas fa-chevron-left mr-2"></i>
+        {% translate "Back to lesson" %}
+    </a>
+{% endblock %}

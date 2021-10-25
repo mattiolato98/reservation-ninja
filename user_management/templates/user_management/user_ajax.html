@@ -1,3 +1,5 @@
+{% load i18n %}
+
 <script type="text/javascript">
     $('#id_username').on('change', function () {
         /**
@@ -18,15 +20,13 @@
                     if (!$('#username-exists-error').length) {
                         username_field.after(
                             '<span id="username-exists-error" class="text-danger font-7 font-size-80">' +
-                            'Someone stole this username. Damn!.' +
+                            '{% translate "Someone stole this username. Damn!." %}' +
                             '</span>'
                         );
                     }
-                    $('#submit-signing-button').attr('disabled', true);
                 } else {
                     username_field.css('border-color', "#e8e8e8");
                     $('#username-exists-error').remove();
-                    $('#submit-signing-button').attr('disabled', false);
                 }
             }
         });
@@ -51,15 +51,85 @@
                     if (!$('#not-unimore-email').length) {
                         email_field.after(
                             '<span id="not-unimore-email" class="text-danger font-7 font-size-80">' +
-                            'Seems that you\'re not a Unimore student.' +
+                            '{% translate "Seems that you are not a Unimore student." %}' +
                             '</span>'
                         );
                     }
-                    $('#submit-signing-button').attr('disabled', true);
                 } else {
                     email_field.css('border-color', "#e8e8e8");
                     $('#not-unimore-email').remove();
-                    $('#submit-signing-button').attr('disabled', false);
+                }
+            }
+        });
+    });
+
+    $('#username-check').on('input', function () {
+        /**
+         * Check username is correct.
+         */
+        $.ajax({
+            type: 'GET',
+            url: "{% url 'user_management:ajax-check-username-is-correct' %}",
+            data: {
+                'username': $(this).val(),
+            },
+            dataType: 'json',
+            success: function(data) {
+                if (!data.is_correct)
+                    $('#delete-user-submit').attr('disabled', true);
+                else
+                    $('#delete-user-submit').attr('disabled', false);
+            }
+        });
+    });
+
+    $("#check-unimore-credentials").on('click', function () {
+        /**
+         * Check unimore credentials to be correct.
+         */
+        let button = $(this);
+        let resultDiv = $("#update-credentials-result-msg");
+        $.ajax({
+            type: 'POST',
+            url: "{% url 'user_management:ajax-check-unimore-credentials' %}",
+            data: {
+                'username': $('#id_unimore_username').val(),
+                'password': $('#id_unimore_password').val(),
+            },
+            headers:{
+                "X-CSRFToken": '{{ csrf_token }}'
+            },
+            dataType: 'json',
+            beforeSend: function() {
+                resultDiv.html('');
+                button.attr("disabled", true);
+                button.html(
+                    '<div class="spinner-grow spinner-grow-sm mr-3" role="status"></div>' +
+                    '<span>{% translate "Checking ..." %}</span>'
+                );
+            },
+            success: function(data) {
+                if (!data.is_valid) {
+                    resultDiv.html(
+                        '<div id="error-msg">' +
+                            '<i class="fas fa-times site-color"></i>&nbsp;' +
+                            '<span class="site-color font-7">' +
+                            '{% translate "Either username or password are wrong. Please try again." %}' +
+                            '</span>' +
+                        '</div>'
+                    );
+                    button.html('{% translate "Update" %}')
+                    button.attr("disabled", false);
+                    window.setTimeout(function() {$('#error-msg').remove(); }, 2500);
+                } else {
+                    button.hide();
+                    resultDiv.html(
+                        '<i class="fas fa-check text-success"></i>&nbsp;' +
+                        '<span class="text-success font-7">{% translate "Verified" %}</span>'
+                    );
+                    $("#submit-id-submit").attr("disabled", false);
+                    $("#submit-id-submit").attr("name", "dummyName");  // With name 'submit' it doesn't work
+                    $("#update-unimore-credentials-form").submit();
                 }
             }
         });

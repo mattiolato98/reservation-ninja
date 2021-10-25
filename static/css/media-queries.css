@@ -1,0 +1,11 @@
+@media (max-width: 767px) {
+    .btn {
+        width: 100% !important;
+    }
+    .site-box {
+        margin-top: 35px;
+    }
+    .modal {
+        width: 100%;
+    }
+}

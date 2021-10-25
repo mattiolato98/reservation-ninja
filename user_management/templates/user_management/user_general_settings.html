@@ -1,0 +1,18 @@
+{% extends 'base_form.html' %}
+{% load i18n %}
+{% load crispy_forms_tags %}
+
+{% block title %}{{ block.super }} {% translate "General settings" %}{% endblock %}
+
+{% block form_title %}{% translate "General settings" %}{% endblock %}
+
+{% block form_body %}
+    {% crispy form %}
+{% endblock %}
+
+{% block back_url %}
+    <a href="{% url 'user_management:settings' %}" class="font-6 site-blue-text">
+        <i class="fas fa-chevron-left mr-2"></i>
+        {% translate "Back to settings" %}
+    </a>
+{% endblock %}

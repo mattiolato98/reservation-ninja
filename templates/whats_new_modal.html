@@ -1,0 +1,52 @@
+{% load i18n %}
+
+<div class="modal fade" tabindex="-1" role="dialog" id="whats-new-modal">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content rounded-6 shadow">
+            <div class="modal-body p-5">
+                <h2 class="logo-font site-color mb-0">{% translate "What's new" %}</h2>
+
+                <ul class="gap-4 my-5 p-0">
+                    <li class="d-flex gap-4 align-items-center">
+                        <i class="fas fa-star-half-alt site-md-icon mr-4 site-yellow-text"></i>
+                        <div>
+                            <h6 class="mb-0 font-6">{% translate "Update Unimore credentials" %}</h6>
+                            <span class="text-muted">{% translate "It's now possible to update Unimore credentials" %}</span>
+                        </div>
+                    </li>
+                    <li class="d-flex gap-4 align-items-center mt-4">
+                        <i class="fas fa-star-half-alt site-md-icon mr-4 site-yellow-text"></i>
+                        <div>
+                            <h6 class="mb-0 font-6">{% translate "Disable automatic reservations" %}</h6>
+                            <span class="text-muted">
+                                {% translate "Don't need classroom reservations for tomorrow's lessons? Disable reservations from settings" %}
+                            </span>
+                        </div>
+                    </li>
+                    <li class="d-flex gap-4 align-items-center mt-4">
+                        <i class="fas fa-star-half-alt site-md-icon mr-4 site-yellow-text"></i>
+                        <div>
+                            <h6 class="mb-0 font-6">{% translate "Add your green pass" %}</h6>
+                            <span class="text-muted">
+                                {% translate "You can add the Google Drive link to your green pass" %}
+                            </span>
+                        </div>
+                    </li>
+                    <li class="d-flex gap-4 align-items-center mt-4">
+                        <i class="fas fa-star-half-alt site-md-icon mr-4 site-yellow-text"></i>
+                        <div>
+                            <h6 class="mb-0 font-6">{% translate "Reservations feedback" %}</h6>
+                            <span class="text-muted">
+                                {% translate "You can let a daily feedback about reservations and help us improve the tool" %}
+                            </span>
+                        </div>
+                    </li>
+                </ul>
+                <button id="whats-new-confirm-button"
+                        type="button" class="btn btn-lg site-btn mt-5 w-100" data-dismiss="modal">
+                    {% translate "Great, thanks!" %}
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
