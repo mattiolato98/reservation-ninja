@@ -21,7 +21,7 @@ EMAIL_HOST_PASSWORD = 'your-password'
 ```
 
 #### crypto.txt
-Set up crypto.txt with a secret key to use either for encryption and decryption of users third party credentials. The key should be generated using *Fernet*, like so:
+Set up `crypto.txt` with a secret key to use either for encryption and decryption of users third party credentials. The key should be generated using *Fernet*, like so:
 ```python
 from cryptography.fernet import Fernet
 key = Fernet.generate_key()
