@@ -6,3 +6,4 @@ crypto.txt
 reservation_tool_base_folder/email_settings.py
 *__pycache__
 db.sqlite3
+.vscode/
