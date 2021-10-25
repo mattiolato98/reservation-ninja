@@ -1,4 +1,7 @@
-# reservation-ninja
+<p align="center">
+  <img src="static/img/ninja.png" alt="Ninja icon" width="100" /> 
+</p>
+<h1 align="center">reservation-ninja</h1>
 
 This is the source code of [Reservation-Ninja](https://reservation-ninja.herokuapp.com/).
 
@@ -38,7 +41,5 @@ You should setup some environment variables:
   - `CSRF_COOKIE_SECURE = 0`
 
 ---
-
-<img src="static/img/ninja.png" alt="Ninja icon" width="100" /> 
 
 > Exploit the power of the ninja
