@@ -1,7 +1,7 @@
-<p align="center">
-  <img src="static/img/ninja.png" alt="Ninja icon" width="100" />
-</p>
-<h1 align="center">reservation-ninja</h1>
+
+<img src="static/img/ninja.png" alt="Ninja icon" width="100" /> 
+
+# reservation-ninja
 
 This is the source code of [Reservation-Ninja](https://reservation-ninja.herokuapp.com/).
 
