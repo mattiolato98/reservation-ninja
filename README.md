@@ -7,7 +7,7 @@ This is the source code of [Reservation-Ninja](https://reservation-ninja.herokua
 
 ## Why
 
-This project comes from the idea of simplify the process of classrooms reservation in the University of Modena and Reggio Emilia (UNIMORE)
+This project comes from the idea of simplify the process of classrooms reservation in the University of Modena and Reggio Emilia (UNIMORE).
 
 ## How to use it
   - Sign up to the platform available at *https://reservation-ninja.herokuapp.com/*
