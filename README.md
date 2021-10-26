@@ -67,6 +67,7 @@ You should setup some environment variables:
 
 <br>
 
-<img title="" src="static/img/ninja.png" alt="Ninja icon" width="100" data-align="center">
-
+<p align="center">
+  <img title="" src="static/img/ninja.png" alt="Ninja icon" width="100" data-align="center">
+</p>
 <p align="center"><i>Unleash the power of the ninja</i></p>
