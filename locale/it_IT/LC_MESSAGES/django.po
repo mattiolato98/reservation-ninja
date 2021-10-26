@@ -3,12 +3,11 @@
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
-#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-10-24 19:25+0200\n"
+"POT-Creation-Date: 2021-10-26 15:55+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -71,6 +70,7 @@ msgstr ""
 #: reservation_management/templates/reservation_management/base/base_list.html:38
 #: reservation_management/templates/reservation_management/lesson_delete.html:10
 #: user_management/templates/user_management/greenpass_add.html:11
+#: user_management/templates/user_management/greenpass_delete.html:11
 #: user_management/templates/user_management/user_delete.html:16
 msgid "Warning"
 msgstr "Attenzione"
@@ -125,6 +125,7 @@ msgstr ""
 "recuperarli."
 
 #: reservation_management/templates/reservation_management/lesson_delete.html:25
+#: user_management/forms.py:191
 #: user_management/templates/user_management/user_delete.html:42
 msgid "Delete"
 msgstr "Elimina"
@@ -168,7 +169,7 @@ msgstr ""
 
 #: reservation_management/templates/reservation_management/lesson_list.html:67
 #: reservation_management/templates/reservation_management/reservation_list.html:11
-#: user_management/templates/user_management/greenpass_add.html:35
+#: user_management/templates/user_management/greenpass_add.html:36
 msgid "Your reservations"
 msgstr "Le tue prenotazioni"
 
@@ -190,12 +191,12 @@ msgstr "Grazie per il feedback!"
 
 #: reservation_management/templates/reservation_management/reservation_list.html:20
 msgid "Green Pass"
-msgstr "Certificato Verde"
+msgstr "Green Pass"
 
 #: reservation_management/templates/reservation_management/reservation_list.html:29
 #: user_management/templates/user_management/greenpass_add.html:7
 msgid "Add your Green Pass"
-msgstr "Aggiungi il tuo Certificato Verde"
+msgstr "Aggiungi il tuo Green Pass"
 
 #: reservation_management/templates/reservation_management/reservation_list.html:62
 msgid "No reservation made, insert your lessons!"
@@ -266,7 +267,7 @@ msgid "Privacy policy"
 msgstr "Informativa sulla privacy"
 
 #: templates/help.html:50 templates/help.html:55
-#: user_management/templates/user_management/settings.html:43
+#: user_management/templates/user_management/settings.html:56
 msgid "Back home"
 msgstr "Torna alla home"
 
@@ -387,11 +388,11 @@ msgstr ""
 
 #: templates/whats_new_modal.html:29
 msgid "Add your green pass"
-msgstr "Aggiungi il tuo Certificato Verde"
+msgstr "Aggiungi il tuo Green Pass"
 
 #: templates/whats_new_modal.html:31
 msgid "You can add the Google Drive link to your green pass"
-msgstr "Puoi aggiungere il link Google Drive al tuo Certificato Verde"
+msgstr "Puoi aggiungere il link Google Drive al tuo Green Pass"
 
 #: templates/whats_new_modal.html:38
 msgid "Reservations feedback"
@@ -483,7 +484,7 @@ msgstr "Devi accettare le politiche sul trattamento dei dati."
 msgid "Google Drive link"
 msgstr "Link a Google Drive"
 
-#: user_management/forms.py:189
+#: user_management/forms.py:208
 msgid ""
 "Disable automatic reservations if you don't need them. You'll be able to "
 "enable them again later."
@@ -491,11 +492,11 @@ msgstr ""
 "Disabilita le prenotazioni automatiche se non ne hai bisogno. Potrai sempre "
 "abilitarle di nuovo successivamente."
 
-#: user_management/forms.py:198
+#: user_management/forms.py:217
 msgid "Save changes"
 msgstr "Salva le modifiche"
 
-#: user_management/forms.py:210
+#: user_management/forms.py:229
 msgid "Automatic reservations"
 msgstr "Prenotazioni automatiche"
 
@@ -555,11 +556,11 @@ msgstr "Entra"
 
 #: user_management/templates/user_management/greenpass_add.html:5
 msgid "Add Green Pass"
-msgstr "Aggiungi il Certificato Verde"
+msgstr "Aggiungi il Green Pass"
 
 #: user_management/templates/user_management/greenpass_add.html:14
-msgid "Make sure your G-Drive link is accessible only by you."
-msgstr "Assicurati che il link a G-Drive sia accessibile solamente a te."
+msgid "Make sure your drive link is accessible only by you."
+msgstr "Assicurati che il link a Google Drive sia accessibile solamente a te."
 
 #: user_management/templates/user_management/greenpass_add.html:19
 msgid ""
@@ -568,7 +569,9 @@ msgid ""
 "have to be\n"
 "                <strong>\"With limitations\"</strong> and you should be the "
 "<strong>only</strong>\n"
-"                authorized user to access the file.\n"
+"                authorized user to access the file. <br>\n"
+"                You can remove the Green Pass from <strong>your settings</"
+"strong>.\n"
 "            "
 msgstr ""
 "\n"
@@ -577,7 +580,35 @@ msgstr ""
 "                <strong>\"Con limitazioni\"</strong> e tu dovresti essere "
 "l'<strong>unico</strong>\n"
 "                utente autorizzato ad accedere al file.\n"
+"                Puoi rimuovere il Green Pass dalle <strong>tue impostazioni</"
+"strong>.\n"
 "            "
+
+#: user_management/templates/user_management/greenpass_delete.html:5
+msgid "Delete Green Pass"
+msgstr "Elimina il Green Pass"
+
+#: user_management/templates/user_management/greenpass_delete.html:7
+#: user_management/templates/user_management/settings.html:34
+msgid "Delete your Green Pass"
+msgstr "Elimina il tuo Green Pass"
+
+#: user_management/templates/user_management/greenpass_delete.html:14
+msgid "Are you sure you want to delete yuor Green Pass link?"
+msgstr "Vuoi davvero eliminare il link al tuo Green Pass?"
+
+#: user_management/templates/user_management/greenpass_delete.html:19
+msgid "This data will be destroyed and you will have to insert the link again."
+msgstr ""
+"I dati verranno eliminati e dovrai inserire il link nuovamente dalla pagina "
+"principale."
+
+#: user_management/templates/user_management/greenpass_delete.html:35
+#: user_management/templates/user_management/user_delete.html:51
+#: user_management/templates/user_management/user_general_settings.html:16
+#: user_management/templates/user_management/user_update_unimore_credentials.html:34
+msgid "Back to settings"
+msgstr "Torna alle impostazioni"
 
 #: user_management/templates/user_management/settings.html:4
 #: user_management/templates/user_management/settings.html:10
@@ -604,12 +635,22 @@ msgstr ""
 "                        Aggiorna le tue credenziali Unimore\n"
 "                    "
 
-#: user_management/templates/user_management/settings.html:31
+#: user_management/templates/user_management/settings.html:37
+msgid ""
+"\n"
+"                        Remove the link to your Green Pass\n"
+"                    "
+msgstr ""
+"\n"
+"                        Rimuovi il tuo Green Pass\n"
+"                    "
+
+#: user_management/templates/user_management/settings.html:44
 #: user_management/templates/user_management/user_delete.html:10
 msgid "Delete your account"
 msgstr "Elimina il tuo account"
 
-#: user_management/templates/user_management/settings.html:33
+#: user_management/templates/user_management/settings.html:46
 msgid ""
 "\n"
 "                        Delete your account and all your information\n"
@@ -652,12 +693,6 @@ msgstr ""
 msgid "For confirmation, enter your username:"
 msgstr "Inserisci il tuo username per confermare:"
 
-#: user_management/templates/user_management/user_delete.html:51
-#: user_management/templates/user_management/user_general_settings.html:16
-#: user_management/templates/user_management/user_update_unimore_credentials.html:34
-msgid "Back to settings"
-msgstr "Torna alle impostazioni"
-
 #: user_management/templates/user_management/user_update_unimore_credentials.html:11
 msgid "Update your Unimore credentials"
 msgstr "Aggiorna le credenziali Unimore"
@@ -677,8 +712,11 @@ msgstr ""
 "\n"
 "Clicca il seguente link per confermare la tua email:"
 
-#: user_management/views.py:185
+#: user_management/views.py:189
 #, fuzzy, python-brace-format
+#| msgid ""
+#| "Error. Attempt to validate email for the user {user_id_b64} with token "
+#| "{user_token}"
 msgid ""
 "Error. Attempt to validate email for the user {user_id_b64} with token "
 "{user_token}"
@@ -686,9 +724,12 @@ msgstr ""
 "Errore. Tentativo di validazione dell'email per l'utente {user} con il token "
 "{token}"
 
-#: user_management/views.py:186
+#: user_management/views.py:190
 msgid "Authentication error"
 msgstr "Errore di autenticazione"
+
+#~ msgid "Delete your Green Pass link"
+#~ msgstr "Elimina il link al tuo Green Pass"
 
 #~ msgid "Welcome to Reservation Ninja "
 #~ msgstr "Benvenuto in Reservation Ninja"
