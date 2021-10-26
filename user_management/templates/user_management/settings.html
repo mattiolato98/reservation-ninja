@@ -28,7 +28,20 @@
                     {% endblocktranslate %}
                 </span>
                 <hr>
-                <a href="{% url 'user_management:delete' %}" class="site-link text-danger font-6">{% translate "Delete your account" %}</a>
+                {% if user.green_pass_link is not None %}
+                    <a href="{% url 'user_management:green-pass-delete' %}"
+                       class="site-link text-danger font-6">
+                        {% translate "Delete your Green Pass" %}
+                    </a>
+                    <span class="text-muted font-5">
+                    {% blocktranslate %}
+                        Remove the link to your Green Pass
+                    {% endblocktranslate %}
+                </span>
+                    <hr>
+                {% endif %}
+                <a href="{% url 'user_management:delete' %}"
+                   class="site-link text-danger font-6">{% translate "Delete your account" %}</a>
                 <span class="text-muted font-5">
                     {% blocktranslate %}
                         Delete your account and all your information
