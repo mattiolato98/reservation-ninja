@@ -52,7 +52,7 @@ You can then simply copy and paste it in the file.
 
 ### Environment variables
 
-You should setup some environment variables:
+You should setup some environment variables (when you develop the software locally):
 
 - `PYTHONUNBUFFERED = 1`
 - `DEBUG = 1`
