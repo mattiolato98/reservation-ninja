@@ -179,6 +179,22 @@ class UserAddGreenPass(forms.ModelForm):
         }
 
 
+class UserDeleteGreenPass(forms.Form):
+    helper = FormHelper()
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
+        self.helper.layout = Layout(
+            Row(
+                Column(
+                    Submit('submit', _('Delete'), css_class="btn site-btn mb-3 w-100 font-5"),
+                ),
+                css_class='form-row'
+            ),
+        )
+
+
 class UserGeneralSettings(forms.ModelForm):
     helper = FormHelper()
 
