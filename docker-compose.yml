@@ -1,0 +1,13 @@
+web:
+  build: .
+  environment:
+    PYTHONDONTWRITEBYTECODE: 1
+    PYTHONUNBUFFERED: 1
+    DEBUG: 0
+    ADMIN_ENABLED: 0
+    SECURE_SSL_REDIRECT: 1
+    SESSION_COOKIE_SECURE: 1
+    CSRF_COOKIE_SECURE: 1
+    TZ: Europe/Rome
+  volumes:
+    - ./app:/app
