@@ -1,0 +1,38 @@
+{% extends '../../../templates/base_form.html' %}
+{% load i18n %}
+{% load crispy_forms_tags %}
+
+{% block title %}{{ block.super }} {% translate "Add Green Pass" %}{% endblock %}
+
+{% block form_title %}{% translate "Add your Green Pass" %}{% endblock %}
+
+{% block form_alert %}
+    <div class="alert alert-danger" role="alert">
+        <h5 class="alert-heading">{% translate "Warning" %} <i class="fas fa-exclamation-triangle"></i></h5>
+        <p>
+            <span class="font-6">
+                {% translate "Make sure your drive link is accessible only by you." %}
+            </span>
+        </p>
+        <hr>
+        <p class="mb-0">
+            {% blocktranslate %}
+                Your file <strong>sharing policy</strong> on Google Drive have to be
+                <strong>"With limitations"</strong> and you should be the <strong>only</strong>
+                authorized user to access the file. <br>
+                You can remove the Green Pass from <strong>your settings</strong>.
+            {% endblocktranslate %}
+        </p>
+    </div>
+{% endblock %}
+
+{% block form_body %}
+    {% crispy form %}
+{% endblock %}
+
+{% block back_url %}
+    <a href="{% url 'reservation_management:reservation-list' %}" class="font-6 site-blue-text">
+        <i class="fas fa-chevron-left mr-2"></i>
+        {% translate "Your reservations" %}
+    </a>
+{% endblock %}

@@ -1,0 +1,60 @@
+{% extends '../../../templates/base.html' %}
+{% load i18n %}
+
+{% block title %}{{ block.super }} {% translate "Delete account" %}{% endblock %}
+
+{% block content %}
+    <div class="site-box">
+        <div class="row justify-content-center">
+            <div class="col-xl-3 col-lg-5 col-md-9 col-12">
+                <span class="h2 site-color logo-font">{% translate "Delete your account" %}</span>
+            </div>
+        </div>
+        <div class="row justify-content-center mt-5">
+            <div class="col-xl-3 col-lg-5 col-md-9 col-12">
+                <div class="alert alert-danger" role="alert">
+                    <h5 class="alert-heading">{% translate "Warning" %} <i class="fas fa-exclamation-triangle"></i></h5>
+                    <p>
+                        <span class="font-6">
+                            {% translate "Are you sure you want to delete your account?" %}
+                        </span>
+                    </p>
+                    <hr>
+                    <p class="mb-0">
+                        {% translate "All your data will be destroyed and you won't be able to retrieve it." %}
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-xl-3 col-lg-5 col-md-9 col-12">
+                <form method="POST" class="d-flex flex-column"> {% csrf_token %}
+                    <label>
+                        <span class="small">
+                            {% translate "For confirmation, enter your username:" %}
+                        </span>
+                        <span class="small text-muted font-6">{{ user.username }}</span>
+                        <input id="username-check" type="text" class="form-control">
+                    </label>
+                    <input id="delete-user-submit"
+                           class="btn site-btn"
+                           type="submit"
+                           value="{% translate 'Delete' %}"
+                           disabled="disabled">
+                </form>
+            </div>
+        </div>
+        <div class="row justify-content-center mt-4">
+            <div class="col-xl-3 col-lg-5 col-md-9 col-12">
+                <a href="{% url 'user_management:settings' %}" class="font-6 site-blue-text">
+                    <i class="fas fa-chevron-left mr-2"></i>
+                    {% translate "Back to settings" %}
+                </a>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block extra_javascript %}
+    {% include 'user_management/user_ajax.html' %}
+{% endblock %}
