@@ -4,16 +4,6 @@ FROM python:3.9.7-alpine
 # set work directory
 WORKDIR .
 
-# set environment variables
-ENV PYTHONDONTWRITEBYTECODE 1
-ENV PYTHONUNBUFFERED 1
-ENV DEBUG 0
-ENV ADMIN_ENABLED 0
-ENV SECURE_SSL_REDIRECT 1
-ENV SESSION_COOKIE_SECURE 1
-ENV CSRF_COOKIE_SECURE 1
-ENV TZ Europe/Rome
-
 # install psycopg2
 RUN apk update \
     && apk add --virtual build-deps gcc python3-dev libc-dev musl-dev libffi-dev openssl-dev \
