@@ -30,7 +30,7 @@ RUN wget https://github.com/mozilla/geckodriver/releases/download/v0.26.0/geckod
     && geckodriver --version
 
 # install dependencies
-COPY requirments.txt .
+COPY app/requirments.txt .
 RUN pip install --upgrade pip \
     && pip install -r requirments.txt
 
