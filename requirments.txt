@@ -13,8 +13,11 @@ parsedatetime==2.6
 platformdirs==2.4.0
 pycparser==2.20
 pytz==2021.1
+pytz-deprecation-shim==0.1.0.post0
 selenium==3.141.0
 sqlparse==0.4.2
+tzdata==2021.5
+tzlocal==4.1
 urllib3==1.26.7
 webbot==0.34
 whitenoise==5.3.0
