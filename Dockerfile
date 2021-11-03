@@ -29,7 +29,7 @@ RUN wget -q -O /etc/apk/keys/sgerrand.rsa.pub https://alpine-pkgs.sgerrand.com/s
     && apk add glibc-bin-2.30-r0.apk
 
 # install Firefox
-RUN apk add firefox-esr
+RUN apk add firefox-esr && apk add chromium
 
 # install vim editor
 RUN apk add vim
