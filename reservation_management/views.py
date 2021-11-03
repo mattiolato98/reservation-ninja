@@ -16,21 +16,13 @@ from user_management.decorators import manager_required
 
 
 class LessonAddView(LoginRequiredMixin, CreateView):
+    """
+    View that implements the Lesson creation.
+    """
     model = Lesson
     form_class = LessonForm
     template_name = "reservation_management/lesson_add.html"
     success_url = reverse_lazy("reservation_management:lesson-list")
-
-    def post(self, request, *args, **kwargs):
-        """
-        In order to manage the cancel button from the lesson form. If 'cancel'
-        is in the request.POST, the lesson must not be created.
-        :return: HTTP response.
-        """
-        if 'cancel' in request.POST:
-            return HttpResponseRedirect(reverse_lazy("home"))
-        else:
-            return super(LessonAddView, self).post(request, *args, **kwargs)
 
     def form_valid(self, form):
         form.instance.user = self.request.user
@@ -81,6 +73,9 @@ class LessonDeleteView(DeleteView):
 
 
 class ReservationListView(LoginRequiredMixin, ListView):
+    """
+    View to display the reservations made for the current user.
+    """
     model = Reservation
     template_name = "reservation_management/reservation_list.html"
 
@@ -90,6 +85,9 @@ class ReservationListView(LoginRequiredMixin, ListView):
 
 @method_decorator(manager_required, name='dispatch')
 class LogListView(ListView):
+    """
+    View to display the log of the daily reservation.py execution.
+    """
     model = Log
     template_name = "reservation_management/log_list.html"
 
@@ -99,6 +97,9 @@ class LogListView(ListView):
 
 @method_decorator(manager_required, name='dispatch')
 class FeedbackListView(ListView):
+    """
+    View to display the feedback list of the daily reservation.py execution.
+    """
     model = Feedback
     template_name = "reservation_management/feedback_list.html"
 
@@ -117,6 +118,9 @@ class FeedbackListView(ListView):
 @require_POST
 @csrf_protect
 def ajax_send_feedback(request):
+    """
+    View called by an ajax function, it creates a feedback object.
+    """
     user = request.user
 
     Feedback.objects.create(
@@ -134,6 +138,9 @@ def ajax_send_feedback(request):
 @require_POST
 @csrf_protect
 def ajax_whats_new_confirm(request):
+    """
+    View called by an ajax function, it confirms that a user saw the new features.
+    """
     user = request.user
     user.whats_new = False
     user.save()
