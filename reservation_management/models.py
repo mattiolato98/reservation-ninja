@@ -5,6 +5,9 @@ from django.utils.translation import gettext_lazy as _
 
 
 class Building(models.Model):
+    """
+    Model that describe a building, a building contains classrooms.
+    """
     name = models.CharField(max_length=100)
 
     def __str__(self):
@@ -15,6 +18,9 @@ class Building(models.Model):
 
 
 class Classroom(models.Model):
+    """
+    Model that describe a classrom, lessons are held in a classroom.
+    """
     name = models.CharField(max_length=100)
     building = models.ForeignKey(Building, on_delete=models.CASCADE, related_name='classrooms')
 
@@ -26,6 +32,9 @@ class Classroom(models.Model):
 
 
 class Lesson(models.Model):
+    """
+    Model that describe a lesson.
+    """
     MONDAY = 0
     TUESDAY = 1
     WEDNESDAY = 2
@@ -53,6 +62,13 @@ class Lesson(models.Model):
         )
 
     def clean(self):
+        """
+        This function applies additional validation to the lesson that is going
+        to be created.
+
+        Raises:
+            ValidationError: A lesson can't have an end time minor than its start time.
+        """
         if self.start_time >= self.end_time:
             raise ValidationError(_('Lesson start time should be before end time'))
         return super(Lesson, self).clean()
@@ -62,6 +78,10 @@ class Lesson(models.Model):
 
 
 class Reservation(models.Model):
+    """
+    Model that describe a reservation, a lesson can have multiple reservations. Each reservation
+    has a link to the corrisponding web page.
+    """
     link = models.URLField()
     lesson = models.ForeignKey(Lesson, on_delete=models.CASCADE, related_name='reservations')
     start_time = models.TimeField(null=True)
@@ -78,6 +98,10 @@ class Reservation(models.Model):
 
 
 class Log(models.Model):
+    """
+    Model that describe a Log object, it contains information about daily
+    executions.
+    """
     execution_time = models.FloatField()
     users = models.IntegerField()
     lessons = models.IntegerField()
@@ -92,4 +116,23 @@ class Log(models.Model):
 
     @property
     def average_lesson_execution_time(self):
+        """
+        This property returns a useful data about the average execution time of
+        a lesson.
+
+        Returns:
+            float: average time resulted
+        """
         return self.execution_time / self.lessons if self.lessons > 0 else 0
+
+
+class Feedback(models.Model):
+    """
+    Model that describe a user feedback of the daily reservations.
+    """
+    user = models.ForeignKey(get_user_model(), on_delete=models.SET_NULL, related_name='feedbacks', null=True)
+    ok = models.BooleanField()
+    date = models.DateField(auto_now_add=True)
+
+    def __str__(self):
+        return f'{self.user.username} {self.ok}'

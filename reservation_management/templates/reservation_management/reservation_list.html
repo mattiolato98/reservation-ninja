@@ -72,6 +72,27 @@
     {% endfor %}
 {% endblock %}
 
+{% block extra_content %}
+    {% include 'whats_new_modal.html' %}
+    {% if not user.feedback %}
+        <div class="row justify-content-center align-items-center mt-3 mb-5">
+            <div id="user-feedback-box" class="col-xl-3 col-lg-5 col-md-9 col-12 d-flex column-flex align-items-center justify-content-center">
+                <span class="font-6">
+                    {% translate "Are your reservations correct?" %}
+                </span>
+                <div class="mt-3 w-100 d-flex justify-content-center align-items-center">
+                    <button id="feedback-response-yes" class="btn btn-outline-success mr-3 font-size-80 w-25">
+                        {% translate "Yes" %}
+                    </button>
+                    <button id="feedback-response-no" class="btn btn-outline-danger font-size-80 w-25">
+                        {% translate "No" %}
+                    </button>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+{% endblock %}
+
 {% block list_nav_button %}
     <div class="col-xl-3 col-lg-5 col-md-9 col-12 d-flex justify-content-end">
         <a href="{% url 'reservation_management:lesson-list' %}" class="font-6 site-blue-text">
@@ -92,7 +113,29 @@
                 <a href="{% url 'reservation_management:log-list' %}" class="site-link site-color font-6">
                     Logs
                 </a>
+                <a href="{% url 'reservation_management:feedback-list' %}" class="site-link site-color font-6">
+                    Feedbacks
+                </a>
             </div>
         </div>
     {% endif %}
+{% endblock %}
+
+{% block extra_javascript %}
+    <script type="text/javascript">
+        $(function () {
+            $("#feedback-response-yes").on('click', function () {
+                send_feedback(1, $(this));
+            });
+
+            $("#feedback-response-no").on('click', function () {
+                send_feedback(0, $(this));
+            });
+
+            {% if user.whats_new %}
+                $('#whats-new-modal').modal('show');
+            {% endif %}
+        });
+    </script>
+    {% include 'reservation_management/reservation_ajax.html' %}
 {% endblock %}

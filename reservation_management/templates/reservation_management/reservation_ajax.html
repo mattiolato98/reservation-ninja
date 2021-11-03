@@ -1,0 +1,52 @@
+{% load i18n %}
+
+<script type="text/javascript">
+    function send_feedback(ok, $button_clicked) {
+        /**
+         * Save user Feedback.
+         */
+        $.ajax({
+            type: 'POST',
+            url: "{% url 'reservation_management:send-feedback' %}",
+            data: {
+                'response_ok': ok,
+            },
+            headers:{
+                "X-CSRFToken": '{{ csrf_token }}'
+            },
+            dataType: 'json',
+            beforeSend: function() {
+                $("#feedback-response-yes").attr("disabled", true);
+                $("#feedback-response-no").attr("disabled", true);
+                $button_clicked.html(
+                    '<div class="spinner-grow spinner-grow-sm mr-3" role="status"></div>' +
+                    '<span>{% translate "Saving ..." %}</span>'
+                );
+            },
+            success: function(data) {
+                $('#user-feedback-box').html(
+                    '<i class="fas fa-check text-success mr-3"></i>' +
+                    '<span class="text-success font-6">{% translate "Thanks for the feedback!" %}</span><br>' +
+                    '<span class="font-6 font-italic">Arigatō</span>'
+                );
+                window.setTimeout(function() {
+                    $('#user-feedback-box').parent().remove();
+                }, 3000);
+            }
+        });
+    }
+
+     $("#whats-new-confirm-button").on('click', function () {
+        /**
+         * Save user Feedback.
+         */
+        $.ajax({
+            type: 'POST',
+            url: "{% url 'reservation_management:whats-new-confirm' %}",
+            headers:{
+                "X-CSRFToken": '{{ csrf_token }}'
+            },
+            dataType: 'json',
+        });
+    });
+</script>

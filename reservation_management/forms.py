@@ -5,14 +5,11 @@ from django import forms
 
 from reservation_management.models import Lesson
 
-"""
-per i giorni della settimana fornire in input una lista, lato server tradurre i giorni in numero.
-ottenere questo con un dizionario, ad ogni giorno della settimana (chiave), è associato il corrispettivo indice 
-numerico (valore) 
-"""
-
 
 class LessonForm(forms.ModelForm):
+    """
+    Form used to create or update a lesson.
+    """
     helper = FormHelper()
 
     def __init__(self, *args, **kwargs):

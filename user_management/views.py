@@ -20,7 +20,7 @@ from reservation_tool_base_folder.decorators import not_authenticated_only
 from user_management.check_unimore_credentials import check_unimore_credentials
 from user_management.decorators import manager_required
 from user_management.forms import LoginForm, PlatformUserCreationForm, UserUpdateUnimoreCredentialsForm, \
-    UserAddGreenPass
+    UserAddGreenPass, UserGeneralSettings, UserDeleteGreenPass
 from user_management.models import PlatformUser
 
 account_activation_token = PasswordResetTokenGenerator()
@@ -70,6 +70,16 @@ class RegistrationView(CreateView):
         self.object.save()
 
         return response
+
+
+class UserGeneralSettingsView(LoginRequiredMixin, UpdateView):
+    model = get_user_model()
+    form_class = UserGeneralSettings
+    template_name = 'user_management/user_general_settings.html'
+    success_url = reverse_lazy('user_management:settings')
+
+    def get_object(self, queryset=None):
+        return self.request.user
 
 
 class UserUpdateUnimoreCredentialsView(LoginRequiredMixin, FormView):
@@ -128,17 +138,6 @@ class UserGreenPassAddView(LoginRequiredMixin, FormView):
     template_name = "user_management/greenpass_add.html"
     success_url = reverse_lazy("reservation_management:reservation-list")
 
-    def post(self, request, *args, **kwargs):
-        """
-        In order to manage the cancel button from the lesson form. If 'cancel'
-        is in the request.POST, the lesson must not be created.
-        :return: HTTP response.
-        """
-        if 'cancel' in request.POST:
-            return HttpResponseRedirect(reverse_lazy("home"))
-        else:
-            return super(UserGreenPassAddView, self).post(request, *args, **kwargs)
-
     def form_valid(self, form):
         self.object = self.request.user
 
@@ -146,6 +145,20 @@ class UserGreenPassAddView(LoginRequiredMixin, FormView):
         self.object.save()
 
         return super(UserGreenPassAddView, self).form_valid(form)
+
+
+class UserGreenPassDeleteView(LoginRequiredMixin, FormView):
+    form_class = UserDeleteGreenPass
+    template_name = "user_management/greenpass_delete.html"
+    success_url = reverse_lazy("user_management:settings")
+
+    def form_valid(self, form):
+        self.object = self.request.user
+
+        self.object.green_pass_link = None
+        self.object.save()
+
+        return super(UserGreenPassDeleteView, self).form_valid(form)
 
 
 def user_login_by_token(request, user_id_b64=None, user_token=None):
