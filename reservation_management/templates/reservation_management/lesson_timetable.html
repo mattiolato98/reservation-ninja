@@ -1,1 +1,50 @@
 {% extends 'base.html' %}
+{% load i18n %}
+
+{% block title %}{{ block.super }} {% translate "Timetable" %}{% endblock %}
+
+{% block content %}
+    <div class="site-box">
+        <div class="row justify-content-center mt-5">
+            <div class="col-lg-7 col-md-9 col-12 d-flex justify-content-between align-items-center">
+                <a href="{% url 'reservation_management:reservation-list' %}" class="font-6 site-blue-text">
+                    <i class="fas fa-chevron-left mr-2"></i>
+                    Back
+                </a>
+            </div>
+        </div>
+        <div class="row justify-content-center mt-3 mb-5">
+            <div class="col-lg-7 col-md-9 col-12">
+                <h2 class="logo-font site-color">{% translate "Lessons timetable" %}</h2>
+            </div>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-lg-7 col-md-9 col-12">
+                <table class="table table-bordered">
+                    <thead>
+                    <tr>
+                        <th scope="col"></th>
+                        <th scope="col">{% translate "Monday" %}</th>
+                        <th scope="col">{% translate "Tuesday" %}</th>
+                        <th scope="col">{% translate "Wednesday" %}</th>
+                        <th scope="col">{% translate "Thursday" %}</th>
+                        <th scope="col">{% translate "Friday" %}</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for time_range, days_lessons in lessons.items %}
+                    <tr>
+                        <th scope="row">time_range</th>
+                        <td>{{ days_lessons }}</td>
+                        <td></td>
+                        <td></td>
+                        <td>Big Data Analytics</td>
+                        <td>Big Data Analytics</td>
+                    </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+{% endblock %}
