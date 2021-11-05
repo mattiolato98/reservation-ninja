@@ -1,3 +1,5 @@
+import datetime as dt
+
 from django.contrib.auth import get_user_model
 from django.core.exceptions import ValidationError
 from django.db import models
@@ -69,6 +71,13 @@ class Lesson(models.Model):
         Raises:
             ValidationError: A lesson can't have an end time minor than its start time.
         """
+        min_time = dt.time(hour=8, minute=0)
+        max_time = dt.time(hour=19, minute=30)
+
+        if not min_time <= self.start_time <= max_time \
+           or not min_time <= self.end_time <= max_time:
+            raise ValidationError(_("Please, choose a time in the range"))
+
         if self.start_time >= self.end_time:
             raise ValidationError(_('Lesson start time should be before end time'))
         return super(Lesson, self).clean()
