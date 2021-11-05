@@ -1,3 +1,6 @@
+import datetime as dt
+import pandas as pd
+
 from collections import defaultdict
 
 from django.contrib.auth.decorators import login_required
@@ -7,7 +10,7 @@ from django.urls import reverse_lazy
 from django.utils.decorators import method_decorator
 from django.views.decorators.csrf import csrf_protect
 from django.views.decorators.http import require_POST
-from django.views.generic import CreateView, ListView, DetailView, UpdateView, DeleteView
+from django.views.generic import CreateView, ListView, DetailView, UpdateView, DeleteView, TemplateView
 
 from reservation_management.decorators import lesson_owner_only
 from reservation_management.forms import LessonForm
@@ -112,6 +115,34 @@ class FeedbackListView(ListView):
 
         # Dict cast is needed, because template see defaultdict as empty
         return dict(feedbacks_grouped_by_date)
+
+
+class LessonTimetableView(LoginRequiredMixin, TemplateView):
+    template_name = "reservation_management/lesson_timetable.html"
+
+    def get_context_data(self, **kwargs):
+        context = super(LessonTimetableView, self).get_context_data(**kwargs)
+
+        context['lessons'] = defaultdict(dict)
+
+        lessons = self.request.user.lessons.all()
+
+        min_time = min(lesson.start_time for lesson in lessons)
+        max_time = max(lesson.end_time for lesson in lessons)
+
+        lessons_timetable = {}
+        times = []
+        while min_time <= max_time:
+            lessons_timetable[min_time] = None
+            min_time = (dt.datetime.combine(dt.date(1, 1, 1), min_time) + dt.timedelta(minutes=30)).time()
+
+            times.append(min_time)
+
+        data = {'index': times, }
+
+        a = 1
+
+        return context
 
 
 @login_required
