@@ -201,12 +201,20 @@ class UserGeneralSettings(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
-        self.fields['enable_automatic_reservation'].help_text = \
-            _('Disable automatic reservations if you don\'t need them. You\'ll be able to enable them again later.')
+        self.fields['enable_automatic_reservation'].help_text = _(
+            'Disable automatic reservations if you don\'t need them. You\'ll be able to enable them again later'
+        )
+        self.fields['ask_for_feedback'].help_text = _(
+            'Help us discover problems by giving a daily feedback about your reservations'
+        )
 
         self.helper.layout = Layout(
             Row(
                 Column('enable_automatic_reservation', css_class='form-group mb-0 font-6'),
+                css_class='form-row'
+            ),
+            Row(
+                Column('ask_for_feedback', css_class='form-group mb-0 font-6'),
                 css_class='form-row'
             ),
             Row(
@@ -221,7 +229,9 @@ class UserGeneralSettings(forms.ModelForm):
         model = get_user_model()
         fields = (
             'enable_automatic_reservation',
+            'ask_for_feedback',
         )
         labels = {
             'enable_automatic_reservation': _('Automatic reservations'),
+            'ask_for_feedback': _('Daily feedback'),
         }

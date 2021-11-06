@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-11-06 19:21+0100\n"
+"POT-Creation-Date: 2021-11-06 19:45+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -102,7 +102,7 @@ msgstr "Aggiungi una lezione"
 #: reservation_management/templates/reservation_management/lesson_add.html:16
 #: reservation_management/templates/reservation_management/lesson_detail.html:13
 #: reservation_management/templates/reservation_management/lesson_list.html:11
-#: reservation_management/templates/reservation_management/reservation_list.html:119
+#: reservation_management/templates/reservation_management/reservation_list.html:122
 msgid "Your lessons"
 msgstr "Le tue lezioni"
 
@@ -233,15 +233,19 @@ msgstr ""
 msgid "Are your reservations correct?"
 msgstr "Le prenotazioni sono corrette?"
 
-#: reservation_management/templates/reservation_management/reservation_list.html:105
+#: reservation_management/templates/reservation_management/reservation_list.html:104
+msgid "You can disable daily feedbacks from settings"
+msgstr "Puoi disabilitare i feedback dalle impostazioni"
+
+#: reservation_management/templates/reservation_management/reservation_list.html:108
 msgid "Yes"
 msgstr "Sì"
 
-#: reservation_management/templates/reservation_management/reservation_list.html:108
+#: reservation_management/templates/reservation_management/reservation_list.html:111
 msgid "No"
 msgstr "No"
 
-#: reservation_management/templates/reservation_management/reservation_list.html:124
+#: reservation_management/templates/reservation_management/reservation_list.html:127
 msgid "+ Add your first lesson"
 msgstr "+ Aggiungi la tua prima lezione"
 
@@ -506,18 +510,28 @@ msgstr "Link a Google Drive"
 #: user_management/forms.py:205
 msgid ""
 "Disable automatic reservations if you don't need them. You'll be able to "
-"enable them again later."
+"enable them again later"
 msgstr ""
 "Disabilita le prenotazioni automatiche se non ne hai bisogno. Potrai sempre "
 "abilitarle di nuovo successivamente."
 
-#: user_management/forms.py:214
+#: user_management/forms.py:208
+msgid ""
+"Help us discover problems by giving a daily feedback about your reservations"
+msgstr ""
+"Aiutaci a scoprire problemi lasciando un feedback giornaliero sulle tue prenotazioni"
+
+#: user_management/forms.py:222
 msgid "Save changes"
 msgstr "Salva le modifiche"
 
-#: user_management/forms.py:226
+#: user_management/forms.py:235
 msgid "Automatic reservations"
 msgstr "Prenotazioni automatiche"
+
+#: user_management/forms.py:236
+msgid "Daily feedback"
+msgstr "Feedback giornaliero"
 
 #: user_management/templates/registration/login.html:6
 #: user_management/templates/user_management/email_verified.html:19
