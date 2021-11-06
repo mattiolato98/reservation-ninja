@@ -82,14 +82,21 @@ class StatsView(TemplateView):
 
         users = get_user_model().objects.annotate(num_lessons=Count('lessons'))
 
-        context['zero_lessons'] = users.filter(num_lessons=0).count()
-        context['from_one_to_five_lessons'] = users.filter(num_lessons__lte=5, num_lessons__gt=0).count()
         context['more_than_five_lessons'] = users.filter(num_lessons__gt=5).count()
+        context['percent_more_than_five_lessons'] = (context['more_than_five_lessons'] / context['users']) * 100
+        context['from_one_to_five_lessons'] = users.filter(num_lessons__lte=5, num_lessons__gt=0).count()
+        context['percent_from_one_to_five_lessons'] = (context['from_one_to_five_lessons'] / context['users']) * 100
+        context['zero_lessons'] = users.filter(num_lessons=0).count()
+        context['percent_zero_lessons'] = (context['zero_lessons'] / context['users']) * 100
 
         context['green_pass_added'] = get_user_model().objects.filter(green_pass_link__isnull=False).count()
+        context['percent_green_pass_added'] = (context['green_pass_added'] / context['users']) * 100
         context['seen_whats_new'] = get_user_model().objects.filter(whats_new=False).count()
+        context['percent_seen_whats_new'] = (context['seen_whats_new'] / context['users']) * 100
         context['feedback_disabled'] = get_user_model().objects.filter(ask_for_feedback=False).count()
+        context['percent_feedback_disabled'] = (context['feedback_disabled'] / context['users']) * 100
         context['wrong_credentials'] = get_user_model().objects.filter(credentials_ok=False).count()
+        context['percent_wrong_credentials'] = (context['wrong_credentials'] / context['users']) * 100
 
         context['lessons'] = Lesson.objects.count()
 
