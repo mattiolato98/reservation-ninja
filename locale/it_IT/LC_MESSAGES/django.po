@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-11-06 18:47+0100\n"
+"POT-Creation-Date: 2021-11-06 19:05+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -102,7 +102,7 @@ msgstr "Aggiungi una lezione"
 #: reservation_management/templates/reservation_management/lesson_add.html:16
 #: reservation_management/templates/reservation_management/lesson_detail.html:13
 #: reservation_management/templates/reservation_management/lesson_list.html:11
-#: reservation_management/templates/reservation_management/reservation_list.html:98
+#: reservation_management/templates/reservation_management/reservation_list.html:119
 msgid "Your lessons"
 msgstr "Le tue lezioni"
 
@@ -198,16 +198,16 @@ msgstr "Green Pass"
 msgid "Add your Green Pass"
 msgstr "Aggiungi il tuo Green Pass"
 
-#: reservation_management/templates/reservation_management/reservation_list.html:62
+#: reservation_management/templates/reservation_management/reservation_list.html:63
 msgid "No reservation made, insert your lessons!"
 msgstr "Nessuna prenotazione effettuata, inserisci le tue lezioni!"
 
-#: reservation_management/templates/reservation_management/reservation_list.html:64
+#: reservation_management/templates/reservation_management/reservation_list.html:65
 msgid ""
 "\n"
-"                            Go to <strong>Your lessons</strong> and add "
+"                                Go to <strong>Your lessons</strong> and add "
 "them!\n"
-"                        "
+"                            "
 msgstr ""
 "\n"
 "                                            Vai a <strong>le tue lezioni</"
@@ -215,16 +215,38 @@ msgstr ""
 "                                        "
 
 #: reservation_management/templates/reservation_management/reservation_list.html:81
+#, fuzzy
+#| msgid "Your reservations"
+msgid "Hooray! No reservations today"
+msgstr "Urrà! Nessuna prenotazione oggi"
+
+#: reservation_management/templates/reservation_management/reservation_list.html:83
+msgid ""
+"\n"
+"                                You can <strong>take it easy!</strong>\n"
+"                            "
+msgstr ""
+"\n"
+"                                            Puoi <strong>prendertela comoda!</strong>\n"
+"                                        "
+
+#: reservation_management/templates/reservation_management/reservation_list.html:101
 msgid "Are your reservations correct?"
 msgstr "Le prenotazioni sono corrette?"
 
-#: reservation_management/templates/reservation_management/reservation_list.html:85
+#: reservation_management/templates/reservation_management/reservation_list.html:105
 msgid "Yes"
 msgstr "Sì"
 
-#: reservation_management/templates/reservation_management/reservation_list.html:88
+#: reservation_management/templates/reservation_management/reservation_list.html:108
 msgid "No"
 msgstr "No"
+
+#: reservation_management/templates/reservation_management/reservation_list.html:124
+#, fuzzy
+#| msgid "Add a lesson"
+msgid "+ Add your first lesson"
+msgstr "+ Aggiungi la tua prima lezione"
 
 #: templates/footer.html:15 templates/help.html:9
 msgid "Help"
