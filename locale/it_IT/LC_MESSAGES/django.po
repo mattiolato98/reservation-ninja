@@ -211,7 +211,7 @@ msgid ""
 msgstr ""
 "\n"
 "                                            Aggiungi la tua <strong>prima "
-"lezione</strong>cliccando il pulsante qui sotto!\n"
+"lezione</strong> cliccando il pulsante qui sotto!\n"
 "                                        "
 
 #: reservation_management/templates/reservation_management/reservation_list.html:81
