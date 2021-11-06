@@ -2,7 +2,7 @@
 FROM python:3.9.7-alpine
 
 # set work directory
-WORKDIR .
+# WORKDIR .
 
 # set environment variables
 ENV PYTHONDONTWRITEBYTECODE 1
@@ -29,7 +29,7 @@ RUN wget -q -O /etc/apk/keys/sgerrand.rsa.pub https://alpine-pkgs.sgerrand.com/s
     && apk add glibc-bin-2.30-r0.apk
 
 # install Firefox
-RUN apk add firefox-esr
+RUN apk add firefox-esr && apk add chromium && apk add chromium-chromedriver
 
 # install vim editor
 RUN apk add vim
@@ -39,13 +39,23 @@ RUN wget https://github.com/mozilla/geckodriver/releases/download/v0.26.0/geckod
     && tar -zxf geckodriver-v0.26.0-linux64.tar.gz -C /usr/bin \
     && geckodriver --version
 
+RUN addgroup -S ninja && adduser -S ninja -G ninja
+
+ENV HOME=/home/ninja
+ENV APP_HOME=/home/ninja/web
+RUN mkdir $APP_HOME
+WORKDIR $APP_HOME
+
 # install dependencies
 COPY requirements.txt .
-RUN pip install --upgrade pip \
-    && pip install -r requirements.txt
+RUN pip install --upgrade pip
+
+RUN pip install -r requirements.txt
+
+RUN chown -R ninja:ninja /usr/local/lib/python3.9/site-packages/webbot/drivers/chrome_linux
 
 # copy project
-COPY . .
+COPY . $APP_HOME
 
 # set timezone info
 RUN cp /usr/share/zoneinfo/$TZ /etc/localtime \
@@ -55,8 +65,9 @@ RUN cp /usr/share/zoneinfo/$TZ /etc/localtime \
 # collect static files and migrate
 RUN python manage.py collectstatic --noinput
 
+RUN chown -R ninja:ninja $APP_HOME
+
 # add and run as non-root user
-RUN adduser -D ninja
 USER ninja
 
 # run gunicorn
