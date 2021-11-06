@@ -6,7 +6,7 @@
     <div class="site-box">
         <div class="row justify-content-center mt-5">
             <div class="col-md-9 col-12 d-flex justify-content-between align-items-center">
-                <a href="{% url 'reservation_management:reservation-list' %}" class="font-6 site-blue-text">
+                <a href="{% url 'reservation_management:reservation-list' %}" class="font-7 site-blue-text">
                     <i class="fas fa-chevron-left mr-2"></i>
                     Back
                 </a>
@@ -31,46 +31,55 @@
                         <div class="row">
                             <div class="col-md col-12 d-flex flex-column mr-md-5">
                                 <div class="d-flex justify-content-between">
-                                    <span class="font-6 text-success">New subscribers last 7 days:</span>
-                                    &nbsp;&nbsp;&nbsp;
-                                    <span>{{ subscribers_last_7_days }}</span>
+                                    <span class="font-7 text-success">New subscribers last 7 days:</span>
+                                    <div>
+                                        <span class="font-7">{{ subscribers_last_7_days }}</span>
+                                        <span class="font-7 text-success">
+                                        (+ {{ percent_increment_subscribers_last_7_days|floatformat:"0" }}%)
+                                    </span>
+                                    </div>
                                 </div>
                                 <div class="d-flex justify-content-between">
-                                    <span class="font-6 text-success">Logged in last 7 days</span>&nbsp;&nbsp;&nbsp;
-                                    <span>{{ logged_in_last_7_days }}</span>
+                                    <span class="font-7 text-success">Logged in last 7 days</span>
+                                    <div>
+                                        <span class="font-7">{{ logged_in_last_7_days }}</span>
+                                        <span class="font-7 text-success">
+                                        ({{ percent_logged_in_last_7_days|floatformat:"0" }}%)
+                                    </span>
+                                    </div>
                                 </div>
                                 <div class="d-flex justify-content-between">
-                                    <span class="font-6 text-danger">Inactive users</span>&nbsp;&nbsp;&nbsp;
+                                    <span class="font-7 text-danger">Inactive users</span>
                                     <span>{{ inactive_users }}</span>
                                 </div>
                             </div>
                             <hr class="sm-only" style="display: none;">
                             <div class="col-md col-12 d-flex flex-column mx-md-5">
                                 <div class="d-flex justify-content-between">
-                                    <span class="font-6">Five or more lessons</span>&nbsp;&nbsp;&nbsp;
+                                    <span class="font-7">Five or more lessons</span>
                                     <span>{{ five_or_more_lessons }}</span>
                                 </div>
                                 <div class="d-flex justify-content-between">
-                                    <span class="font-6">Less than five lessons</span>&nbsp;&nbsp;&nbsp;
+                                    <span class="font-7">Less than five lessons</span>
                                     <span>{{ less_than_five_lessons }}</span>
                                 </div>
                                 <div class="d-flex justify-content-between">
-                                    <span class="font-6">Zero lessons</span>&nbsp;&nbsp;&nbsp;
+                                    <span class="font-7">Zero lessons</span>
                                     <span>{{ zero_lessons }}</span>
                                 </div>
                             </div>
                             <hr class="sm-only" style="display: none;">
                             <div class="col-md col-12 d-flex flex-column ml-md-5">
                                 <div class="d-flex justify-content-between">
-                                    <span class="font-6">Green pass added</span>&nbsp;&nbsp;&nbsp;
+                                    <span class="font-7">Green pass added</span>
                                     <span>{{ green_pass_added }}</span>
                                 </div>
                                 <div class="d-flex justify-content-between">
-                                    <span class="font-6">Seen What's new</span>&nbsp;&nbsp;&nbsp;
+                                    <span class="font-7">Seen What's new</span>
                                     <span>{{ seen_whats_new }}</span>
                                 </div>
                                 <div class="d-flex justify-content-between">
-                                    <span class="font-6">Wrong credentials</span>&nbsp;&nbsp;&nbsp;
+                                    <span class="font-7">Wrong credentials</span>
                                     <span>{{ wrong_credentials }}</span>
                                 </div>
                             </div>
@@ -93,11 +102,11 @@
                         <div class="row">
                             <div class="col-md col-12 d-flex flex-column mr-md-5">
                                 <div class="d-flex justify-content-between">
-                                    <span class="font-6">Average lessons per user</span>&nbsp;&nbsp;&nbsp;
+                                    <span class="font-7">Average lessons per user</span>
                                     <span>{{ average_lessons_per_user|floatformat:"2" }}</span>
                                 </div>
                                 <div class="d-flex justify-content-between">
-                                    <span class="font-6">Today lessons</span>&nbsp;&nbsp;&nbsp;
+                                    <span class="font-7">Today lessons</span>
                                     <span>{{ today_lessons }}</span>
                                 </div>
                             </div>
@@ -105,7 +114,7 @@
                             <div class="col-md col-12 d-flex flex-column ml-md-5">
                                 {% for day, num_lessons in lessons_per_day.items %}
                                     <div class="d-flex justify-content-between">
-                                        <span class="font-6">{{ day }}</span>&nbsp;&nbsp;&nbsp;
+                                        <span class="font-7">{{ day }}</span>
                                         <span>{{ num_lessons }}</span>
                                     </div>
                                 {% endfor %}
@@ -127,7 +136,7 @@
                 <div class="list-group">
                     <div class="list-group-item py-3">
                         <div class="d-flex justify-content-between">
-                            <span class="font-6">Average reservations per user</span>&nbsp;&nbsp;&nbsp;
+                            <span class="font-7">Average reservations per user</span>&nbsp;&nbsp;&nbsp;
                             <span>{{ average_reservations_per_user|floatformat:"2" }}</span>
                         </div>
                     </div>
