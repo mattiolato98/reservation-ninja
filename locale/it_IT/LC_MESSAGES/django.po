@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-11-06 19:05+0100\n"
+"POT-Creation-Date: 2021-11-06 19:10+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -215,8 +215,6 @@ msgstr ""
 "                                        "
 
 #: reservation_management/templates/reservation_management/reservation_list.html:81
-#, fuzzy
-#| msgid "Your reservations"
 msgid "Hooray! No reservations today"
 msgstr "Urrà! Nessuna prenotazione oggi"
 
@@ -227,7 +225,8 @@ msgid ""
 "                            "
 msgstr ""
 "\n"
-"                                            Puoi <strong>prendertela comoda!</strong>\n"
+"                                            Puoi <strong>prendertela comoda!"
+"</strong>\n"
 "                                        "
 
 #: reservation_management/templates/reservation_management/reservation_list.html:101
