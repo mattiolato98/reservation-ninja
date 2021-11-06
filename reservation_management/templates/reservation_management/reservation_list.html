@@ -117,7 +117,7 @@
 {% endblock %}
 
 {% block bottom_nav_button %}
-    {% if user.lessons.count < 0 %}
+    {% if user.lessons.count > 0 %}
         <a href="{% url 'reservation_management:lesson-list' %}" class="font-6 site-blue-text">
             {% translate "Your lessons" %}
             <i class="fas fa-chevron-right ml-2"></i>
