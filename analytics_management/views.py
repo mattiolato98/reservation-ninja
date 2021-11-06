@@ -82,16 +82,19 @@ class StatsView(TemplateView):
 
         users = get_user_model().objects.annotate(num_lessons=Count('lessons'))
 
-        context['zero_lessons'] = users.filter(num_lessons=0).count()
-        context['from_one_to_five_lessons'] = users.filter(num_lessons__lte=5, num_lessons__gt=0).count()
+        context['lessons'] = Lesson.objects.count()
+
         context['more_than_five_lessons'] = users.filter(num_lessons__gt=5).count()
+        context['percent_more_than_five_lessons'] = (context['more_than_five_lessons'] / context['lessons']) * 100
+        context['from_one_to_five_lessons'] = users.filter(num_lessons__lte=5, num_lessons__gt=0).count()
+        context['percent_from_one_to_five_lessons'] = (context['from_one_to_five_lessons'] / context['lessons']) * 100
+        context['zero_lessons'] = users.filter(num_lessons=0).count()
+        context['percent_zero_lessons'] = (context['zero_lessons'] / context['lessons']) * 100
 
         context['green_pass_added'] = get_user_model().objects.filter(green_pass_link__isnull=False).count()
         context['seen_whats_new'] = get_user_model().objects.filter(whats_new=False).count()
         context['feedback_disabled'] = get_user_model().objects.filter(ask_for_feedback=False).count()
         context['wrong_credentials'] = get_user_model().objects.filter(credentials_ok=False).count()
-
-        context['lessons'] = Lesson.objects.count()
 
         context['average_lessons_per_user'] = context['lessons'] / context['users']
         context['today_lessons'] = Lesson.objects.filter(
