@@ -107,14 +107,17 @@
         <div class="row justify-content-center mt-5 px-3">
             <div class="col-xl-3 col-lg-5 col-md-9 col-12 d-flex flex-column border p-4">
                 <span class="h4 font-6 logo-font">Administration</span>
-                <a href="{% url 'user_management:list' %}" class="site-link site-color font-6">
+                <a href="{% url 'analytics_management:user-list' %}" class="site-link site-color font-6">
                     Users
                 </a>
-                <a href="{% url 'reservation_management:log-list' %}" class="site-link site-color font-6">
+                <a href="{% url 'analytics_management:log-list' %}" class="site-link site-color font-6">
                     Logs
                 </a>
-                <a href="{% url 'reservation_management:feedback-list' %}" class="site-link site-color font-6">
+                <a href="{% url 'analytics_management:feedback-list' %}" class="site-link site-color font-6">
                     Feedbacks
+                </a>
+                <a href="{% url 'analytics_management:stats' %}" class="site-link site-color font-6">
+                    Stats
                 </a>
             </div>
         </div>

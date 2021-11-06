@@ -7,7 +7,7 @@
          */
         $.ajax({
             type: 'POST',
-            url: "{% url 'reservation_management:send-feedback' %}",
+            url: "{% url 'analytics_management:send-feedback' %}",
             data: {
                 'response_ok': ok,
             },

@@ -1,7 +1,9 @@
+import datetime
 import django
 import os
 import sys
 
+from django.utils.timezone import make_aware
 from os.path import dirname
 from selenium import webdriver
 from selenium.webdriver.firefox.options import Options
@@ -55,9 +57,12 @@ if __name__ == "__main__":
     os.environ.setdefault("DJANGO_SETTINGS_MODULE", "reservation_tool_base_folder.settings")
     django.setup()
 
+    today_min = make_aware(datetime.datetime.combine(datetime.date.today(), datetime.time.min))
+    today_max = make_aware(datetime.datetime.combine(datetime.date.today(), datetime.time.max))
+
     users = get_user_model().objects.filter(
-        enable_automatic_reservation=True,
         credentials_ok=True,
+        date_joined__range=(today_min, today_max),
     )
 
     wrong_users = list(set(map(check_data, users)))

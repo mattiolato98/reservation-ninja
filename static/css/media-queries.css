@@ -8,4 +8,7 @@
     .modal {
         width: 100%;
     }
+    .sm-only {
+        display: block !important;
+    }
 }
