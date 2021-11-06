@@ -242,6 +242,24 @@ select:-webkit-autofill:focus {
     color: white;
 }
 
+.green-btn-outline {
+    border-color: #69DC9E;
+    color: #69DC9E;
+}
+
+.green-btn-outline:hover {
+    box-shadow: 0 .5rem 1rem rgba(0,0,0,.15)!important;
+    background-color: #5cc58c;
+    border-color: #5cc58c;
+    color: white;
+}
+
+.green-btn-outline:active {
+    background-color: #7ceaae !important;
+    border-color: #7ceaae !important;
+    color: white;
+}
+
 .btn-danger:hover {
     box-shadow: 0 .5rem 1rem rgba(0,0,0,.15)!important;
 }
