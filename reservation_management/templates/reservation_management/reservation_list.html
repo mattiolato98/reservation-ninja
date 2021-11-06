@@ -94,11 +94,14 @@
 
 {% block extra_content %}
     {% include 'whats_new_modal.html' %}
-    {% if not user.feedback %}
+    {% if not user.feedback and user.ask_for_feedback %}
         <div class="row justify-content-center align-items-center mt-3 mb-5">
             <div id="user-feedback-box" class="col-xl-3 col-lg-5 col-md-9 col-12 d-flex column-flex align-items-center justify-content-center">
                 <span class="font-6">
                     {% translate "Are your reservations correct?" %}
+                </span>
+                <span class="small text-muted">
+                    {% translate "You can disable daily feedbacks from settings" %}
                 </span>
                 <div class="mt-3 w-100 d-flex justify-content-center align-items-center">
                     <button id="feedback-response-yes" class="btn btn-outline-success mr-3 font-size-80 w-25">
