@@ -16,6 +16,7 @@ from django.views.decorators.http import require_GET, require_POST
 from django.views.generic import CreateView, TemplateView, DeleteView, UpdateView, FormView
 from django.utils.translation import gettext_lazy as _
 
+from analytics_management.models import Stats
 from reservation_tool_base_folder.decorators import not_authenticated_only
 from user_management.check_unimore_credentials import check_unimore_credentials
 from user_management.forms import LoginForm, PlatformUserCreationForm, UserUpdateUnimoreCredentialsForm, \
@@ -120,6 +121,12 @@ class UserDeleteView(LoginRequiredMixin, DeleteView):
 
     def get_object(self, queryset=None):
         return self.request.user
+
+    def post(self, request, *args, **kwargs):
+        stats = Stats.objects.first()
+        stats.unsubscribed_users += 1
+        stats.save()
+        return super(UserDeleteView, self).post(request, *args, **kwargs)
 
 
 class UserGreenPassAddView(LoginRequiredMixin, FormView):
