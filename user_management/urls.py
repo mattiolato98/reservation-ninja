@@ -8,7 +8,6 @@ urlpatterns = [
     path('login', views.LoginUserView.as_view(), name='login'),
     path('registration', views.RegistrationView.as_view(), name='registration'),
     path('logout', auth_views.LogoutView.as_view(), name='logout'),
-    path('list', views.UserListView.as_view(), name='list'),
     path('ajax-check-username-exists', views.ajax_check_username_exists, name='ajax-check-username-exists'),
     path('ajax-check-email', views.ajax_check_email, name='ajax-check-email'),
     path('email/verification_needed', views.EmailVerificationNeededView.as_view(), name='email-verification-needed'),
