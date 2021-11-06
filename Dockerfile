@@ -40,9 +40,9 @@ RUN wget https://github.com/mozilla/geckodriver/releases/download/v0.26.0/geckod
     && geckodriver --version
 
 # install dependencies
-COPY requirments.txt .
+COPY requirements.txt .
 RUN pip install --upgrade pip \
-    && pip install -r requirments.txt
+    && pip install -r requirements.txt
 
 # copy project
 COPY . .
