@@ -5,7 +5,15 @@
 
 {% block content %}
     <div class="site-box">
-        <div class="row justify-content-center">
+        <div class="row justify-content-center mt-5">
+            <div class="col-xl-3 col-lg-5 col-md-9 col-12">
+                <a href="{% url 'user_management:settings' %}" class="font-6 site-blue-text">
+                    <i class="fas fa-chevron-left mr-2"></i>
+                    {% translate "Back to settings" %}
+                </a>
+            </div>
+        </div>
+        <div class="row justify-content-center mt-3">
             <div class="col-xl-3 col-lg-5 col-md-9 col-12">
                 <span class="h2 site-color logo-font">{% translate "Delete your account" %}</span>
             </div>
@@ -42,14 +50,6 @@
                            value="{% translate 'Delete' %}"
                            disabled="disabled">
                 </form>
-            </div>
-        </div>
-        <div class="row justify-content-center mt-4">
-            <div class="col-xl-3 col-lg-5 col-md-9 col-12">
-                <a href="{% url 'user_management:settings' %}" class="font-6 site-blue-text">
-                    <i class="fas fa-chevron-left mr-2"></i>
-                    {% translate "Back to settings" %}
-                </a>
             </div>
         </div>
     </div>
