@@ -1,10 +1,138 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
-</head>
-<body>
-$END$
-</body>
-</html>
+{% extends 'base.html' %}
+
+{% block title %}Stats{% endblock %}
+
+{% block content %}
+    <div class="site-box">
+        <div class="row justify-content-center mt-5">
+            <div class="col-md-9 col-12 d-flex justify-content-between align-items-center">
+                <a href="{% url 'reservation_management:reservation-list' %}" class="font-6 site-blue-text">
+                    <i class="fas fa-chevron-left mr-2"></i>
+                    Back
+                </a>
+            </div>
+        </div>
+        <div class="row justify-content-center mb-5 mt-3">
+            <div class="col-md-9 col-12">
+                <h2 class="logo-font site-color">Stats</h2>
+            </div>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-md-9 col-12">
+                <div class="d-flex justify-content-between">
+                    <span class="h3 font-7">Users</span>
+                    <div>
+                        <span class="h3 font-7">{{ users }}</span>&nbsp;
+                        <span class="h4 text-danger font-7">(- {{ unsubscribed_users }})</span>
+                    </div>
+                </div>
+                <div class="list-group">
+                    <div class="list-group-item py-3">
+                        <div class="row">
+                            <div class="col-md col-12 d-flex flex-column mr-5">
+                                <div class="d-flex justify-content-between">
+                                    <span class="font-6 text-success">New subscribers last 7 days:</span>
+                                    &nbsp;&nbsp;&nbsp;
+                                    <span>{{ subscribers_last_7_days }}</span>
+                                </div>
+                                <div class="d-flex justify-content-between">
+                                    <span class="font-6 text-success">Logged in last 7 days</span>&nbsp;&nbsp;&nbsp;
+                                    <span>{{ logged_in_last_7_days }}</span>
+                                </div>
+                                <div class="d-flex justify-content-between">
+                                    <span class="font-6 text-danger">Inactive users</span>&nbsp;&nbsp;&nbsp;
+                                    <span>{{ inactive_users }}</span>
+                                </div>
+                            </div>
+                            <hr class="sm-only" style="display: none;">
+                            <div class="col-md col-12 d-flex flex-column mx-5">
+                                <div class="d-flex justify-content-between">
+                                    <span class="font-6">Five or more lessons</span>&nbsp;&nbsp;&nbsp;
+                                    <span>{{ five_or_more_lessons }}</span>
+                                </div>
+                                <div class="d-flex justify-content-between">
+                                    <span class="font-6">Less than five lessons</span>&nbsp;&nbsp;&nbsp;
+                                    <span>{{ less_than_five_lessons }}</span>
+                                </div>
+                                <div class="d-flex justify-content-between">
+                                    <span class="font-6">Zero lessons</span>&nbsp;&nbsp;&nbsp;
+                                    <span>{{ zero_lessons }}</span>
+                                </div>
+                            </div>
+                            <hr class="sm-only" style="display: none;">
+                            <div class="col-md col-12 d-flex flex-column ml-5">
+                                <div class="d-flex justify-content-between">
+                                    <span class="font-6">Green pass added</span>&nbsp;&nbsp;&nbsp;
+                                    <span>{{ green_pass_added }}</span>
+                                </div>
+                                <div class="d-flex justify-content-between">
+                                    <span class="font-6">Seen What's new</span>&nbsp;&nbsp;&nbsp;
+                                    <span>{{ seen_whats_new }}</span>
+                                </div>
+                                <div class="d-flex justify-content-between">
+                                    <span class="font-6">Wrong credentials</span>&nbsp;&nbsp;&nbsp;
+                                    <span>{{ wrong_credentials }}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row justify-content-center">
+            <div class="col-md-9 col-12">
+                <div class="d-flex justify-content-between mt-4">
+                    <span class="h3 font-7">Lessons</span>
+                    <div>
+                        <span class="h3 font-7">{{ lessons }}</span>
+                    </div>
+                </div>
+                <div class="list-group">
+                    <div class="list-group-item py-3">
+                        <div class="row">
+                            <div class="col-md col-12 d-flex flex-column mr-5">
+                                <div class="d-flex justify-content-between">
+                                    <span class="font-6">Average lessons per user</span>&nbsp;&nbsp;&nbsp;
+                                    <span>{{ average_lessons_per_user|floatformat:"2" }}</span>
+                                </div>
+                                <div class="d-flex justify-content-between">
+                                    <span class="font-6">Today lessons</span>&nbsp;&nbsp;&nbsp;
+                                    <span>{{ today_lessons }}</span>
+                                </div>
+                            </div>
+                            <hr class="sm-only" style="display: none;">
+                            <div class="col-md col-12 d-flex flex-column ml-5">
+                                {% for day, num_lessons in lessons_per_day.items %}
+                                    <div class="d-flex justify-content-between">
+                                        <span class="font-6">{{ day }}</span>&nbsp;&nbsp;&nbsp;
+                                        <span>{{ num_lessons }}</span>
+                                    </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row justify-content-center">
+            <div class="col-md-9 col-12">
+                <div class="d-flex justify-content-between mt-4">
+                    <span class="h3 font-7">Reservations</span>
+                    <div>
+                        <span class="h3 font-7">{{ reservations }}</span>
+                    </div>
+                </div>
+                <div class="list-group">
+                    <div class="list-group-item py-3">
+                        <div class="d-flex justify-content-between">
+                            <span class="font-6">Average reservations per user</span>&nbsp;&nbsp;&nbsp;
+                            <span>{{ average_reservations_per_user|floatformat:"2" }}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
