@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-11-06 19:45+0100\n"
+"POT-Creation-Date: 2021-11-06 22:16+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -71,7 +71,7 @@ msgstr ""
 #: reservation_management/templates/reservation_management/lesson_delete.html:10
 #: user_management/templates/user_management/greenpass_add.html:11
 #: user_management/templates/user_management/greenpass_delete.html:11
-#: user_management/templates/user_management/user_delete.html:16
+#: user_management/templates/user_management/user_delete.html:24
 msgid "Warning"
 msgstr "Attenzione"
 
@@ -90,7 +90,7 @@ msgstr "Perfavore aggiornale o non potremo prenotare le tue aule."
 #: reservation_management/templates/reservation_management/base/base_list.html:62
 #: user_management/forms.py:136
 #: user_management/templates/user_management/user_ajax.html:121
-#: user_management/templates/user_management/user_update_unimore_credentials.html:22
+#: user_management/templates/user_management/user_update_unimore_credentials.html:30
 msgid "Update"
 msgstr "Aggiorna"
 
@@ -126,7 +126,7 @@ msgstr ""
 
 #: reservation_management/templates/reservation_management/lesson_delete.html:25
 #: user_management/forms.py:191
-#: user_management/templates/user_management/user_delete.html:42
+#: user_management/templates/user_management/user_delete.html:50
 msgid "Delete"
 msgstr "Elimina"
 
@@ -215,8 +215,8 @@ msgstr ""
 "                                        "
 
 #: reservation_management/templates/reservation_management/reservation_list.html:81
-msgid "Hooray! No reservations today"
-msgstr "Urrà! Nessuna prenotazione oggi"
+msgid "Hooray! No reservations today."
+msgstr "Urrà! Nessuna prenotazione oggi."
 
 #: reservation_management/templates/reservation_management/reservation_list.html:83
 msgid ""
@@ -519,7 +519,8 @@ msgstr ""
 msgid ""
 "Help us discover problems by giving a daily feedback about your reservations"
 msgstr ""
-"Aiutaci a scoprire problemi lasciando un feedback giornaliero sulle tue prenotazioni"
+"Aiutaci a scoprire problemi lasciando un feedback giornaliero sulle tue "
+"prenotazioni"
 
 #: user_management/forms.py:222
 msgid "Save changes"
@@ -637,9 +638,9 @@ msgstr ""
 "principale."
 
 #: user_management/templates/user_management/greenpass_delete.html:31
-#: user_management/templates/user_management/user_delete.html:51
+#: user_management/templates/user_management/user_delete.html:12
 #: user_management/templates/user_management/user_general_settings.html:16
-#: user_management/templates/user_management/user_update_unimore_credentials.html:34
+#: user_management/templates/user_management/user_update_unimore_credentials.html:13
 msgid "Back to settings"
 msgstr "Torna alle impostazioni"
 
@@ -679,7 +680,7 @@ msgstr ""
 "                    "
 
 #: user_management/templates/user_management/settings.html:52
-#: user_management/templates/user_management/user_delete.html:10
+#: user_management/templates/user_management/user_delete.html:18
 msgid "Delete your account"
 msgstr "Elimina il tuo account"
 
@@ -713,20 +714,20 @@ msgstr "Verificato"
 msgid "Delete account"
 msgstr "Elimina account"
 
-#: user_management/templates/user_management/user_delete.html:19
+#: user_management/templates/user_management/user_delete.html:27
 msgid "Are you sure you want to delete your account?"
 msgstr "Vuoi davvero eliminare il tuo account?"
 
-#: user_management/templates/user_management/user_delete.html:24
+#: user_management/templates/user_management/user_delete.html:32
 msgid "All your data will be destroyed and you won't be able to retrieve it."
 msgstr ""
 "Tutti i tuoi dati verranno distrutti e non sarai più in grado di recuperarli."
 
-#: user_management/templates/user_management/user_delete.html:34
+#: user_management/templates/user_management/user_delete.html:42
 msgid "For confirmation, enter your username:"
 msgstr "Inserisci il tuo username per confermare:"
 
-#: user_management/templates/user_management/user_update_unimore_credentials.html:11
+#: user_management/templates/user_management/user_update_unimore_credentials.html:19
 msgid "Update your Unimore credentials"
 msgstr "Aggiorna le credenziali Unimore"
 
