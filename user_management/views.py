@@ -58,7 +58,7 @@ class RegistrationView(CreateView):
 
         self.object.email_user(
             subject=mail_subject,
-            message=(f'''Ciao {self.object.username}'''
+            message=(f'''Ciao {self.object.username}\n'''
                      + '''Ti diamo il benvenuto in Reservation Ninja!\n'''
                      + '''\nConferma la tua email:'''
                      + f'''\n{self.request.build_absolute_uri(relative_confirm_url)}\n'''
