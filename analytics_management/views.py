@@ -1,4 +1,3 @@
-import datetime
 import datetime as dt
 
 from collections import defaultdict
@@ -18,7 +17,7 @@ from reservation_management.models import Lesson, Reservation
 from user_management.decorators import manager_required
 
 
-@method_decorator(manager_required, name='dispatch')
+@method_decorator([login_required, manager_required], name='dispatch')
 class LogListView(ListView):
     """
     View to display the log of the daily reservation.py execution.
@@ -30,7 +29,7 @@ class LogListView(ListView):
         return Log.objects.all().order_by('-date')
 
 
-@method_decorator(manager_required, name='dispatch')
+@method_decorator([login_required, manager_required], name='dispatch')
 class FeedbackListView(ListView):
     """
     View to display the feedback list of the daily reservation.py execution.
@@ -49,7 +48,7 @@ class FeedbackListView(ListView):
         return dict(feedbacks_grouped_by_date)
 
 
-@method_decorator(manager_required, name='dispatch')
+@method_decorator([login_required, manager_required], name='dispatch')
 class UserListView(ListView):
     model = get_user_model()
     template_name = "analytics_management/user_list.html"
