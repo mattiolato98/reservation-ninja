@@ -88,6 +88,7 @@ class StatsView(TemplateView):
 
         context['green_pass_added'] = get_user_model().objects.filter(green_pass_link__isnull=False).count()
         context['seen_whats_new'] = get_user_model().objects.filter(whats_new=False).count()
+        context['feedback_disabled'] = get_user_model().objects.filter(ask_for_feedback=False).count()
         context['wrong_credentials'] = get_user_model().objects.filter(credentials_ok=False).count()
 
         context['lessons'] = Lesson.objects.count()
