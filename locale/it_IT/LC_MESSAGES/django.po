@@ -242,8 +242,6 @@ msgid "No"
 msgstr "No"
 
 #: reservation_management/templates/reservation_management/reservation_list.html:124
-#, fuzzy
-#| msgid "Add a lesson"
 msgid "+ Add your first lesson"
 msgstr "+ Aggiungi la tua prima lezione"
 
