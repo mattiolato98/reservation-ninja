@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-10-26 15:55+0200\n"
+"POT-Creation-Date: 2021-11-06 18:47+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -16,58 +16,58 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: reservation_management/forms.py:34 user_management/forms.py:165
+#: reservation_management/forms.py:31 user_management/forms.py:165
 msgid "Insert"
 msgstr "Inserisci"
 
-#: reservation_management/forms.py:50
+#: reservation_management/forms.py:47
 msgid "Day"
 msgstr "Giorno"
 
-#: reservation_management/forms.py:51
+#: reservation_management/forms.py:48
 msgid "Start time"
 msgstr "Ora inizio"
 
-#: reservation_management/forms.py:52
+#: reservation_management/forms.py:49
 msgid "End time"
 msgstr "Ora fine"
 
-#: reservation_management/forms.py:53
+#: reservation_management/forms.py:50
 msgid "Classroom"
 msgstr "Aula"
 
-#: reservation_management/models.py:35
-#: reservation_management/templatetags/app_filters.py:8
+#: reservation_management/models.py:44
+#: reservation_management/templatetags/app_filters.py:17
 msgid "Monday"
 msgstr "Lunedì"
 
-#: reservation_management/models.py:36
-#: reservation_management/templatetags/app_filters.py:9
+#: reservation_management/models.py:45
+#: reservation_management/templatetags/app_filters.py:18
 msgid "Tuesday"
 msgstr "Martedì"
 
-#: reservation_management/models.py:37
-#: reservation_management/templatetags/app_filters.py:10
+#: reservation_management/models.py:46
+#: reservation_management/templatetags/app_filters.py:19
 msgid "Wednesday"
 msgstr "Mercoledì"
 
-#: reservation_management/models.py:38
-#: reservation_management/templatetags/app_filters.py:11
+#: reservation_management/models.py:47
+#: reservation_management/templatetags/app_filters.py:20
 msgid "Thursday"
 msgstr "Giovedì"
 
-#: reservation_management/models.py:39
-#: reservation_management/templatetags/app_filters.py:12
+#: reservation_management/models.py:48
+#: reservation_management/templatetags/app_filters.py:21
 msgid "Friday"
 msgstr "Venerdì"
 
-#: reservation_management/models.py:57
+#: reservation_management/models.py:73
 msgid "Lesson start time should be before end time"
 msgstr ""
 "L'orario di inizio di una lezione dovrebbe essere inferiore all'orario di "
 "fine."
 
-#: reservation_management/templates/reservation_management/base/base_list.html:38
+#: reservation_management/templates/reservation_management/base/base_list.html:44
 #: reservation_management/templates/reservation_management/lesson_delete.html:10
 #: user_management/templates/user_management/greenpass_add.html:11
 #: user_management/templates/user_management/greenpass_delete.html:11
@@ -75,19 +75,19 @@ msgstr ""
 msgid "Warning"
 msgstr "Attenzione"
 
-#: reservation_management/templates/reservation_management/base/base_list.html:42
+#: reservation_management/templates/reservation_management/base/base_list.html:48
 msgid "Your Unimore credentials are wrong"
 msgstr "Le tue credenziali Unimore risultano errate"
 
-#: reservation_management/templates/reservation_management/base/base_list.html:47
+#: reservation_management/templates/reservation_management/base/base_list.html:53
 msgid "Even monkeys fall from trees"
 msgstr "Anche le scimmie cadono dagli alberi"
 
-#: reservation_management/templates/reservation_management/base/base_list.html:51
+#: reservation_management/templates/reservation_management/base/base_list.html:57
 msgid "Please update them or we can't reserve your classrooms."
 msgstr "Perfavore aggiornale o non potremo prenotare le tue aule."
 
-#: reservation_management/templates/reservation_management/base/base_list.html:56
+#: reservation_management/templates/reservation_management/base/base_list.html:62
 #: user_management/forms.py:136
 #: user_management/templates/user_management/user_ajax.html:121
 #: user_management/templates/user_management/user_update_unimore_credentials.html:22
@@ -100,9 +100,9 @@ msgid "Add a lesson"
 msgstr "Aggiungi una lezione"
 
 #: reservation_management/templates/reservation_management/lesson_add.html:16
-#: reservation_management/templates/reservation_management/lesson_detail.html:44
+#: reservation_management/templates/reservation_management/lesson_detail.html:13
 #: reservation_management/templates/reservation_management/lesson_list.html:11
-#: reservation_management/templates/reservation_management/reservation_list.html:99
+#: reservation_management/templates/reservation_management/reservation_list.html:98
 msgid "Your lessons"
 msgstr "Le tue lezioni"
 
@@ -139,11 +139,11 @@ msgstr "Torna alla lezione"
 msgid "Lesson"
 msgstr "Lezione"
 
-#: reservation_management/templates/reservation_management/lesson_detail.html:32
+#: reservation_management/templates/reservation_management/lesson_detail.html:40
 msgid "Start at "
 msgstr "Inizia alle "
 
-#: reservation_management/templates/reservation_management/lesson_detail.html:33
+#: reservation_management/templates/reservation_management/lesson_detail.html:41
 msgid "End at "
 msgstr "Finisce alle "
 
@@ -167,7 +167,7 @@ msgstr ""
 "strong> e aggiungile!\n"
 "                                        "
 
-#: reservation_management/templates/reservation_management/lesson_list.html:67
+#: reservation_management/templates/reservation_management/lesson_list.html:66
 #: reservation_management/templates/reservation_management/reservation_list.html:11
 #: user_management/templates/user_management/greenpass_add.html:36
 msgid "Your reservations"
@@ -267,7 +267,7 @@ msgid "Privacy policy"
 msgstr "Informativa sulla privacy"
 
 #: templates/help.html:50 templates/help.html:55
-#: user_management/templates/user_management/settings.html:56
+#: user_management/templates/user_management/settings.html:12
 msgid "Back home"
 msgstr "Torna alla home"
 
@@ -365,7 +365,7 @@ msgid "What's new"
 msgstr "Novita'"
 
 #: templates/whats_new_modal.html:13
-#: user_management/templates/user_management/settings.html:23
+#: user_management/templates/user_management/settings.html:31
 #: user_management/templates/user_management/user_update_unimore_credentials.html:5
 msgid "Update Unimore credentials"
 msgstr "Aggiorna le credenziali Unimore"
@@ -484,7 +484,7 @@ msgstr "Devi accettare le politiche sul trattamento dei dati."
 msgid "Google Drive link"
 msgstr "Link a Google Drive"
 
-#: user_management/forms.py:208
+#: user_management/forms.py:205
 msgid ""
 "Disable automatic reservations if you don't need them. You'll be able to "
 "enable them again later."
@@ -492,11 +492,11 @@ msgstr ""
 "Disabilita le prenotazioni automatiche se non ne hai bisogno. Potrai sempre "
 "abilitarle di nuovo successivamente."
 
-#: user_management/forms.py:217
+#: user_management/forms.py:214
 msgid "Save changes"
 msgstr "Salva le modifiche"
 
-#: user_management/forms.py:229
+#: user_management/forms.py:226
 msgid "Automatic reservations"
 msgstr "Prenotazioni automatiche"
 
@@ -589,7 +589,7 @@ msgid "Delete Green Pass"
 msgstr "Elimina il Green Pass"
 
 #: user_management/templates/user_management/greenpass_delete.html:7
-#: user_management/templates/user_management/settings.html:34
+#: user_management/templates/user_management/settings.html:42
 msgid "Delete your Green Pass"
 msgstr "Elimina il tuo Green Pass"
 
@@ -603,7 +603,7 @@ msgstr ""
 "I dati verranno eliminati e dovrai inserire il link nuovamente dalla pagina "
 "principale."
 
-#: user_management/templates/user_management/greenpass_delete.html:35
+#: user_management/templates/user_management/greenpass_delete.html:31
 #: user_management/templates/user_management/user_delete.html:51
 #: user_management/templates/user_management/user_general_settings.html:16
 #: user_management/templates/user_management/user_update_unimore_credentials.html:34
@@ -611,21 +611,21 @@ msgid "Back to settings"
 msgstr "Torna alle impostazioni"
 
 #: user_management/templates/user_management/settings.html:4
-#: user_management/templates/user_management/settings.html:10
+#: user_management/templates/user_management/settings.html:18
 msgid "Settings"
 msgstr "Impostazioni"
 
-#: user_management/templates/user_management/settings.html:17
+#: user_management/templates/user_management/settings.html:25
 #: user_management/templates/user_management/user_general_settings.html:5
 #: user_management/templates/user_management/user_general_settings.html:7
 msgid "General settings"
 msgstr "Impostazioni generali"
 
-#: user_management/templates/user_management/settings.html:19
+#: user_management/templates/user_management/settings.html:27
 msgid "Update general settings"
 msgstr "Aggiorna le impostazioni generali"
 
-#: user_management/templates/user_management/settings.html:26
+#: user_management/templates/user_management/settings.html:34
 msgid ""
 "\n"
 "                        Update your Unimore credentials\n"
@@ -635,7 +635,7 @@ msgstr ""
 "                        Aggiorna le tue credenziali Unimore\n"
 "                    "
 
-#: user_management/templates/user_management/settings.html:37
+#: user_management/templates/user_management/settings.html:45
 msgid ""
 "\n"
 "                        Remove the link to your Green Pass\n"
@@ -645,12 +645,12 @@ msgstr ""
 "                        Rimuovi il tuo Green Pass\n"
 "                    "
 
-#: user_management/templates/user_management/settings.html:44
+#: user_management/templates/user_management/settings.html:52
 #: user_management/templates/user_management/user_delete.html:10
 msgid "Delete your account"
 msgstr "Elimina il tuo account"
 
-#: user_management/templates/user_management/settings.html:46
+#: user_management/templates/user_management/settings.html:54
 msgid ""
 "\n"
 "                        Delete your account and all your information\n"
@@ -697,22 +697,7 @@ msgstr "Inserisci il tuo username per confermare:"
 msgid "Update your Unimore credentials"
 msgstr "Aggiorna le credenziali Unimore"
 
-#: user_management/views.py:50
-msgid "Reservation Ninja - Confirm your email"
-msgstr "Reservation Ninja - Conferma la tua email"
-
-#: user_management/views.py:61
-#, fuzzy, python-brace-format
-msgid ""
-"Hi {self.object.username}, welcome to Reservation Ninja.\n"
-"\n"
-"Click this link to confirm your email:"
-msgstr ""
-"Ciao {self.object.username}, ti diamo il benvenuto in Reservation Ninja.\n"
-"\n"
-"Clicca il seguente link per confermare la tua email:"
-
-#: user_management/views.py:189
+#: user_management/views.py:185
 #, fuzzy, python-brace-format
 #| msgid ""
 #| "Error. Attempt to validate email for the user {user_id_b64} with token "
@@ -724,12 +709,6 @@ msgstr ""
 "Errore. Tentativo di validazione dell'email per l'utente {user} con il token "
 "{token}"
 
-#: user_management/views.py:190
+#: user_management/views.py:186
 msgid "Authentication error"
 msgstr "Errore di autenticazione"
-
-#~ msgid "Delete your Green Pass link"
-#~ msgstr "Elimina il link al tuo Green Pass"
-
-#~ msgid "Welcome to Reservation Ninja "
-#~ msgstr "Benvenuto in Reservation Ninja"

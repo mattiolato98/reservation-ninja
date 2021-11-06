@@ -47,7 +47,7 @@ class RegistrationView(CreateView):
 
         response = super(RegistrationView, self).form_valid(form)
 
-        mail_subject = _('Reservation Ninja - Confirm your email')
+        mail_subject = 'Conferma la tua email | Reservation Ninja'
         relative_confirm_url = reverse(
             'user_management:verify-user-email',
             args=[
@@ -58,11 +58,11 @@ class RegistrationView(CreateView):
 
         self.object.email_user(
             subject=mail_subject,
-            message=_(f'''Hi {self.object.username}, '''
-                      + '''welcome to Reservation Ninja.\n'''
-                      + '''\nClick this link to confirm your email:'''
-                      + f'''\n{self.request.build_absolute_uri(relative_confirm_url)}\n'''
-                      + '''\nSee you soon, \nReservation Ninja.''')
+            message=(f'''Ciao {self.object.username}'''
+                     + '''Ti diamo il benvenuto in Reservation Ninja!\n'''
+                     + '''\nConferma la tua email:'''
+                     + f'''\n{self.request.build_absolute_uri(relative_confirm_url)}\n'''
+                     + '''\nA presto, \nReservation Ninja''')
         )
 
         self.object.token_sent = True

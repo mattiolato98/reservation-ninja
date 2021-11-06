@@ -69,9 +69,15 @@ class StatsView(TemplateView):
         context['subscribers_last_7_days'] = len(get_user_model().objects.filter(
             date_joined__gte=dt.datetime.now(pytz.timezone('Europe/Rome')) - dt.timedelta(days=7)
         ))
+        context['percent_increment_subscribers_last_7_days'] = ((
+            context['subscribers_last_7_days']
+        ) / (context['users'] - context['subscribers_last_7_days'])) * 100
         context['logged_in_last_7_days'] = get_user_model().objects.filter(
             last_login__gte=dt.datetime.now(pytz.timezone('Europe/Rome')) - dt.timedelta(days=7)
         ).count()
+        context['percent_logged_in_last_7_days'] = (
+            context['logged_in_last_7_days'] / context['users']
+        ) * 100
         context['inactive_users'] = get_user_model().objects.filter(is_active=False).count()
 
         users = get_user_model().objects.annotate(num_lessons=Count('lessons'))
