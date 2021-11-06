@@ -192,6 +192,10 @@ select:-webkit-autofill:focus {
     border-radius: 10px;
 }
 
+.btn:hover {
+    box-shadow: 0 .5rem 1rem rgba(0,0,0,.15)!important;
+}
+
 .btn.dropdown-toggle {
     border-radius: 10px !important;
 }
