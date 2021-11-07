@@ -6,11 +6,11 @@ from time import time as measure_time
 
 
 LOGIN_URL = "https://in.unimore.it"
+CORRECT_URL = "https://in.unimore.it/intra/"
 TIME_INTERVAL = 5
 
 
 def check_unimore_credentials(username, password):
-    CORRECT_URL = "https://in.unimore.it/intra/"
     start = measure_time()
     options = webdriver.ChromeOptions()
     options.add_argument("--disable-dev-shm-usage")
@@ -31,7 +31,7 @@ def check_unimore_credentials(username, password):
 
         driver.find_element_by_name("_eventId_proceed").click()
     except NoSuchElementException:
-        driver.delete_allk_cookies()
+        driver.delete_all_cookies()
         driver.quit()
         return False
     end = measure_time()
