@@ -9,7 +9,6 @@ from datetime import time
 
 import pytz
 from selenium import webdriver
-from selenium.webdriver.firefox.options import Options
 from selenium.common.exceptions import NoSuchElementException
 
 PROJECT_PATH = os.path.join(dirname(__file__), "../")
@@ -169,11 +168,17 @@ def reserve_lessons(lesson):
     Il driver a quel punto viene creato direttamente dal main così può essere chiuso da lì.
     """
     # Allows to run Firefox on a system with no display
-    options = Options()
+    # options = Options()
+    # options.headless = True
+    #
+    # driver = webdriver.Firefox(options=options)
+
+    options = webdriver.ChromeOptions()
+    options.add_argument("--disable-dev-shm-usage")
+    options.add_argument("--no-sandbox")
     options.headless = True
 
-    driver = webdriver.Firefox(options=options)
-
+    driver = webdriver.Chrome(executable_path="/usr/lib/chromium/chromedriver", options=options)
     # Selenium configuration:
     driver.implicitly_wait(TIME_INTERVAL)
 
