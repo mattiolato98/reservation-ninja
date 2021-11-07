@@ -41,3 +41,7 @@ class Feedback(models.Model):
 
     def __str__(self):
         return f'{self.user.username} {self.ok}'
+
+
+class Stats(models.Model):
+    unsubscribed_users = models.IntegerField(default=0)
