@@ -188,7 +188,8 @@ if __name__ == "__main__":
     os.environ.setdefault("DJANGO_SETTINGS_MODULE", "reservation_tool_base_folder.settings")
     django.setup()
 
-    from reservation_management.models import Lesson, Reservation, Log
+    from reservation_management.models import Lesson, Reservation
+    from analytics_management.models import Log
 
     # In the case the scheduler execute this script more than one time:
     if Log.objects.filter(date=datetime.now(pytz.timezone('Europe/Rome')).date()).exists():
