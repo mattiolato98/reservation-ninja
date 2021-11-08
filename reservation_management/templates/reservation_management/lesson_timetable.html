@@ -3,10 +3,28 @@
 
 {% block title %}{{ block.super }} {% translate "Timetable" %}{% endblock %}
 
+{% block extra_css %}
+    <style>
+        table{
+            table-layout:fixed;
+            min-width: 1200px !important;
+            margin-right: 10px;
+        }
+
+        table tr th:first-child {
+            width: 200px !important;
+        }
+
+        .table-col {
+            overflow-x: scroll;
+        }
+    </style>
+{% endblock %}
+
 {% block content %}
     <div class="site-box">
         <div class="row justify-content-center mt-5">
-            <div class="col-lg-7 col-md-9 col-12 d-flex justify-content-between align-items-center">
+            <div class="col-md-10 col-12 d-flex justify-content-between align-items-center">
                 <a href="{% url 'reservation_management:reservation-list' %}" class="font-6 site-blue-text">
                     <i class="fas fa-chevron-left mr-2"></i>
                     Back
@@ -14,106 +32,40 @@
             </div>
         </div>
         <div class="row justify-content-center mt-3 mb-5">
-            <div class="col-lg-7 col-md-9 col-12">
+            <div class="col-md-10 col-12">
                 <h2 class="logo-font site-color">{% translate "Lessons timetable" %}</h2>
             </div>
         </div>
         <div class="row justify-content-center">
-            <div class="col-lg-7 col-md-9 col-12">
-                <table class="table table-bordered" style="table-layout: fixed; width: 1180px;">
+            <div class="col-md-10 col-12 table-col">
+                <table class="table table-bordered">
                     <thead>
-                    <tr>
+                    <tr class="text-center">
                         <th scope="col"></th>
-                        <th scope="col">{% translate "Lunedì" %}</th>
-                        <th scope="col">{% translate "Martedì" %}</th>
-                        <th scope="col">{% translate "Mercoledì" %}</th>
-                        <th scope="col">{% translate "Giovedì" %}</th>
-                        <th scope="col">{% translate "Venerdì" %}</th>
+                        <th scope="col">{% translate "Monday" %}</th>
+                        <th scope="col">{% translate "Tuesday" %}</th>
+                        <th scope="col">{% translate "Wednesday" %}</th>
+                        <th scope="col">{% translate "Thursday" %}</th>
+                        <th scope="col">{% translate "Friday" %}</th>
                     </tr>
                     </thead>
                     <tbody>
-                    {#                    {% for time_range, days_lessons in lessons.items %}#}
-                    {#                    <tr>#}
-                    {#                        <th scope="row">time_range</th>#}
-                    {#                        <td>{{ days_lessons }}</td>#}
-                    {#                        <td></td>#}
-                    {#                        <td></td>#}
-                    {#                        <td>Big Data Analytics</td>#}
-                    {#                        <td>Big Data Analytics</td>#}
-                    {#                    </tr>#}
-                    {#                    {% endfor %}#}
-                    <tr>
-                        <th scope="row" class="font-5">09:00 - 10:00</th>
-                        <td style="background-color: #69DC9E; color: white;" class="font-7">Algebra Lineare</td>
-                        <td style="background-color: #563d7c; color: white;" class="font-7">Analisi Matematica</td>
-                        <td></td>
-                        <td></td>
-                        <td style="background-color: #FF5964; color: white;" class="font-7">Chimica 1</td>
-                    </tr>
-                    <tr>
-                        <th scope="row" class="font-5">10:00 - 11:00</th>
-                        <td style="background-color: #69DC9E; color: white;" class="font-7">Algebra Lineare</td>
-                        <td style="background-color: #563d7c; color: white;" class="font-7">Analisi Matematica</td>
-                        <td></td>
-                        <td></td>
-                        <td style="background-color: #FF5964; color: white;" class="font-7">Chimica 1</td>
-                    </tr>
-                    <tr>
-                        <th scope="row" class="font-5">11:00 - 12:00</th>
-                        <td style="background-color: #0075A2; color: white;" class="font-7">Fisica 1</td>
-                        <td></td>
-                        <td style="background-color: #69DC9E; color: white;" class="font-7">Algebra Lineare</td>
-                        <td style="background-color: #563d7c; color: white;" class="font-7">Analisi Matematica</td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <th scope="row" class="font-5">12:00 - 13:00</th>
-                        <td style="background-color: #0075A2; color: white;" class="font-7">Fisica 1</td>
-                        <td></td>
-                        <td style="background-color: #69DC9E; color: white;" class="font-7">Algebra Lineare</td>
-                        <td style="background-color: #563d7c; color: white;" class="font-7">Analisi Matematica</td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <th scope="row" class="font-5">13:00 - 14:00</th>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <th scope="row" class="font-5">14:00 - 15:00</th>
-                        <td></td>
-                        <td style="background-color: #FF5964; color: white;" class="font-7">Chimica 1</td>
-                        <td style="background-color: #0075A2; color: white;" class="font-7">Fisica 1</td>
-                        <td style="background-color: #69DC9E; color: white;" class="font-7">Algebra Lineare</td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <th scope="row" class="font-5">15:00 - 16:00</th>
-                        <td></td>
-                        <td style="background-color: #FF5964; color: white;" class="font-7">Chimica 1</td>
-                        <td style="background-color: #0075A2; color: white;" class="font-7">Fisica 1</td>
-                        <td style="background-color: #69DC9E; color: white;" class="font-7">Algebra Lineare</td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <th scope="row" class="font-5">16:00 - 17:00</th>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td style="background-color: #FF5964; color: white;" class="font-7">Chimica 1</td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <th scope="row" class="font-5">17:00 - 18:00</th>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td style="background-color: #FF5964; color: white;" class="font-7">Chimica 1</td>
-                        <td></td>
-                    </tr>
+                    {% for index, monday, tuesday, wednesday, thursday, friday in df.itertuples %}
+                        <tr class="text-break text-center">
+                            <th scope="row" class="font-5">{{ index }}</th>
+                            <td>
+                                <div class="badge site-badge-blue py-2 px-4 text-wrap">
+                                    Big Data Analytics
+                                    <br>
+                                    <span class="font-size-80 font-4">{{ monday }}</span>
+                                </div>
+                            </td>
+                            <td>{{ tuesday }}</td>
+                            <td>{{ wednesday }}</td>
+                            <td>{{ thursday }}</td>
+                            <td>{{ friday }}</td>
+                        </tr>
+                    {% endfor %}
                     </tbody>
                 </table>
             </div>
