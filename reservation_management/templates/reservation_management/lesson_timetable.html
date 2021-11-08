@@ -20,28 +20,100 @@
         </div>
         <div class="row justify-content-center">
             <div class="col-lg-7 col-md-9 col-12">
-                <table class="table table-bordered">
+                <table class="table table-bordered" style="table-layout: fixed; width: 1180px;">
                     <thead>
                     <tr>
                         <th scope="col"></th>
-                        <th scope="col">{% translate "Monday" %}</th>
-                        <th scope="col">{% translate "Tuesday" %}</th>
-                        <th scope="col">{% translate "Wednesday" %}</th>
-                        <th scope="col">{% translate "Thursday" %}</th>
-                        <th scope="col">{% translate "Friday" %}</th>
+                        <th scope="col">{% translate "Lunedì" %}</th>
+                        <th scope="col">{% translate "Martedì" %}</th>
+                        <th scope="col">{% translate "Mercoledì" %}</th>
+                        <th scope="col">{% translate "Giovedì" %}</th>
+                        <th scope="col">{% translate "Venerdì" %}</th>
                     </tr>
                     </thead>
                     <tbody>
-                    {% for time_range, days_lessons in lessons.items %}
+                    {#                    {% for time_range, days_lessons in lessons.items %}#}
+                    {#                    <tr>#}
+                    {#                        <th scope="row">time_range</th>#}
+                    {#                        <td>{{ days_lessons }}</td>#}
+                    {#                        <td></td>#}
+                    {#                        <td></td>#}
+                    {#                        <td>Big Data Analytics</td>#}
+                    {#                        <td>Big Data Analytics</td>#}
+                    {#                    </tr>#}
+                    {#                    {% endfor %}#}
                     <tr>
-                        <th scope="row">time_range</th>
-                        <td>{{ days_lessons }}</td>
+                        <th scope="row" class="font-5">09:00 - 10:00</th>
+                        <td style="background-color: #69DC9E; color: white;" class="font-7">Algebra Lineare</td>
+                        <td style="background-color: #563d7c; color: white;" class="font-7">Analisi Matematica</td>
                         <td></td>
                         <td></td>
-                        <td>Big Data Analytics</td>
-                        <td>Big Data Analytics</td>
+                        <td style="background-color: #FF5964; color: white;" class="font-7">Chimica 1</td>
                     </tr>
-                    {% endfor %}
+                    <tr>
+                        <th scope="row" class="font-5">10:00 - 11:00</th>
+                        <td style="background-color: #69DC9E; color: white;" class="font-7">Algebra Lineare</td>
+                        <td style="background-color: #563d7c; color: white;" class="font-7">Analisi Matematica</td>
+                        <td></td>
+                        <td></td>
+                        <td style="background-color: #FF5964; color: white;" class="font-7">Chimica 1</td>
+                    </tr>
+                    <tr>
+                        <th scope="row" class="font-5">11:00 - 12:00</th>
+                        <td style="background-color: #0075A2; color: white;" class="font-7">Fisica 1</td>
+                        <td></td>
+                        <td style="background-color: #69DC9E; color: white;" class="font-7">Algebra Lineare</td>
+                        <td style="background-color: #563d7c; color: white;" class="font-7">Analisi Matematica</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <th scope="row" class="font-5">12:00 - 13:00</th>
+                        <td style="background-color: #0075A2; color: white;" class="font-7">Fisica 1</td>
+                        <td></td>
+                        <td style="background-color: #69DC9E; color: white;" class="font-7">Algebra Lineare</td>
+                        <td style="background-color: #563d7c; color: white;" class="font-7">Analisi Matematica</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <th scope="row" class="font-5">13:00 - 14:00</th>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <th scope="row" class="font-5">14:00 - 15:00</th>
+                        <td></td>
+                        <td style="background-color: #FF5964; color: white;" class="font-7">Chimica 1</td>
+                        <td style="background-color: #0075A2; color: white;" class="font-7">Fisica 1</td>
+                        <td style="background-color: #69DC9E; color: white;" class="font-7">Algebra Lineare</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <th scope="row" class="font-5">15:00 - 16:00</th>
+                        <td></td>
+                        <td style="background-color: #FF5964; color: white;" class="font-7">Chimica 1</td>
+                        <td style="background-color: #0075A2; color: white;" class="font-7">Fisica 1</td>
+                        <td style="background-color: #69DC9E; color: white;" class="font-7">Algebra Lineare</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <th scope="row" class="font-5">16:00 - 17:00</th>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td style="background-color: #FF5964; color: white;" class="font-7">Chimica 1</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <th scope="row" class="font-5">17:00 - 18:00</th>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td style="background-color: #FF5964; color: white;" class="font-7">Chimica 1</td>
+                        <td></td>
+                    </tr>
                     </tbody>
                 </table>
             </div>
