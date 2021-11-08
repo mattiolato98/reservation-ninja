@@ -1,0 +1,27 @@
+body {
+    background-color: #252525;
+}
+
+.list-group-item {
+    color: #c9c9c9;
+    border-color: #4b4b4b;
+    background-color: transparent;
+}
+
+.path-link {
+    color: #bebebe !important;
+}
+
+.site-blue-text {
+    color: #3998bd !important;
+}
+
+.site-color {
+    color: #d7404a !important;
+}
+
+.site-btn {
+    background-color: #d7404a;
+    border-color: #d7404a;
+    color: white !important;
+}
