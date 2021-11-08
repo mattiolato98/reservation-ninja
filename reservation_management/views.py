@@ -123,24 +123,63 @@ class LessonTimetableView(LoginRequiredMixin, TemplateView):
     def get_context_data(self, **kwargs):
         context = super(LessonTimetableView, self).get_context_data(**kwargs)
 
-        context['lessons'] = defaultdict(dict)
-
         lessons = self.request.user.lessons.all()
 
         min_time = min(lesson.start_time for lesson in lessons)
         max_time = max(lesson.end_time for lesson in lessons)
 
-        lessons_timetable = {}
-        times = []
-        while min_time <= max_time:
-            lessons_timetable[min_time] = None
-            min_time = (dt.datetime.combine(dt.date(1, 1, 1), min_time) + dt.timedelta(minutes=30)).time()
+        if any(lesson.start_time.minute != 0 and lesson.end_time.minute != 0 for lesson in lessons):
+            frequency = 60
+        else:
+            frequency = 30
 
-            times.append(min_time)
+        time_series = pd.Series()
 
-        data = {'index': times, }
+        time_list = []
+        items = 0
+        time = min_time
+        while time <= max_time:
+            time_list.append(time)
+            time = (dt.datetime.combine(dt.date(1, 1, 1), time) + dt.timedelta(minutes=frequency)).time()
+            items += 1
 
-        a = 1
+        index = [
+            f"{time.strftime('%H:%M')} - "
+            f"{(dt.datetime.combine(dt.date(1, 1, 1), time) + dt.timedelta(minutes=frequency)).time().strftime('%H:%M')}"
+            for time in time_list
+        ]
+
+        lessons_grouped_by_day = {
+            0: [],
+            1: [],
+            2: [],
+            3: [],
+            4: [],
+        }
+
+        for lesson in lessons:
+            lessons_grouped_by_day[lesson.day].append(lesson)
+
+        data = defaultdict(list)
+        for day, lessons in lessons_grouped_by_day.items():
+            lesson = lessons.pop(0) if len(lessons) > 0 else None
+            time = min_time
+            while time <= max_time:
+                next_time = (dt.datetime.combine(dt.date(1, 1, 1), time) + dt.timedelta(minutes=frequency)).time()
+
+                if lesson is not None \
+                        and lesson.start_time <= time < lesson.end_time \
+                        and lesson.end_time >= next_time > lesson.start_time:
+                    data[day].append(lesson.classroom.name)
+                else:
+                    data[day].append('')
+
+                if lesson is not None and lesson.end_time <= next_time:
+                    lesson = lessons.pop(0) if len(lessons) > 0 else None
+
+                time = next_time
+
+        context['df'] = pd.DataFrame(data, index=index)
 
         return context
 
