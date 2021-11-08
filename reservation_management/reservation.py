@@ -91,8 +91,8 @@ def reserve_room(driver, lesson):
         lesson (lesson): lesson to reserve.
     """
     element = driver.find_element_by_xpath(
-        f"//li[contains(text(), '{lesson.classroom.building.name}')]"
-        "//a[contains(text(), 'Elenco Aule con link per registrazione presenza')]"
+        f'//li[contains(text(), "{lesson.classroom.building.name}")]'
+        '//a[contains(text(), "Elenco Aule con link per registrazione presenza")]'
     )
     driver.execute_script("arguments[0].click();", element)
 
