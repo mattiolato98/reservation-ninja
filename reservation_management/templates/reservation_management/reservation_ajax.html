@@ -36,9 +36,9 @@
         });
     }
 
-     $("#whats-new-confirm-button").on('click', function () {
+    $("#whats-new-confirm-button").on('click', function () {
         /**
-         * Save user Feedback.
+         * After closing What's new modal, set whats_new=False on user to not show it anymore.
          */
         $.ajax({
             type: 'POST',
