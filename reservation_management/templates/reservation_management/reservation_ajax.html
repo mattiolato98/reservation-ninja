@@ -49,4 +49,18 @@
             dataType: 'json',
         });
     });
+
+    $("#instagram-confirm-button").on('click', function () {
+        /**
+         * After closing Instagram modal, set instagram=False on user to not show it anymore.
+         */
+        $.ajax({
+            type: 'POST',
+            url: "{% url 'reservation_management:instagram-confirm' %}",
+            headers:{
+                "X-CSRFToken": '{{ csrf_token }}'
+            },
+            dataType: 'json',
+        });
+    });
 </script>
