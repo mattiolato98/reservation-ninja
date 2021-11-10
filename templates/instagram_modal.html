@@ -4,25 +4,21 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content rounded-6 shadow">
             <div class="modal-body p-5">
-                <h2 class="logo-font site-color mb-0">{% translate "Choose the next feature" %}</h2>
-                <ul class="gap-4 my-5 p-0">
-                    <li class="d-flex gap-4 align-items-center">
-                        <div>
-                            <i class="fab fa-instagram site-md-icon"></i>
-                            <h6 class="mb-0 font-6">
-                                {% translate "Visit our Instagram profile reservationninja to take the survey" %}
-                            </h6>
-                            <span class="text-muted">{% translate "Vote the next feature in the stories" %}</span>
-                        </div>
-                    </li>
-                    <li class="d-flex gap-4 align-items-center mt-3">
-                        <a href="https://www.instagram.com/reservationninja/"
-                           target="_blank"
-                           class="site-link site-blue-text font-7">
-                            {% translate "Go to Instagram" %}
-                        </a>
-                    </li>
-                </ul>
+                <h2 class="logo-font site-color text-center">{% translate "Choose the next feature" %}</h2>
+                <div class="mt-5 d-flex align-items-center flex-column">
+                    <i class="fab fa-instagram site-md-icon"></i>
+                    <h6 class="mb-0 font-6 text-center">
+                        {% translate "Visit our Instagram profile reservationninja to take the survey" %}
+                    </h6>
+                    <span class="text-muted">{% translate "Vote the next feature in the stories" %}</span>
+                </div>
+                <div class="mt-4 d-flex justify-content-center">
+                    <a href="https://www.instagram.com/reservationninja/"
+                       target="_blank"
+                       class="site-link site-blue-text font-7">
+                        {% translate "Go to Instagram" %}
+                    </a>
+                </div>
                 <button id="instagram-confirm-button"
                         type="button" class="btn btn-lg site-btn mt-5 w-100" data-dismiss="modal">
                     {% translate "Done!" %}
