@@ -97,6 +97,8 @@ class StatsView(TemplateView):
         context['percent_feedback_disabled'] = (context['feedback_disabled'] / context['users']) * 100
         context['wrong_credentials'] = get_user_model().objects.filter(credentials_ok=False).count()
         context['percent_wrong_credentials'] = (context['wrong_credentials'] / context['users']) * 100
+        context['seen_instagram'] = get_user_model().objects.filter(instagram=False).count()
+        context['percent_seen_instagram'] = (context['seen_instagram'] / context['users']) * 100
 
         context['lessons'] = Lesson.objects.count()
 
