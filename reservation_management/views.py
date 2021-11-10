@@ -92,3 +92,17 @@ def ajax_whats_new_confirm(request):
     user.save()
 
     return JsonResponse({'ok', True})
+
+
+@login_required
+@require_POST
+@csrf_protect
+def ajax_instagram_confirm(request):
+    """
+    View called by an ajax function, it confirms that a user saw the Instagram modal.
+    """
+    user = request.user
+    user.instagram = False
+    user.save()
+
+    return JsonResponse({'ok', True})
