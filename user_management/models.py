@@ -16,7 +16,9 @@ class PlatformUser(AbstractUser):
     enable_automatic_reservation = models.BooleanField(default=True)
     feedback = models.BooleanField(default=True)
     ask_for_feedback = models.BooleanField(default=True)
+
     whats_new = models.BooleanField(default=True)
+    instagram = models.BooleanField(default=True)
 
     privacy_and_cookie_policy_acceptance = models.BooleanField(default=False)
 
