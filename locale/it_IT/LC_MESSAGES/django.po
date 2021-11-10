@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-11-06 22:16+0100\n"
+"POT-Creation-Date: 2021-11-10 11:49+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -102,7 +102,7 @@ msgstr "Aggiungi una lezione"
 #: reservation_management/templates/reservation_management/lesson_add.html:16
 #: reservation_management/templates/reservation_management/lesson_detail.html:13
 #: reservation_management/templates/reservation_management/lesson_list.html:11
-#: reservation_management/templates/reservation_management/reservation_list.html:122
+#: reservation_management/templates/reservation_management/reservation_list.html:123
 msgid "Your lessons"
 msgstr "Le tue lezioni"
 
@@ -229,23 +229,23 @@ msgstr ""
 "</strong>\n"
 "                                        "
 
-#: reservation_management/templates/reservation_management/reservation_list.html:101
+#: reservation_management/templates/reservation_management/reservation_list.html:102
 msgid "Are your reservations correct?"
 msgstr "Le prenotazioni sono corrette?"
 
-#: reservation_management/templates/reservation_management/reservation_list.html:104
+#: reservation_management/templates/reservation_management/reservation_list.html:105
 msgid "You can disable daily feedbacks from settings"
 msgstr "Puoi disabilitare i feedback dalle impostazioni"
 
-#: reservation_management/templates/reservation_management/reservation_list.html:108
+#: reservation_management/templates/reservation_management/reservation_list.html:109
 msgid "Yes"
 msgstr "Sì"
 
-#: reservation_management/templates/reservation_management/reservation_list.html:111
+#: reservation_management/templates/reservation_management/reservation_list.html:112
 msgid "No"
 msgstr "No"
 
-#: reservation_management/templates/reservation_management/reservation_list.html:127
+#: reservation_management/templates/reservation_management/reservation_list.html:128
 msgid "+ Add your first lesson"
 msgstr "+ Aggiungi la tua prima lezione"
 
@@ -382,6 +382,26 @@ msgstr "Registrati"
 #: templates/home.html:77
 msgid "Login"
 msgstr "Login"
+
+#: templates/instagram_modal.html:7
+msgid "Choose the next feature"
+msgstr "Scegli la prossima funzionalita'"
+
+#: templates/instagram_modal.html:13
+msgid "Visit our Instagram profile reservationninja to take the survey"
+msgstr "Visita il nostro profilo Instagram reservationninja per partecipare al sondaggio"
+
+#: templates/instagram_modal.html:15
+msgid "Vote the next feature in the stories"
+msgstr "Vota la prossima funzionalità nelle storie"
+
+#: templates/instagram_modal.html:22
+msgid "Go to Instagram"
+msgstr "Vai su Instagram"
+
+#: templates/instagram_modal.html:28
+msgid "Done!"
+msgstr "Fatto!"
 
 #: templates/whats_new_modal.html:7
 msgid "What's new"
