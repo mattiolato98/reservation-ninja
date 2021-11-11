@@ -128,12 +128,10 @@ class LessonTimetableView(LoginRequiredMixin, TemplateView):
         min_time = min(lesson.start_time for lesson in lessons)
         max_time = max(lesson.end_time for lesson in lessons)
 
-        if any(lesson.start_time.minute != 0 and lesson.end_time.minute != 0 for lesson in lessons):
-            frequency = 60
-        else:
+        if any(lesson.start_time.minute != 0 or lesson.end_time.minute != 0 for lesson in lessons):
             frequency = 30
-
-        time_series = pd.Series()
+        else:
+            frequency = 60
 
         time_list = []
         items = 0
