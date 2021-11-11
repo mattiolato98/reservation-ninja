@@ -1,17 +1,9 @@
-import datetime as dt
-
 from crispy_forms.helper import FormHelper
 from django.utils.translation import gettext_lazy as _
 from crispy_forms.layout import Layout, Row, Column, Submit
 from django import forms
 
 from reservation_management.models import Lesson
-
-HOUR_CHOICES = [
-    (dt.time(hour=x, minute=y), f'{x:02d}:{y:02d}')
-    for x in range(8, 20)
-    for y in (0, 30)
-]
 
 
 class LessonForm(forms.ModelForm):
@@ -61,6 +53,6 @@ class LessonForm(forms.ModelForm):
         widgets = {
             'day': forms.Select(attrs={'class': 'selectpicker', 'data-live-search': 'true'}),
             'classroom': forms.Select(attrs={'class': 'selectpicker', 'data-live-search': 'true'}),
-            'start_time': forms.Select(choices=HOUR_CHOICES),
-            'end_time': forms.Select(choices=HOUR_CHOICES),
+            'start_time': forms.TimeInput(attrs={'type': 'time'}, format='%H:%M'),
+            'end_time': forms.TimeInput(attrs={'type': 'time'}, format='%H:%M'),
         }
