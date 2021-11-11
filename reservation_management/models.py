@@ -78,6 +78,11 @@ class Lesson(models.Model):
            or not min_time <= self.end_time <= max_time:
             raise ValidationError(_("Please, choose a time in the range"))
 
+        if (dt.datetime.combine(
+                dt.date.min, self.end_time
+        ) - dt.datetime.combine(dt.date.min, self.start_time)).total_seconds() % 1800 != 0:
+            raise ValidationError(_("Lesson duration must be multiple of 30 minutes"))
+
         if self.start_time >= self.end_time:
             raise ValidationError(_('Lesson start time should be before end time'))
         return super(Lesson, self).clean()
