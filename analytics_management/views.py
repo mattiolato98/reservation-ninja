@@ -119,7 +119,8 @@ class StatsView(TemplateView):
 
         if Log.objects.filter(date=dt.datetime.now(pytz.timezone('Europe/Rome'))).exists():
             log = Log.objects.filter(date=dt.datetime.now(pytz.timezone('Europe/Rome'))).first()
-            context['average_reservations_per_today_user'] = context['reservations'] / log.users
+            context['average_reservations_per_today_user'] = context['reservations'] / log.users \
+                if log.users != 0 else 0
 
         return context
 
