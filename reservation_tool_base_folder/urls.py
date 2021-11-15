@@ -24,6 +24,7 @@ urlpatterns = [
     path('help', HelpView.as_view(), name='help'),
     path('user/', include('user_management.urls')),
     path('reservation/', include('reservation_management.urls')),
+    path('analytics/', include('analytics_management.urls')),
 ]
 
 if settings.ADMIN_ENABLED:

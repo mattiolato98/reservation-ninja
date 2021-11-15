@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     # local
     "user_management",
     "reservation_management",
+    "analytics_management",
 
     # 3d party
     "crispy_forms",

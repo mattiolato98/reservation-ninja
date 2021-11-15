@@ -5,7 +5,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.tokens import PasswordResetTokenGenerator
 from django.contrib.auth.views import LoginView
-from django.http import JsonResponse, HttpResponseRedirect
+from django.http import JsonResponse
 from django.shortcuts import redirect
 from django.urls import reverse_lazy, reverse
 from django.utils.decorators import method_decorator
@@ -13,12 +13,12 @@ from django.utils.encoding import force_bytes, force_text
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from django.views.decorators.csrf import csrf_protect
 from django.views.decorators.http import require_GET, require_POST
-from django.views.generic import CreateView, TemplateView, DeleteView, ListView, UpdateView, FormView
+from django.views.generic import CreateView, TemplateView, DeleteView, UpdateView, FormView
 from django.utils.translation import gettext_lazy as _
 
+from analytics_management.models import Stats
 from reservation_tool_base_folder.decorators import not_authenticated_only
 from user_management.check_unimore_credentials import check_unimore_credentials
-from user_management.decorators import manager_required
 from user_management.forms import LoginForm, PlatformUserCreationForm, UserUpdateUnimoreCredentialsForm, \
     UserAddGreenPass, UserGeneralSettings, UserDeleteGreenPass
 from user_management.models import PlatformUser
@@ -47,7 +47,7 @@ class RegistrationView(CreateView):
 
         response = super(RegistrationView, self).form_valid(form)
 
-        mail_subject = _('Reservation Ninja - Confirm your email')
+        mail_subject = 'Conferma la tua email | Reservation Ninja'
         relative_confirm_url = reverse(
             'user_management:verify-user-email',
             args=[
@@ -58,11 +58,11 @@ class RegistrationView(CreateView):
 
         self.object.email_user(
             subject=mail_subject,
-            message=_(f'''Hi {self.object.username}, '''
-                      + '''welcome to Reservation Ninja.\n'''
-                      + '''\nClick this link to confirm your email:'''
-                      + f'''\n{self.request.build_absolute_uri(relative_confirm_url)}\n'''
-                      + '''\nSee you soon, \nReservation Ninja.''')
+            message=(f'''Ciao {self.object.username}\n'''
+                     + '''Ti diamo il benvenuto in Reservation Ninja!\n'''
+                     + '''\nConferma la tua email:'''
+                     + f'''\n{self.request.build_absolute_uri(relative_confirm_url)}\n'''
+                     + '''\nA presto, \nReservation Ninja''')
         )
 
         self.object.token_sent = True
@@ -122,14 +122,11 @@ class UserDeleteView(LoginRequiredMixin, DeleteView):
     def get_object(self, queryset=None):
         return self.request.user
 
-
-@method_decorator(manager_required, name='dispatch')
-class UserListView(ListView):
-    model = get_user_model()
-    template_name = "user_management/user_list.html"
-
-    def get_queryset(self):
-        return get_user_model().objects.all().order_by('-date_joined')
+    def post(self, request, *args, **kwargs):
+        stats = Stats.objects.first()
+        stats.unsubscribed_users += 1
+        stats.save()
+        return super(UserDeleteView, self).post(request, *args, **kwargs)
 
 
 class UserGreenPassAddView(LoginRequiredMixin, FormView):

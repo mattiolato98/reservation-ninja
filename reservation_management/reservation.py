@@ -9,7 +9,6 @@ from datetime import time
 
 import pytz
 from selenium import webdriver
-from selenium.webdriver.firefox.options import Options
 from selenium.common.exceptions import NoSuchElementException
 
 PROJECT_PATH = os.path.join(dirname(__file__), "../")
@@ -57,7 +56,7 @@ def find_hours(root_element, start_hour, end_hour):
 
 def check_reservation_exist(start_time, end_time, lesson):
     """
-    This function acutally check if a lesson is included in already created reservation.
+    This function actually check if a lesson is included in already created reservation.
     This happens, for example, when at least two lessons are contiguous in the same classroom.
 
     Args:
@@ -84,7 +83,7 @@ def check_reservation_exist(start_time, end_time, lesson):
 def reserve_room(driver, lesson):
     """
     This function actually reserves the given lesson through the Selenium 
-    web driver. The webdriver actually simulate an authentic browser istance.
+    web driver. The webdriver actually simulate an authentic browser instance.
 
     Args:
         driver (webdriver): Selenium Web Driver.
@@ -169,11 +168,17 @@ def reserve_lessons(lesson):
     Il driver a quel punto viene creato direttamente dal main così può essere chiuso da lì.
     """
     # Allows to run Firefox on a system with no display
-    options = Options()
+    # options = Options()
+    # options.headless = True
+    #
+    # driver = webdriver.Firefox(options=options)
+
+    options = webdriver.ChromeOptions()
+    options.add_argument("--disable-dev-shm-usage")
+    options.add_argument("--no-sandbox")
     options.headless = True
 
-    driver = webdriver.Firefox(options=options)
-
+    driver = webdriver.Chrome(executable_path="/usr/lib/chromium/chromedriver", options=options)
     # Selenium configuration:
     driver.implicitly_wait(TIME_INTERVAL)
 
@@ -188,7 +193,8 @@ if __name__ == "__main__":
     os.environ.setdefault("DJANGO_SETTINGS_MODULE", "reservation_tool_base_folder.settings")
     django.setup()
 
-    from reservation_management.models import Lesson, Reservation, Log
+    from reservation_management.models import Lesson, Reservation
+    from analytics_management.models import Log
 
     # In the case the scheduler execute this script more than one time:
     if Log.objects.filter(date=datetime.now(pytz.timezone('Europe/Rome')).date()).exists():
