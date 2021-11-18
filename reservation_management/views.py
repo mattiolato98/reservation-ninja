@@ -29,6 +29,12 @@ class LessonAddView(LoginRequiredMixin, CreateView):
     template_name = "reservation_management/lesson_add.html"
     success_url = reverse_lazy("reservation_management:lesson-list")
 
+    def get_form_kwargs(self):
+        kwargs = super(LessonAddView, self).get_form_kwargs()
+        kwargs.update({'request': self.request})
+        return kwargs
+
+    # TODO: keeping this function here and not in the FormClass is probably conceptually wrong now.
     def form_valid(self, form):
         form.instance.user = self.request.user
         return super(LessonAddView, self).form_valid(form)
@@ -62,6 +68,11 @@ class LessonUpdateView(UpdateView):
     model = Lesson
     form_class = LessonForm
     template_name = "reservation_management/lesson_update.html"
+
+    def get_form_kwargs(self):
+        kwargs = super(LessonUpdateView, self).get_form_kwargs()
+        kwargs.update({'request': self.request})
+        return kwargs
 
     def get_success_url(self):
         return reverse_lazy("reservation_management:lesson-detail", kwargs={'pk': self.kwargs['pk']})
