@@ -53,6 +53,7 @@ class LessonForm(forms.ModelForm):
 
         return True
 
+        # TODO: lasciato per la comprensione dell'hero developer
         # the new lesson is after all the other lessons
         # if idx == len(self.request.user.get_day_lessons(self.cleaned_data["day"])):
         #     return True
