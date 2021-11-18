@@ -5,8 +5,8 @@
 
 {% block extra_css %}
     <style>
-        table{
-            table-layout:fixed;
+        table {
+            table-layout: fixed;
             min-width: 1200px !important;
             margin-right: 10px;
         }
@@ -52,18 +52,66 @@
                     <tbody>
                     {% for index, monday, tuesday, wednesday, thursday, friday in df.itertuples %}
                         <tr class="text-break text-center">
-                            <th scope="row" class="font-5">{{ index }}</th>
-                            <td>
-                                <div class="badge site-badge-blue py-2 px-4 text-wrap">
-                                    Big Data Analytics
-                                    <br>
-                                    <span class="font-size-80 font-4">{{ monday }}</span>
+                            <th scope="row" class="font-5">
+                                <div class="d-flex align-items-center h-100">
+                                    {{ index }}
                                 </div>
+                            </th>
+                            <td>
+                                {% if monday %}
+                                    <div class="badge site-badge-blue py-2 px-4 text-wrap">
+                                        {{ monday.classroom.name }}
+                                        <br>
+                                        <span class="font-size-80 font-4">
+                                            {{ monday.start_time }} - {{ monday.end_time }}
+                                        </span>
+                                    </div>
+                                {% endif %}
                             </td>
-                            <td>{{ tuesday }}</td>
-                            <td>{{ wednesday }}</td>
-                            <td>{{ thursday }}</td>
-                            <td>{{ friday }}</td>
+                            <td>
+                                {% if tuesday %}
+                                    <div class="badge site-badge-yellow py-2 px-4 text-wrap">
+                                        {{ tuesday.classroom.name }}
+                                        <br>
+                                        <span class="font-size-80 font-4">
+                                            {{ tuesday.start_time }} - {{ tuesday.end_time }}
+                                        </span>
+                                    </div>
+                                {% endif %}
+                            </td>
+                            <td>
+                                {% if wednesday %}
+                                    <div class="badge site-badge-green py-2 px-4 text-wrap">
+                                        {{ wednesday.classroom.name }}
+                                        <br>
+                                        <span class="font-size-80 font-4">
+                                            {{ wednesday.start_time }} - {{ wednesday.end_time }}
+                                        </span>
+                                    </div>
+                                {% endif %}
+                            </td>
+                            <td>
+                                {% if thursday %}
+                                    <div class="badge site-badge-red py-2 px-4 text-wrap">
+                                        {{ thursday.classroom.name }}
+                                        <br>
+                                        <span class="font-size-80 font-4">
+                                            {{ thursday.start_time }} - {{ thursday.end_time }}
+                                        </span>
+                                    </div>
+                                {% endif %}
+                            </td>
+                            <td>
+                                {% if friday %}
+                                    <div class="badge site-badge-dark py-2 px-4 text-wrap">
+                                        {{ friday.classroom.name }}
+                                        <br>
+                                        <span class="font-size-80 font-4">
+                                            {{ friday.start_time }} - {{ friday.end_time }}
+                                        </span>
+                                    </div>
+                                {% endif %}
+                            </td>
                         </tr>
                     {% endfor %}
                     </tbody>
