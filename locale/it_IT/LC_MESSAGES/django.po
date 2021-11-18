@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-10-26 15:55+0200\n"
+"POT-Creation-Date: 2021-11-18 11:10+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -16,52 +16,65 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: reservation_management/forms.py:34 user_management/forms.py:165
+#: reservation_management/forms.py:31 user_management/forms.py:165
 msgid "Insert"
 msgstr "Inserisci"
 
-#: reservation_management/forms.py:50
+#: reservation_management/forms.py:47
 msgid "Day"
 msgstr "Giorno"
 
-#: reservation_management/forms.py:51
+#: reservation_management/forms.py:48
 msgid "Start time"
 msgstr "Ora inizio"
 
-#: reservation_management/forms.py:52
+#: reservation_management/forms.py:49
 msgid "End time"
 msgstr "Ora fine"
 
-#: reservation_management/forms.py:53
+#: reservation_management/forms.py:50
 msgid "Classroom"
 msgstr "Aula"
 
-#: reservation_management/models.py:35
-#: reservation_management/templatetags/app_filters.py:8
+#: reservation_management/models.py:46
+#: reservation_management/templates/reservation_management/lesson_timetable.html:45
+#: reservation_management/templatetags/app_filters.py:17
 msgid "Monday"
 msgstr "Lunedì"
 
-#: reservation_management/models.py:36
-#: reservation_management/templatetags/app_filters.py:9
+#: reservation_management/models.py:47
+#: reservation_management/templates/reservation_management/lesson_timetable.html:46
+#: reservation_management/templatetags/app_filters.py:18
 msgid "Tuesday"
 msgstr "Martedì"
 
-#: reservation_management/models.py:37
-#: reservation_management/templatetags/app_filters.py:10
+#: reservation_management/models.py:48
+#: reservation_management/templates/reservation_management/lesson_timetable.html:47
+#: reservation_management/templatetags/app_filters.py:19
 msgid "Wednesday"
 msgstr "Mercoledì"
 
-#: reservation_management/models.py:38
-#: reservation_management/templatetags/app_filters.py:11
+#: reservation_management/models.py:49
+#: reservation_management/templates/reservation_management/lesson_timetable.html:48
+#: reservation_management/templatetags/app_filters.py:20
 msgid "Thursday"
 msgstr "Giovedì"
 
-#: reservation_management/models.py:39
-#: reservation_management/templatetags/app_filters.py:12
+#: reservation_management/models.py:50
+#: reservation_management/templates/reservation_management/lesson_timetable.html:49
+#: reservation_management/templatetags/app_filters.py:21
 msgid "Friday"
 msgstr "Venerdì"
 
-#: reservation_management/models.py:57
+#: reservation_management/models.py:79
+msgid "Please, choose a time in the range"
+msgstr ""
+
+#: reservation_management/models.py:84
+msgid "Lesson duration must be multiple of 30 minutes"
+msgstr ""
+
+#: reservation_management/models.py:87
 msgid "Lesson start time should be before end time"
 msgstr ""
 "L'orario di inizio di una lezione dovrebbe essere inferiore all'orario di "
@@ -102,7 +115,7 @@ msgstr "Aggiungi una lezione"
 #: reservation_management/templates/reservation_management/lesson_add.html:16
 #: reservation_management/templates/reservation_management/lesson_detail.html:44
 #: reservation_management/templates/reservation_management/lesson_list.html:11
-#: reservation_management/templates/reservation_management/reservation_list.html:99
+#: reservation_management/templates/reservation_management/reservation_list.html:98
 msgid "Your lessons"
 msgstr "Le tue lezioni"
 
@@ -168,10 +181,19 @@ msgstr ""
 "                                        "
 
 #: reservation_management/templates/reservation_management/lesson_list.html:67
+#: reservation_management/templates/reservation_management/lesson_timetable.html:30
 #: reservation_management/templates/reservation_management/reservation_list.html:11
 #: user_management/templates/user_management/greenpass_add.html:36
 msgid "Your reservations"
 msgstr "Le tue prenotazioni"
+
+#: reservation_management/templates/reservation_management/lesson_timetable.html:4
+msgid "Timetable"
+msgstr "Orario"
+
+#: reservation_management/templates/reservation_management/lesson_timetable.html:36
+msgid "Lessons timetable"
+msgstr "Orario delle lezioni"
 
 #: reservation_management/templates/reservation_management/lesson_update.html:5
 msgid "Update lesson"
@@ -189,20 +211,20 @@ msgstr "Un attimo ..."
 msgid "Thanks for the feedback!"
 msgstr "Grazie per il feedback!"
 
-#: reservation_management/templates/reservation_management/reservation_list.html:20
+#: reservation_management/templates/reservation_management/reservation_list.html:23
 msgid "Green Pass"
 msgstr "Green Pass"
 
-#: reservation_management/templates/reservation_management/reservation_list.html:29
+#: reservation_management/templates/reservation_management/reservation_list.html:28
 #: user_management/templates/user_management/greenpass_add.html:7
 msgid "Add your Green Pass"
 msgstr "Aggiungi il tuo Green Pass"
 
-#: reservation_management/templates/reservation_management/reservation_list.html:62
+#: reservation_management/templates/reservation_management/reservation_list.html:61
 msgid "No reservation made, insert your lessons!"
 msgstr "Nessuna prenotazione effettuata, inserisci le tue lezioni!"
 
-#: reservation_management/templates/reservation_management/reservation_list.html:64
+#: reservation_management/templates/reservation_management/reservation_list.html:63
 msgid ""
 "\n"
 "                            Go to <strong>Your lessons</strong> and add "
@@ -214,15 +236,15 @@ msgstr ""
 "strong> e aggiungile!\n"
 "                                        "
 
-#: reservation_management/templates/reservation_management/reservation_list.html:81
+#: reservation_management/templates/reservation_management/reservation_list.html:80
 msgid "Are your reservations correct?"
 msgstr "Le prenotazioni sono corrette?"
 
-#: reservation_management/templates/reservation_management/reservation_list.html:85
+#: reservation_management/templates/reservation_management/reservation_list.html:84
 msgid "Yes"
 msgstr "Sì"
 
-#: reservation_management/templates/reservation_management/reservation_list.html:88
+#: reservation_management/templates/reservation_management/reservation_list.html:87
 msgid "No"
 msgstr "No"
 
@@ -484,7 +506,7 @@ msgstr "Devi accettare le politiche sul trattamento dei dati."
 msgid "Google Drive link"
 msgstr "Link a Google Drive"
 
-#: user_management/forms.py:208
+#: user_management/forms.py:205
 msgid ""
 "Disable automatic reservations if you don't need them. You'll be able to "
 "enable them again later."
@@ -492,11 +514,11 @@ msgstr ""
 "Disabilita le prenotazioni automatiche se non ne hai bisogno. Potrai sempre "
 "abilitarle di nuovo successivamente."
 
-#: user_management/forms.py:217
+#: user_management/forms.py:214
 msgid "Save changes"
 msgstr "Salva le modifiche"
 
-#: user_management/forms.py:229
+#: user_management/forms.py:226
 msgid "Automatic reservations"
 msgstr "Prenotazioni automatiche"
 
@@ -603,7 +625,7 @@ msgstr ""
 "I dati verranno eliminati e dovrai inserire il link nuovamente dalla pagina "
 "principale."
 
-#: user_management/templates/user_management/greenpass_delete.html:35
+#: user_management/templates/user_management/greenpass_delete.html:31
 #: user_management/templates/user_management/user_delete.html:51
 #: user_management/templates/user_management/user_general_settings.html:16
 #: user_management/templates/user_management/user_update_unimore_credentials.html:34
@@ -712,7 +734,7 @@ msgstr ""
 "\n"
 "Clicca il seguente link per confermare la tua email:"
 
-#: user_management/views.py:189
+#: user_management/views.py:188
 #, fuzzy, python-brace-format
 #| msgid ""
 #| "Error. Attempt to validate email for the user {user_id_b64} with token "
@@ -724,7 +746,7 @@ msgstr ""
 "Errore. Tentativo di validazione dell'email per l'utente {user} con il token "
 "{token}"
 
-#: user_management/views.py:190
+#: user_management/views.py:189
 msgid "Authentication error"
 msgstr "Errore di autenticazione"
 
