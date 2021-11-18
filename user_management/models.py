@@ -24,6 +24,9 @@ class PlatformUser(AbstractUser):
     def __str__(self):
         return self.username
 
+    def get_day_lessons(self, day_idx):
+        return self.lessons.filter(day=day_idx)
+
     @property
     def today_lessons(self):
         return self.lessons.filter(day=datetime.today().weekday())
