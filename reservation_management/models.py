@@ -87,6 +87,14 @@ class Lesson(models.Model):
             raise ValidationError(_('Lesson start time should be before end time'))
         return super(Lesson, self).clean()
 
+    @property
+    def get_approximated_start_time(self, base=5):
+        return self.start_time.replace(minute=(base * round(self.start_time.minute / base)))
+
+    @property
+    def get_approximated_end_time(self, base=5):
+        return self.end_time.replace(minute=(base * round(self.end_time.minute / base)))
+
     class Meta:
         ordering = ['day', 'start_time']
 
