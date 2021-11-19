@@ -37,18 +37,24 @@ class LessonForm(forms.ModelForm):
             ),
         )
 
-    def check_time_overlap(self):
+    def check_time_overlap(self, update=False):
         idx = 0
 
-        # TODO: come formattare bene questa riga? Assegnare nomi a variabili?
-        while idx < len(self.request.user.get_day_lessons(self.cleaned_data["day"])) \
-                and self.cleaned_data["start_time"] >= self.request.user.get_day_lessons(
-                self.cleaned_data["day"])[idx].end_time:
+        if update:  # exclude the existing lesson to check the possible overlap
+            user_day_lessons = self.request.user.get_day_lessons(
+                self.cleaned_data["day"], exclude=True, lesson_id=self.instance.id
+            )
+        else:
+            user_day_lessons = self.request.user.get_day_lessons(self.cleaned_data["day"])
+
+        while (idx < len(user_day_lessons)
+                and self.cleaned_data["start_time"]
+                >= user_day_lessons[idx].end_time):
             idx += 1
 
-        if idx < len(self.request.user.get_day_lessons(self.cleaned_data["day"])) \
-                and self.cleaned_data["end_time"] > self.request.user.get_day_lessons(
-                self.cleaned_data["day"])[idx].start_time:
+        if (idx < len(user_day_lessons)
+                and self.cleaned_data["end_time"]
+                > user_day_lessons[idx].start_time):
             return False
 
         return True
@@ -63,8 +69,12 @@ class LessonForm(forms.ModelForm):
         #     return False
 
     def clean(self):
-        if not self.check_time_overlap():
-            raise ValidationError(_('You have already a lesson in this time interval'))
+        if not self.instance.id:
+            if not self.check_time_overlap():
+                raise ValidationError(_('You have already a lesson in this time interval'))
+        else:  # the element already exist
+            if not self.check_time_overlap(update=True):
+                raise ValidationError(_('You have already a lesson in this time interval'))
 
         return super(LessonForm, self).clean()
 
