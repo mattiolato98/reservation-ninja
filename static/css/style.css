@@ -331,6 +331,10 @@ select:-webkit-autofill:focus {
     font-size: 350%;
 }
 
+.site-badge {
+    color: white;
+}
+
 .site-badge-red {
     color: white;
     background-color: #FF5964;
