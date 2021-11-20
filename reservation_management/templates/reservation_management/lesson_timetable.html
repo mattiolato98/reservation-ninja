@@ -59,20 +59,41 @@
                             </th>
                             <td>
                                 {% if monday %}
-                                    <div class="badge site-badge-blue py-2 px-4 text-wrap">
-                                        {{ monday.classroom.name }}
+                                    <div class="badge site-badge py-2 px-4 text-wrap w-100"
+                                         style="background-color: {{ monday.color }}">
+                                        {% if monday.name %}
+                                            {{ monday.name }}
+                                        {% else %}
+                                            {{ monday.classroom.name }}
+                                        {% endif %}
                                         <br>
+                                        {% if monday.name %}
+                                            <span class="font-size-80 font-4">
+                                                {{ monday.classroom.name }}
+                                            </span>
+                                            <br>
+                                        {% endif %}
                                         <span class="font-size-80 font-4">
-                                            {{ monday.start_time }} - {{ monday.end_time }}
+                                             {{ monday.start_time }} - {{ monday.end_time }}
                                         </span>
                                     </div>
                                 {% endif %}
                             </td>
                             <td>
                                 {% if tuesday %}
-                                    <div class="badge site-badge-yellow py-2 px-4 text-wrap">
-                                        {{ tuesday.classroom.name }}
+                                    <div class="badge site-badge py-2 px-4 text-wrap w-100"
+                                         style="background-color: {{ tuesday.color }}">
+                                        {% if tuesday.name %}
+                                            {{ tuesday.name }}
+                                        {% else %}
+                                            {{ tuesday.classroom.name }}
+                                        {% endif %}
                                         <br>
+                                        {% if tuesday.name %}
+                                            <span class="font-size-80 font-4">
+                                                {{ tuesday.classroom.name }}
+                                            </span>
+                                        {% endif %}
                                         <span class="font-size-80 font-4">
                                             {{ tuesday.start_time }} - {{ tuesday.end_time }}
                                         </span>
@@ -81,9 +102,19 @@
                             </td>
                             <td>
                                 {% if wednesday %}
-                                    <div class="badge site-badge-green py-2 px-4 text-wrap">
-                                        {{ wednesday.classroom.name }}
+                                    <div class="badge site-badge py-2 px-4 text-wrap w-100"
+                                         style="background-color: {{ wednesday.color }}">
+                                        {% if wednesday.name %}
+                                            {{ wednesday.name }}
+                                        {% else %}
+                                            {{ wednesday.classroom.name }}
+                                        {% endif %}
                                         <br>
+                                        {% if wednesday.name %}
+                                            <span class="font-size-80 font-4">
+                                                {{ wednesday.classroom.name }}
+                                            </span>
+                                        {% endif %}
                                         <span class="font-size-80 font-4">
                                             {{ wednesday.start_time }} - {{ wednesday.end_time }}
                                         </span>
@@ -92,9 +123,19 @@
                             </td>
                             <td>
                                 {% if thursday %}
-                                    <div class="badge site-badge-red py-2 px-4 text-wrap">
-                                        {{ thursday.classroom.name }}
+                                    <div class="badge site-badge py-2 px-4 text-wrap w-100"
+                                         style="background-color: {{ thursday.color }}">
+                                        {% if thursday.name %}
+                                            {{ thursday.name }}
+                                        {% else %}
+                                            {{ thursday.classroom.name }}
+                                        {% endif %}
                                         <br>
+                                        {% if thursday.name %}
+                                            <span class="font-size-80 font-4">
+                                                {{ thursday.classroom.name }}
+                                            </span>
+                                        {% endif %}
                                         <span class="font-size-80 font-4">
                                             {{ thursday.start_time }} - {{ thursday.end_time }}
                                         </span>
@@ -103,9 +144,19 @@
                             </td>
                             <td>
                                 {% if friday %}
-                                    <div class="badge site-badge-dark py-2 px-4 text-wrap">
-                                        {{ friday.classroom.name }}
+                                    <div class="badge site-badge py-2 px-4 text-wrap w-100"
+                                         style="background-color: {{ friday.color }}">
+                                        {% if friday.name %}
+                                            {{ friday.name }}
+                                        {% else %}
+                                            {{ friday.classroom.name }}
+                                        {% endif %}
                                         <br>
+                                        {% if friday.name %}
+                                            <span class="font-size-80 font-4">
+                                                {{ friday.classroom.name }}
+                                            </span>
+                                        {% endif %}
                                         <span class="font-size-80 font-4">
                                             {{ friday.start_time }} - {{ friday.end_time }}
                                         </span>
