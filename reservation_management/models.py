@@ -5,6 +5,8 @@ from django.core.exceptions import ValidationError
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 
+from colorfield.fields import ColorField
+
 
 class Building(models.Model):
     """
@@ -49,9 +51,34 @@ class Lesson(models.Model):
         (THURSDAY, _("Thursday")),
         (FRIDAY, _("Friday")),
     ]
+    COLOR_1 = "#FF5964"
+    COLOR_2 = "#69DC9E"
+    COLOR_3 = "#0075A2"
+    COLOR_4 = "#333333"
+    COLOR_5 = "#FF9F1C"
+    COLOR_6 = "#694F5D"
+    COLOR_7 = "#3D3A4B"
+    COLOR_8 = "#849483"
+    COLOR_9 = "#B388EB"
+    COLOR_10 = "#823329"
+    COLOR_CHOICES = [
+        (COLOR_1, _("Red")),
+        (COLOR_2, _("Green")),
+        (COLOR_3, _("Blue")),
+        (COLOR_4, _("Black")),
+        (COLOR_5, _("Orange")),
+        (COLOR_6, _("Eggplant")),
+        (COLOR_7, _("Grey")),
+        (COLOR_8, _("Olive")),
+        (COLOR_9, _("Purple")),
+        (COLOR_10, _("Burnt umber")),
+    ]
+
     day = models.PositiveSmallIntegerField(choices=WEEKDAYS, default=MONDAY)
     start_time = models.TimeField()
     end_time = models.TimeField()
+    name = models.CharField(max_length=200, blank=True)
+    color = models.CharField(choices=COLOR_CHOICES, default=COLOR_1, max_length=7)
 
     classroom = models.ForeignKey(Classroom, on_delete=models.CASCADE, related_name='lessons')
     user = models.ForeignKey(get_user_model(), on_delete=models.CASCADE, related_name='lessons')
