@@ -75,7 +75,7 @@ class Lesson(models.Model):
     day = models.PositiveSmallIntegerField(choices=WEEKDAYS, default=MONDAY)
     start_time = models.TimeField()
     end_time = models.TimeField()
-    name = models.CharField(max_length=200, blank=True)
+    name = models.CharField(max_length=200, blank=True, null=True)
     color = models.CharField(choices=COLOR_CHOICES, default=COLOR_1, max_length=7)
 
     classroom = models.ForeignKey(Classroom, on_delete=models.CASCADE, related_name='lessons')
