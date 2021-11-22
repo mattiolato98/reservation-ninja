@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-11-20 12:31+0100\n"
+"POT-Creation-Date: 2021-11-22 16:13+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -83,10 +83,8 @@ msgid "Red"
 msgstr "Rosso"
 
 #: reservation_management/models.py:64
-#, fuzzy
-#| msgid "Green Pass"
 msgid "Green"
-msgstr "Green Pass"
+msgstr "Verde"
 
 #: reservation_management/models.py:65
 msgid "Blue"
@@ -163,7 +161,7 @@ msgid "Add a lesson"
 msgstr "Aggiungi una lezione"
 
 #: reservation_management/templates/reservation_management/lesson_add.html:16
-#: reservation_management/templates/reservation_management/lesson_detail.html:55
+#: reservation_management/templates/reservation_management/lesson_detail.html:63
 #: reservation_management/templates/reservation_management/lesson_list.html:11
 #: reservation_management/templates/reservation_management/reservation_list.html:98
 msgid "Your lessons"
@@ -202,13 +200,17 @@ msgstr "Torna alla lezione"
 msgid "Lesson"
 msgstr "Lezione"
 
-#: reservation_management/templates/reservation_management/lesson_detail.html:43
+#: reservation_management/templates/reservation_management/lesson_detail.html:44
 msgid "Start at "
 msgstr "Inizia alle "
 
-#: reservation_management/templates/reservation_management/lesson_detail.html:44
+#: reservation_management/templates/reservation_management/lesson_detail.html:45
 msgid "End at "
 msgstr "Finisce alle "
+
+#: reservation_management/templates/reservation_management/lesson_detail.html:58
+msgid "Your time table"
+msgstr "Il tuo orario delle lezioni"
 
 #: reservation_management/templates/reservation_management/lesson_list.html:7
 #: reservation_management/templates/reservation_management/reservation_list.html:7
@@ -437,47 +439,26 @@ msgid "What's new"
 msgstr "Novita'"
 
 #: templates/whats_new_modal.html:13
-#: user_management/templates/user_management/settings.html:23
-#: user_management/templates/user_management/user_update_unimore_credentials.html:5
-msgid "Update Unimore credentials"
-msgstr "Aggiorna le credenziali Unimore"
+msgid "The lessons timetable is here!"
+msgstr "L'orario delle lezioni è arrivato!"
 
 #: templates/whats_new_modal.html:14
-msgid "It's now possible to update Unimore credentials"
-msgstr "Ora è possibile aggiornare le credenziali Unimore"
+msgid "It's now possible to see your lessons timetable."
+msgstr "Ora è possibile visualizzare il tuo orario delle lezioni."
 
 #: templates/whats_new_modal.html:20
-msgid "Disable automatic reservations"
-msgstr "Disabilita prenotazioni automatiche"
+msgid "Now you can add the name of your subjects!"
+msgstr "Ora puoi aggiungere il nome delle tue materie!"
 
-#: templates/whats_new_modal.html:22
-msgid ""
-"Don't need classroom reservations for tomorrow's lessons? Disable "
-"reservations from settings"
-msgstr ""
-"Non hai bisogno delle prenotazioni per domani? Disabilitale dalle "
-"impostazioni"
+#: templates/whats_new_modal.html:21 templates/whats_new_modal.html:28
+msgid "You can do it by editing your lessons."
+msgstr "Puoi farlo modificando le tue lezioni."
 
-#: templates/whats_new_modal.html:29
-msgid "Add your green pass"
-msgstr "Aggiungi il tuo Green Pass"
+#: templates/whats_new_modal.html:27
+msgid "Now you can add a color to your subjects!"
+msgstr "Ora puoi aggiungere un colore alle tue lezioni!"
 
-#: templates/whats_new_modal.html:31
-msgid "You can add the Google Drive link to your green pass"
-msgstr "Puoi aggiungere il link Google Drive al tuo Green Pass"
-
-#: templates/whats_new_modal.html:38
-msgid "Reservations feedback"
-msgstr "Feedback sulle prenotazioni"
-
-#: templates/whats_new_modal.html:40
-msgid ""
-"You can let a daily feedback about reservations and help us improve the tool"
-msgstr ""
-"Puoi lasciare un feedback giornaliero sulle tue prenotazioni e aiutarci a "
-"migliorare lo strumento"
-
-#: templates/whats_new_modal.html:47
+#: templates/whats_new_modal.html:34
 msgid "Great, thanks!"
 msgstr "Grazie mille!"
 
@@ -697,6 +678,11 @@ msgstr "Impostazioni generali"
 msgid "Update general settings"
 msgstr "Aggiorna le impostazioni generali"
 
+#: user_management/templates/user_management/settings.html:23
+#: user_management/templates/user_management/user_update_unimore_credentials.html:5
+msgid "Update Unimore credentials"
+msgstr "Aggiorna le credenziali Unimore"
+
 #: user_management/templates/user_management/settings.html:26
 msgid ""
 "\n"
@@ -799,6 +785,32 @@ msgstr ""
 #: user_management/views.py:189
 msgid "Authentication error"
 msgstr "Errore di autenticazione"
+
+#~ msgid "Disable automatic reservations"
+#~ msgstr "Disabilita prenotazioni automatiche"
+
+#~ msgid ""
+#~ "Don't need classroom reservations for tomorrow's lessons? Disable "
+#~ "reservations from settings"
+#~ msgstr ""
+#~ "Non hai bisogno delle prenotazioni per domani? Disabilitale dalle "
+#~ "impostazioni"
+
+#~ msgid "Add your green pass"
+#~ msgstr "Aggiungi il tuo Green Pass"
+
+#~ msgid "You can add the Google Drive link to your green pass"
+#~ msgstr "Puoi aggiungere il link Google Drive al tuo Green Pass"
+
+#~ msgid "Reservations feedback"
+#~ msgstr "Feedback sulle prenotazioni"
+
+#~ msgid ""
+#~ "You can let a daily feedback about reservations and help us improve the "
+#~ "tool"
+#~ msgstr ""
+#~ "Puoi lasciare un feedback giornaliero sulle tue prenotazioni e aiutarci a "
+#~ "migliorare lo strumento"
 
 #~ msgid "Delete your Green Pass link"
 #~ msgstr "Elimina il link al tuo Green Pass"
