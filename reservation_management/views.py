@@ -13,7 +13,7 @@ from django.views.decorators.csrf import csrf_protect
 from django.views.decorators.http import require_POST
 from django.views.generic import CreateView, ListView, DetailView, UpdateView, DeleteView, TemplateView
 
-from reservation_management.decorators import lesson_owner_only
+from reservation_management.decorators import lesson_owner_only, check_overlap
 from reservation_management.forms import LessonForm
 from reservation_management.models import Lesson, Reservation
 
@@ -97,6 +97,7 @@ class ReservationListView(LoginRequiredMixin, ListView):
         return Reservation.objects.filter(lesson__user=self.request.user)
 
 
+@method_decorator(check_overlap, name='dispatch')
 class LessonTimetableView(LoginRequiredMixin, TemplateView):
     """
     View to display the timetable of the current user.
@@ -185,6 +186,10 @@ class LessonTimetableView(LoginRequiredMixin, TemplateView):
         context['df'] = pd.DataFrame(data, index=index)
 
         return context
+
+
+class LessonOverlapErrorView(LoginRequiredMixin, TemplateView):
+    template_name = 'reservation_management/lesson_overlap_error.html'
 
 
 @login_required
