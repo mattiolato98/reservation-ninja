@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-11-23 09:41+0100\n"
+"POT-Creation-Date: 2021-11-23 12:22+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -26,31 +26,31 @@ msgstr "Torna alla home"
 msgid "Insert"
 msgstr "Inserisci"
 
-#: reservation_management/forms.py:79 reservation_management/forms.py:82
+#: reservation_management/forms.py:71 reservation_management/forms.py:74
 msgid "You have already a lesson in this time interval"
 msgstr "Hai già una lezione in questo intervallo"
 
-#: reservation_management/forms.py:97
+#: reservation_management/forms.py:89
 msgid "Day"
 msgstr "Giorno"
 
-#: reservation_management/forms.py:98
+#: reservation_management/forms.py:90
 msgid "Start time"
 msgstr "Ora inizio"
 
-#: reservation_management/forms.py:99
+#: reservation_management/forms.py:91
 msgid "End time"
 msgstr "Ora fine"
 
-#: reservation_management/forms.py:100
+#: reservation_management/forms.py:92
 msgid "Classroom"
 msgstr "Aula"
 
-#: reservation_management/forms.py:101
+#: reservation_management/forms.py:93
 msgid "Color"
 msgstr "Colore"
 
-#: reservation_management/forms.py:102
+#: reservation_management/forms.py:94
 msgid "Name"
 msgstr "Nome"
 
@@ -137,7 +137,7 @@ msgstr ""
 #: reservation_management/templates/reservation_management/base/base_list.html:44
 #: reservation_management/templates/reservation_management/lesson_delete.html:10
 #: user_management/templates/user_management/greenpass_add.html:11
-#: user_management/templates/user_management/greenpass_delete.html:11
+#: user_management/templates/user_management/greenpass_delete.html:18
 #: user_management/templates/user_management/user_delete.html:24
 msgid "Warning"
 msgstr "Attenzione"
@@ -169,6 +169,7 @@ msgstr "Aggiungi una lezione"
 #: reservation_management/templates/reservation_management/lesson_add.html:16
 #: reservation_management/templates/reservation_management/lesson_detail.html:20
 #: reservation_management/templates/reservation_management/lesson_list.html:11
+#: reservation_management/templates/reservation_management/lesson_overlap_error.html:34
 #: reservation_management/templates/reservation_management/reservation_list.html:121
 msgid "Your lessons"
 msgstr "Le tue lezioni"
@@ -244,6 +245,39 @@ msgstr ""
 "                                            Clicca il <strong>pulsante</"
 "strong> e aggiungile!\n"
 "                                        "
+
+#: reservation_management/templates/reservation_management/lesson_overlap_error.html:4
+#: reservation_management/templates/reservation_management/lesson_overlap_error.html:16
+msgid "Error"
+msgstr "Errore"
+
+#: reservation_management/templates/reservation_management/lesson_overlap_error.html:10
+msgid "Error: Lessons overlap!"
+msgstr "Errore: Lezioni sovrapposte!"
+
+#: reservation_management/templates/reservation_management/lesson_overlap_error.html:19
+msgid "A lessons overlap error was found."
+msgstr "È stata rilevata una sovrapposizione di lezioni."
+
+msgid ""
+"\n"
+"                            Please, check your <strong>lessons</strong>.\n"
+"                            You have <strong>at least</strong> two of them "
+"which <strong>times overlap</strong>.\n"
+"                            <br><br>\n"
+"                            In this case the lessons timetable <strong>can't "
+"work properly</strong>.\n"
+"                        "
+msgstr ""
+"\n"
+"                            Per favore, controlla le tue <strong>lezioni</"
+"strong>.\n"
+"                            Hai <strong>almeno</strong> due di esse in cui gli "
+"<strong>orari si sovrappongono</strong>.\n"
+"                            <br><br>\n"
+"                            In questo caso l'orario delle lezioni <strong>non può "
+"funzionare correttamente</strong>.\n"
+"                        "
 
 #: reservation_management/templates/reservation_management/lesson_timetable.html:4
 msgid "Timetable"
@@ -698,27 +732,27 @@ msgstr ""
 msgid "Delete Green Pass"
 msgstr "Elimina il Green Pass"
 
-#: user_management/templates/user_management/greenpass_delete.html:7
-#: user_management/templates/user_management/settings.html:42
-msgid "Delete your Green Pass"
-msgstr "Elimina il tuo Green Pass"
-
-#: user_management/templates/user_management/greenpass_delete.html:14
-msgid "Are you sure you want to delete yuor Green Pass link?"
-msgstr "Vuoi davvero eliminare il link al tuo Green Pass?"
-
-#: user_management/templates/user_management/greenpass_delete.html:19
-msgid "This data will be destroyed and you will have to insert the link again."
-msgstr ""
-"I dati verranno eliminati e dovrai inserire il link nuovamente dalla pagina "
-"principale."
-
-#: user_management/templates/user_management/greenpass_delete.html:31
+#: user_management/templates/user_management/greenpass_delete.html:10
 #: user_management/templates/user_management/user_delete.html:12
 #: user_management/templates/user_management/user_general_settings.html:16
 #: user_management/templates/user_management/user_update_unimore_credentials.html:13
 msgid "Back to settings"
 msgstr "Torna alle impostazioni"
+
+#: user_management/templates/user_management/greenpass_delete.html:14
+#: user_management/templates/user_management/settings.html:42
+msgid "Delete your Green Pass"
+msgstr "Elimina il tuo Green Pass"
+
+#: user_management/templates/user_management/greenpass_delete.html:21
+msgid "Are you sure you want to delete yuor Green Pass link?"
+msgstr "Vuoi davvero eliminare il link al tuo Green Pass?"
+
+#: user_management/templates/user_management/greenpass_delete.html:26
+msgid "This data will be destroyed and you will have to insert the link again."
+msgstr ""
+"I dati verranno eliminati e dovrai inserire il link nuovamente dalla pagina "
+"principale."
 
 #: user_management/templates/user_management/settings.html:4
 #: user_management/templates/user_management/settings.html:18
@@ -827,16 +861,3 @@ msgstr ""
 #: user_management/views.py:186
 msgid "Authentication error"
 msgstr "Errore di autenticazione"
-
-#~ msgid "Reservation Ninja - Confirm your email"
-#~ msgstr "Reservation Ninja - Conferma la tua email"
-
-#, fuzzy, python-brace-format
-#~ msgid ""
-#~ "Hi {self.object.username}, welcome to Reservation Ninja.\n"
-#~ "\n"
-#~ "Click this link to confirm your email:"
-#~ msgstr ""
-#~ "Ciao {self.object.username}, ti diamo il benvenuto in Reservation Ninja.\n"
-#~ "\n"
-#~ "Clicca il seguente link per confermare la tua email:"
