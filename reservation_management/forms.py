@@ -42,6 +42,8 @@ class LessonForm(forms.ModelForm):
             ),
         )
 
+    # TODO: move this function to user and only call the user's method in clean() method
+    #       We have to pass the lesson as an object, now it's only a list of fields (maybe instance is an object?.
     def check_time_overlap(self, update=False):
         idx = 0
 
@@ -63,15 +65,6 @@ class LessonForm(forms.ModelForm):
             return False
 
         return True
-
-        # TODO: lasciato per la comprensione dell'hero developer
-        # the new lesson is after all the other lessons
-        # if idx == len(self.request.user.get_day_lessons(self.cleaned_data['day'])):
-        #     return True
-        # if self.cleaned_data['end_time'] <= self.request.user.get_day_lessons(self.cleaned_data['day'])[idx].start_time:
-        #     return True
-        # else:
-        #     return False
 
     def clean(self):
         if not self.instance.id:
