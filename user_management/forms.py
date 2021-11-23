@@ -84,6 +84,14 @@ class PlatformUserCreationForm(UserCreationForm):
             ),
         )
 
+    def clean(self):
+        if self.cleaned_data['email'].split('@')[1] != 'studenti.unimore.it':
+            raise ValidationError(_("Seems that you are not a Unimore student."))
+        if not self.cleaned_data['privacy_and_cookie_policy_acceptance']:
+            raise ValidationError(_("You must accept the privacy policies."))
+
+        return super(PlatformUserCreationForm, self).clean()
+
     class Meta:
         model = get_user_model()
         fields = (
@@ -103,14 +111,6 @@ class PlatformUserCreationForm(UserCreationForm):
         widgets = {
             'unimore_password': forms.PasswordInput(),
         }
-
-    def clean(self):
-        if self.cleaned_data['email'].split('@')[1] != 'studenti.unimore.it':
-            raise ValidationError(_("Seems that you are not a Unimore student."))
-        if not self.cleaned_data['privacy_and_cookie_policy_acceptance']:
-            raise ValidationError(_("You must accept the privacy policies."))
-
-        return super(PlatformUserCreationForm, self).clean()
 
 
 class UserUpdateUnimoreCredentialsForm(forms.ModelForm):

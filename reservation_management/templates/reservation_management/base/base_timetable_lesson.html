@@ -1,0 +1,22 @@
+{% load app_filters %}
+<a href="{% url 'reservation_management:lesson-detail' lesson.pk %}">
+    <div class="badge site-badge py-2 px-4 text-wrap w-100"
+         style="background-color: {{ lesson.color }};">
+        {% if lesson.name %}
+            {{ lesson.name }}
+        {% else %}
+            {{ lesson.classroom.name }}
+        {% endif %}
+        <br>
+        {% if lesson.name %}
+            <span class="font-size-80 font-4">
+                {{ lesson.classroom.name }}
+            </span>
+        {% endif %}
+        {% if lesson|is_time_approx %}
+            <span class="font-size-80 font-4">
+                | {{ lesson.start_time }} - {{ lesson.end_time }}
+            </span>
+        {% endif %}
+    </div>
+</a>
