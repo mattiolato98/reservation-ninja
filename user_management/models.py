@@ -27,6 +27,12 @@ class PlatformUser(AbstractUser):
     def __str__(self):
         return self.username
 
+    def get_day_lessons(self, day_idx, exclude=False, lesson_id=None ):
+        if not exclude:
+            return self.lessons.filter(day=day_idx)
+        else:
+            return self.lessons.filter(day=day_idx).exclude(id=lesson_id)
+
     @property
     def today_lessons(self):
         return self.lessons.filter(day=datetime.today().weekday())

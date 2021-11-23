@@ -10,6 +10,7 @@ urlpatterns = [
     path('lesson/<int:pk>/detail', views.LessonDetailView.as_view(), name='lesson-detail'),
     path('lesson/<int:pk>/update', views.LessonUpdateView.as_view(), name='lesson-update'),
     path('lesson/<int:pk>/delete', views.LessonDeleteView.as_view(), name='lesson-delete'),
+    path('lesson-timetable', views.LessonTimetableView.as_view(), name='lesson-timetable'),
     path('whats-new-confirm', views.ajax_whats_new_confirm, name='whats-new-confirm'),
     path('instagram-confirm', views.ajax_instagram_confirm, name='instagram-confirm'),
 ]

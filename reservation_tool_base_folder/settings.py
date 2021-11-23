@@ -43,14 +43,12 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-
     # local
     "user_management",
     "reservation_management",
     "analytics_management",
-
     # 3d party
-    "crispy_forms",
+    'crispy_forms',
 ]
 
 if ADMIN_ENABLED:

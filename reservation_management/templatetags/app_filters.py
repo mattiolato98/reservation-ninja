@@ -21,3 +21,12 @@ def get_day_from_int(day_idx):
         4: _("Friday"),
     }
     return weekdays.get(day_idx, None)
+
+
+@register.filter
+def is_time_approx(lesson):
+    if (lesson.start_time != lesson.get_approximated_start_time
+            and lesson.end_time != lesson.get_approximated_end_time):
+        return True
+    else:
+        return False
