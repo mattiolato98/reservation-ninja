@@ -13,7 +13,11 @@
 
 {% block list_button %}
     <div class="row justify-content-center">
-        <div class="col-xl-3 col-lg-5 col-md-9 col-12 d-flex justify-content-end">
+        <div class="col-xl-3 col-lg-5 col-md-9 col-12 d-flex justify-content-between align-items-center">
+            <a href="{% url 'reservation_management:reservation-list' %}" class="font-6 site-blue-text">
+                <i class="fas fa-chevron-left mr-2"></i>
+                {% translate "Your reservations" %}
+            </a>
             <a href="{% url "reservation_management:lesson-add" %}"
                class="btn site-btn font-5" style="width: auto !important;">
                 <i class="fas fa-plus"></i>
@@ -30,11 +34,22 @@
             <img src="{% static 'img/calendar.png' %}" alt="cal" width="32" height="32"
                  class="flex-shrink-0 mr-3">
             <div class="d-flex gap-2 w-100 justify-content-between">
-                <div>
-                    <h6 class="mb-0">{{ lesson.classroom }} {{ lesson.start_time }}
-                        - {{ lesson.end_time }}</h6>
-                    <p class="mb-0 opacity-75">
-                        {{ lesson.classroom.building }}</p>
+                <div class="text-wrap">
+                    {% if lesson.name %}
+                        <h6 class="mb-0">{{ lesson.name }} </h6>
+                        <p class="mb-0 opacity-75 font-size-80 font-4">
+                            {{ lesson.start_time }} - {{ lesson.end_time }}
+                        </p>
+                        <p class="mb-0 opacity-75">
+                            {{ lesson.classroom.name }} - {{ lesson.classroom.building }}</p>
+                    {% else %}
+                        <h6 class="mb-0">{{ lesson.classroom }}</h6>
+                        <p class="mb-0 opacity-75 font-size-80 font-4">
+                            {{ lesson.start_time }} - {{ lesson.end_time }}
+                        </p>
+                        <p class="mb-0 opacity-75">
+                            {{ lesson.classroom.building }}</p>
+                    {% endif %}
                 </div>
                 <small class="opacity-50 text-nowrap">{{ lesson.day|get_day_from_int }}</small>
             </div>
@@ -58,13 +73,4 @@
             </div>
         </a>
     {% endfor %}
-{% endblock %}
-
-{% block list_nav_button %}
-    <div class="col-xl-3 col-lg-5 col-md-9 col-12 d-flex justify-content-between align-items-center">
-        <a href="{% url 'reservation_management:reservation-list' %}" class="font-6 site-blue-text">
-            <i class="fas fa-chevron-left mr-2"></i>
-            {% translate "Your reservations" %}
-        </a>
-    </div>
 {% endblock %}

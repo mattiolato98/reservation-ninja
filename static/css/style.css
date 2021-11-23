@@ -192,6 +192,10 @@ select:-webkit-autofill:focus {
     border-radius: 10px;
 }
 
+.btn:hover {
+    box-shadow: 0 .5rem 1rem rgba(0,0,0,.15)!important;
+}
+
 .btn.dropdown-toggle {
     border-radius: 10px !important;
 }
@@ -238,6 +242,24 @@ select:-webkit-autofill:focus {
     color: white;
 }
 
+.green-btn-outline {
+    border-color: #69DC9E;
+    color: #69DC9E;
+}
+
+.green-btn-outline:hover {
+    box-shadow: 0 .5rem 1rem rgba(0,0,0,.15)!important;
+    background-color: #5cc58c;
+    border-color: #5cc58c;
+    color: white;
+}
+
+.green-btn-outline:active {
+    background-color: #7ceaae !important;
+    border-color: #7ceaae !important;
+    color: white;
+}
+
 .btn-danger:hover {
     box-shadow: 0 .5rem 1rem rgba(0,0,0,.15)!important;
 }
@@ -268,6 +290,8 @@ select:-webkit-autofill:focus {
 .site-btn-outline {
     border-color: #0075A2 !important;
 }
+
+
 
 .vertical-line {
     border-left: 1px solid rgba(0,0,0,.1);
@@ -327,6 +351,30 @@ select:-webkit-autofill:focus {
 
 .site-big-icon {
     font-size: 350%;
+}
+
+.site-badge {
+    color: white;
+}
+
+.site-badge-red {
+    color: white;
+    background-color: #FF5964;
+}
+
+.site-badge-green {
+    color: white;
+    background-color: #69DC9E;
+}
+
+.site-badge-yellow {
+    color: white;
+    background-color: #FF9F1C;
+}
+
+.site-badge-dark {
+    color: white;
+    background-color: #333333;
 }
 
 .site-badge-blue {

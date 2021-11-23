@@ -17,7 +17,10 @@ class PlatformUser(AbstractUser):
 
     enable_automatic_reservation = models.BooleanField(default=True)
     feedback = models.BooleanField(default=True)
+    ask_for_feedback = models.BooleanField(default=True)
+
     whats_new = models.BooleanField(default=True)
+    instagram = models.BooleanField(default=True)
 
     privacy_and_cookie_policy_acceptance = models.BooleanField(default=False)
 
@@ -25,6 +28,12 @@ class PlatformUser(AbstractUser):
 
     def __str__(self):
         return self.username
+
+    def get_day_lessons(self, day_idx, exclude=False, lesson_id=None ):
+        if not exclude:
+            return self.lessons.filter(day=day_idx)
+        else:
+            return self.lessons.filter(day=day_idx).exclude(id=lesson_id)
 
     @property
     def today_lessons(self):

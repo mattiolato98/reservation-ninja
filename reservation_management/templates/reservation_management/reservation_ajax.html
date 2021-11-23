@@ -7,7 +7,7 @@
          */
         $.ajax({
             type: 'POST',
-            url: "{% url 'reservation_management:send-feedback' %}",
+            url: "{% url 'analytics_management:send-feedback' %}",
             data: {
                 'response_ok': ok,
             },
@@ -36,13 +36,27 @@
         });
     }
 
-     $("#whats-new-confirm-button").on('click', function () {
+    $("#whats-new-confirm-button").on('click', function () {
         /**
-         * Save user Feedback.
+         * After closing What's new modal, set whats_new=False on user to not show it anymore.
          */
         $.ajax({
             type: 'POST',
             url: "{% url 'reservation_management:whats-new-confirm' %}",
+            headers:{
+                "X-CSRFToken": '{{ csrf_token }}'
+            },
+            dataType: 'json',
+        });
+    });
+
+    $("#instagram-confirm-button").on('click', function () {
+        /**
+         * After closing Instagram modal, set instagram=False on user to not show it anymore.
+         */
+        $.ajax({
+            type: 'POST',
+            url: "{% url 'reservation_management:instagram-confirm' %}",
             headers:{
                 "X-CSRFToken": '{{ csrf_token }}'
             },

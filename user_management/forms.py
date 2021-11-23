@@ -84,6 +84,14 @@ class PlatformUserCreationForm(UserCreationForm):
             ),
         )
 
+    def clean(self):
+        if self.cleaned_data['email'].split('@')[1] != 'studenti.unimore.it':
+            raise ValidationError(_("Seems that you are not a Unimore student."))
+        if not self.cleaned_data['privacy_and_cookie_policy_acceptance']:
+            raise ValidationError(_("You must accept the privacy policies."))
+
+        return super(PlatformUserCreationForm, self).clean()
+
     class Meta:
         model = get_user_model()
         fields = (
@@ -103,14 +111,6 @@ class PlatformUserCreationForm(UserCreationForm):
         widgets = {
             'unimore_password': forms.PasswordInput(),
         }
-
-    def clean(self):
-        if self.cleaned_data['email'].split('@')[1] != 'studenti.unimore.it':
-            raise ValidationError(_("Seems that you are not a Unimore student."))
-        if not self.cleaned_data['privacy_and_cookie_policy_acceptance']:
-            raise ValidationError(_("You must accept the privacy policies."))
-
-        return super(PlatformUserCreationForm, self).clean()
 
 
 class UserUpdateUnimoreCredentialsForm(forms.ModelForm):
@@ -201,12 +201,20 @@ class UserGeneralSettings(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
-        self.fields['enable_automatic_reservation'].help_text = \
-            _('Disable automatic reservations if you don\'t need them. You\'ll be able to enable them again later.')
+        self.fields['enable_automatic_reservation'].help_text = _(
+            'Disable automatic reservations if you don\'t need them. You\'ll be able to enable them again later'
+        )
+        self.fields['ask_for_feedback'].help_text = _(
+            'Help us discover problems by giving a daily feedback about your reservations'
+        )
 
         self.helper.layout = Layout(
             Row(
                 Column('enable_automatic_reservation', css_class='form-group mb-0 font-6'),
+                css_class='form-row'
+            ),
+            Row(
+                Column('ask_for_feedback', css_class='form-group mb-0 font-6'),
                 css_class='form-row'
             ),
             Row(
@@ -221,7 +229,9 @@ class UserGeneralSettings(forms.ModelForm):
         model = get_user_model()
         fields = (
             'enable_automatic_reservation',
+            'ask_for_feedback',
         )
         labels = {
             'enable_automatic_reservation': _('Automatic reservations'),
+            'ask_for_feedback': _('Daily feedback'),
         }

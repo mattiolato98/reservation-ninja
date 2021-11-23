@@ -9,8 +9,11 @@ from datetime import time
 
 import pytz
 from selenium import webdriver
+from selenium.webdriver.common.by import By
 from selenium.webdriver.firefox.options import Options
-from selenium.common.exceptions import NoSuchElementException
+from selenium.common.exceptions import NoSuchElementException, TimeoutException
+from selenium.webdriver.support import expected_conditions
+from selenium.webdriver.support.wait import WebDriverWait
 
 PROJECT_PATH = os.path.join(dirname(__file__), "../")
 RESERVATION_URL = 'https://www.unimore.it/covid19/trovaaula.html'
@@ -18,6 +21,17 @@ TIME_INTERVAL = 5
 
 
 def find_hours(root_element, start_hour, end_hour):
+    """
+    This function find the available time range for the given classroom.
+
+    Args:
+        root_element (WebElement): element that represent the classroom.
+        start_hour (string): starting hour as a string (must be parsed).
+        end_hour (string): ending hour as a string (must be parsed)
+
+    Returns:
+        list: list containing the ranges to reserve.
+    """
     links = root_element.find_elements_by_tag_name("a")
 
     available_hours = (
@@ -45,6 +59,19 @@ def find_hours(root_element, start_hour, end_hour):
 
 
 def check_reservation_exist(start_time, end_time, lesson):
+    """
+    This function actually check if a lesson is included in already created reservation.
+    This happens, for example, when at least two lessons are contiguous in the same classroom.
+
+    Args:
+        start_time (TimeField): reservation starting time.
+        end_time (TimeField): reservation ending time.
+        lesson (Lesson): lesson to reserve.
+
+    Returns:
+        UrlField: if another reservation was created before.
+        Boolean (False): if no other reservations were created.
+    """
     reservations = Reservation.objects.filter(
             lesson__user=lesson.user,
             lesson__classroom=lesson.classroom,
@@ -58,9 +85,17 @@ def check_reservation_exist(start_time, end_time, lesson):
 
 
 def reserve_room(driver, lesson):
+    """
+    This function actually reserves the given lesson through the Selenium 
+    web driver. The webdriver actually simulate an authentic browser instance.
+
+    Args:
+        driver (webdriver): Selenium Web Driver.
+        lesson (lesson): lesson to reserve.
+    """
     element = driver.find_element_by_xpath(
-        f"//li[contains(text(), '{lesson.classroom.building.name}')]"
-        "//a[contains(text(), 'Elenco Aule con link per registrazione presenza')]"
+        f'//li[contains(text(), "{lesson.classroom.building.name}")]'
+        '//a[contains(text(), "Elenco Aule con link per registrazione presenza")]'
     )
     driver.execute_script("arguments[0].click();", element)
 
@@ -68,10 +103,13 @@ def reserve_room(driver, lesson):
         f"//td[contains(text(), '{lesson.classroom}')]/ancestor::tr"
     )
 
+    # getting the time range available for the current lesson's classroom:
     ranges = find_hours(room_element, lesson.start_time, lesson.end_time)
 
     building_url = driver.current_url
     for range_start_time, range_end_time in ranges:
+        # in the case if multiple lessons are grouped in the same classroom and in the same 
+        # time window, the older reservation link is provided to the new lesson:
         if link := check_reservation_exist(range_start_time, range_end_time, lesson):
             Reservation.objects.create(
                 link=link,
@@ -98,8 +136,10 @@ def reserve_room(driver, lesson):
                 pass
 
             try:
-                button = driver.find_element_by_xpath("//button[contains(text(), 'Inserisci')]")
-                button.click()
+                button_xpath = "//button[contains(text(), 'Inserisci')]"
+                WebDriverWait(driver, 10).until(
+                    expected_conditions.element_to_be_clickable((By.XPATH, button_xpath))
+                ).click()
                 Reservation.objects.create(
                     link=driver.current_url,
                     lesson=lesson,
@@ -110,11 +150,20 @@ def reserve_room(driver, lesson):
             except NoSuchElementException:
                 print(f"WRONG CREDENTIALS for user {lesson.user.username}")
                 break
+            except TimeoutException:
+                print(f"ALREADY RESERVED by user {lesson.user.username}")
 
             driver.get(building_url)
 
 
 def reserve_lessons(lesson):
+    """
+    This function is called by the map function for each lesson element in the
+    map's iterable. It plans the reservation procedure.
+
+    Args:
+        lesson (Lesson]): lesson that have to be reserved.
+    """
     print("----------------------------------------------------------------------------------------------------------")
     print(f'Reserving: {lesson}')
     """
@@ -139,11 +188,13 @@ def reserve_lessons(lesson):
 
 
 if __name__ == "__main__":
+    # Django environment initialization:
     sys.path.append(os.path.join(os.path.dirname(__file__), PROJECT_PATH))
     os.environ.setdefault("DJANGO_SETTINGS_MODULE", "reservation_tool_base_folder.settings")
     django.setup()
 
-    from reservation_management.models import Lesson, Reservation, Log
+    from reservation_management.models import Lesson, Reservation
+    from analytics_management.models import Log
 
     # In the case the scheduler execute this script more than one time:
     if Log.objects.filter(date=datetime.now(pytz.timezone('Europe/Rome')).date()).exists():
@@ -152,6 +203,7 @@ if __name__ == "__main__":
     # Delete old reservations
     Reservation.objects.all().delete()
 
+    # Getting today's lessons:
     lessons = Lesson.objects.filter(
         day=datetime.now(pytz.timezone('Europe/Rome')).weekday(),
         user__enable_automatic_reservation=True,
@@ -168,7 +220,7 @@ if __name__ == "__main__":
         user.feedback = False
         user.save()
 
-    print(f"FINE, tempo: {end - start}")
+    print(f"END, time: {end - start}")
     Log.objects.create(
         execution_time=(end - start),
         users=len(users),
