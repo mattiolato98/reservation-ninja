@@ -89,6 +89,12 @@
                                     </span>
                                 </div>
                                 <div class="d-flex justify-content-between">
+                                    <span class="font-7">Seen Instagram modal</span>
+                                    <span>
+                                        {{ seen_instagram }} ({{ percent_seen_instagram|floatformat:"0" }}%)
+                                    </span>
+                                </div>
+                                <div class="d-flex justify-content-between">
                                     <span class="font-7">Feedback disabled</span>
                                     <span>
                                         {{ feedback_disabled }} ({{ percent_feedback_disabled|floatformat:"0" }}%)
@@ -156,6 +162,10 @@
                         <div class="d-flex justify-content-between">
                             <span class="font-7">Average reservations per user</span>&nbsp;&nbsp;&nbsp;
                             <span>{{ average_reservations_per_user|floatformat:"2" }}</span>
+                        </div>
+                        <div class="d-flex justify-content-between">
+                            <span class="font-7">Average reservations per user (with at least a lesson today)</span>&nbsp;&nbsp;&nbsp;
+                            <span>{{ average_reservations_per_today_user|floatformat:"2" }}</span>
                         </div>
                     </div>
                 </div>

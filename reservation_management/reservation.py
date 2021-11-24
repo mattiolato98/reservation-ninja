@@ -9,7 +9,11 @@ from datetime import time
 
 import pytz
 from selenium import webdriver
-from selenium.common.exceptions import NoSuchElementException
+from selenium.webdriver.common.by import By
+from selenium.webdriver.firefox.options import Options
+from selenium.common.exceptions import NoSuchElementException, TimeoutException
+from selenium.webdriver.support import expected_conditions
+from selenium.webdriver.support.wait import WebDriverWait
 
 PROJECT_PATH = os.path.join(dirname(__file__), "../")
 RESERVATION_URL = 'https://www.unimore.it/covid19/trovaaula.html'
@@ -90,8 +94,8 @@ def reserve_room(driver, lesson):
         lesson (lesson): lesson to reserve.
     """
     element = driver.find_element_by_xpath(
-        f"//li[contains(text(), '{lesson.classroom.building.name}')]"
-        "//a[contains(text(), 'Elenco Aule con link per registrazione presenza')]"
+        f'//li[contains(text(), "{lesson.classroom.building.name}")]'
+        '//a[contains(text(), "Elenco Aule con link per registrazione presenza")]'
     )
     driver.execute_script("arguments[0].click();", element)
 
@@ -132,8 +136,10 @@ def reserve_room(driver, lesson):
                 pass
 
             try:
-                button = driver.find_element_by_xpath("//button[contains(text(), 'Inserisci')]")
-                button.click()
+                button_xpath = "//button[contains(text(), 'Inserisci')]"
+                WebDriverWait(driver, 10).until(
+                    expected_conditions.element_to_be_clickable((By.XPATH, button_xpath))
+                ).click()
                 Reservation.objects.create(
                     link=driver.current_url,
                     lesson=lesson,
@@ -144,6 +150,8 @@ def reserve_room(driver, lesson):
             except NoSuchElementException:
                 print(f"WRONG CREDENTIALS for user {lesson.user.username}")
                 break
+            except TimeoutException:
+                print(f"ALREADY RESERVED by user {lesson.user.username}")
 
             driver.get(building_url)
 

@@ -291,6 +291,8 @@ select:-webkit-autofill:focus {
     border-color: #0075A2 !important;
 }
 
+
+
 .vertical-line {
     border-left: 1px solid rgba(0,0,0,.1);
     height: 230px;
@@ -349,6 +351,30 @@ select:-webkit-autofill:focus {
 
 .site-big-icon {
     font-size: 350%;
+}
+
+.site-badge {
+    color: white;
+}
+
+.site-badge-red {
+    color: white;
+    background-color: #FF5964;
+}
+
+.site-badge-green {
+    color: white;
+    background-color: #69DC9E;
+}
+
+.site-badge-yellow {
+    color: white;
+    background-color: #FF9F1C;
+}
+
+.site-badge-dark {
+    color: white;
+    background-color: #333333;
 }
 
 .site-badge-blue {
