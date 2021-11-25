@@ -32,7 +32,7 @@ with open("crypto.txt") as f:
 DEBUG = int(os.environ.get('DEBUG', default=0))
 ADMIN_ENABLED = int(os.environ.get('ADMIN_ENABLED', default=0))
 
-ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'reservation-ninja.herokuapp.com']
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'testing-ninja.herokuapp.com']
 
 
 # Application definition
