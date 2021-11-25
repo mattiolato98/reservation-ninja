@@ -66,6 +66,7 @@ def webbot_check(username, passwd):
 
     return check_strings_equality(CORRECT_URL, test_url)
 
+
 if __name__ == "__main__":
     start = measure_time()
     check_unimore_credentials("username", "password")
