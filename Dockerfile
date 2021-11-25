@@ -1,5 +1,5 @@
 # pull official base image
-FROM python:3.9-slim
+FROM python:3.9.9-slim
 
 # set environment variables
 ENV PYTHONDONTWRITEBYTECODE 1
@@ -21,7 +21,7 @@ RUN apt-get update \
     && apt-get install --no-install-recommends -y tzdata
 
 # install Firefox
-RUN apt-get install --no-install-recommends -y firefox-esr
+RUN apt-get install --no-install-recommends -y firefox-esr chromium chromium-driver
 
 # install vim editor
 RUN apt-get install --no-install-recommends -y vim
@@ -43,8 +43,6 @@ COPY requirements.txt .
 RUN pip install --upgrade pip
 
 RUN pip install -r requirements.txt
-
-# RUN chown -R ninja:ninja /usr/local/lib/python3.9/site-packages/webbot/drivers/chrome_linux
 
 # copy project
 COPY . $APP_HOME
