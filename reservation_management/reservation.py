@@ -186,7 +186,7 @@ def reserve_lessons(lesson):
     options.add_argument("--no-sandbox")
     options.headless = True
 
-    driver = webdriver.Chrome(executable_path="/usr/lib/chromium/chromedriver", options=options)
+    driver = webdriver.Chrome(executable_path="/usr/bin/chromedriver", options=options)
     # Selenium configuration:
     driver.implicitly_wait(TIME_INTERVAL)
 
