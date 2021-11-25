@@ -14,7 +14,8 @@
 {% block list_button %}
     <div class="row justify-content-center">
         <div class="col-xl-3 col-lg-5 col-md-9 col-12 d-flex justify-content-between">
-            <a href="{% url 'reservation_management:lesson-timetable' %}" class="btn btn-info w-25">
+            <a href="{% url 'reservation_management:lesson-timetable' %}" class="btn btn-info mr-5"
+               style="width: auto !important;">
                 <i class="fas fa-clock"></i>
             </a>
             {% if user.green_pass_link is not None %}
@@ -95,7 +96,8 @@
     {% include 'whats_new_modal.html' %}
     {% if not user.feedback and user.ask_for_feedback %}
         <div class="row justify-content-center align-items-center mt-3 mb-5">
-            <div id="user-feedback-box" class="col-xl-3 col-lg-5 col-md-9 col-12 d-flex column-flex align-items-center justify-content-center">
+            <div id="user-feedback-box"
+                 class="col-xl-3 col-lg-5 col-md-9 col-12 d-flex column-flex align-items-center justify-content-center">
                 <span class="font-6">
                     {% translate "Are your reservations correct?" %}
                 </span>
