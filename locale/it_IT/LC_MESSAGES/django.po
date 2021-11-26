@@ -310,7 +310,7 @@ msgstr "Green Pass"
 #: reservation_management/templates/reservation_management/reservation_list.html:28
 #: user_management/templates/user_management/greenpass_add.html:7
 msgid "Add your Green Pass"
-msgstr "Aggiungi il tuo Green Pass"
+msgstr "Aggiungi Green Pass"
 
 #: reservation_management/templates/reservation_management/reservation_list.html:62
 msgid "No reservation made, insert your lessons!"
