@@ -162,6 +162,9 @@ STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 # security settings
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
-SECURE_SSL_REDIRECT = int(os.environ.get('SECURE_SSL_REDIRECT', default=1))
-SESSION_COOKIE_SECURE = int(os.environ.get('SESSION_COOKIE_SECURE', default=1))
-CSRF_COOKIE_SECURE = int(os.environ.get('CSRF_COOKIE_SECURE', default=1))
+SECURE_SSL_REDIRECT = int(os.environ.get('SECURE', default=1))
+SESSION_COOKIE_SECURE = int(os.environ.get('SECURE', default=1))
+CSRF_COOKIE_SECURE = int(os.environ.get('SECURE', default=1))
+SECURE_HSTS_SECONDS = 3600 if int(os.environ.get('SECURE', default=1)) else 0
+SECURE_HSTS_INCLUDE_SUBDOMAINS = int(os.environ.get('SECURE', default=1))
+SECURE_HSTS_PRELOAD = int(os.environ.get('SECURE', default=1))
