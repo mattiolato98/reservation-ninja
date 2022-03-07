@@ -37,5 +37,5 @@ if __name__ == '__main__':
     from user_management.models import PlatformUser
 
 
-    for u in PlatformUser.objects.filter(username='provaaa'):
+    for u in PlatformUser.objects.filter(is_active=True):
         send_newsletter(u)
