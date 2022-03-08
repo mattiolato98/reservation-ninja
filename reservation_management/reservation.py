@@ -175,7 +175,7 @@ def reserve_lessons(lesson):
 
     Il driver a quel punto viene creato direttamente dal main così può essere chiuso da lì.
     """
-    # Allows to run Firefox on a system with no display
+    # Allows running Firefox on a system with no display
     options = Options()
     options.headless = True
 
