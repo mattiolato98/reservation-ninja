@@ -90,8 +90,8 @@ def reserve_room(driver, lesson):
     web driver. The webdriver actually simulate an authentic browser instance.
 
     Args:
-        driver (webdriver): Selenium Web Driver.
-        lesson (lesson): lesson to reserve.
+        - driver selenium.webdriver: Selenium Web Driver.
+        - lesson (lesson): lesson to reserve.
     """
     element = driver.find_element_by_xpath(
         f'//li[contains(text(), "{lesson.classroom.building.name}")]'
@@ -162,7 +162,7 @@ def reserve_lessons(lesson):
     map's iterable. It plans the reservation procedure.
 
     Args:
-        lesson (Lesson]): lesson that have to be reserved.
+        - lesson reservation_management.models.Lesson: lesson that have to be reserved.
     """
     print("----------------------------------------------------------------------------------------------------------")
     print(f'Reserving: {lesson}')
