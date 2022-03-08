@@ -15,7 +15,7 @@ RUN apt-get update \
     # postgresql postgresql-contrib?
     && apt-get install --no-install-recommends -y libpq-dev \
     # psycopg2?
-    && python3 -m pip install psycopg2-binary \ 
+    && python3 -m pip install psycopg2-binary \
     && apt-get install --no-install-recommends -y tzdata
 
 # install Firefox
