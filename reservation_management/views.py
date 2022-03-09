@@ -97,11 +97,12 @@ class ReservationListView(LoginRequiredMixin, ListView):
         return Reservation.objects.filter(lesson__user=self.request.user)
 
 
-@method_decorator(check_overlap, name='dispatch')
-class LessonTimetableView(LoginRequiredMixin, TemplateView):
+@method_decorator((login_required, check_overlap), name="dispatch")
+class LessonTimetableView(TemplateView):
     """
     View to display the timetable of the current user.
     """
+
     template_name = "reservation_management/lesson_timetable.html"
 
     def get_context_data(self, **kwargs):
