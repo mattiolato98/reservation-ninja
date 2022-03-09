@@ -11,7 +11,14 @@ from django.urls import reverse_lazy
 from django.utils.decorators import method_decorator
 from django.views.decorators.csrf import csrf_protect
 from django.views.decorators.http import require_POST
-from django.views.generic import CreateView, ListView, DetailView, UpdateView, DeleteView, TemplateView
+from django.views.generic import (
+    CreateView,
+    ListView,
+    DetailView,
+    UpdateView,
+    DeleteView,
+    TemplateView,
+)
 
 from reservation_management.decorators import lesson_owner_only, check_overlap
 from reservation_management.forms import LessonForm
@@ -22,6 +29,7 @@ class LessonAddView(LoginRequiredMixin, CreateView):
     """
     View that implements the Lesson creation.
     """
+
     model = Lesson
     form_class = LessonForm
     template_name = "reservation_management/lesson_add.html"
@@ -29,7 +37,7 @@ class LessonAddView(LoginRequiredMixin, CreateView):
 
     def get_form_kwargs(self):
         kwargs = super(LessonAddView, self).get_form_kwargs()
-        kwargs.update({'request': self.request})
+        kwargs.update({"request": self.request})
         return kwargs
 
     # TODO: keeping this function here and not in the FormClass is probably conceptually wrong now.
@@ -42,6 +50,7 @@ class LessonListView(LoginRequiredMixin, ListView):
     """
     View to display the Lessons created by a user.
     """
+
     model = Lesson
     template_name = "reservation_management/lesson_list.html"
 
@@ -49,47 +58,53 @@ class LessonListView(LoginRequiredMixin, ListView):
         return Lesson.objects.filter(user=self.request.user)
 
 
-@method_decorator((login_required, lesson_owner_only), name='dispatch')
+@method_decorator((login_required, lesson_owner_only), name="dispatch")
 class LessonDetailView(DetailView):
     """
     View to show detail of a Lesson.
     """
+
     model = Lesson
     template_name = "reservation_management/lesson_detail.html"
 
 
-@method_decorator((login_required, lesson_owner_only), name='dispatch')
+@method_decorator((login_required, lesson_owner_only), name="dispatch")
 class LessonUpdateView(UpdateView):
     """
     View to update a Lesson.
     """
+
     model = Lesson
     form_class = LessonForm
     template_name = "reservation_management/lesson_update.html"
 
     def get_form_kwargs(self):
         kwargs = super(LessonUpdateView, self).get_form_kwargs()
-        kwargs.update({'request': self.request})
+        kwargs.update({"request": self.request})
         return kwargs
 
     def get_success_url(self):
-        return reverse_lazy("reservation_management:lesson-detail", kwargs={'pk': self.kwargs['pk']})
+        return reverse_lazy(
+            "reservation_management:lesson-detail", kwargs={"pk": self.kwargs["pk"]}
+        )
 
 
-@method_decorator((login_required, lesson_owner_only), name='dispatch')
+@method_decorator((login_required, lesson_owner_only), name="dispatch")
 class LessonDeleteView(DeleteView):
     """
     View to delete an existing dish.
     """
+
     model = Lesson
-    template_name = 'reservation_management/lesson_delete.html'
-    success_url = reverse_lazy('reservation_management:lesson-list')
+    template_name = "reservation_management/lesson_delete.html"
+    success_url = reverse_lazy("reservation_management:lesson-list")
 
 
 class ReservationListView(LoginRequiredMixin, ListView):
     """
     View to display the reservations made for the current user.
     """
+
     model = Reservation
     template_name = "reservation_management/reservation_list.html"
 
@@ -97,11 +112,12 @@ class ReservationListView(LoginRequiredMixin, ListView):
         return Reservation.objects.filter(lesson__user=self.request.user)
 
 
-@method_decorator(check_overlap, name='dispatch')
-class LessonTimetableView(LoginRequiredMixin, TemplateView):
+@method_decorator((login_required, check_overlap), name="dispatch")
+class LessonTimetableView(TemplateView):
     """
     View to display the timetable of the current user.
     """
+
     template_name = "reservation_management/lesson_timetable.html"
 
     def get_context_data(self, **kwargs):
@@ -115,33 +131,36 @@ class LessonTimetableView(LoginRequiredMixin, TemplateView):
         for lesson in lessons:
             sorted_times.add(lesson.get_approximated_start_time)
             sorted_times.add(lesson.get_approximated_end_time)
-        sorted_times = list(sorted(sorted_times))  # in order to access elements by index
+        sorted_times = list(
+            sorted(sorted_times)
+        )  # in order to access elements by index
 
         # retrieving all possible deltas between each lesson
         time_deltas = {
-            dt.datetime.combine(
-                dt.date.min,
-                sorted_times[idx + 1]
-            ) - dt.datetime.combine(
-                dt.datetime.min,
-                sorted_times[idx]
-            )
+            dt.datetime.combine(dt.date.min, sorted_times[idx + 1])
+            - dt.datetime.combine(dt.datetime.min, sorted_times[idx])
             for idx in range(len(sorted_times))
             if idx < len(sorted_times) - 1
         }
         time_deltas = {
-            int((delta.seconds % 3600) / 60)  # distribute the durations in an hour and convert seconds in minutes
+            int(
+                (delta.seconds % 3600) / 60
+            )  # distribute the durations in an hour and convert seconds in minutes
             for delta in time_deltas
             if delta.seconds % 3600 != 0
         }
-        time_interval = math.gcd(*time_deltas, 60)  # this is the time interval of the timetable
+        time_interval = math.gcd(
+            *time_deltas, 60
+        )  # this is the time interval of the timetable
 
         time_list = []
         current_time_slot = min_time
         while current_time_slot < max_time:
             time_list.append(current_time_slot)
-            current_time_slot = (dt.datetime.combine(dt.date.min, current_time_slot)
-                                 + dt.timedelta(minutes=time_interval)).time()
+            current_time_slot = (
+                dt.datetime.combine(dt.date.min, current_time_slot)
+                + dt.timedelta(minutes=time_interval)
+            ).time()
         # this index will be used in a pandas DataFrame
         index = [
             f"{time.strftime('%H:%M')} - "
@@ -167,29 +186,33 @@ class LessonTimetableView(LoginRequiredMixin, TemplateView):
             current_time_slot = min_time
             while current_time_slot < max_time:
                 next_time_slot = (
-                        dt.datetime.combine(dt.date.min, current_time_slot)
-                        + dt.timedelta(minutes=time_interval)
+                    dt.datetime.combine(dt.date.min, current_time_slot)
+                    + dt.timedelta(minutes=time_interval)
                 ).time()
 
-                if lesson is not None \
-                        and lesson.get_approximated_start_time <= current_time_slot \
-                        and lesson.get_approximated_end_time >= next_time_slot:
+                if (
+                    lesson is not None
+                    and lesson.get_approximated_start_time <= current_time_slot
+                    and lesson.get_approximated_end_time >= next_time_slot
+                ):
                     data[day].append(lesson)
                 else:
-                    data[day].append('')  # if there is no lesson, we have to fill the time slot anyway
+                    data[day].append(
+                        ""
+                    )  # if there is no lesson, we have to fill the time slot anyway
 
                 if lesson is not None and lesson.end_time <= next_time_slot:
                     lesson = lessons.pop(0) if len(lessons) > 0 else None
 
                 current_time_slot = next_time_slot
 
-        context['df'] = pd.DataFrame(data, index=index)
+        context["df"] = pd.DataFrame(data, index=index)
 
         return context
 
 
 class LessonOverlapErrorView(LoginRequiredMixin, TemplateView):
-    template_name = 'reservation_management/lesson_overlap_error.html'
+    template_name = "reservation_management/lesson_overlap_error.html"
 
 
 @login_required
@@ -203,7 +226,7 @@ def ajax_whats_new_confirm(request):
     user.whats_new = False
     user.save()
 
-    return JsonResponse({'ok', True})
+    return JsonResponse({"ok", True})
 
 
 @login_required
@@ -217,4 +240,4 @@ def ajax_instagram_confirm(request):
     user.instagram = False
     user.save()
 
-    return JsonResponse({'ok', True})
+    return JsonResponse({"ok", True})
