@@ -104,12 +104,12 @@ def reserve_room(driver, lesson):
         # in the case if multiple lessons are grouped in the same classroom and in the same
         # time window, the older reservation link is provided to the new one:
         if link := check_reservation_exist(range_begin_time, range_end_time, lesson):
-            Reservation.objects.create(
-                link=link,
-                lesson=lesson,
-                start_time=range_begin_time,
-                end_time=range_end_time,
-            )
+            # Reservation.objects.create(
+            #     link=link,
+            #     lesson=lesson,
+            #     start_time=range_begin_time,
+            #     end_time=range_end_time,
+            # )
             print(f"Presenza duplicata inserita {range_begin_time}-{range_end_time}")
         else:
             element = driver.find_element_by_xpath(
@@ -133,19 +133,20 @@ def reserve_room(driver, lesson):
                 pass  # can be removed?
 
             try:
-                button_xpath = "//button[contains(text(), 'Inserisci')]"
-                WebDriverWait(driver, 10).until(
-                    expected_conditions.element_to_be_clickable(
-                        (By.XPATH, button_xpath)
-                    )
-                ).click()
-                Reservation.objects.create(
-                    link=driver.current_url,
-                    lesson=lesson,
-                    start_time=range_begin_time,
-                    end_time=range_end_time,
-                )
-                print(f"Presenza inserita {range_begin_time}-{range_end_time}")
+                print(driver.find_element_by_id("id_app_user_first_name"))
+                # button_xpath = "//button[contains(text(), 'Inserisci')]"
+                # WebDriverWait(driver, 10).until(
+                #     expected_conditions.element_to_be_clickable(
+                #         (By.XPATH, button_xpath)
+                #     )
+                # ).click()
+                # Reservation.objects.create(
+                #     link=driver.current_url,
+                #     lesson=lesson,
+                #     start_time=range_begin_time,
+                #     end_time=range_end_time,
+                # )
+                # print(f"Presenza inserita {range_begin_time}-{range_end_time}")
             except NoSuchElementException:
                 print(f"WRONG CREDENTIALS for user {lesson.user.username}")
                 break
