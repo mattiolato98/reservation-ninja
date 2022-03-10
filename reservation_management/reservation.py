@@ -220,7 +220,7 @@ if __name__ == "__main__":
         user__credentials_ok=True,
     ).order_by("-user__date_joined")
 
-    start = measure_time()
+    begin = measure_time()
     # TODO: understand if this assignment is required...
     x = list(map(reserve_lessons, lessons))
     end = measure_time()
@@ -230,9 +230,9 @@ if __name__ == "__main__":
         user.feedback = False
         user.save()
 
-    print(f"END, time: {end - start}")
+    print(f"END, time: {end - begin}")
     Log.objects.create(
-        execution_time=(end - start),
+        execution_time=(end - begin),
         users=len(users),
         lessons=len(lessons),
     )
