@@ -84,7 +84,7 @@ def reserve_room(driver, lesson):
     web driver. The webdriver actually simulate an authentic browser instance.
 
     Args:
-        - driver selenium.webdriver: Selenium Web Driver.
+        - driver (selenium.webdriver): Selenium Web Driver.
         - lesson (lesson): lesson to reserve.
     """
     element = driver.find_element_by_xpath(
@@ -120,6 +120,9 @@ def reserve_room(driver, lesson):
             driver.execute_script("arguments[0].click();", element)
 
             try:
+                # TODO: this try takes a long time if the user is already authenticated
+                # TODO: can we do something? Like wait a timeout or check if the user
+                # TODO: is already authenticated (with some tricks).
                 driver.find_element_by_id("username").send_keys(
                     lesson.user.plain_unimore_username
                 )
@@ -145,7 +148,7 @@ def reserve_room(driver, lesson):
                     start_time=range_begin_time,
                     end_time=range_end_time,
                 )
-                print(f"Presenza inserita {range_begin_time}-{range_end_time}")
+                print(f"Time range booked {range_begin_time}-{range_end_time}")
             except NoSuchElementException:
                 print(f"WRONG CREDENTIALS for user {lesson.user.username}")
                 break
