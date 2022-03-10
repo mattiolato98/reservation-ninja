@@ -5,6 +5,8 @@ from django.core.exceptions import ValidationError
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 
+import pytz
+
 
 class Building(models.Model):
     """
@@ -87,6 +89,14 @@ class Lesson(models.Model):
             f'{self.start_time.strftime("%H:%M")}/{self.end_time.strftime("%H:%M")} '
             f'on day {self.day}'
         )
+
+    @classmethod
+    def get_today_lessons(cls):
+        return cls.objects.filter(
+            day=dt.datetime.now(pytz.timezone("Europe/Rome")).weekday(),
+            user__enable_automatic_reservation=True,
+            user__credentials_ok=True,
+        ).order_by("user__unimore_username")
 
     def clean(self):
         """
