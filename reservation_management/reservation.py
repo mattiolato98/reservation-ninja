@@ -54,13 +54,13 @@ def find_hours(root_element, start_hour, end_hour):
     return ranges_to_reserve
 
 
-def check_reservation_exist(start_time, end_time, lesson):
+def check_reservation_exist(begin_time, end_time, lesson):
     """
     This function actually check if a lesson is included in already created reservation.
     This happens, for example, when at least two lessons are contiguous in the same classroom.
 
     Args:
-        start_time (TimeField): reservation starting time.
+        begin_time (TimeField): reservation starting time.
         end_time (TimeField): reservation ending time.
         lesson (Lesson): lesson to reserve.
 
@@ -71,13 +71,10 @@ def check_reservation_exist(start_time, end_time, lesson):
     reservations = Reservation.objects.filter(
         lesson__user=lesson.user,
         lesson__classroom=lesson.classroom,
-        start_time=start_time,
+        start_time=begin_time,
         end_time=end_time,
     )
-    if len(reservations) > 0:
-        return reservations[0].link
-
-    return False
+    return reservations[0].link if reservations else False
 
 
 def reserve_room(driver, lesson):
@@ -103,21 +100,21 @@ def reserve_room(driver, lesson):
     ranges = find_hours(room_element, lesson.start_time, lesson.end_time)
 
     building_url = driver.current_url
-    for range_start_time, range_end_time in ranges:
+    for range_begin_time, range_end_time in ranges:
         # in the case if multiple lessons are grouped in the same classroom and in the same
-        # time window, the older reservation link is provided to the new lesson:
-        if link := check_reservation_exist(range_start_time, range_end_time, lesson):
+        # time window, the older reservation link is provided to the new one:
+        if link := check_reservation_exist(range_begin_time, range_end_time, lesson):
             Reservation.objects.create(
                 link=link,
                 lesson=lesson,
-                start_time=range_start_time,
+                start_time=range_begin_time,
                 end_time=range_end_time,
             )
-            print(f"Presenza duplicata inserita {range_start_time}-{range_end_time}")
+            print(f"Presenza duplicata inserita {range_begin_time}-{range_end_time}")
         else:
             element = driver.find_element_by_xpath(
                 f"//td[contains(text(), '{lesson.classroom}')]"
-                f"/ancestor::tr//a[contains(text(), 'Turno Aula {range_start_time}-{range_end_time}')]"
+                f"/ancestor::tr//a[contains(text(), 'Turno Aula {range_begin_time}-{range_end_time}')]"
             )
             driver.execute_script("arguments[0].click();", element)
 
@@ -133,7 +130,7 @@ def reserve_room(driver, lesson):
                 print("CREDENZIALI INSERITE CORRETTAMENTE")
             except NoSuchElementException:
                 print("CREDENZIALI ESISTENTI")
-                pass
+                pass  # can be removed?
 
             try:
                 button_xpath = "//button[contains(text(), 'Inserisci')]"
@@ -145,10 +142,10 @@ def reserve_room(driver, lesson):
                 Reservation.objects.create(
                     link=driver.current_url,
                     lesson=lesson,
-                    start_time=range_start_time,
+                    start_time=range_begin_time,
                     end_time=range_end_time,
                 )
-                print(f"Presenza inserita {range_start_time}-{range_end_time}")
+                print(f"Presenza inserita {range_begin_time}-{range_end_time}")
             except NoSuchElementException:
                 print(f"WRONG CREDENTIALS for user {lesson.user.username}")
                 break
