@@ -84,7 +84,7 @@ def reserve_room(driver, lesson):
     web driver. The webdriver actually simulate an authentic browser instance.
 
     Args:
-        - driver selenium.webdriver: Selenium Web Driver.
+        - driver (selenium.webdriver): Selenium Web Driver.
         - lesson (lesson): lesson to reserve.
     """
     element = driver.find_element_by_xpath(
@@ -120,6 +120,9 @@ def reserve_room(driver, lesson):
             driver.execute_script("arguments[0].click();", element)
 
             try:
+                # TODO: this try takes a long time if the user is already authenticated
+                # TODO: can we do something? Like wait a timeout or check if the user
+                # TODO: is already authenticated (with some tricks).
                 driver.find_element_by_id("username").send_keys(
                     lesson.user.plain_unimore_username
                 )
@@ -145,7 +148,7 @@ def reserve_room(driver, lesson):
                     start_time=range_begin_time,
                     end_time=range_end_time,
                 )
-                print(f"Presenza inserita {range_begin_time}-{range_end_time}")
+                print(f"Time range booked {range_begin_time}-{range_end_time}")
             except NoSuchElementException:
                 print(f"WRONG CREDENTIALS for user {lesson.user.username}")
                 break
@@ -155,50 +158,50 @@ def reserve_room(driver, lesson):
             driver.get(building_url)
 
 
-def reserve_lessons(lesson):
+def reserve_lessons(driver, lessons):
     """
-    This function is called by the map function for each lesson element in the
-    map's iterable. It plans the reservation procedure.
+    This function just iterates over the lessons of the current day and reserves them.
 
     Args:
-        - lesson reservation_management.models.Lesson: lesson that have to be reserved.
+        - driver (selenium.webdriver): Selenium Web Driver.
+        - lessons (QuerySet): today's lesson to be reserved.
     """
-    print(
-        "----------------------------------------------------------------------------------------------------------"
-    )
-    print(f"Reserving: {lesson}")
-    """
-    l'ideale è creare ad esempio 3 tab e ciclare iterativamente su di essi con l'operatore modulo, in questo modo
-    dovremmo ottimizzare al massimo il driver e l'occupazione di memoria e cpu.
-
-    ogni map calcola che tab utilizzare (mediante un contatore globale + operatore modulo(3)) e fa quello che deve 
-    su quel tab.
-
-    Il driver a quel punto viene creato direttamente dal main così può essere chiuso da lì.
-    """
-    # Allows running Firefox on a system with no display
-    options = Options()
-    options.headless = True
-
-    driver = webdriver.Chrome(executable_path="/usr/lib/chromium/chromedriver", options=options)
-    # Selenium configuration:
-    driver.implicitly_wait(TIME_INTERVAL)
-
-    driver.get(RESERVATION_URL)
-    reserve_room(driver, lesson)
-    driver.quit()
+    for i, lesson in enumerate(lessons):
+        driver.get(RESERVATION_URL)
+        print("----------------------------------------------------------------------")
+        print(f"Reserving: {lesson}")
+        if i < len(lessons) - 1:
+            # start new instance if the next user is different from the current one:
+            if lesson.user != lessons[i + 1].user:
+                driver.quit()
+                driver = get_webdriver()
 
 
 def get_webdriver():
     # Allows running Firefox on a system with no display
     options = Options()
     options.headless = True
-    # driver = webdriver.Firefox(options=options)
     driver = webdriver.Firefox(
         executable_path=GeckoDriverManager().install(), options=options
     )
     driver.implicitly_wait(TIME_INTERVAL)  # Selenium configuration
     return driver
+
+
+def set_user_feedback_false(users):
+    for user in users:
+        user.feedback = False
+        user.save()
+
+    return users
+
+
+def create_execution_log(users, lessons, begin, end):
+    Log.objects.create(
+        execution_time=(end - begin),
+        users=len(users),
+        lessons=len(lessons),
+    )
 
 
 def main():
@@ -212,34 +215,16 @@ def main():
     Reservation.objects.all().delete()
 
     driver = get_webdriver()
-
     lessons = Lesson.get_today_lessons()
-
     begin = measure_time()
-    for i, lesson in enumerate(lessons):
-        driver.get(RESERVATION_URL)
-        print("----------------------------------------------------------------------")
-        print(f"Reserving: {lesson}")
-        if i < len(lessons) - 1:
-            # start new instance if the next user is different from the current one:
-            if lesson.user != lessons[i + 1].user:
-                driver.quit()
-                driver = get_webdriver()
-
+    reserve_lessons(driver, lessons)
     driver.quit()
     end = measure_time()
 
-    users = list(set(lesson.user for lesson in lessons))
-    for user in users:
-        user.feedback = False
-        user.save()
+    users = set_user_feedback_false(list(set(lesson.user for lesson in lessons)))
 
     # print(f"END, time: {end - begin}")
-    Log.objects.create(
-        execution_time=(end - begin),
-        users=len(users),
-        lessons=len(lessons),
-    )
+    create_execution_log(users, lessons, begin, end)
 
 
 if __name__ == "__main__":
