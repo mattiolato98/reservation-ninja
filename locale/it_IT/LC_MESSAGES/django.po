@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-11-06 22:16+0100\n"
+"POT-Creation-Date: 2021-11-23 12:22+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -16,52 +16,119 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: reservation_management/forms.py:31 user_management/forms.py:165
+#: analytics_management/templates/analytics_management/base_admin.html:33
+#: templates/help.html:50 templates/help.html:55
+#: user_management/templates/user_management/settings.html:12
+msgid "Back home"
+msgstr "Torna alla home"
+
+#: reservation_management/forms.py:38 user_management/forms.py:165
 msgid "Insert"
 msgstr "Inserisci"
 
-#: reservation_management/forms.py:47
+#: reservation_management/forms.py:71 reservation_management/forms.py:74
+msgid "You have already a lesson in this time interval"
+msgstr "Hai già una lezione in questo intervallo"
+
+#: reservation_management/forms.py:89
 msgid "Day"
 msgstr "Giorno"
 
-#: reservation_management/forms.py:48
+#: reservation_management/forms.py:90
 msgid "Start time"
 msgstr "Ora inizio"
 
-#: reservation_management/forms.py:49
+#: reservation_management/forms.py:91
 msgid "End time"
 msgstr "Ora fine"
 
-#: reservation_management/forms.py:50
+#: reservation_management/forms.py:92
 msgid "Classroom"
 msgstr "Aula"
 
-#: reservation_management/models.py:44
+#: reservation_management/forms.py:93
+msgid "Color"
+msgstr "Colore"
+
+#: reservation_management/forms.py:94
+msgid "Name"
+msgstr "Nome"
+
+#: reservation_management/models.py:46
+#: reservation_management/templates/reservation_management/lesson_timetable.html:45
 #: reservation_management/templatetags/app_filters.py:17
 msgid "Monday"
 msgstr "Lunedì"
 
-#: reservation_management/models.py:45
+#: reservation_management/models.py:47
+#: reservation_management/templates/reservation_management/lesson_timetable.html:46
 #: reservation_management/templatetags/app_filters.py:18
 msgid "Tuesday"
 msgstr "Martedì"
 
-#: reservation_management/models.py:46
+#: reservation_management/models.py:48
+#: reservation_management/templates/reservation_management/lesson_timetable.html:47
 #: reservation_management/templatetags/app_filters.py:19
 msgid "Wednesday"
 msgstr "Mercoledì"
 
-#: reservation_management/models.py:47
+#: reservation_management/models.py:49
+#: reservation_management/templates/reservation_management/lesson_timetable.html:48
 #: reservation_management/templatetags/app_filters.py:20
 msgid "Thursday"
 msgstr "Giovedì"
 
-#: reservation_management/models.py:48
+#: reservation_management/models.py:50
+#: reservation_management/templates/reservation_management/lesson_timetable.html:49
 #: reservation_management/templatetags/app_filters.py:21
 msgid "Friday"
 msgstr "Venerdì"
 
-#: reservation_management/models.py:73
+#: reservation_management/models.py:63
+msgid "Red"
+msgstr "Rosso"
+
+#: reservation_management/models.py:64
+msgid "Green"
+msgstr "Verde"
+
+#: reservation_management/models.py:65
+msgid "Blue"
+msgstr "Blu"
+
+#: reservation_management/models.py:66
+msgid "Black"
+msgstr "Nero"
+
+#: reservation_management/models.py:67
+msgid "Orange"
+msgstr "Arancione"
+
+#: reservation_management/models.py:68
+msgid "Eggplant"
+msgstr "Melanzana"
+
+#: reservation_management/models.py:69
+msgid "Grey"
+msgstr "Grigio"
+
+#: reservation_management/models.py:70
+msgid "Olive"
+msgstr "Oliva"
+
+#: reservation_management/models.py:71
+msgid "Purple"
+msgstr "Viola"
+
+#: reservation_management/models.py:72
+msgid "Burnt umber"
+msgstr "Terra d'ombra"
+
+#: reservation_management/models.py:104
+msgid "Please, choose a time in the range"
+msgstr "Per favore, scegli un orario nell'intervallo disponibile"
+
+#: reservation_management/models.py:107
 msgid "Lesson start time should be before end time"
 msgstr ""
 "L'orario di inizio di una lezione dovrebbe essere inferiore all'orario di "
@@ -70,7 +137,7 @@ msgstr ""
 #: reservation_management/templates/reservation_management/base/base_list.html:44
 #: reservation_management/templates/reservation_management/lesson_delete.html:10
 #: user_management/templates/user_management/greenpass_add.html:11
-#: user_management/templates/user_management/greenpass_delete.html:11
+#: user_management/templates/user_management/greenpass_delete.html:18
 #: user_management/templates/user_management/user_delete.html:24
 msgid "Warning"
 msgstr "Attenzione"
@@ -100,9 +167,10 @@ msgid "Add a lesson"
 msgstr "Aggiungi una lezione"
 
 #: reservation_management/templates/reservation_management/lesson_add.html:16
-#: reservation_management/templates/reservation_management/lesson_detail.html:13
+#: reservation_management/templates/reservation_management/lesson_detail.html:20
 #: reservation_management/templates/reservation_management/lesson_list.html:11
-#: reservation_management/templates/reservation_management/reservation_list.html:122
+#: reservation_management/templates/reservation_management/lesson_overlap_error.html:34
+#: reservation_management/templates/reservation_management/reservation_list.html:121
 msgid "Your lessons"
 msgstr "Le tue lezioni"
 
@@ -139,11 +207,15 @@ msgstr "Torna alla lezione"
 msgid "Lesson"
 msgstr "Lezione"
 
-#: reservation_management/templates/reservation_management/lesson_detail.html:40
+#: reservation_management/templates/reservation_management/lesson_detail.html:15
+msgid "Your time table"
+msgstr "Il tuo orario delle lezioni"
+
+#: reservation_management/templates/reservation_management/lesson_detail.html:60
 msgid "Start at "
 msgstr "Inizia alle "
 
-#: reservation_management/templates/reservation_management/lesson_detail.html:41
+#: reservation_management/templates/reservation_management/lesson_detail.html:61
 msgid "End at "
 msgstr "Finisce alle "
 
@@ -152,11 +224,18 @@ msgstr "Finisce alle "
 msgid "My lessons"
 msgstr "Le mie lezioni"
 
-#: reservation_management/templates/reservation_management/lesson_list.html:50
+#: reservation_management/templates/reservation_management/lesson_list.html:19
+#: reservation_management/templates/reservation_management/lesson_timetable.html:30
+#: reservation_management/templates/reservation_management/reservation_list.html:11
+#: user_management/templates/user_management/greenpass_add.html:36
+msgid "Your reservations"
+msgstr "Le tue prenotazioni"
+
+#: reservation_management/templates/reservation_management/lesson_list.html:65
 msgid "No lesson here, insert your lessons!"
 msgstr "Ancora nessuna lezione, aggiungine una!"
 
-#: reservation_management/templates/reservation_management/lesson_list.html:52
+#: reservation_management/templates/reservation_management/lesson_list.html:67
 msgid ""
 "\n"
 "                            Click the <strong>button</strong> and add them!\n"
@@ -167,11 +246,46 @@ msgstr ""
 "strong> e aggiungile!\n"
 "                                        "
 
-#: reservation_management/templates/reservation_management/lesson_list.html:66
-#: reservation_management/templates/reservation_management/reservation_list.html:11
-#: user_management/templates/user_management/greenpass_add.html:36
-msgid "Your reservations"
-msgstr "Le tue prenotazioni"
+#: reservation_management/templates/reservation_management/lesson_overlap_error.html:4
+#: reservation_management/templates/reservation_management/lesson_overlap_error.html:16
+msgid "Error"
+msgstr "Errore"
+
+#: reservation_management/templates/reservation_management/lesson_overlap_error.html:10
+msgid "Error: Lessons overlap!"
+msgstr "Errore: Lezioni sovrapposte!"
+
+#: reservation_management/templates/reservation_management/lesson_overlap_error.html:19
+msgid "A lessons overlap error was found."
+msgstr "È stata rilevata una sovrapposizione di lezioni."
+
+msgid ""
+"\n"
+"                            Please, check your <strong>lessons</strong>.\n"
+"                            You have <strong>at least</strong> two of them "
+"which <strong>times overlap</strong>.\n"
+"                            <br><br>\n"
+"                            In this case the lessons timetable <strong>can't "
+"work properly</strong>.\n"
+"                        "
+msgstr ""
+"\n"
+"                            Per favore, controlla le tue <strong>lezioni</"
+"strong>.\n"
+"                            Hai <strong>almeno</strong> due di esse in cui gli "
+"<strong>orari si sovrappongono</strong>.\n"
+"                            <br><br>\n"
+"                            In questo caso l'orario delle lezioni <strong>non può "
+"funzionare correttamente</strong>.\n"
+"                        "
+
+#: reservation_management/templates/reservation_management/lesson_timetable.html:4
+msgid "Timetable"
+msgstr "Orario"
+
+#: reservation_management/templates/reservation_management/lesson_timetable.html:36
+msgid "Lessons timetable"
+msgstr "Orario delle lezioni"
 
 #: reservation_management/templates/reservation_management/lesson_update.html:5
 msgid "Update lesson"
@@ -189,20 +303,20 @@ msgstr "Un attimo ..."
 msgid "Thanks for the feedback!"
 msgstr "Grazie per il feedback!"
 
-#: reservation_management/templates/reservation_management/reservation_list.html:20
+#: reservation_management/templates/reservation_management/reservation_list.html:23
 msgid "Green Pass"
 msgstr "Green Pass"
 
-#: reservation_management/templates/reservation_management/reservation_list.html:29
+#: reservation_management/templates/reservation_management/reservation_list.html:28
 #: user_management/templates/user_management/greenpass_add.html:7
 msgid "Add your Green Pass"
-msgstr "Aggiungi il tuo Green Pass"
+msgstr "Aggiungi Green Pass"
 
-#: reservation_management/templates/reservation_management/reservation_list.html:63
+#: reservation_management/templates/reservation_management/reservation_list.html:62
 msgid "No reservation made, insert your lessons!"
 msgstr "Nessuna prenotazione effettuata, inserisci le tue lezioni!"
 
-#: reservation_management/templates/reservation_management/reservation_list.html:65
+#: reservation_management/templates/reservation_management/reservation_list.html:64
 msgid ""
 "\n"
 "                                Add your <strong>first lesson</strong> "
@@ -214,11 +328,11 @@ msgstr ""
 "lezione</strong> cliccando il pulsante qui sotto!\n"
 "                                        "
 
-#: reservation_management/templates/reservation_management/reservation_list.html:81
+#: reservation_management/templates/reservation_management/reservation_list.html:80
 msgid "Hooray! No reservations today."
 msgstr "Urrà! Nessuna prenotazione oggi."
 
-#: reservation_management/templates/reservation_management/reservation_list.html:83
+#: reservation_management/templates/reservation_management/reservation_list.html:82
 msgid ""
 "\n"
 "                                You can <strong>take it easy!</strong>\n"
@@ -229,23 +343,23 @@ msgstr ""
 "</strong>\n"
 "                                        "
 
-#: reservation_management/templates/reservation_management/reservation_list.html:101
+#: reservation_management/templates/reservation_management/reservation_list.html:100
 msgid "Are your reservations correct?"
 msgstr "Le prenotazioni sono corrette?"
 
-#: reservation_management/templates/reservation_management/reservation_list.html:104
+#: reservation_management/templates/reservation_management/reservation_list.html:103
 msgid "You can disable daily feedbacks from settings"
 msgstr "Puoi disabilitare i feedback dalle impostazioni"
 
-#: reservation_management/templates/reservation_management/reservation_list.html:108
+#: reservation_management/templates/reservation_management/reservation_list.html:107
 msgid "Yes"
 msgstr "Sì"
 
-#: reservation_management/templates/reservation_management/reservation_list.html:111
+#: reservation_management/templates/reservation_management/reservation_list.html:110
 msgid "No"
 msgstr "No"
 
-#: reservation_management/templates/reservation_management/reservation_list.html:127
+#: reservation_management/templates/reservation_management/reservation_list.html:126
 msgid "+ Add your first lesson"
 msgstr "+ Aggiungi la tua prima lezione"
 
@@ -288,11 +402,6 @@ msgstr "Informativa sui cookie"
 #: templates/help.html:39
 msgid "Privacy policy"
 msgstr "Informativa sulla privacy"
-
-#: templates/help.html:50 templates/help.html:55
-#: user_management/templates/user_management/settings.html:12
-msgid "Back home"
-msgstr "Torna alla home"
 
 #: templates/home.html:32
 msgid ""
@@ -383,56 +492,57 @@ msgstr "Registrati"
 msgid "Login"
 msgstr "Login"
 
+#: templates/instagram_modal.html:7
+msgid "Choose the next feature"
+msgstr "Scegli la prossima funzionalita'"
+
+#: templates/instagram_modal.html:11
+msgid "Visit our Instagram profile reservationninja to take the survey"
+msgstr ""
+"Visita il nostro profilo Instagram reservationninja per partecipare al "
+"sondaggio"
+
+#: templates/instagram_modal.html:13
+msgid "Vote the next feature in the stories"
+msgstr "Vota la prossima funzionalità nelle storie"
+
+#: templates/instagram_modal.html:19
+msgid "Go to Instagram"
+msgstr "Vai su Instagram"
+
+#: templates/instagram_modal.html:24
+msgid "Done!"
+msgstr "Fatto!"
+
 #: templates/whats_new_modal.html:7
 msgid "What's new"
 msgstr "Novita'"
 
 #: templates/whats_new_modal.html:13
-#: user_management/templates/user_management/settings.html:31
-#: user_management/templates/user_management/user_update_unimore_credentials.html:5
-msgid "Update Unimore credentials"
-msgstr "Aggiorna le credenziali Unimore"
+msgid "The lessons timetable is here!"
+msgstr "L'orario delle lezioni è arrivato!"
 
 #: templates/whats_new_modal.html:14
-msgid "It's now possible to update Unimore credentials"
-msgstr "Ora è possibile aggiornare le credenziali Unimore"
+msgid "It's now possible to see your lessons timetable."
+msgstr "Ora è possibile visualizzare il tuo orario delle lezioni."
 
 #: templates/whats_new_modal.html:20
-msgid "Disable automatic reservations"
-msgstr "Disabilita prenotazioni automatiche"
+msgid "Now you can add the name of your subjects!"
+msgstr "Ora puoi aggiungere il nome delle tue materie!"
 
-#: templates/whats_new_modal.html:22
-msgid ""
-"Don't need classroom reservations for tomorrow's lessons? Disable "
-"reservations from settings"
-msgstr ""
-"Non hai bisogno delle prenotazioni per domani? Disabilitale dalle "
-"impostazioni"
+#: templates/whats_new_modal.html:21 templates/whats_new_modal.html:28
+msgid "You can do it by editing your lessons."
+msgstr "Puoi farlo modificando le tue lezioni."
 
-#: templates/whats_new_modal.html:29
-msgid "Add your green pass"
-msgstr "Aggiungi il tuo Green Pass"
+#: templates/whats_new_modal.html:27
+msgid "Now you can add a color to your subjects!"
+msgstr "Ora puoi aggiungere un colore alle tue lezioni!"
 
-#: templates/whats_new_modal.html:31
-msgid "You can add the Google Drive link to your green pass"
-msgstr "Puoi aggiungere il link Google Drive al tuo Green Pass"
-
-#: templates/whats_new_modal.html:38
-msgid "Reservations feedback"
-msgstr "Feedback sulle prenotazioni"
-
-#: templates/whats_new_modal.html:40
-msgid ""
-"You can let a daily feedback about reservations and help us improve the tool"
-msgstr ""
-"Puoi lasciare un feedback giornaliero sulle tue prenotazioni e aiutarci a "
-"migliorare lo strumento"
-
-#: templates/whats_new_modal.html:47
+#: templates/whats_new_modal.html:34
 msgid "Great, thanks!"
 msgstr "Grazie mille!"
 
-#: user_management/forms.py:31 user_management/forms.py:101
+#: user_management/forms.py:31 user_management/forms.py:109
 msgid "Unimore Email"
 msgstr "Email Unimore"
 
@@ -444,12 +554,12 @@ msgstr "La tua email Unimore"
 msgid "Confirm password"
 msgstr "Conferma password"
 
-#: user_management/forms.py:37 user_management/forms.py:99
+#: user_management/forms.py:37 user_management/forms.py:107
 #: user_management/forms.py:122 user_management/forms.py:147
 msgid "Unimore username"
 msgstr "Username Unimore"
 
-#: user_management/forms.py:38 user_management/forms.py:100
+#: user_management/forms.py:38 user_management/forms.py:108
 #: user_management/forms.py:123 user_management/forms.py:148
 msgid "Unimore password"
 msgstr "Password Unimore"
@@ -494,12 +604,12 @@ msgstr ""
 "                    </span>      \n"
 "                "
 
-#: user_management/forms.py:109
+#: user_management/forms.py:89
 #: user_management/templates/user_management/user_ajax.html:54
 msgid "Seems that you are not a Unimore student."
 msgstr "Sembra che tu non sia uno studente Unimore."
 
-#: user_management/forms.py:111
+#: user_management/forms.py:91
 msgid "You must accept the privacy policies."
 msgstr "Devi accettare le politiche sul trattamento dei dati."
 
@@ -622,27 +732,27 @@ msgstr ""
 msgid "Delete Green Pass"
 msgstr "Elimina il Green Pass"
 
-#: user_management/templates/user_management/greenpass_delete.html:7
-#: user_management/templates/user_management/settings.html:42
-msgid "Delete your Green Pass"
-msgstr "Elimina il tuo Green Pass"
-
-#: user_management/templates/user_management/greenpass_delete.html:14
-msgid "Are you sure you want to delete yuor Green Pass link?"
-msgstr "Vuoi davvero eliminare il link al tuo Green Pass?"
-
-#: user_management/templates/user_management/greenpass_delete.html:19
-msgid "This data will be destroyed and you will have to insert the link again."
-msgstr ""
-"I dati verranno eliminati e dovrai inserire il link nuovamente dalla pagina "
-"principale."
-
-#: user_management/templates/user_management/greenpass_delete.html:31
+#: user_management/templates/user_management/greenpass_delete.html:10
 #: user_management/templates/user_management/user_delete.html:12
 #: user_management/templates/user_management/user_general_settings.html:16
 #: user_management/templates/user_management/user_update_unimore_credentials.html:13
 msgid "Back to settings"
 msgstr "Torna alle impostazioni"
+
+#: user_management/templates/user_management/greenpass_delete.html:14
+#: user_management/templates/user_management/settings.html:42
+msgid "Delete your Green Pass"
+msgstr "Elimina il tuo Green Pass"
+
+#: user_management/templates/user_management/greenpass_delete.html:21
+msgid "Are you sure you want to delete yuor Green Pass link?"
+msgstr "Vuoi davvero eliminare il link al tuo Green Pass?"
+
+#: user_management/templates/user_management/greenpass_delete.html:26
+msgid "This data will be destroyed and you will have to insert the link again."
+msgstr ""
+"I dati verranno eliminati e dovrai inserire il link nuovamente dalla pagina "
+"principale."
 
 #: user_management/templates/user_management/settings.html:4
 #: user_management/templates/user_management/settings.html:18
@@ -658,6 +768,11 @@ msgstr "Impostazioni generali"
 #: user_management/templates/user_management/settings.html:27
 msgid "Update general settings"
 msgstr "Aggiorna le impostazioni generali"
+
+#: user_management/templates/user_management/settings.html:31
+#: user_management/templates/user_management/user_update_unimore_credentials.html:5
+msgid "Update Unimore credentials"
+msgstr "Aggiorna le credenziali Unimore"
 
 #: user_management/templates/user_management/settings.html:34
 msgid ""

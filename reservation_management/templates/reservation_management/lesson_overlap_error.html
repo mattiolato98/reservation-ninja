@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% load i18n %}
+
+{% block title %}{{ block.super }} {% translate "Error" %}{% endblock %}
+
+{% block content %}
+    <div class="site-box">
+        <div class="row justify-content-center mt-3">
+            <div class="col-xl-3 col-lg-5 col-md-9 col-12">
+                <h2 class="site-color logo-font">{% translate "Error: Lessons overlap!" %}</h2>
+            </div>
+        </div>
+        <div class="row justify-content-center mt-5">
+            <div class="col-xl-3 col-lg-5 col-md-9 col-12 d-flex flex-column">
+                <div class="alert alert-danger" role="alert">
+                    <h5 class="alert-heading">{% translate "Error" %} <i class="fas fa-exclamation-triangle"></i></h5>
+                    <p>
+                        <span class="font-6">
+                            {% translate "A lessons overlap error was found." %}
+                        </span>
+                    </p>
+                    <hr>
+                    <p class="mb-0">
+                        {% blocktranslate %}
+                            Please, check your <strong>lessons</strong>.
+                            You have <strong>at least</strong> two of them which <strong>times overlap</strong>.
+                            <br><br>
+                            In this case the lessons timetable <strong>can't work properly</strong>.
+                        {% endblocktranslate %}
+                    </p>
+                    <p class="mt-4">
+                         <a href="{% url 'reservation_management:lesson-list' %}" class="font-6 btn btn-danger">
+                            {% translate "Your lessons" %}
+                        </a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

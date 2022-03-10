@@ -9,10 +9,14 @@ from datetime import time
 
 import pytz
 from selenium import webdriver
-from selenium.common.exceptions import NoSuchElementException
+from selenium.webdriver.common.by import By
+from selenium.webdriver.firefox.options import Options
+from selenium.common.exceptions import NoSuchElementException, TimeoutException
+from selenium.webdriver.support import expected_conditions
+from selenium.webdriver.support.wait import WebDriverWait
 
 PROJECT_PATH = os.path.join(dirname(__file__), "../")
-RESERVATION_URL = 'https://www.unimore.it/covid19/trovaaula.html'
+RESERVATION_URL = "https://www.unimore.it/covid19/trovaaula.html"
 TIME_INTERVAL = 5
 
 
@@ -30,10 +34,7 @@ def find_hours(root_element, start_hour, end_hour):
     """
     links = root_element.find_elements_by_tag_name("a")
 
-    available_hours = (
-        tuple(link.text.split(" ")[2].split("-"))
-        for link in links
-    )
+    available_hours = (tuple(link.text.split(" ")[2].split("-")) for link in links)
 
     def check_range(x):
         try:
@@ -42,12 +43,11 @@ def find_hours(root_element, start_hour, end_hour):
         except (TypeError, ValueError):
             return False
 
-        return (range_start <= start_hour < range_end) or (range_end >= end_hour > range_start)
+        return (range_start <= start_hour < range_end) or (
+            range_end >= end_hour > range_start
+        )
 
-    ranges_to_reserve = list(filter(
-        check_range,
-        available_hours
-    ))
+    ranges_to_reserve = list(filter(check_range, available_hours))
 
     print(ranges_to_reserve)
 
@@ -69,10 +69,10 @@ def check_reservation_exist(start_time, end_time, lesson):
         Boolean (False): if no other reservations were created.
     """
     reservations = Reservation.objects.filter(
-            lesson__user=lesson.user,
-            lesson__classroom=lesson.classroom,
-            start_time=start_time,
-            end_time=end_time
+        lesson__user=lesson.user,
+        lesson__classroom=lesson.classroom,
+        start_time=start_time,
+        end_time=end_time,
     )
     if len(reservations) > 0:
         return reservations[0].link
@@ -82,16 +82,16 @@ def check_reservation_exist(start_time, end_time, lesson):
 
 def reserve_room(driver, lesson):
     """
-    This function actually reserves the given lesson through the Selenium 
+    This function actually reserves the given lesson through the Selenium
     web driver. The webdriver actually simulate an authentic browser instance.
 
     Args:
-        driver (webdriver): Selenium Web Driver.
-        lesson (lesson): lesson to reserve.
+        - driver selenium.webdriver: Selenium Web Driver.
+        - lesson (lesson): lesson to reserve.
     """
     element = driver.find_element_by_xpath(
-        f"//li[contains(text(), '{lesson.classroom.building.name}')]"
-        "//a[contains(text(), 'Elenco Aule con link per registrazione presenza')]"
+        f'//li[contains(text(), "{lesson.classroom.building.name}")]'
+        '//a[contains(text(), "Elenco Aule con link per registrazione presenza")]'
     )
     driver.execute_script("arguments[0].click();", element)
 
@@ -104,7 +104,7 @@ def reserve_room(driver, lesson):
 
     building_url = driver.current_url
     for range_start_time, range_end_time in ranges:
-        # in the case if multiple lessons are grouped in the same classroom and in the same 
+        # in the case if multiple lessons are grouped in the same classroom and in the same
         # time window, the older reservation link is provided to the new lesson:
         if link := check_reservation_exist(range_start_time, range_end_time, lesson):
             Reservation.objects.create(
@@ -122,8 +122,12 @@ def reserve_room(driver, lesson):
             driver.execute_script("arguments[0].click();", element)
 
             try:
-                driver.find_element_by_id("username").send_keys(lesson.user.plain_unimore_username)
-                driver.find_element_by_id("password").send_keys(lesson.user.plain_unimore_password)
+                driver.find_element_by_id("username").send_keys(
+                    lesson.user.plain_unimore_username
+                )
+                driver.find_element_by_id("password").send_keys(
+                    lesson.user.plain_unimore_password
+                )
 
                 driver.find_element_by_name("_eventId_proceed").click()
                 print("CREDENZIALI INSERITE CORRETTAMENTE")
@@ -132,8 +136,12 @@ def reserve_room(driver, lesson):
                 pass
 
             try:
-                button = driver.find_element_by_xpath("//button[contains(text(), 'Inserisci')]")
-                button.click()
+                button_xpath = "//button[contains(text(), 'Inserisci')]"
+                WebDriverWait(driver, 10).until(
+                    expected_conditions.element_to_be_clickable(
+                        (By.XPATH, button_xpath)
+                    )
+                ).click()
                 Reservation.objects.create(
                     link=driver.current_url,
                     lesson=lesson,
@@ -144,6 +152,8 @@ def reserve_room(driver, lesson):
             except NoSuchElementException:
                 print(f"WRONG CREDENTIALS for user {lesson.user.username}")
                 break
+            except TimeoutException:
+                print(f"ALREADY RESERVED by user {lesson.user.username}")
 
             driver.get(building_url)
 
@@ -154,10 +164,12 @@ def reserve_lessons(lesson):
     map's iterable. It plans the reservation procedure.
 
     Args:
-        lesson (Lesson]): lesson that have to be reserved.
+        - lesson reservation_management.models.Lesson: lesson that have to be reserved.
     """
-    print("----------------------------------------------------------------------------------------------------------")
-    print(f'Reserving: {lesson}')
+    print(
+        "----------------------------------------------------------------------------------------------------------"
+    )
+    print(f"Reserving: {lesson}")
     """
     l'ideale è creare ad esempio 3 tab e ciclare iterativamente su di essi con l'operatore modulo, in questo modo
     dovremmo ottimizzare al massimo il driver e l'occupazione di memoria e cpu.
@@ -167,15 +179,8 @@ def reserve_lessons(lesson):
 
     Il driver a quel punto viene creato direttamente dal main così può essere chiuso da lì.
     """
-    # Allows to run Firefox on a system with no display
-    # options = Options()
-    # options.headless = True
-    #
-    # driver = webdriver.Firefox(options=options)
-
-    options = webdriver.ChromeOptions()
-    options.add_argument("--disable-dev-shm-usage")
-    options.add_argument("--no-sandbox")
+    # Allows running Firefox on a system with no display
+    options = Options()
     options.headless = True
 
     driver = webdriver.Chrome(executable_path="/usr/lib/chromium/chromedriver", options=options)
@@ -187,30 +192,82 @@ def reserve_lessons(lesson):
     driver.quit()
 
 
-if __name__ == "__main__":
+def get_webdriver():
+    # Allows running Firefox on a system with no display
+    options = Options()
+    options.headless = True
+    # Disable the cache use for the current webdriver:
+    profile = webdriver.FirefoxProfile()
+    profile.set_preference("browser.cache.disk.enable", False)
+    profile.set_preference("browser.cache.memory.enable", False)
+    profile.set_preference("browser.cache.offline.enable", False)
+    profile.set_preference("network.http.use-cache", False)
+
+    driver = webdriver.Firefox(firefox_profile=profile, options=options)
+    driver.implicitly_wait(TIME_INTERVAL)  # Selenium configuration
+    return driver
+
+
+def main():
     # Django environment initialization:
     sys.path.append(os.path.join(os.path.dirname(__file__), PROJECT_PATH))
-    os.environ.setdefault("DJANGO_SETTINGS_MODULE", "reservation_tool_base_folder.settings")
+    os.environ.setdefault(
+        "DJANGO_SETTINGS_MODULE", "reservation_tool_base_folder.settings"
+    )
     django.setup()
 
     from reservation_management.models import Lesson, Reservation
+    from user_management.models import PlatformUser
     from analytics_management.models import Log
 
     # In the case the scheduler execute this script more than one time:
-    if Log.objects.filter(date=datetime.now(pytz.timezone('Europe/Rome')).date()).exists():
+    if Log.objects.filter(
+            date=datetime.now(pytz.timezone("Europe/Rome")).date()
+    ).exists():
         sys.exit(0)
 
     # Delete old reservations
     Reservation.objects.all().delete()
 
-    # Getting today's lessons:
-    lessons = Lesson.objects.filter(
-        day=datetime.now(pytz.timezone('Europe/Rome')).weekday(),
-        user__enable_automatic_reservation=True,
-        user__credentials_ok=True,
-    ).order_by('-user__date_joined')
+    driver = get_webdriver()
 
-    start = measure_time()
+    # users = PlatformUser.objects.filter(
+    #     enable_automatic_reservation=True,
+    #     credentials_ok=True,
+    # )
+    # for user in users:
+    #     user_lessons = user.today_lessons
+    #     for lesson in user_lessons:
+    #         driver.get(RESERVATION_URL)
+    #         reserve_room(driver, lesson)
+    #     # delete cookies
+    #     driver.delete_all_cookies()
+    # driver.quit()
+
+    # Getting today's lessons:
+    # lessons = Lesson.objects.filter(
+    #     day=datetime.now(pytz.timezone("Europe/Rome")).weekday(),
+    #     user__enable_automatic_reservation=True,
+    #     user__credentials_ok=True,
+    # ).order_by("-user__date_joined")
+
+    lessons = Lesson.get_today_lessons()
+
+    for i, lesson in enumerate(lessons):
+        # If cookies won't work
+        # driver = get_webdriver()
+        driver.get(RESERVATION_URL)
+        print("----------------------------------------------------------------------")
+        print(f"Reserving: {lesson}")
+        reserve_room(driver, lesson)
+        # cookies cleaning phase
+        if i < len(lessons) - 1:
+            if lesson.user != lessons[i + 1].user:
+                driver.delete_all_cookies()
+                # If cookies won't work
+                # driver.quit()
+
+    begin = measure_time()
     # TODO: understand if this assignment is required...
     x = list(map(reserve_lessons, lessons))
     end = measure_time()
@@ -220,9 +277,13 @@ if __name__ == "__main__":
         user.feedback = False
         user.save()
 
-    print(f"END, time: {end - start}")
+    print(f"END, time: {end - begin}")
     Log.objects.create(
-        execution_time=(end - start),
+        execution_time=(end - begin),
         users=len(users),
         lessons=len(lessons),
     )
+
+
+if __name__ == "__main__":
+    main()

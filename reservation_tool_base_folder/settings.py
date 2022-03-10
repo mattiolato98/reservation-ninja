@@ -44,14 +44,12 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-
     # local
     "user_management",
     "reservation_management",
     "analytics_management",
-
     # 3d party
-    "crispy_forms",
+    'crispy_forms',
 ]
 
 if ADMIN_ENABLED:
@@ -166,6 +164,9 @@ STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 # security settings
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
-SECURE_SSL_REDIRECT = int(os.environ.get('SECURE_SSL_REDIRECT', default=1))
-SESSION_COOKIE_SECURE = int(os.environ.get('SESSION_COOKIE_SECURE', default=1))
-CSRF_COOKIE_SECURE = int(os.environ.get('CSRF_COOKIE_SECURE', default=1))
+SECURE_SSL_REDIRECT = int(os.environ.get('SECURE', default=1))
+SESSION_COOKIE_SECURE = int(os.environ.get('SECURE', default=1))
+CSRF_COOKIE_SECURE = int(os.environ.get('SECURE', default=1))
+SECURE_HSTS_SECONDS = 31536000 if int(os.environ.get('SECURE', default=1)) else 0
+SECURE_HSTS_INCLUDE_SUBDOMAINS = int(os.environ.get('SECURE', default=1))
+SECURE_HSTS_PRELOAD = int(os.environ.get('SECURE', default=1))

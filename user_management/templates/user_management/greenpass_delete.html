@@ -4,6 +4,13 @@
 
 {% block title %}{{ block.super }} {% translate "Delete Green Pass" %}{% endblock %}
 
+{% block back_url %}
+    <a href="{% url 'user_management:settings' %}" class="font-6 site-blue-text">
+        <i class="fas fa-chevron-left mr-2"></i>
+        {% translate "Back to settings" %}
+    </a>
+{% endblock %}
+
 {% block form_title %}{% translate "Delete your Green Pass" %}{% endblock %}
 
 {% block form_alert %}
@@ -23,15 +30,4 @@
 
 {% block form_body %}
     {% crispy form %}
-{% endblock %}
-
-{% block back_url %}
-    <a href="{% url 'user_management:settings' %}" class="font-6 site-blue-text">
-        <i class="fas fa-chevron-left mr-2"></i>
-        {% translate "Back to settings" %}
-    </a>
-{% endblock %}
-
-{% block extra_javascript %}
-
 {% endblock %}
