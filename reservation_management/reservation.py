@@ -188,6 +188,22 @@ def get_webdriver():
     return driver
 
 
+def set_user_feedback_false(users):
+    for user in users:
+        user.feedback = False
+        user.save()
+
+    return users
+
+
+def create_execution_log(users, lessons, begin, end):
+    Log.objects.create(
+        execution_time=(end - begin),
+        users=len(users),
+        lessons=len(lessons),
+    )
+
+
 def main():
     # In the case the scheduler execute this script more than one time:
     if Log.objects.filter(
@@ -199,34 +215,16 @@ def main():
     Reservation.objects.all().delete()
 
     driver = get_webdriver()
-
     lessons = Lesson.get_today_lessons()
-
     begin = measure_time()
-    for i, lesson in enumerate(lessons):
-        driver.get(RESERVATION_URL)
-        print("----------------------------------------------------------------------")
-        print(f"Reserving: {lesson}")
-        if i < len(lessons) - 1:
-            # start new instance if the next user is different from the current one:
-            if lesson.user != lessons[i + 1].user:
-                driver.quit()
-                driver = get_webdriver()
-
+    reserve_lessons(driver, lessons)
     driver.quit()
     end = measure_time()
 
-    users = list(set(lesson.user for lesson in lessons))
-    for user in users:
-        user.feedback = False
-        user.save()
+    users = set_user_feedback_false(list(set(lesson.user for lesson in lessons)))
 
     # print(f"END, time: {end - begin}")
-    Log.objects.create(
-        execution_time=(end - begin),
-        users=len(users),
-        lessons=len(lessons),
-    )
+    create_execution_log(users, lessons, begin, end)
 
 
 if __name__ == "__main__":
