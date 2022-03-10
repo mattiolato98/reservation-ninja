@@ -14,6 +14,7 @@ from selenium.webdriver.firefox.options import Options
 from selenium.common.exceptions import NoSuchElementException, TimeoutException
 from selenium.webdriver.support import expected_conditions
 from selenium.webdriver.support.wait import WebDriverWait
+from webdriver_manager.firefox import GeckoDriverManager
 
 PROJECT_PATH = os.path.join(dirname(__file__), "../")
 RESERVATION_URL = "https://www.unimore.it/covid19/trovaaula.html"
@@ -26,8 +27,8 @@ def find_hours(root_element, start_hour, end_hour):
 
     Args:
         root_element (WebElement): element that represent the classroom.
-        start_hour (string): starting hour as a string (must be parsed).
-        end_hour (string): ending hour as a string (must be parsed)
+        start_hour (time): starting hour.
+        end_hour (time): ending hour.
 
     Returns:
         list: list containing the ranges to reserve.
@@ -54,13 +55,13 @@ def find_hours(root_element, start_hour, end_hour):
     return ranges_to_reserve
 
 
-def check_reservation_exist(start_time, end_time, lesson):
+def check_reservation_exist(begin_time, end_time, lesson):
     """
     This function actually check if a lesson is included in already created reservation.
     This happens, for example, when at least two lessons are contiguous in the same classroom.
 
     Args:
-        start_time (TimeField): reservation starting time.
+        begin_time (TimeField): reservation starting time.
         end_time (TimeField): reservation ending time.
         lesson (Lesson): lesson to reserve.
 
@@ -71,13 +72,10 @@ def check_reservation_exist(start_time, end_time, lesson):
     reservations = Reservation.objects.filter(
         lesson__user=lesson.user,
         lesson__classroom=lesson.classroom,
-        start_time=start_time,
+        start_time=begin_time,
         end_time=end_time,
     )
-    if len(reservations) > 0:
-        return reservations[0].link
-
-    return False
+    return reservations[0].link if reservations else False
 
 
 def reserve_room(driver, lesson):
@@ -86,7 +84,7 @@ def reserve_room(driver, lesson):
     web driver. The webdriver actually simulate an authentic browser instance.
 
     Args:
-        - driver selenium.webdriver: Selenium Web Driver.
+        - driver (selenium.webdriver): Selenium Web Driver.
         - lesson (lesson): lesson to reserve.
     """
     element = driver.find_element_by_xpath(
@@ -103,25 +101,28 @@ def reserve_room(driver, lesson):
     ranges = find_hours(room_element, lesson.start_time, lesson.end_time)
 
     building_url = driver.current_url
-    for range_start_time, range_end_time in ranges:
+    for range_begin_time, range_end_time in ranges:
         # in the case if multiple lessons are grouped in the same classroom and in the same
-        # time window, the older reservation link is provided to the new lesson:
-        if link := check_reservation_exist(range_start_time, range_end_time, lesson):
+        # time window, the older reservation link is provided to the new one:
+        if link := check_reservation_exist(range_begin_time, range_end_time, lesson):
             Reservation.objects.create(
                 link=link,
                 lesson=lesson,
-                start_time=range_start_time,
+                start_time=range_begin_time,
                 end_time=range_end_time,
             )
-            print(f"Presenza duplicata inserita {range_start_time}-{range_end_time}")
+            print(f"Presenza duplicata inserita {range_begin_time}-{range_end_time}")
         else:
             element = driver.find_element_by_xpath(
                 f"//td[contains(text(), '{lesson.classroom}')]"
-                f"/ancestor::tr//a[contains(text(), 'Turno Aula {range_start_time}-{range_end_time}')]"
+                f"/ancestor::tr//a[contains(text(), 'Turno Aula {range_begin_time}-{range_end_time}')]"
             )
             driver.execute_script("arguments[0].click();", element)
 
             try:
+                # TODO: this try takes a long time if the user is already authenticated
+                # TODO: can we do something? Like wait a timeout or check if the user
+                # TODO: is already authenticated (with some tricks).
                 driver.find_element_by_id("username").send_keys(
                     lesson.user.plain_unimore_username
                 )
@@ -130,10 +131,9 @@ def reserve_room(driver, lesson):
                 )
 
                 driver.find_element_by_name("_eventId_proceed").click()
-                print("CREDENZIALI INSERITE CORRETTAMENTE")
+                print("Credentials passed correctly.")
             except NoSuchElementException:
-                print("CREDENZIALI ESISTENTI")
-                pass
+                print("User already logged in.")
 
             try:
                 button_xpath = "//button[contains(text(), 'Inserisci')]"
@@ -145,10 +145,10 @@ def reserve_room(driver, lesson):
                 Reservation.objects.create(
                     link=driver.current_url,
                     lesson=lesson,
-                    start_time=range_start_time,
+                    start_time=range_begin_time,
                     end_time=range_end_time,
                 )
-                print(f"Presenza inserita {range_start_time}-{range_end_time}")
+                print(f"Time range booked {range_begin_time}-{range_end_time}")
             except NoSuchElementException:
                 print(f"WRONG CREDENTIALS for user {lesson.user.username}")
                 break
@@ -158,37 +158,73 @@ def reserve_room(driver, lesson):
             driver.get(building_url)
 
 
-def reserve_lessons(lesson):
+def reserve_lessons(driver, lessons):
     """
-    This function is called by the map function for each lesson element in the
-    map's iterable. It plans the reservation procedure.
+    This function just iterates over the lessons of the current day and reserves them.
 
     Args:
-        - lesson reservation_management.models.Lesson: lesson that have to be reserved.
+        - driver (selenium.webdriver): Selenium Web Driver.
+        - lessons (QuerySet): today's lesson to be reserved.
     """
-    print(
-        "----------------------------------------------------------------------------------------------------------"
-    )
-    print(f"Reserving: {lesson}")
-    """
-    l'ideale è creare ad esempio 3 tab e ciclare iterativamente su di essi con l'operatore modulo, in questo modo
-    dovremmo ottimizzare al massimo il driver e l'occupazione di memoria e cpu.
-    ogni map calcola che tab utilizzare (mediante un contatore globale + operatore modulo(3)) e fa quello che deve 
-    su quel tab.
-    Il driver a quel punto viene creato direttamente dal main così può essere chiuso da lì.
-    """
+    for i, lesson in enumerate(lessons):
+        driver.get(RESERVATION_URL)
+        print("----------------------------------------------------------------------")
+        print(f"Reserving: {lesson}")
+        if i < len(lessons) - 1:
+            # start new instance if the next user is different from the current one:
+            if lesson.user != lessons[i + 1].user:
+                driver.quit()
+                driver = get_webdriver()
+
+
+def get_webdriver():
     # Allows running Firefox on a system with no display
     options = Options()
     options.headless = True
+    driver = webdriver.Firefox(
+        executable_path=GeckoDriverManager().install(), options=options
+    )
+    driver.implicitly_wait(TIME_INTERVAL)  # Selenium configuration
+    return driver
 
-    driver = webdriver.Firefox(options=options)
 
-    # Selenium configuration:
-    driver.implicitly_wait(TIME_INTERVAL)
+def set_user_feedback_false(users):
+    for user in users:
+        user.feedback = False
+        user.save()
 
-    driver.get(RESERVATION_URL)
-    reserve_room(driver, lesson)
+    return users
+
+
+def create_execution_log(users, lessons, begin, end):
+    Log.objects.create(
+        execution_time=(end - begin),
+        users=len(users),
+        lessons=len(lessons),
+    )
+
+
+def main():
+    # In the case the scheduler execute this script more than one time:
+    if Log.objects.filter(
+            date=datetime.now(pytz.timezone("Europe/Rome")).date()
+    ).exists():
+        sys.exit(0)
+
+    # Delete old reservations
+    Reservation.objects.all().delete()
+
+    driver = get_webdriver()
+    lessons = Lesson.get_today_lessons()
+    begin = measure_time()
+    reserve_lessons(driver, lessons)
     driver.quit()
+    end = measure_time()
+
+    users = set_user_feedback_false(list(set(lesson.user for lesson in lessons)))
+
+    # print(f"END, time: {end - begin}")
+    create_execution_log(users, lessons, begin, end)
 
 
 if __name__ == "__main__":
@@ -202,35 +238,4 @@ if __name__ == "__main__":
     from reservation_management.models import Lesson, Reservation
     from analytics_management.models import Log
 
-    # In the case the scheduler execute this script more than one time:
-    if Log.objects.filter(
-        date=datetime.now(pytz.timezone("Europe/Rome")).date()
-    ).exists():
-        sys.exit(0)
-
-    # Delete old reservations
-    Reservation.objects.all().delete()
-
-    # Getting today's lessons:
-    lessons = Lesson.objects.filter(
-        day=datetime.now(pytz.timezone("Europe/Rome")).weekday(),
-        user__enable_automatic_reservation=True,
-        user__credentials_ok=True,
-    ).order_by("-user__date_joined")
-
-    start = measure_time()
-    # TODO: understand if this assignment is required...
-    x = list(map(reserve_lessons, lessons))
-    end = measure_time()
-
-    users = list(set(lesson.user for lesson in lessons))
-    for user in users:
-        user.feedback = False
-        user.save()
-
-    print(f"END, time: {end - start}")
-    Log.objects.create(
-        execution_time=(end - start),
-        users=len(users),
-        lessons=len(lessons),
-    )
+    main()
