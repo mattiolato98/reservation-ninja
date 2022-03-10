@@ -14,6 +14,7 @@ from selenium.webdriver.firefox.options import Options
 from selenium.common.exceptions import NoSuchElementException, TimeoutException
 from selenium.webdriver.support import expected_conditions
 from selenium.webdriver.support.wait import WebDriverWait
+from webdriver_manager.firefox import GeckoDriverManager
 
 PROJECT_PATH = os.path.join(dirname(__file__), "../")
 RESERVATION_URL = "https://www.unimore.it/covid19/trovaaula.html"
@@ -26,8 +27,8 @@ def find_hours(root_element, start_hour, end_hour):
 
     Args:
         root_element (WebElement): element that represent the classroom.
-        start_hour (string): starting hour as a string (must be parsed).
-        end_hour (string): ending hour as a string (must be parsed)
+        start_hour (time): starting hour.
+        end_hour (time): ending hour.
 
     Returns:
         list: list containing the ranges to reserve.
@@ -127,10 +128,9 @@ def reserve_room(driver, lesson):
                 )
 
                 driver.find_element_by_name("_eventId_proceed").click()
-                print("CREDENZIALI INSERITE CORRETTAMENTE")
+                print("Credentials passed correctly.")
             except NoSuchElementException:
-                print("CREDENZIALI ESISTENTI")
-                pass  # can be removed?
+                print("User already logged in.")
 
             try:
                 button_xpath = "//button[contains(text(), 'Inserisci')]"
@@ -193,30 +193,15 @@ def get_webdriver():
     # Allows running Firefox on a system with no display
     options = Options()
     options.headless = True
-    # Disable the cache use for the current webdriver:
-    profile = webdriver.FirefoxProfile()
-    profile.set_preference("browser.cache.disk.enable", False)
-    profile.set_preference("browser.cache.memory.enable", False)
-    profile.set_preference("browser.cache.offline.enable", False)
-    profile.set_preference("network.http.use-cache", False)
-
-    driver = webdriver.Firefox(firefox_profile=profile, options=options)
+    # driver = webdriver.Firefox(options=options)
+    driver = webdriver.Firefox(
+        executable_path=GeckoDriverManager().install(), options=options
+    )
     driver.implicitly_wait(TIME_INTERVAL)  # Selenium configuration
     return driver
 
 
 def main():
-    # Django environment initialization:
-    sys.path.append(os.path.join(os.path.dirname(__file__), PROJECT_PATH))
-    os.environ.setdefault(
-        "DJANGO_SETTINGS_MODULE", "reservation_tool_base_folder.settings"
-    )
-    django.setup()
-
-    from reservation_management.models import Lesson, Reservation
-    from user_management.models import PlatformUser
-    from analytics_management.models import Log
-
     # In the case the scheduler execute this script more than one time:
     if Log.objects.filter(
             date=datetime.now(pytz.timezone("Europe/Rome")).date()
@@ -228,45 +213,20 @@ def main():
 
     driver = get_webdriver()
 
-    # users = PlatformUser.objects.filter(
-    #     enable_automatic_reservation=True,
-    #     credentials_ok=True,
-    # )
-    # for user in users:
-    #     user_lessons = user.today_lessons
-    #     for lesson in user_lessons:
-    #         driver.get(RESERVATION_URL)
-    #         reserve_room(driver, lesson)
-    #     # delete cookies
-    #     driver.delete_all_cookies()
-    # driver.quit()
-
-    # Getting today's lessons:
-    # lessons = Lesson.objects.filter(
-    #     day=datetime.now(pytz.timezone("Europe/Rome")).weekday(),
-    #     user__enable_automatic_reservation=True,
-    #     user__credentials_ok=True,
-    # ).order_by("-user__date_joined")
-
     lessons = Lesson.get_today_lessons()
 
+    begin = measure_time()
     for i, lesson in enumerate(lessons):
-        # If cookies won't work
-        # driver = get_webdriver()
         driver.get(RESERVATION_URL)
         print("----------------------------------------------------------------------")
         print(f"Reserving: {lesson}")
-        reserve_room(driver, lesson)
-        # cookies cleaning phase
         if i < len(lessons) - 1:
+            # start new instance if the next user is different from the current one:
             if lesson.user != lessons[i + 1].user:
-                driver.delete_all_cookies()
-                # If cookies won't work
-                # driver.quit()
+                driver.quit()
+                driver = get_webdriver()
 
-    begin = measure_time()
-    # TODO: understand if this assignment is required...
-    x = list(map(reserve_lessons, lessons))
+    driver.quit()
     end = measure_time()
 
     users = list(set(lesson.user for lesson in lessons))
@@ -274,7 +234,7 @@ def main():
         user.feedback = False
         user.save()
 
-    print(f"END, time: {end - begin}")
+    # print(f"END, time: {end - begin}")
     Log.objects.create(
         execution_time=(end - begin),
         users=len(users),
@@ -283,4 +243,14 @@ def main():
 
 
 if __name__ == "__main__":
+    # Django environment initialization:
+    sys.path.append(os.path.join(os.path.dirname(__file__), PROJECT_PATH))
+    os.environ.setdefault(
+        "DJANGO_SETTINGS_MODULE", "reservation_tool_base_folder.settings"
+    )
+    django.setup()
+
+    from reservation_management.models import Lesson, Reservation
+    from analytics_management.models import Log
+
     main()

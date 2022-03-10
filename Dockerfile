@@ -25,9 +25,9 @@ RUN apt-get install --no-install-recommends -y firefox-esr
 RUN apt-get install --no-install-recommends -y vim
 
 # install GeckoDriver
-RUN apt-get install -y --no-install-recommends wget \
-    && wget https://github.com/mozilla/geckodriver/releases/download/v0.26.0/geckodriver-v0.26.0-linux64.tar.gz \
-    && tar -zxf geckodriver-v0.26.0-linux64.tar.gz -C /usr/bin
+#RUN apt-get install -y --no-install-recommends wget \
+#    && wget https://github.com/mozilla/geckodriver/releases/download/v0.26.0/geckodriver-v0.26.0-linux64.tar.gz \
+#    && tar -zxf geckodriver-v0.26.0-linux64.tar.gz -C /usr/bin
 
 RUN groupadd --system ninja && useradd --system ninja --gid ninja
 
