@@ -193,7 +193,23 @@ def reserve_lessons(lesson):
     driver.quit()
 
 
-if __name__ == "__main__":
+def get_webdriver():
+    # Allows running Firefox on a system with no display
+    options = Options()
+    options.headless = True
+    # Disable the cache use for the current webdriver:
+    profile = webdriver.FirefoxProfile()
+    profile.set_preference("browser.cache.disk.enable", False)
+    profile.set_preference("browser.cache.memory.enable", False)
+    profile.set_preference("browser.cache.offline.enable", False)
+    profile.set_preference("network.http.use-cache", False)
+
+    driver = webdriver.Firefox(firefox_profile=profile, options=options)
+    driver.implicitly_wait(TIME_INTERVAL)  # Selenium configuration
+    return driver
+
+
+def main():
     # Django environment initialization:
     sys.path.append(os.path.join(os.path.dirname(__file__), PROJECT_PATH))
     os.environ.setdefault(
@@ -202,23 +218,55 @@ if __name__ == "__main__":
     django.setup()
 
     from reservation_management.models import Lesson, Reservation
+    from user_management.models import PlatformUser
     from analytics_management.models import Log
 
     # In the case the scheduler execute this script more than one time:
     if Log.objects.filter(
-        date=datetime.now(pytz.timezone("Europe/Rome")).date()
+            date=datetime.now(pytz.timezone("Europe/Rome")).date()
     ).exists():
         sys.exit(0)
 
     # Delete old reservations
     Reservation.objects.all().delete()
 
+    driver = get_webdriver()
+
+    # users = PlatformUser.objects.filter(
+    #     enable_automatic_reservation=True,
+    #     credentials_ok=True,
+    # )
+    # for user in users:
+    #     user_lessons = user.today_lessons
+    #     for lesson in user_lessons:
+    #         driver.get(RESERVATION_URL)
+    #         reserve_room(driver, lesson)
+    #     # delete cookies
+    #     driver.delete_all_cookies()
+    # driver.quit()
+
     # Getting today's lessons:
-    lessons = Lesson.objects.filter(
-        day=datetime.now(pytz.timezone("Europe/Rome")).weekday(),
-        user__enable_automatic_reservation=True,
-        user__credentials_ok=True,
-    ).order_by("-user__date_joined")
+    # lessons = Lesson.objects.filter(
+    #     day=datetime.now(pytz.timezone("Europe/Rome")).weekday(),
+    #     user__enable_automatic_reservation=True,
+    #     user__credentials_ok=True,
+    # ).order_by("-user__date_joined")
+
+    lessons = Lesson.get_today_lessons()
+
+    for i, lesson in enumerate(lessons):
+        # If cookies won't work
+        # driver = get_webdriver()
+        driver.get(RESERVATION_URL)
+        print("----------------------------------------------------------------------")
+        print(f"Reserving: {lesson}")
+        reserve_room(driver, lesson)
+        # cookies cleaning phase
+        if i < len(lessons) - 1:
+            if lesson.user != lessons[i + 1].user:
+                driver.delete_all_cookies()
+                # If cookies won't work
+                # driver.quit()
 
     begin = measure_time()
     # TODO: understand if this assignment is required...
@@ -236,3 +284,7 @@ if __name__ == "__main__":
         users=len(users),
         lessons=len(lessons),
     )
+
+
+if __name__ == "__main__":
+    main()
