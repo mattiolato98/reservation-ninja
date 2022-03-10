@@ -36,13 +36,6 @@ ENV APP_HOME=/home/ninja/web
 RUN mkdir -p $APP_HOME
 WORKDIR $APP_HOME
 
-RUN addgroup -S ninja && adduser -S ninja -G ninja
-
-ENV HOME=/home/ninja
-ENV APP_HOME=/home/ninja/web
-RUN mkdir $APP_HOME
-WORKDIR $APP_HOME
-
 # install dependencies
 COPY requirements.txt .
 RUN pip install --upgrade pip
