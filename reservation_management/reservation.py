@@ -158,46 +158,29 @@ def reserve_room(driver, lesson):
             driver.get(building_url)
 
 
-def reserve_lessons(lesson):
+def reserve_lessons(driver, lessons):
     """
-    This function is called by the map function for each lesson element in the
-    map's iterable. It plans the reservation procedure.
+    This function just iterates over the lessons of the current day and reserves them.
 
     Args:
-        - lesson reservation_management.models.Lesson: lesson that have to be reserved.
+        - driver (selenium.webdriver): Selenium Web Driver.
+        - lessons (QuerySet): today's lesson to be reserved.
     """
-    print(
-        "----------------------------------------------------------------------------------------------------------"
-    )
-    print(f"Reserving: {lesson}")
-    """
-    l'ideale è creare ad esempio 3 tab e ciclare iterativamente su di essi con l'operatore modulo, in questo modo
-    dovremmo ottimizzare al massimo il driver e l'occupazione di memoria e cpu.
-
-    ogni map calcola che tab utilizzare (mediante un contatore globale + operatore modulo(3)) e fa quello che deve 
-    su quel tab.
-
-    Il driver a quel punto viene creato direttamente dal main così può essere chiuso da lì.
-    """
-    # Allows running Firefox on a system with no display
-    options = Options()
-    options.headless = True
-
-    driver = webdriver.Firefox(options=options)
-
-    # Selenium configuration:
-    driver.implicitly_wait(TIME_INTERVAL)
-
-    driver.get(RESERVATION_URL)
-    reserve_room(driver, lesson)
-    driver.quit()
+    for i, lesson in enumerate(lessons):
+        driver.get(RESERVATION_URL)
+        print("----------------------------------------------------------------------")
+        print(f"Reserving: {lesson}")
+        if i < len(lessons) - 1:
+            # start new instance if the next user is different from the current one:
+            if lesson.user != lessons[i + 1].user:
+                driver.quit()
+                driver = get_webdriver()
 
 
 def get_webdriver():
     # Allows running Firefox on a system with no display
     options = Options()
     options.headless = True
-    # driver = webdriver.Firefox(options=options)
     driver = webdriver.Firefox(
         executable_path=GeckoDriverManager().install(), options=options
     )
