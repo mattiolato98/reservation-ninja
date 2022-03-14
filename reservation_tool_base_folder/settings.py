@@ -29,95 +29,101 @@ SECRET_KEY = get_random_secret_key()
 with open("crypto.txt") as f:
     CRYPTOGRAPHY_KEY = f.read().strip()
 
-DEBUG = int(os.environ.get('DEBUG', default=0))
-ADMIN_ENABLED = int(os.environ.get('ADMIN_ENABLED', default=0))
+with open(".env") as f:
+    os.environ["GH_TOKEN"] = f.read().strip().split("=")[1]
 
-ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'reservation-ninja.herokuapp.com']
+
+DEBUG = int(os.environ.get("DEBUG", default=0))
+ADMIN_ENABLED = int(os.environ.get("ADMIN_ENABLED", default=0))
+
+ALLOWED_HOSTS = ["localhost", "127.0.0.1", "reservation-ninja.herokuapp.com"]
 
 
 # Application definition
 
 INSTALLED_APPS = [
-    'django.contrib.auth',
-    'django.contrib.contenttypes',
-    'django.contrib.sessions',
-    'django.contrib.messages',
-    'django.contrib.staticfiles',
+    "django.contrib.auth",
+    "django.contrib.contenttypes",
+    "django.contrib.sessions",
+    "django.contrib.messages",
+    "django.contrib.staticfiles",
     # local
     "user_management",
     "reservation_management",
     "analytics_management",
     # 3d party
-    'crispy_forms',
+    "crispy_forms",
 ]
 
 if ADMIN_ENABLED:
-    INSTALLED_APPS.append('django.contrib.admin')
+    INSTALLED_APPS.append("django.contrib.admin")
 
 MIDDLEWARE = [
-    'django.middleware.security.SecurityMiddleware',
-    'whitenoise.middleware.WhiteNoiseMiddleware',  # new
-    'django.contrib.sessions.middleware.SessionMiddleware',
-    'django.middleware.locale.LocaleMiddleware',
-    'django.middleware.common.CommonMiddleware',
-    'django.middleware.csrf.CsrfViewMiddleware',
-    'django.contrib.auth.middleware.AuthenticationMiddleware',
-    'django.contrib.messages.middleware.MessageMiddleware',
-    'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    "django.middleware.security.SecurityMiddleware",
+    "whitenoise.middleware.WhiteNoiseMiddleware",  # new
+    "django.contrib.sessions.middleware.SessionMiddleware",
+    "django.middleware.locale.LocaleMiddleware",
+    "django.middleware.common.CommonMiddleware",
+    "django.middleware.csrf.CsrfViewMiddleware",
+    "django.contrib.auth.middleware.AuthenticationMiddleware",
+    "django.contrib.messages.middleware.MessageMiddleware",
+    "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
 
-ROOT_URLCONF = 'reservation_tool_base_folder.urls'
+ROOT_URLCONF = "reservation_tool_base_folder.urls"
 
 TEMPLATES = [
     {
-        'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [
-            os.path.join(BASE_DIR, 'templates'),
+        "BACKEND": "django.template.backends.django.DjangoTemplates",
+        "DIRS": [
+            os.path.join(BASE_DIR, "templates"),
         ],
-        'APP_DIRS': True,
-        'OPTIONS': {
-            'context_processors': [
-                'django.template.context_processors.debug',
-                'django.template.context_processors.request',
-                'django.contrib.auth.context_processors.auth',
-                'django.contrib.messages.context_processors.messages',
+        "APP_DIRS": True,
+        "OPTIONS": {
+            "context_processors": [
+                "django.template.context_processors.debug",
+                "django.template.context_processors.request",
+                "django.contrib.auth.context_processors.auth",
+                "django.contrib.messages.context_processors.messages",
             ],
         },
     },
 ]
 
-WSGI_APPLICATION = 'reservation_tool_base_folder.wsgi.application'
+WSGI_APPLICATION = "reservation_tool_base_folder.wsgi.application"
 
 
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+    "default": {
+        "ENGINE": "django.db.backends.sqlite3",
+        "NAME": BASE_DIR / "db.sqlite3",
     }
 }
 
-DATABASE_URL = os.environ.get('DATABASE_URL')
-db_from_env = dj_database_url.config(default=DATABASE_URL, conn_max_age=500, ssl_require=True)
-DATABASES['default'].update(db_from_env)
+DATABASE_URL = os.environ.get("DATABASE_URL")
+db_from_env = dj_database_url.config(
+    default=DATABASE_URL, conn_max_age=500, ssl_require=True
+)
+DATABASES["default"].update(db_from_env)
 
 # Password validation
 # https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators
 
 AUTH_PASSWORD_VALIDATORS = [
     {
-        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
+        "NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator",
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
+        "NAME": "django.contrib.auth.password_validation.MinimumLengthValidator",
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
+        "NAME": "django.contrib.auth.password_validation.CommonPasswordValidator",
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
+        "NAME": "django.contrib.auth.password_validation.NumericPasswordValidator",
     },
 ]
 
@@ -125,10 +131,10 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/3.1/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
-LOCALE_PATHS = (os.path.join(BASE_DIR, 'locale'), )
+LANGUAGE_CODE = "en-us"
+LOCALE_PATHS = (os.path.join(BASE_DIR, "locale"),)
 
-TIME_ZONE = 'Europe/Rome'
+TIME_ZONE = "Europe/Rome"
 
 USE_I18N = True
 
@@ -140,31 +146,31 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
-STATIC_URL = '/static/'
+STATIC_URL = "/static/"
 
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
 
-AUTHENTICATION_BACKENDS = ['user_management.auth.EmailOrUsernameModelBackend']
+AUTHENTICATION_BACKENDS = ["user_management.auth.EmailOrUsernameModelBackend"]
 
-AUTH_USER_MODEL = 'user_management.PlatformUser'
+AUTH_USER_MODEL = "user_management.PlatformUser"
 
-CRISPY_TEMPLATE_PACK = 'bootstrap4'
+CRISPY_TEMPLATE_PACK = "bootstrap4"
 
-STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
+STATICFILES_DIRS = [os.path.join(BASE_DIR, "static")]
 
-LOGIN_URL = '/user/login'
+LOGIN_URL = "/user/login"
 
-LOGIN_REDIRECT_URL = '/reservation'
+LOGIN_REDIRECT_URL = "/reservation"
 
-LOGOUT_REDIRECT_URL = '/user/login'
+LOGOUT_REDIRECT_URL = "/user/login"
 
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
 # security settings
-SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
-SECURE_SSL_REDIRECT = int(os.environ.get('SECURE', default=1))
-SESSION_COOKIE_SECURE = int(os.environ.get('SECURE', default=1))
-CSRF_COOKIE_SECURE = int(os.environ.get('SECURE', default=1))
-SECURE_HSTS_SECONDS = 31536000 if int(os.environ.get('SECURE', default=1)) else 0
-SECURE_HSTS_INCLUDE_SUBDOMAINS = int(os.environ.get('SECURE', default=1))
-SECURE_HSTS_PRELOAD = int(os.environ.get('SECURE', default=1))
+SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
+SECURE_SSL_REDIRECT = int(os.environ.get("SECURE", default=1))
+SESSION_COOKIE_SECURE = int(os.environ.get("SECURE", default=1))
+CSRF_COOKIE_SECURE = int(os.environ.get("SECURE", default=1))
+SECURE_HSTS_SECONDS = 31536000 if int(os.environ.get("SECURE", default=1)) else 0
+SECURE_HSTS_INCLUDE_SUBDOMAINS = int(os.environ.get("SECURE", default=1))
+SECURE_HSTS_PRELOAD = int(os.environ.get("SECURE", default=1))

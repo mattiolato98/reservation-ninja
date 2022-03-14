@@ -96,7 +96,7 @@ class Lesson(models.Model):
             day=dt.datetime.now(pytz.timezone("Europe/Rome")).weekday(),
             user__enable_automatic_reservation=True,
             user__credentials_ok=True,
-        ).order_by("user__unimore_username")
+        )
 
     def clean(self):
         """
@@ -127,13 +127,13 @@ class Lesson(models.Model):
         return self.end_time.replace(minute=(base * round(self.end_time.minute / base)))
 
     class Meta:
-        ordering = ['day', 'start_time']
+        ordering = ['user__unimore_username', 'day', 'start_time']
 
 
 class Reservation(models.Model):
     """
     Model that describe a reservation, a lesson can have multiple reservations. Each reservation
-    has a link to the corrisponding web page.
+    has a link to the corresponding web page.
     """
     link = models.URLField()
     lesson = models.ForeignKey(Lesson, on_delete=models.CASCADE, related_name='reservations')

@@ -111,7 +111,7 @@ def reserve_room(driver, lesson):
                 start_time=range_begin_time,
                 end_time=range_end_time,
             )
-            print(f"Presenza duplicata inserita {range_begin_time}-{range_end_time}")
+            print(f"Duplicate reservation at {range_begin_time}-{range_end_time}")
         else:
             element = driver.find_element_by_xpath(
                 f"//td[contains(text(), '{lesson.classroom}')]"
@@ -170,11 +170,14 @@ def reserve_lessons(driver, lessons):
         driver.get(RESERVATION_URL)
         print("----------------------------------------------------------------------")
         print(f"Reserving: {lesson}")
+        reserve_room(driver, lesson)
         if i < len(lessons) - 1:
             # start new instance if the next user is different from the current one:
             if lesson.user != lessons[i + 1].user:
+                print("Starting new instance of Firefox")
                 driver.quit()
                 driver = get_webdriver()
+    driver.quit()  # closing the last driver instance of the last user.
 
 
 def get_webdriver():
@@ -214,11 +217,9 @@ def main():
     # Delete old reservations
     Reservation.objects.all().delete()
 
-    driver = get_webdriver()
     lessons = Lesson.get_today_lessons()
     begin = measure_time()
-    reserve_lessons(driver, lessons)
-    driver.quit()
+    reserve_lessons(get_webdriver(), lessons)
     end = measure_time()
 
     users = set_user_feedback_false(list(set(lesson.user for lesson in lessons)))
