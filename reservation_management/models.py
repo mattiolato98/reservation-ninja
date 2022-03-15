@@ -5,6 +5,8 @@ from django.core.exceptions import ValidationError
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 
+import pytz
+
 
 class Building(models.Model):
     """
@@ -88,6 +90,14 @@ class Lesson(models.Model):
             f'on day {self.day}'
         )
 
+    @classmethod
+    def get_today_lessons(cls):
+        return cls.objects.filter(
+            day=dt.datetime.now(pytz.timezone("Europe/Rome")).weekday(),
+            user__enable_automatic_reservation=True,
+            user__credentials_ok=True,
+        )
+
     def clean(self):
         """
         This function applies additional validation to the lesson that is going
@@ -117,13 +127,13 @@ class Lesson(models.Model):
         return self.end_time.replace(minute=(base * round(self.end_time.minute / base)))
 
     class Meta:
-        ordering = ['day', 'start_time']
+        ordering = ['user__unimore_username', 'day', 'start_time']
 
 
 class Reservation(models.Model):
     """
     Model that describe a reservation, a lesson can have multiple reservations. Each reservation
-    has a link to the corrisponding web page.
+    has a link to the corresponding web page.
     """
     link = models.URLField()
     lesson = models.ForeignKey(Lesson, on_delete=models.CASCADE, related_name='reservations')

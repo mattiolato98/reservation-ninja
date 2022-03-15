@@ -4,6 +4,9 @@ geckodriver.log
 .idea/
 crypto.txt
 reservation_tool_base_folder/email_settings.py
+reservation_tool_base_folder/email_settings_back.py
 *__pycache__
 db.sqlite3
 .vscode/
+.env
+
