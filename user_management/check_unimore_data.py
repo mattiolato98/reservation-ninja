@@ -8,6 +8,7 @@ from os.path import dirname
 from selenium import webdriver
 from selenium.webdriver.firefox.options import Options
 from selenium.common.exceptions import NoSuchElementException
+from webdriver_manager.firefox import GeckoDriverManager
 
 from django.contrib.auth import get_user_model
 
@@ -23,7 +24,9 @@ def check_data(user):
     options = Options()
     options.headless = True
 
-    driver = webdriver.Firefox(options=options)
+    driver = webdriver.Firefox(
+        executable_path=GeckoDriverManager().install(), options=options
+    )
     driver.implicitly_wait(TIME_INTERVAL)
 
     driver.get(LOGIN_URL)
