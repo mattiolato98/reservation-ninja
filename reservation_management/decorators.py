@@ -22,9 +22,15 @@ def lesson_owner_only(func):
     return check_and_call
 
 
-def check_overlap(func):
+def check_correctness(func):
     def check_and_call(request, *args, **kwargs):
-        for lesson in request.user.lessons.all():
+        lessons = request.user.lessons.all()
+        # if the user has no lessons, just return an error page
+        if not lessons:
+            return HttpResponseRedirect(
+                reverse_lazy("reservation_management:no-lessons-error")
+            )
+        for lesson in lessons:
             if not request.user.check_lesson_time_overlap(lesson, update=True):
                 return HttpResponseRedirect(
                     reverse_lazy("reservation_management:lesson-overlap-error")
