@@ -215,6 +215,10 @@ class LessonOverlapErrorView(LoginRequiredMixin, TemplateView):
     template_name = "reservation_management/lesson_overlap_error.html"
 
 
+class NoLessonsErrorView(LoginRequiredMixin, TemplateView):
+    template_name = "reservation_management/no_lessons_error.html"
+
+
 @login_required
 @require_POST
 @csrf_protect
