@@ -20,7 +20,7 @@ from django.views.generic import (
     TemplateView,
 )
 
-from reservation_management.decorators import lesson_owner_only, check_overlap
+from reservation_management.decorators import lesson_owner_only, check_correctness
 from reservation_management.forms import LessonForm
 from reservation_management.models import Lesson, Reservation
 
@@ -112,7 +112,7 @@ class ReservationListView(LoginRequiredMixin, ListView):
         return Reservation.objects.filter(lesson__user=self.request.user)
 
 
-@method_decorator((login_required, check_overlap), name="dispatch")
+@method_decorator((login_required, check_correctness), name="dispatch")
 class LessonTimetableView(TemplateView):
     """
     View to display the timetable of the current user.
