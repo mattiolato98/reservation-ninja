@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-11-23 12:22+0100\n"
+"POT-Creation-Date: 2022-03-29 16:42+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -26,109 +26,109 @@ msgstr "Torna alla home"
 msgid "Insert"
 msgstr "Inserisci"
 
-#: reservation_management/forms.py:71 reservation_management/forms.py:74
+#: reservation_management/forms.py:72 reservation_management/forms.py:75
 msgid "You have already a lesson in this time interval"
 msgstr "Hai già una lezione in questo intervallo"
 
-#: reservation_management/forms.py:89
+#: reservation_management/forms.py:90
 msgid "Day"
 msgstr "Giorno"
 
-#: reservation_management/forms.py:90
+#: reservation_management/forms.py:91
 msgid "Start time"
 msgstr "Ora inizio"
 
-#: reservation_management/forms.py:91
+#: reservation_management/forms.py:92
 msgid "End time"
 msgstr "Ora fine"
 
-#: reservation_management/forms.py:92
+#: reservation_management/forms.py:93
 msgid "Classroom"
 msgstr "Aula"
 
-#: reservation_management/forms.py:93
+#: reservation_management/forms.py:94
 msgid "Color"
 msgstr "Colore"
 
-#: reservation_management/forms.py:94
+#: reservation_management/forms.py:95
 msgid "Name"
 msgstr "Nome"
 
-#: reservation_management/models.py:46
+#: reservation_management/models.py:48
 #: reservation_management/templates/reservation_management/lesson_timetable.html:45
 #: reservation_management/templatetags/app_filters.py:17
 msgid "Monday"
 msgstr "Lunedì"
 
-#: reservation_management/models.py:47
+#: reservation_management/models.py:49
 #: reservation_management/templates/reservation_management/lesson_timetable.html:46
 #: reservation_management/templatetags/app_filters.py:18
 msgid "Tuesday"
 msgstr "Martedì"
 
-#: reservation_management/models.py:48
+#: reservation_management/models.py:50
 #: reservation_management/templates/reservation_management/lesson_timetable.html:47
 #: reservation_management/templatetags/app_filters.py:19
 msgid "Wednesday"
 msgstr "Mercoledì"
 
-#: reservation_management/models.py:49
+#: reservation_management/models.py:51
 #: reservation_management/templates/reservation_management/lesson_timetable.html:48
 #: reservation_management/templatetags/app_filters.py:20
 msgid "Thursday"
 msgstr "Giovedì"
 
-#: reservation_management/models.py:50
+#: reservation_management/models.py:52
 #: reservation_management/templates/reservation_management/lesson_timetable.html:49
 #: reservation_management/templatetags/app_filters.py:21
 msgid "Friday"
 msgstr "Venerdì"
 
-#: reservation_management/models.py:63
+#: reservation_management/models.py:65
 msgid "Red"
 msgstr "Rosso"
 
-#: reservation_management/models.py:64
+#: reservation_management/models.py:66
 msgid "Green"
 msgstr "Verde"
 
-#: reservation_management/models.py:65
+#: reservation_management/models.py:67
 msgid "Blue"
 msgstr "Blu"
 
-#: reservation_management/models.py:66
+#: reservation_management/models.py:68
 msgid "Black"
 msgstr "Nero"
 
-#: reservation_management/models.py:67
+#: reservation_management/models.py:69
 msgid "Orange"
 msgstr "Arancione"
 
-#: reservation_management/models.py:68
+#: reservation_management/models.py:70
 msgid "Eggplant"
 msgstr "Melanzana"
 
-#: reservation_management/models.py:69
+#: reservation_management/models.py:71
 msgid "Grey"
 msgstr "Grigio"
 
-#: reservation_management/models.py:70
+#: reservation_management/models.py:72
 msgid "Olive"
 msgstr "Oliva"
 
-#: reservation_management/models.py:71
+#: reservation_management/models.py:73
 msgid "Purple"
 msgstr "Viola"
 
-#: reservation_management/models.py:72
+#: reservation_management/models.py:74
 msgid "Burnt umber"
 msgstr "Terra d'ombra"
 
-#: reservation_management/models.py:104
+#: reservation_management/models.py:114
 msgid "Please, choose a time in the range"
 msgstr "Per favore, scegli un orario nell'intervallo disponibile"
 
-#: reservation_management/models.py:107
+#: reservation_management/models.py:117
 msgid "Lesson start time should be before end time"
 msgstr ""
 "L'orario di inizio di una lezione dovrebbe essere inferiore all'orario di "
@@ -169,8 +169,9 @@ msgstr "Aggiungi una lezione"
 #: reservation_management/templates/reservation_management/lesson_add.html:16
 #: reservation_management/templates/reservation_management/lesson_detail.html:20
 #: reservation_management/templates/reservation_management/lesson_list.html:11
-#: reservation_management/templates/reservation_management/lesson_overlap_error.html:34
-#: reservation_management/templates/reservation_management/reservation_list.html:121
+#: reservation_management/templates/reservation_management/lesson_overlap_error.html:33
+#: reservation_management/templates/reservation_management/no_lessons_error.html:33
+#: reservation_management/templates/reservation_management/reservation_list.html:123
 msgid "Your lessons"
 msgstr "Le tue lezioni"
 
@@ -248,10 +249,13 @@ msgstr ""
 
 #: reservation_management/templates/reservation_management/lesson_overlap_error.html:4
 #: reservation_management/templates/reservation_management/lesson_overlap_error.html:16
+#: reservation_management/templates/reservation_management/no_lessons_error.html:4
+#: reservation_management/templates/reservation_management/no_lessons_error.html:16
 msgid "Error"
 msgstr "Errore"
 
 #: reservation_management/templates/reservation_management/lesson_overlap_error.html:10
+#: reservation_management/templates/reservation_management/no_lessons_error.html:10
 msgid "Error: Lessons overlap!"
 msgstr "Errore: Lezioni sovrapposte!"
 
@@ -259,6 +263,7 @@ msgstr "Errore: Lezioni sovrapposte!"
 msgid "A lessons overlap error was found."
 msgstr "È stata rilevata una sovrapposizione di lezioni."
 
+#: reservation_management/templates/reservation_management/lesson_overlap_error.html:24
 msgid ""
 "\n"
 "                            Please, check your <strong>lessons</strong>.\n"
@@ -272,11 +277,11 @@ msgstr ""
 "\n"
 "                            Per favore, controlla le tue <strong>lezioni</"
 "strong>.\n"
-"                            Hai <strong>almeno</strong> due di esse in cui gli "
-"<strong>orari si sovrappongono</strong>.\n"
+"                            Hai <strong>almeno</strong> due di esse in cui "
+"gli <strong>orari si sovrappongono</strong>.\n"
 "                            <br><br>\n"
-"                            In questo caso l'orario delle lezioni <strong>non può "
-"funzionare correttamente</strong>.\n"
+"                            In questo caso l'orario delle lezioni "
+"<strong>non può funzionare correttamente</strong>.\n"
 "                        "
 
 #: reservation_management/templates/reservation_management/lesson_timetable.html:4
@@ -295,6 +300,30 @@ msgstr "Aggiorna la lezione"
 msgid "Update lesson information"
 msgstr "Aggiorna i dati della lezione"
 
+#: reservation_management/templates/reservation_management/no_lessons_error.html:19
+msgid "A no lessons error was found."
+msgstr "È stata rilevata una mancanza di lezioni."
+
+msgid ""
+"\n"
+"                            Please, check your <strong>lessons</strong>.\n"
+"                            You must have <strong>at least</strong> one "
+"lesson in your profile in order to see it.\n"
+"                            <br><br>\n"
+"                            In this case the lessons timetable <strong>can't "
+"work properly</strong>.\n"
+"                        "
+msgstr ""
+"\n"
+"                            Per favore, controlla le tue <strong>lezioni</"
+"strong>.\n"
+"                            Devi avere <strong>almeno</strong> una lezione "
+"per visualizzarla nell'orario.\n"
+"                            <br><br>\n"
+"                            In questo caso l'orario delle lezioni "
+"<strong>non può funzionare correttamente</strong>.\n"
+"                        "
+
 #: reservation_management/templates/reservation_management/reservation_ajax.html:23
 msgid "Saving ..."
 msgstr "Un attimo ..."
@@ -303,20 +332,20 @@ msgstr "Un attimo ..."
 msgid "Thanks for the feedback!"
 msgstr "Grazie per il feedback!"
 
-#: reservation_management/templates/reservation_management/reservation_list.html:23
+#: reservation_management/templates/reservation_management/reservation_list.html:24
 msgid "Green Pass"
 msgstr "Green Pass"
 
-#: reservation_management/templates/reservation_management/reservation_list.html:28
+#: reservation_management/templates/reservation_management/reservation_list.html:29
 #: user_management/templates/user_management/greenpass_add.html:7
 msgid "Add your Green Pass"
 msgstr "Aggiungi Green Pass"
 
-#: reservation_management/templates/reservation_management/reservation_list.html:62
+#: reservation_management/templates/reservation_management/reservation_list.html:63
 msgid "No reservation made, insert your lessons!"
 msgstr "Nessuna prenotazione effettuata, inserisci le tue lezioni!"
 
-#: reservation_management/templates/reservation_management/reservation_list.html:64
+#: reservation_management/templates/reservation_management/reservation_list.html:65
 msgid ""
 "\n"
 "                                Add your <strong>first lesson</strong> "
@@ -328,11 +357,11 @@ msgstr ""
 "lezione</strong> cliccando il pulsante qui sotto!\n"
 "                                        "
 
-#: reservation_management/templates/reservation_management/reservation_list.html:80
+#: reservation_management/templates/reservation_management/reservation_list.html:81
 msgid "Hooray! No reservations today."
 msgstr "Urrà! Nessuna prenotazione oggi."
 
-#: reservation_management/templates/reservation_management/reservation_list.html:82
+#: reservation_management/templates/reservation_management/reservation_list.html:83
 msgid ""
 "\n"
 "                                You can <strong>take it easy!</strong>\n"
@@ -343,23 +372,23 @@ msgstr ""
 "</strong>\n"
 "                                        "
 
-#: reservation_management/templates/reservation_management/reservation_list.html:100
+#: reservation_management/templates/reservation_management/reservation_list.html:102
 msgid "Are your reservations correct?"
 msgstr "Le prenotazioni sono corrette?"
 
-#: reservation_management/templates/reservation_management/reservation_list.html:103
+#: reservation_management/templates/reservation_management/reservation_list.html:105
 msgid "You can disable daily feedbacks from settings"
 msgstr "Puoi disabilitare i feedback dalle impostazioni"
 
-#: reservation_management/templates/reservation_management/reservation_list.html:107
+#: reservation_management/templates/reservation_management/reservation_list.html:109
 msgid "Yes"
 msgstr "Sì"
 
-#: reservation_management/templates/reservation_management/reservation_list.html:110
+#: reservation_management/templates/reservation_management/reservation_list.html:112
 msgid "No"
 msgstr "No"
 
-#: reservation_management/templates/reservation_management/reservation_list.html:126
+#: reservation_management/templates/reservation_management/reservation_list.html:128
 msgid "+ Add your first lesson"
 msgstr "+ Aggiungi la tua prima lezione"
 
